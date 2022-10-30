@@ -26,7 +26,7 @@
 
 @section('content')
 
-
+<h2>{{$data['title1']}}</h2>
 
 <ul class="nav nav-pills mb-3" role="tablist">
     @foreach ($oList as $key=>$oSubList)
@@ -57,7 +57,7 @@
                         {{ mb_convert_encoding($oItem->FIO_stud, "utf-8", "windows-1251") }}
                     </td>
                     <td>
-                        {{ $oItem->ocenka }}
+                        <input type="text" class="form form-control" id="{{$oItem->kod_stud}}_{{$oItem->kod_grup}}_{{$oItem->kod_prep}}_{{$oItem->kod_subj}}" value="{{ $oItem->ocenka }}">
                     </td>
 
 
