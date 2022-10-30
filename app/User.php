@@ -5,10 +5,21 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use DB;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    public static function getMySubjects($myId){
+        return DB::table('subjects')->
+        join('lessons_', 'subjects.kod_subj', '=', 'lessons_.kod_subj')->
+        join('grups', 'lessons_.kod_grupi', '=', 'grups.kod_grup')->
+        where('kod_prep',$myId)->
+        select('nomer_grup','kod_grup','subjects.kod_subj', 'subject_name')->
+        distinct()->
+        get();
+    }
 
     /**
      * The attributes that are mass assignable.
