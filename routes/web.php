@@ -16,10 +16,14 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welc');
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/journal', function(){ 
+        return redirect()->route('get_subjects',['prep'=>Auth::user()->usercode]);
+    });
+
     Route::get('/journal/{prep}', [UserController::class, 'listSubjects'])->name('get_subjects');
 
     Route::get('/journal/{prep}/{subj}/{group}', [UserController::class, 'showJournal'])->name('get_journal');
