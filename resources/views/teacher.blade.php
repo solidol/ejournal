@@ -35,7 +35,7 @@
                 {{$mItem->nomer_grup}}
             </td>
             <td>
-                {{ mb_convert_encoding($mItem->subject_name, "utf-8", "windows-1251") }}
+                {{$mItem->subject_name}}
             </td>
             <td>
                 <a href="{{URL::route('get_lessons',['prep'=>$data['prep'],'subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">

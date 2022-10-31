@@ -27,7 +27,7 @@
 
 <nav class="nav flex-column d-none d-md-block">
     @foreach($mList as $mItem)
-    <a class="nav-link" href="{{URL::route('get_lessons',['prep'=>$data['prep'],'subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">{{$mItem->nomer_grup}} - {{ mb_convert_encoding($mItem->subject_name, "utf-8", "windows-1251") }}</a>
+    <a class="nav-link" href="{{URL::route('get_lessons',['prep'=>$data['prep'],'subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">{{$mItem->nomer_grup}} - {{$mItem->subject_name}}</a>
     @endforeach
 </nav>
 
@@ -57,10 +57,10 @@
                 {{ $oItem->kol_chasov }}
             </td>
             <td>
-                {{ mb_convert_encoding($oItem->tema, "utf-8", "windows-1251") }}
+                {{ $oItem->tema }}
             </td>
             <td>
-                {{ mb_convert_encoding($oItem->zadanaie, "utf-8", "windows-1251") }}
+                {{ $oItem->zadanaie }}
             </td>
             <td>
                 <a class="btn btn-danger" href="{{URL::route('delete_lesson',['lessId'=>$oItem->kod_pari])}}"  data-confirm="Видалити?"><i class="bi bi-trash"></i></a>

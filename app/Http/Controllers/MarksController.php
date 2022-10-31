@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Marks;
-use App\User;
-use App\Lesson;
+use App\Models\Marks;
+use App\Models\User;
+use App\Models\Lesson;
 
 class MarksController extends Controller
 {
@@ -21,7 +21,7 @@ class MarksController extends Controller
         $additionalData = Lesson::getSubjectIfo($prep, $subj, $group)[0];        
         return view('marks', [
             'data' => [
-                'title1'=> mb_convert_encoding($additionalData->nomer_grup.' - '.$additionalData->subject_name, "utf-8", "windows-1251") ,    
+                'title1'=> $additionalData->nomer_grup.' - '.$additionalData->subject_name ,    
                 'prep'=>$prep, 
                 'subj'=>$subj, 
                 'group'=>$group

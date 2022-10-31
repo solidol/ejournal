@@ -7,9 +7,9 @@
 <h2>Навігація</h2>
 
 <nav class="nav flex-column">
-    
+
     <a class="nav-link" href="{{URL::route('get_subjects',['prep'=>$data['prep']])}}">Ha головну</a>
-    
+
 </nav>
 
 
@@ -17,7 +17,7 @@
 
 <nav class="nav flex-column d-none d-md-block">
     @foreach($mList as $mItem)
-    <a class="nav-link" href="{{URL::route('get_marks',['prep'=>$data['prep'],'subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">{{$mItem->nomer_grup}} - {{ mb_convert_encoding($mItem->subject_name, "utf-8", "windows-1251") }}</a>
+    <a class="nav-link" href="{{URL::route('get_marks',['prep'=>$data['prep'],'subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">{{$mItem->nomer_grup}} - {{ $mItem->subject_name }}</a>
     @endforeach
 </nav>
 
@@ -33,7 +33,7 @@
 
     <li class="nav-item" role="presentation">
         <button class="nav-link <?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'active' : '' ?>" id="<?= 'tl-' . $oSubList['meta']['slug'] ?>" data-bs-toggle="tab" data-bs-target="#{{$oSubList['meta']['slug']}}" type="button" role="tab" aria-controls="<?= $oSubList['meta']['slug'] ?>" aria-selected="<?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'true' : 'false' ?>">
-            {{ mb_convert_encoding($oSubList['meta']['title'], "utf-8", "windows-1251") }}
+            {{ $oSubList['meta']['title'] }}
         </button>
     </li>
     @endforeach
@@ -54,7 +54,7 @@
                 @foreach ($oSubList['data'] as $oItem)
                 <tr>
                     <td>
-                        {{ mb_convert_encoding($oItem->FIO_stud, "utf-8", "windows-1251") }}
+                        {{ $oItem->FIO_stud}}
                     </td>
                     <td>
                         <input type="text" class="form form-control" readonly="readonly" id="{{$oItem->kod_stud}}_{{$oItem->kod_grup}}_{{$oItem->kod_prep}}_{{$oItem->kod_subj}}" value="{{ $oItem->ocenka }}">

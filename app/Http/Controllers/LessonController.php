@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Lesson;
-use App\User;
+use App\Models\Lesson;
+use App\Models\User;
 
 
 class LessonController extends Controller
@@ -13,7 +13,7 @@ class LessonController extends Controller
         $additionalData = Lesson::getSubjectIfo($prep, $subj, $group)[0];
         return view('lessons', [
             'data' => [
-                'title1'=> mb_convert_encoding($additionalData->nomer_grup.' - '.$additionalData->subject_name, "utf-8", "windows-1251") ,    
+                'title1'=> $additionalData->nomer_grup.' - '.$additionalData->subject_name ,    
                 'prep'=>$prep, 
                 'subj'=>$subj, 
                 'group'=>$group
@@ -82,8 +82,10 @@ class LessonController extends Controller
         $lesson->kod_prep = Auth::user()->usercode;
         $lesson->kod_subj = $request->input('sbjcode');
         $lesson->nom_pari = $request->input('lessnom');
-        $lesson->tema = mb_convert_encoding($request->input('thesis'), "windows-1251", "utf-8");
-        $lesson->zadanaie = mb_convert_encoding($request->input('homework'), "windows-1251", "utf-8");
+        //$lesson->tema = mb_convert_encoding($request->input('thesis'), "windows-1251", "utf-8");
+        //$lesson->zadanaie = mb_convert_encoding($request->input('homework'), "windows-1251", "utf-8");
+        $lesson->tema = $request->input('thesis');
+        $lesson->zadanaie = $request->input('homework');
         $lesson->kol_chasov = $request->input('hours');
         $lesson->data_ = $request->input('datetime');
 
