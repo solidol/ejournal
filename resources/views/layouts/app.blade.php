@@ -98,6 +98,9 @@
             </div>
         </nav>
         <div class="container">
+
+            @if (Auth::user())
+
             <div class="row">
                 <aside class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                     <h1>@yield('title')</h1>
@@ -108,6 +111,12 @@
                     @yield('content')
                 </main>
             </div>
+            @else
+            <main>
+
+                @yield('content')
+            </main>
+            @endif
         </div>
     </div>
 </body>

@@ -23,9 +23,9 @@
 </nav>
 
 
-<h2>Записані пари з інших дисциплін</h2>
+<h2 class="d-sm-none d-md-block">Записані пари з інших дисциплін</h2>
 
-<nav class="nav flex-column">
+<nav class="nav flex-column d-none d-md-block">
     @foreach($mList as $mItem)
     <a class="nav-link" href="{{URL::route('get_lessons',['prep'=>$data['prep'],'subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">{{$mItem->nomer_grup}} - {{ mb_convert_encoding($mItem->subject_name, "utf-8", "windows-1251") }}</a>
     @endforeach

@@ -13,9 +13,9 @@
 </nav>
 
 
-<h2>Оцінки з інших дисциплін</h2>
+<h2 class="d-sm-none d-md-block">Оцінки з інших дисциплін</h2>
 
-<nav class="nav flex-column">
+<nav class="nav flex-column d-none d-md-block">
     @foreach($mList as $mItem)
     <a class="nav-link" href="{{URL::route('get_marks',['prep'=>$data['prep'],'subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">{{$mItem->nomer_grup}} - {{ mb_convert_encoding($mItem->subject_name, "utf-8", "windows-1251") }}</a>
     @endforeach
@@ -57,7 +57,7 @@
                         {{ mb_convert_encoding($oItem->FIO_stud, "utf-8", "windows-1251") }}
                     </td>
                     <td>
-                        <input type="text" class="form form-control" id="{{$oItem->kod_stud}}_{{$oItem->kod_grup}}_{{$oItem->kod_prep}}_{{$oItem->kod_subj}}" value="{{ $oItem->ocenka }}">
+                        <input type="text" class="form form-control" readonly="readonly" id="{{$oItem->kod_stud}}_{{$oItem->kod_grup}}_{{$oItem->kod_prep}}_{{$oItem->kod_subj}}" value="{{ $oItem->ocenka }}">
                     </td>
 
 
