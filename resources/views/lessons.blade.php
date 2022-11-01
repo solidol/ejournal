@@ -147,11 +147,14 @@
                     <div class="mb-3">
                         <label for="zadanaie">Що задано</label>
                         <textarea class="form-control" placeholder="Leave a comment here" id="homework" name="homework"></textarea>
+                        <button id="addlect" type="button" class="btn btn-secondary">Конспект</button>
+                        <button id="addrep" type="button" class="btn btn-secondary">Звіт</button>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                    <button type="button" class="btn btn-danger" id="freset">Очистити</button>
                     <button type="submit" class="btn btn-primary">Зберегти</button>
                 </div>
             </div>
@@ -165,7 +168,16 @@
 
 
 $(document).ready(function () {
-    
+    $('#freset').click(function(){
+        $('#homework').val('');
+        $('#thesis').val('');
+    });
+    $('#addlect').click(function(){
+        $('#homework').val('Конспект');
+    });
+    $('#addrep').click(function(){
+        $('#homework').val('Звіт');
+    });
     $('#datetime1').val(new Date().toISOString().split('T')[0]);
     //$('#example').DataTable();
 });
