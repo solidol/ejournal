@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Marks;
+use App\Models\Mark;
 use App\Models\User;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Auth;
 
-class MarksController extends Controller
+class MarkController extends Controller
 {
     function index()
     {
         return view('marks', [
-            'oList' => Marks::tester()
+            'oList' => Mark::tester()
         ]);
     }
 
@@ -29,8 +29,16 @@ class MarksController extends Controller
                 'subj'=>$subj, 
                 'group'=>$group
             ],
-            'oList' => Marks::getOcTable($subj, $group),
+            'oList' => Mark::getOcTable($subj, $group),
             'mList' => User::getMySubjects()
         ]);        
+    }
+
+    function store(Request $request){
+        foreach($request->input('marks') as $key=>$value){
+
+        }
+        
+
     }
 }

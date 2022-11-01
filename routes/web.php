@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MarksController;
+use App\Http\Controllers\MarkController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -45,17 +45,19 @@ Route::group(['middleware' => 'auth'], function () {
 
     //Route::get('/journal/{subj}/{group}', [UserController::class, 'showJournal'])->name('get_journal');
 
-    Route::get('/journal/{subj}/{group}/marks', [MarksController::class, 'list'])->name('get_marks');
+    Route::get('/journal/{subj}/{group}/marks', [MarkController::class, 'list'])->name('get_marks');
 
     Route::get('/journal/{subj}/{group}/lessons', [LessonController::class, 'list'])->name('get_lessons');
 
     Route::post('/journal/{subj}/{group}/lessons/create', [LessonController::class, 'create'])->name('create_lesson');
 
-    Route::post('/journal/lesson:{lessId}/update', [LessonController::class, 'update'])->name('update_lesson');
+    Route::post('/journal/lesson/update', [LessonController::class, 'update'])->name('update_lesson');
 
     Route::get('/journal/lesson:{lessId}/edit',[LessonController::class, 'edit'])->name('edit_lesson');
 
-    Route::get('/journal/lesson:{lessId}/delete',[LessonController::class, 'destroy'])->name('delete_lesson');    
+    Route::get('/journal/lesson:{lessId}/delete',[LessonController::class, 'destroy'])->name('delete_lesson'); 
+    
+    Route::post('/journal/marks/store', [MarkController::class, 'store'])->name('store_marks');
 });
 
 

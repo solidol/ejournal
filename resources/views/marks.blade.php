@@ -42,30 +42,32 @@
 <div class="tab-content" id="myTabContent">
     @foreach ($oList as $key=>$oSubList)
     <div class="tab-pane fade <?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'show active' : '' ?> " id="{{$oSubList['meta']['slug']}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $oSubList['meta']['slug'] ?>">
+        <form action="{{route('store_marks')}}" method="post">
+        @csrf
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ПІБ студента</th>
+                        <th>Оцінка</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($oSubList['data'] as $oItem)
+                    <tr>
+                        <td>
+                            {{ $oItem->FIO_stud}}
+                        </td>
+                        <td>
+                            <input type="text" class="form form-control" readonly="readonly" name="marks[{{$oItem->kod_prep}}_{{$oItem->kod_subj}}_{{$oItem->kod_grup}}_{{$oItem->kod_stud}}]" value="{{ $oItem->ocenka }}">
+                        </td>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ПІБ студента</th>
-                    <th>Оцінка</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($oSubList['data'] as $oItem)
-                <tr>
-                    <td>
-                        {{ $oItem->FIO_stud}}
-                    </td>
-                    <td>
-                        <input type="text" class="form form-control" readonly="readonly" id="{{$oItem->kod_prep}}_{{$oItem->kod_subj}}_{{$oItem->kod_grup}}_{{$oItem->kod_stud}}" value="{{ $oItem->ocenka }}">
-                    </td>
 
-
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Зберегти</button>
+        </form>
     </div>
     @endforeach
 </div>
