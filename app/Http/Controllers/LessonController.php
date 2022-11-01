@@ -10,25 +10,30 @@ use App\Models\User;
 
 class LessonController extends Controller
 {
-    function list($prep, $subj, $group)
+    function list($subj, $group)
     {
-        $additionalData = Lesson::getSubjectIfo($prep, $subj, $group)[0];
+        $additionalData = Lesson::getSubjectInfo($subj, $group);
+        if ($additionalData == null)
+            return view('noelement');
         return view('lessons', [
             'data' => [
                 'title1' => $additionalData->nomer_grup . ' - ' . $additionalData->subject_name,
-                'prep' => $prep,
+                'prep' => Auth::user()->usercode,
                 'subj' => $subj,
                 'group' => $group
             ],
-            'storeRoute' => route('create_lesson', ['prep' => $prep, 'subj' => $subj, 'group' => $group]),
-            'oList' => Lesson::filterLs($prep, $subj, $group),
-            'mList' => User::getMySubjects($prep)
+            'storeRoute' => route('create_lesson', ['subj' => $subj, 'group' => $group]),
+            'oList' => Lesson::filterLs($subj, $group),
+            'mList' => User::getMySubjects()
         ]);
     }
 
     public function edit($lessId)
     {
         $lesson = Lesson::findOrFail($lessId);
+
+        if (Auth::user()->usercode != $lesson->kod_prep)
+            return view('noelement');
         return view(
             'edit-lesson',
             [
@@ -63,7 +68,7 @@ class LessonController extends Controller
 
         // redirect
 
-        return redirect()->route('get_lessons', ['prep' => Auth::user()->usercode, 'subj' => $lesson->kod_subj, 'group' => $lesson->kod_grupi]);
+        return redirect()->route('get_lessons', ['subj' => $lesson->kod_subj, 'group' => $lesson->kod_grupi]);
     }
 
     public function update(Request $request)
@@ -85,7 +90,7 @@ class LessonController extends Controller
         }
         // redirect
         // Session::flash('message', 'Successfully updated post!');
-        return redirect()->route('get_lessons', ['prep' => Auth::user()->usercode, 'subj' => $subj, 'group' => $group]);
+        return redirect()->route('get_lessons', ['subj' => $subj, 'group' => $group]);
         //  }*/
     }
 

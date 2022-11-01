@@ -38,12 +38,12 @@
                 {{$mItem->subject_name}}
             </td>
             <td>
-                <a href="{{URL::route('get_lessons',['prep'=>$data['prep'],'subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">
+                <a href="{{URL::route('get_lessons',['subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">
                     Пари
                 </a>
             </td>
             <td>
-                <a href="{{URL::route('get_marks',['prep'=>$data['prep'],'subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">
+                <a href="{{URL::route('get_marks',['subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">
                     Оцінки
                 </a>
             </td>

@@ -3,8 +3,14 @@
 @section('title', 'Записані пари')
 
 @section('sidebar')
+<h2>Навігація</h2>
 
+<nav class="nav flex-column">
 
+    <a class="nav-link" href="{{URL::route('get_subjects')}}">Ha головну</a>
+
+</nav>
+@stop
 
 
 @section('content')
@@ -14,8 +20,8 @@
     @csrf
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Записати пару</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="exampleModalLabel">Редагувати пару</h5>
+
         </div>
         <div class="modal-body">
 

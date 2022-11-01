@@ -13,12 +13,12 @@
 <ul>
 
     <li>
-    <a href="{{URL::route('get_lessons',['prep'=>$data['prep'],'subj'=>$data['subj'],'group'=>$data['group']])}}">
+    <a href="{{URL::route('get_lessons',['subj'=>$data['subj'],'group'=>$data['group']])}}">
             Записати/переглянути пару
         </a>
     </li>
     <li>
-        <a href="{{URL::route('get_marks',['prep'=>$data['prep'],'subj'=>$data['subj'],'group'=>$data['group']])}}">
+        <a href="{{URL::route('get_marks',['subj'=>$data['subj'],'group'=>$data['group']])}}">
             Записати/переглянути оцінки
         </a>
     </li>

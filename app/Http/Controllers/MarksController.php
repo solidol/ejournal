@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Marks;
 use App\Models\User;
 use App\Models\Lesson;
+use Illuminate\Support\Facades\Auth;
 
 class MarksController extends Controller
 {
@@ -16,18 +17,20 @@ class MarksController extends Controller
         ]);
     }
 
-    function list($prep, $subj, $group){
+    function list($subj, $group){
 
-        $additionalData = Lesson::getSubjectIfo($prep, $subj, $group)[0];        
+        $additionalData = Lesson::getSubjectInfo($subj, $group);
+        if ($additionalData == null)  
+        return view('noelement');     
         return view('marks', [
             'data' => [
                 'title1'=> $additionalData->nomer_grup.' - '.$additionalData->subject_name ,    
-                'prep'=>$prep, 
+                'prep'=>Auth::user()->usercode, 
                 'subj'=>$subj, 
                 'group'=>$group
             ],
-            'oList' => Marks::getOcTable($prep, $subj, $group),
-            'mList' => User::getMySubjects($prep)
+            'oList' => Marks::getOcTable($subj, $group),
+            'mList' => User::getMySubjects()
         ]);        
     }
 }

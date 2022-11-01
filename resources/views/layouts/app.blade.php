@@ -49,7 +49,7 @@
                     <ul class="navbar-nav mr-auto">
                         @if (Auth::user())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('get_subjects',['prep'=>Auth::user()->usercode]) }}">Мої журнали</a>
+                            <a class="nav-link" href="{{ route('get_subjects') }}">Мої журнали</a>
                         </li>
                         @endif
                     </ul>
