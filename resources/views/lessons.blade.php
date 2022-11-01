@@ -42,7 +42,7 @@
         <tr>
             <th></th>
             <th>Дата Години</th>
-            
+
             <th>Тема</th>
             <th>Задано</th>
             <th></th>
@@ -52,14 +52,14 @@
         @foreach ($oList as $key=>$oItem)
         <tr>
             <td>
-            <a class="text-primary" href="{{URL::route('edit_lesson',['lessId'=>$oItem->kod_pari])}}" ><i class="bi bi-pencil-square"></i></a>
+                <a class="text-primary" href="{{URL::route('edit_lesson',['lessId'=>$oItem->kod_pari])}}"><i class="bi bi-pencil-square"></i></a>
             </td>
             <td>
                 {{ $oItem->date }}
                 <hr width="75%">
                 {{ $oItem->kol_chasov }}
             </td>
-            
+
             <td>
                 {!! nl2br($oItem->tema) !!}
             </td>
