@@ -19,6 +19,7 @@ class User extends Authenticatable
         join('grups', 'lessons_.kod_grupi', '=', 'grups.kod_grup')->
         where('kod_prep',$myId)->
         select('nomer_grup','kod_grup','subjects.kod_subj', 'subject_name')->
+        orderBy('nomer_grup')->
         distinct()->
         get();
     }
