@@ -1,75 +1,3 @@
-@extends('layouts.app')
-
-@section('title', 'Записані пари')
-
-@section('sidebar')
-
-
-
-
-
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Записати пару
-</button>
-
-<h2>Навігація</h2>
-
-<nav class="nav flex-column">
-
-    <a class="nav-link" href="{{URL::route('get_subjects',['prep'=>$data['prep']])}}">Ha головну</a>
-
-</nav>
-
-
-<h2 class="d-sm-none d-md-block">Записані пари з інших дисциплін</h2>
-
-<nav class="nav flex-column d-none d-md-block">
-    @foreach($mList as $mItem)
-    <a class="nav-link" href="{{URL::route('get_lessons',['prep'=>$data['prep'],'subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">{{$mItem->nomer_grup}} - {{$mItem->subject_name}}</a>
-    @endforeach
-</nav>
-
-@stop
-
-@section('content')
-
-<h2>{{$data['title1']}}</h2>
-
-<table id="example" class="display table table-striped">
-    <thead>
-        <tr>
-            <th>Дата</th>
-            <th>Години</th>
-            <th>Тема</th>
-            <th>Що задано</th>
-            <th>Видалити</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($oList as $key=>$oItem)
-        <tr>
-            <td>
-                {{ $oItem->date }}
-            </td>
-            <td>
-                {{ $oItem->kol_chasov }}
-            </td>
-            <td>
-                {{ $oItem->tema }}
-            </td>
-            <td>
-                {{ $oItem->zadanaie }}
-            </td>
-            <td>
-                <a class="btn btn-danger" href="{{URL::route('delete_lesson',['lessId'=>$oItem->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i></a>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-
 
 
 
@@ -77,7 +5,7 @@
 <form action="{{$storeRoute}}" method="post">
     @csrf
     <!-- {{ csrf_field() }} -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addLesson" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -143,7 +71,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="thesis" class="form-label">Тема</label>
-                        <input type="text" class="form-control" id="thesis" name="thesis">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="thesis" name="thesis"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="zadanaie">Що задано</label>
@@ -184,4 +112,3 @@
         //$('#example').DataTable();
     });
 </script>
-@stop

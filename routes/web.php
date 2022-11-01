@@ -36,6 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/journal/lesson:{lessId}/update', [LessonController::class, 'update'])->name('update_lesson');
 
+    Route::get('/journal/lesson:{lessId}/edit',[LessonController::class, 'edit'])->name('edit_lesson');
+
     Route::get('/journal/lesson:{lessId}/delete',[LessonController::class, 'destroy'])->name('delete_lesson');
 });
 

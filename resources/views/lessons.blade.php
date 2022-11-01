@@ -10,7 +10,7 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLesson">
     Записати пару
 </button>
 
@@ -52,7 +52,7 @@
         @foreach ($oList as $key=>$oItem)
         <tr>
             <td>
-                <i class="bi bi-pencil-square"></i>
+            <a class="text-primary" href="{{URL::route('edit_lesson',['lessId'=>$oItem->kod_pari])}}" ><i class="bi bi-pencil-square"></i></a>
             </td>
             <td>
                 {{ $oItem->date }}
@@ -61,10 +61,10 @@
             </td>
             
             <td>
-                {{ $oItem->tema }}
+                {!! nl2br($oItem->tema) !!}
             </td>
             <td>
-                {{ $oItem->zadanaie }}
+                {!! nl2br($oItem->zadanaie) !!}
             </td>
             <td>
                 <a class="text-danger" href="{{URL::route('delete_lesson',['lessId'=>$oItem->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i></a>
@@ -77,5 +77,5 @@
 
 
 
-@include('popups.new-lessons')
+@include('popups.new-lesson')
 @stop
