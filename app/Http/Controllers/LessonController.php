@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
@@ -9,19 +10,20 @@ use App\Models\User;
 
 class LessonController extends Controller
 {
-    function list($prep, $subj, $group){
+    function list($prep, $subj, $group)
+    {
         $additionalData = Lesson::getSubjectIfo($prep, $subj, $group)[0];
         return view('lessons', [
             'data' => [
-                'title1'=> $additionalData->nomer_grup.' - '.$additionalData->subject_name ,    
-                'prep'=>$prep, 
-                'subj'=>$subj, 
-                'group'=>$group
+                'title1' => $additionalData->nomer_grup . ' - ' . $additionalData->subject_name,
+                'prep' => $prep,
+                'subj' => $subj,
+                'group' => $group
             ],
-            'storeRoute' => route('create_lesson',['prep'=>$prep, 'subj'=>$subj, 'group'=>$group]),
+            'storeRoute' => route('create_lesson', ['prep' => $prep, 'subj' => $subj, 'group' => $group]),
             'oList' => Lesson::filterLs($prep, $subj, $group),
             'mList' => User::getMySubjects($prep)
-        ]);        
+        ]);
     }
 
     public function edit($lessonId)
@@ -35,7 +37,7 @@ class LessonController extends Controller
             ]
         );
     }
-/*
+    /*
     public function create($catId)
     {
         $categories = PostCategory::all();
@@ -48,54 +50,35 @@ class LessonController extends Controller
 */
     public function store(Request $request)
     {
-        /*
-          // validate
-          // read more on validation at http://laravel.com/docs/validation
-          $rules = array(
-          'name' => 'required',
-          'email' => 'required|email',
-          'shark_level' => 'required|numeric'
-          );
-          $validator = Validator::make(Input::all(), $rules);
-
-          // process the login
-          if ($validator->fails()) {
-          return Redirect::to('sharks/create')
-          ->withErrors($validator)
-          ->withInput(Input::except('password'));
-          } else {
-          // store
-          $shark = new shark;
-          $shark->name = Input::get('name');
-          $shark->email = Input::get('email');
-          $shark->shark_level = Input::get('shark_level');
-          $shark->save();
-
-          // redirect
-          Session::flash('message', 'Successfully created shark!');
-          return Redirect::to('sharks');
-          }
-
-         */
-        $lesson = new Lesson();
-        $lesson->kod_grupi = $request->input('grcode');
-        $lesson->kod_prep = Auth::user()->usercode;
-        $lesson->kod_subj = $request->input('sbjcode');
-        $lesson->nom_pari = $request->input('lessnom');
-        //$lesson->tema = mb_convert_encoding($request->input('thesis'), "windows-1251", "utf-8");
-        //$lesson->zadanaie = mb_convert_encoding($request->input('homework'), "windows-1251", "utf-8");
-        $lesson->tema = $request->input('thesis');
-        $lesson->zadanaie = $request->input('homework');
-        $lesson->kol_chasov = $request->input('hours');
-        $lesson->data_ = $request->input('datetime');
 
 
- 
-        $lesson->save();
+        if ($request->get('lesscode') < 1) {
+            $lesson = new Lesson();
+            $lesson->kod_grupi = $request->input('grcode');
+            $lesson->kod_prep = Auth::user()->usercode;
+            $lesson->kod_subj = $request->input('sbjcode');
+            $lesson->nom_pari = $request->input('lessnom');
+            $lesson->tema = $request->input('thesis');
+            $lesson->zadanaie = $request->input('homework');
+            $lesson->kol_chasov = $request->input('hours');
+            $lesson->data_ = $request->input('datetime');
+            $lesson->save();
+        }else{
+            $lesson = Lesson::findOrFail($request->get('lesscode'));
+            $lesson->kod_grupi = $request->input('grcode');
+            $lesson->kod_prep = Auth::user()->usercode;
+            $lesson->kod_subj = $request->input('sbjcode');
+            $lesson->nom_pari = $request->input('lessnom');
+            $lesson->tema = $request->input('thesis');
+            $lesson->zadanaie = $request->input('homework');
+            $lesson->kol_chasov = $request->input('hours');
+            $lesson->data_ = $request->input('datetime');
+            $lesson->save();
+        }
 
         // redirect
         // Session::flash('message', 'Successfully updated post!');
-        return redirect()->route('get_lessons',['prep'=>Auth::user()->usercode,'subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi]);
+        return redirect()->route('get_lessons', ['prep' => Auth::user()->usercode, 'subj' => $lesson->kod_subj, 'group' => $lesson->kod_grupi]);
     }
 
     public function update(Request $request)
@@ -148,14 +131,14 @@ class LessonController extends Controller
     {
         // delete
         $lesson = Lesson::find($lessId);
-        $routeData['subj']=$lesson->kod_subj;
-        $routeData['group']=$lesson->kod_grupi; 
+        $routeData['subj'] = $lesson->kod_subj;
+        $routeData['group'] = $lesson->kod_grupi;
         $lesson->delete();
 
-        return redirect()->route('get_lessons',[
-            'prep'=>Auth::user()->usercode,
-            'subj'=>$routeData['subj'],
-            'group'=>$routeData['group']
+        return redirect()->route('get_lessons', [
+            'prep' => Auth::user()->usercode,
+            'subj' => $routeData['subj'],
+            'group' => $routeData['group']
         ]);;
     }
 }
