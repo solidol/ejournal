@@ -63,7 +63,7 @@
                 {{ $oItem->zadanaie }}
             </td>
             <td>
-                <a class="btn btn-danger" href="{{URL::route('delete_lesson',['lessId'=>$oItem->kod_pari])}}"  data-confirm="Видалити?"><i class="bi bi-trash"></i></a>
+                <a class="btn btn-danger" href="{{URL::route('delete_lesson',['lessId'=>$oItem->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i></a>
             </td>
         </tr>
         @endforeach
@@ -75,7 +75,8 @@
 
 <!-- Modal -->
 <form action="{{$storeRoute}}" method="post">
-@csrf <!-- {{ csrf_field() }} -->
+    @csrf
+    <!-- {{ csrf_field() }} -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -153,9 +154,10 @@
 
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Зберегти</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
                     <button type="button" class="btn btn-danger" id="freset">Очистити</button>
-                    <button type="submit" class="btn btn-primary">Зберегти</button>
+
                 </div>
             </div>
         </div>
@@ -163,23 +165,23 @@
 </form>
 
 <script>
-//document.getElementById('datetime').valueAsDate = new Date();
+    //document.getElementById('datetime').valueAsDate = new Date();
 
 
 
-$(document).ready(function () {
-    $('#freset').click(function(){
-        $('#homework').val('');
-        $('#thesis').val('');
+    $(document).ready(function() {
+        $('#freset').click(function() {
+            $('#homework').val('');
+            $('#thesis').val('');
+        });
+        $('#addlect').click(function() {
+            $('#homework').val('Конспект');
+        });
+        $('#addrep').click(function() {
+            $('#homework').val('Звіт');
+        });
+        $('#datetime1').val(new Date().toISOString().split('T')[0]);
+        //$('#example').DataTable();
     });
-    $('#addlect').click(function(){
-        $('#homework').val('Конспект');
-    });
-    $('#addrep').click(function(){
-        $('#homework').val('Звіт');
-    });
-    $('#datetime1').val(new Date().toISOString().split('T')[0]);
-    //$('#example').DataTable();
-});
 </script>
 @stop
