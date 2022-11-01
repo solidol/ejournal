@@ -35,11 +35,11 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Номер пари</label>
-                <input type="number" class="form-control" id="lessnom" name="lessnom" value="{{$lesson->nom_pari}}">
+                <input type="number" class="form-control" id="lessnom" name="lessnom" min="1" step="1" max="8" value="{{$lesson->nom_pari}}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Години</label>
-                <input type="number" class="form-control" id="hours" name="hours" value="{{$lesson->kol_chasov}}">
+                <input type="number" class="form-control" id="hours" name="hours" min="1" step="1" max="4" value="{{$lesson->kol_chasov}}">
             </div>
             <div class="mb-3">
                 <label for="thesis" class="form-label">Тема</label>
