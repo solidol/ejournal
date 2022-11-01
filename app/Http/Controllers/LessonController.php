@@ -78,10 +78,10 @@ class LessonController extends Controller
             $lesson->kod_grupi = $request->input('grcode');
             $lesson->kod_prep = Auth::user()->usercode;
             $lesson->kod_subj = $request->input('sbjcode');
-            $lesson->nom_pari = $request->input('lessnom');
+            $lesson->nom_pari = abs(round(+$request->input('lessnom'),0));
             $lesson->tema = $request->input('thesis');
             $lesson->zadanaie = $request->input('homework');
-            $lesson->kol_chasov = $request->input('hours');
+            $lesson->kol_chasov = abs(round(+$request->input('hours'),0));
             $lesson->data_ = $request->input('datetime');
 
             $subj = $lesson->kod_subj;
