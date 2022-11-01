@@ -48,7 +48,7 @@ class LessonController extends Controller
         ]);
     }
 */
-    public function store(Request $request)
+    public function create(Request $request)
     {
 
 
@@ -63,7 +63,16 @@ class LessonController extends Controller
             $lesson->kol_chasov = $request->input('hours');
             $lesson->data_ = $request->input('datetime');
             $lesson->save();
-        }else{
+        }
+
+        // redirect
+
+        return redirect()->route('get_lessons', ['prep' => Auth::user()->usercode, 'subj' => $lesson->kod_subj, 'group' => $lesson->kod_grupi]);
+    }
+
+    public function update(Request $request)
+    {
+        if ($request->get('lesscode') < 1) {
             $lesson = Lesson::findOrFail($request->get('lesscode'));
             $lesson->kod_grupi = $request->input('grcode');
             $lesson->kod_prep = Auth::user()->usercode;
@@ -75,55 +84,9 @@ class LessonController extends Controller
             $lesson->data_ = $request->input('datetime');
             $lesson->save();
         }
-
         // redirect
         // Session::flash('message', 'Successfully updated post!');
         return redirect()->route('get_lessons', ['prep' => Auth::user()->usercode, 'subj' => $lesson->kod_subj, 'group' => $lesson->kod_grupi]);
-    }
-
-    public function update(Request $request)
-    {
-        /*
-         * 
-         * 
-         * 
-         *             $table->id();
-          $table->timestamps();
-          $table->string('title');
-          $table->string('slug');
-          $table->text('description')->nullable();
-          $table->text('alterpreview')->nullable();
-          $table->text('content');
-          $table->unsignedBigInteger('user_id');
-          $table->foreign('user_id')->references('id')->on('users');
-          $rules = array(
-          'title' => 'required',
-          'slug' => 'required|email',
-          'shark_level' => 'required|numeric'
-          );
-          $validator = Validator::make(Input::all(), $rules);
-
-          // process the login
-          if ($validator->fails()) {
-          return Redirect::to('sharks/' . $id . '/edit')
-          ->withErrors($validator)
-          ->withInput(Input::except('password'));
-          } else { */
-        // store
-        /*
-        $lesson = Post::findOrFail($request->input('id'));
-        $lesson->title = $request->input('title');
-        $lesson->slug = $request->input('slug');
-        $lesson->description = $request->input('description');
-        $lesson->alterpreview = $request->input('alterpreview');
-        $lesson->content = $request->input('content');
-        $lesson->post_category_id = $request->input('category_id');
-
-        $lesson->save();
-
-        // redirect
-        // Session::flash('message', 'Successfully updated post!');
-        return redirect()->route('admin.post.show', ['postId' => $request->input('id')]);
         //  }*/
     }
 

@@ -32,7 +32,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/journal/{prep}/{subj}/{group}/lessons', [LessonController::class, 'list'])->name('get_lessons');
 
-    Route::post('/journal/{prep}/{subj}/{group}/lessons/store', [LessonController::class, 'store'])->name('create_lesson');
+    Route::post('/journal/{prep}/{subj}/{group}/lessons/create', [LessonController::class, 'create'])->name('create_lesson');
+
+    Route::post('/journal/lesson:{lessId}/update', [LessonController::class, 'update'])->name('update_lesson');
 
     Route::get('/journal/lesson:{lessId}/delete',[LessonController::class, 'destroy'])->name('delete_lesson');
 });
