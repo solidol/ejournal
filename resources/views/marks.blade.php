@@ -57,7 +57,7 @@
                         {{ $oItem->FIO_stud}}
                     </td>
                     <td>
-                        <input type="text" class="form form-control" readonly="readonly" id="{{$oItem->kod_stud}}_{{$oItem->kod_grup}}_{{$oItem->kod_prep}}_{{$oItem->kod_subj}}" value="{{ $oItem->ocenka }}">
+                        <input type="text" class="form form-control" readonly="readonly" id="{{$oItem->kod_prep}}_{{$oItem->kod_subj}}_{{$oItem->kod_grup}}_{{$oItem->kod_stud}}" value="{{ $oItem->ocenka }}">
                     </td>
 
 

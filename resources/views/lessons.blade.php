@@ -40,22 +40,26 @@
 <table id="example" class="display table table-striped">
     <thead>
         <tr>
-            <th>Дата</th>
-            <th>Години</th>
+            <th></th>
+            <th>Дата Години</th>
+            
             <th>Тема</th>
-            <th>Що задано</th>
-            <th>Видалити</th>
+            <th>Задано</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach ($oList as $key=>$oItem)
         <tr>
             <td>
-                {{ $oItem->date }}
+                <i class="bi bi-pencil-square"></i>
             </td>
             <td>
+                {{ $oItem->date }}
+                <hr width="75%">
                 {{ $oItem->kol_chasov }}
             </td>
+            
             <td>
                 {{ $oItem->tema }}
             </td>
@@ -63,7 +67,7 @@
                 {{ $oItem->zadanaie }}
             </td>
             <td>
-                <a class="btn btn-danger" href="{{URL::route('delete_lesson',['lessId'=>$oItem->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i></a>
+                <a class="text-danger" href="{{URL::route('delete_lesson',['lessId'=>$oItem->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i></a>
             </td>
         </tr>
         @endforeach
