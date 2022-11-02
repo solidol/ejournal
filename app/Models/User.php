@@ -25,6 +25,12 @@ class User extends Authenticatable
         get();
     }
 
+    function getStudents($group){
+        return DB::table('spisok_stud')->
+        where('kod_grup',$group)->
+        orderBy('FIO_stud')->
+        get();
+    }
     /**
      * The attributes that are mass assignable.
      *
