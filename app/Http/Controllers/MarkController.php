@@ -31,7 +31,9 @@ class MarkController extends Controller
                 'group' => $group
             ],
             'oList' => Mark::getOcTable($subj, $group),
-            'mList' => User::getMySubjects()
+            'mList' => User::getMySubjects(),
+            'storeRoute' => route('store_marks'),
+            'createControlRoute' => route('create_control'),
         ]);
     }
 
@@ -40,10 +42,21 @@ class MarkController extends Controller
         //var_dump($request->input('marks'));
         //die();
         foreach ($request->input('marks') as $key => $value) {
-            switch ($value){
-                case 'Н/А': case 'НА': case 'н/а': case 'на': $value = -1; break;
-                case 'З': case 'з': case 'Зар': case 'зар': $value = -2; break;
-                default: break;
+            switch ($value) {
+                case 'Н/А':
+                case 'НА':
+                case 'н/а':
+                case 'на':
+                    $value = -1;
+                    break;
+                case 'З':
+                case 'з':
+                case 'Зар':
+                case 'зар':
+                    $value = -2;
+                    break;
+                default:
+                    break;
             }
             if (!is_numeric($value)) $value = null;
             $tmpKeys = explode("_", $key);
@@ -68,14 +81,26 @@ class MarkController extends Controller
 
                 $mark->ocenka = $value;
                 $mark->save();
-            }else{
+            } else {
                 $searchKeys['ocenka'] = $value;
 
                 Mark::insert($searchKeys);
-
             }
         }
 
+        return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
+    }
+
+    function createControl(Request $request)
+    {
+        $markFields['kod_prep'] = Auth::user()->usercode;
+        $markFields['kod_subj'] = $request->input('sbjcode');
+        $markFields['kod_grup'] = $request->input('grcode');
+        $markFields['kod_stud'] = null;
+        $markFields['vid_kontrol'] = $request->input('control');
+        $subj = $markFields['kod_subj'];
+        $group = $markFields['kod_grup'];
+        Mark::insert($markFields);
         return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
     }
 }

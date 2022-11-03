@@ -54,7 +54,7 @@
 
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Зберегти</button>
+            <button type="submit" class="btn btn-success">Зберегти</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
             <button type="button" class="btn btn-danger" id="freset">Очистити</button>
 

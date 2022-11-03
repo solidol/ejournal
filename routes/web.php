@@ -58,6 +58,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/journal/lesson:{lessId}/delete',[LessonController::class, 'destroy'])->name('delete_lesson'); 
     
     Route::post('/journal/marks/store', [MarkController::class, 'store'])->name('store_marks');
+
+    Route::post('/journal/marks/create-control', [MarkController::class, 'createControl'])->name('create_control');
 });
 
 

@@ -4,6 +4,14 @@
 
 @section('sidebar')
 
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addControl">
+    Додати контроль
+</button>
+
+
+
 <h2>Навігація</h2>
 
 <nav class="nav flex-column">
@@ -81,6 +89,6 @@
     @endforeach
 </div>
 
-
+@include('popups.new-control')
 
 @stop
