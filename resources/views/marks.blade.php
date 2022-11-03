@@ -59,9 +59,10 @@
 <div class="tab-content" id="myTabContent">
     @foreach ($oList as $key=>$oSubList)
     <div class="tab-pane fade <?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'show active' : '' ?> " id="{{$oSubList['meta']['slug']}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $oSubList['meta']['slug'] ?>">
-    <h3>Дата контролю {{$oSubList['meta']['dateFormatted']}}</h3>
-    <button type="submit" class="btn btn-success">Зберегти</button>
+        <h3>Дата контролю {{$oSubList['meta']['dateFormatted']}}</h3>
+
         <form action="{{route('store_marks')}}" method="post">
+            <button type="submit" class="btn btn-success">Зберегти</button>
             <input type="hidden" name="cdate" value="{{$oSubList['meta']['data_']}}">
             @csrf
             <table class="table table-striped">
@@ -86,10 +87,8 @@
                     @endforeach
                 </tbody>
             </table>
-            
-            <a href="{{URL::route('delete_control',['subj'=>$oSubList['meta']['subj'], 'group'=>$oSubList['meta']['group'], 'control'=>$oSubList['meta']['title']])}}" 
-            class="btn btn-danger" 
-            data-confirm="Видалити увесь контроль {{$oSubList['meta']['title']}} разом з оцінками?">Видалити контроль</a>
+            <button type="submit" class="btn btn-success">Зберегти</button>
+            <a href="{{URL::route('delete_control',['subj'=>$oSubList['meta']['subj'], 'group'=>$oSubList['meta']['group'], 'control'=>$oSubList['meta']['title']])}}" class="btn btn-danger" data-confirm="Видалити увесь контроль {{$oSubList['meta']['title']}} разом з оцінками?">Видалити контроль</a>
         </form>
     </div>
     @endforeach
