@@ -1,6 +1,3 @@
-
-
-
 <!-- Modal -->
 <form action="{{$createControlRoute}}" method="post">
     @csrf
@@ -25,12 +22,33 @@
                         <label for="datetime1" class="form-label">Дата проведення</label>
                         <input type="date" class="form-control" id="datetime1" name="datetime1">
                     </div>
+                    <div class="mb-3">
+                        <label>Швидкі шаблони</label>
+                        <select id="ftemp" class="form-select form-select-md" aria-label=".form-select-sm example">
+                            <option selected></option>
+                            <option >Опитування</option>
+                            <option >Опитування 1</option>
+                            <option >Опитування 2</option>
+                            <option >Опитування 3</option>
+                            <option >Опитування 4</option>
+                            <option >Опитування 5</option>
+                            <option >Опитування 6</option>
+                            <option >МК 1</option>
+                            <option >МК 2</option>
+                            <option >СМ 1</option>
+                            <option >СМ 2</option>
+                            <option >ЛР</option>
+                            <option >Підсумок</option>
+                            <option >Екзамен</option>
+
+                        </select>
+
+
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Зберегти</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
-                    <button type="button" class="btn btn-danger" id="freset">Очистити</button>
-
                 </div>
             </div>
         </div>
@@ -43,16 +61,10 @@
 
 
     $(document).ready(function() {
-        $('#freset').click(function() {
-            $('#homework').val('');
-            $('#thesis').val('');
+        $('#ftemp').change(function() {
+            $('#control').val($("#ftemp option:selected").text());
         });
-        $('#addlect').click(function() {
-            $('#homework').val('Конспект');
-        });
-        $('#addrep').click(function() {
-            $('#homework').val('Звіт');
-        });
+
         $('#datetime1').val(new Date().toISOString().split('T')[0]);
         //$('#example').DataTable();
     });
