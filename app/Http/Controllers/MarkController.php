@@ -65,7 +65,7 @@ class MarkController extends Controller
             $searchKeys['kod_grup'] = $tmpKeys[2];
             $searchKeys['kod_stud'] = $tmpKeys[3];
             $searchKeys['vid_kontrol'] = $tmpKeys[4];
-
+            
             $updateKeys['ocenka'] = $value;
 
             /*
@@ -80,10 +80,12 @@ class MarkController extends Controller
             if ($mark = Mark::where($searchKeys)->first()) {
 
                 $mark->ocenka = $value;
+                $mark->data_ = $request->input('cdate');
                 $mark->save();
-            } else {
-                $searchKeys['ocenka'] = $value;
+            } else if (!is_null($value)) {
 
+                $searchKeys['ocenka'] = $value;
+                $searchKeys['data_'] = $request->input('cdate');
                 Mark::insert($searchKeys);
             }
         }

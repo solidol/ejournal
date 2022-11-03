@@ -59,7 +59,9 @@
 <div class="tab-content" id="myTabContent">
     @foreach ($oList as $key=>$oSubList)
     <div class="tab-pane fade <?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'show active' : '' ?> " id="{{$oSubList['meta']['slug']}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $oSubList['meta']['slug'] ?>">
+    <h3>Дата контролю {{$oSubList['meta']['dateFormatted']}}</h3>
         <form action="{{route('store_marks')}}" method="post">
+            <input type="hidden" name="cdate" value="{{$oSubList['meta']['data_']}}">
             @csrf
             <table class="table table-striped">
                 <thead>
