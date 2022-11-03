@@ -98,6 +98,7 @@ class MarkController extends Controller
         $markFields['kod_grup'] = $request->input('grcode');
         $markFields['kod_stud'] = null;
         $markFields['vid_kontrol'] = $request->input('control');
+        $markFields['data_'] = $request->input('datetime1');
         $subj = $markFields['kod_subj'];
         $group = $markFields['kod_grup'];
         Mark::insert($markFields);
