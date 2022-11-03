@@ -60,6 +60,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/journal/marks/store', [MarkController::class, 'store'])->name('store_marks');
 
     Route::post('/journal/marks/create-control', [MarkController::class, 'createControl'])->name('create_control');
+
+    Route::get('/journal/marks/{subj}/{group}/{control}/del-control', [MarkController::class, 'deleteControl'])->name('delete_control');
 });
 
 

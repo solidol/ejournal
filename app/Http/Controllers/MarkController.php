@@ -106,4 +106,14 @@ class MarkController extends Controller
         Mark::insert($markFields);
         return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
     }
+
+    function deleteControl($subj, $group, $control){
+        Mark::
+        where('kod_prep',Auth::user()->usercode)->
+        where('kod_subj',$subj)->
+        where('kod_grup',$group)->
+        where('vid_kontrol',$control)->
+        delete();
+        return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
+    }
 }

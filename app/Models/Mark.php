@@ -37,11 +37,12 @@ class Mark extends Model
             'spisok_stud.kod_grup',
             'spisok_stud.FIO_stud',
             'ocenki.ocenka',
+            'ocenki.kod_subj',
             'ocenki.vid_kontrol',
             'ocenki.data_',
             DB::raw('DATE_FORMAT(ocenki.data_,"%d.%m.%y") as dateFormatted'))->
         leftJoinSub(
-            Mark::select('kod_stud', 'kod_prep','kod_subj','vid_kontrol','ocenka','data_')->
+            Mark::select('kod_stud', 'kod_prep','kod_grup', 'kod_subj','vid_kontrol','ocenka','data_')->
             where('kod_grup', $group)->
             
             where('kod_prep', Auth::user()->usercode)->        
@@ -74,7 +75,9 @@ class Mark extends Model
         where('kod_grup', $group)->
         where('kod_subj', $subj)->
         select('vid_kontrol')->
-        distinct()->get();
+        orderBy('data_')->
+        distinct()->
+        get();
     }
 
     public static function getOcTable($subj, $group)
@@ -89,14 +92,18 @@ class Mark extends Model
             $controlInfo = Mark::getControlInfo($subj, $group, $cItem->vid_kontrol);
             //dd($controlInfo);
             $arTmp=array();
-            $arTmp['meta']['title']=$cItem->vid_kontrol;
+            $arTmp['meta']['title']=$controlInfo->vid_kontrol??'-1';
+            $arTmp['meta']['group']=$controlInfo->kod_grup??0;
+            $arTmp['meta']['subj']=$controlInfo->kod_subj??0;
+            
             $arTmp['meta']['slug']='tab-id'.$i;
             $arTmp['data'] = Mark::filterOc($subj, $group, $cItem->vid_kontrol);
             $arTmp['meta']['dateFormatted']=$controlInfo->dateFormatted??'';
             $arTmp['meta']['data_']=$controlInfo->data_??$arTmp['data'][0]->data_;
-            //dd($controlInfo->dateFormatted);
+            
             $res[]=$arTmp;
             $i++;
+           
         }
 
         return $res;
