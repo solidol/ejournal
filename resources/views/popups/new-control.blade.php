@@ -33,10 +33,15 @@
                             <option >Опитування 4</option>
                             <option >Опитування 5</option>
                             <option >Опитування 6</option>
+                            <option >Самостійна робота</option>
                             <option >МК 1</option>
-                            <option >МК 2</option>
                             <option >СМ 1</option>
+                            <option >МК 2</option>
                             <option >СМ 2</option>
+                            <option >МК 3</option>
+                            <option >СМ 3</option>
+                            <option >МК 4</option>
+                            <option >СМ 4</option>
                             <option >ЛР</option>
                             <option >Підсумок</option>
                             <option >Екзамен</option>
