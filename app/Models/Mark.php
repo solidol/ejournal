@@ -36,6 +36,12 @@ class Mark extends Model
             $mItem->kod_prep = Auth::user()->usercode;
             $mItem->kod_subj = $subj;
             $mItem->vid_kontrol = $control;
+            switch ($mItem->ocenka){
+                case -1: $mItem->ocenka = "Н/А"; break;
+                case -2: $mItem->ocenka = "Зар"; break;
+                default: break;
+            }
+            
         }
         return $marks;
     }

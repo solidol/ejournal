@@ -40,6 +40,12 @@ class MarkController extends Controller
         //var_dump($request->input('marks'));
         //die();
         foreach ($request->input('marks') as $key => $value) {
+            switch ($value){
+                case 'Н/А': case 'НА': case 'н/а': case 'на': $value = -1; break;
+                case 'З': case 'з': case 'Зар': case 'зар': $value = -2; break;
+                default: break;
+            }
+            if (!is_numeric($value)) $value = null;
             $tmpKeys = explode("_", $key);
             $searchKeys['kod_prep'] = $tmpKeys[0];
             $searchKeys['kod_subj'] = $tmpKeys[1];

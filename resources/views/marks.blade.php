@@ -28,6 +28,15 @@
 
 <h2>{{$data['title1']}}</h2>
 
+<ul>
+    <li>
+        Н/А, н/а, НА, на - неатестований
+    </li>
+    <li>
+        Зар, зар, З, з - зараховано
+    </li>
+</ul>
+
 <ul class="nav nav-pills mb-3" role="tablist">
     @foreach ($oList as $key=>$oSubList)
 
@@ -43,7 +52,7 @@
     @foreach ($oList as $key=>$oSubList)
     <div class="tab-pane fade <?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'show active' : '' ?> " id="{{$oSubList['meta']['slug']}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $oSubList['meta']['slug'] ?>">
         <form action="{{route('store_marks')}}" method="post">
-        @csrf
+            @csrf
             <table class="table table-striped">
                 <thead>
                     <tr>
