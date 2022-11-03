@@ -89,6 +89,7 @@
             </table>
             <button type="submit" class="btn btn-success">Зберегти</button>
             <a href="{{URL::route('delete_control',['subj'=>$oSubList['meta']['subj'], 'group'=>$oSubList['meta']['group'], 'control'=>$oSubList['meta']['title']])}}" class="btn btn-danger" data-confirm="Видалити увесь контроль {{$oSubList['meta']['title']}} разом з оцінками?">Видалити контроль</a>
+            <a href="{{URL::route('get_info_control',['subj'=>$oSubList['meta']['subj'], 'group'=>$oSubList['meta']['group'], 'control'=>$oSubList['meta']['title']])}}" class="btn btn-danger" data-confirm="Видалити увесь контроль {{$oSubList['meta']['title']}} разом з оцінками?">api test</a>
         </form>
     </div>
     @endforeach

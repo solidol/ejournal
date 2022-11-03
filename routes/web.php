@@ -62,6 +62,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/journal/marks/create-control', [MarkController::class, 'createControl'])->name('create_control');
 
     Route::get('/journal/marks/{subj}/{group}/{control}/del-control', [MarkController::class, 'deleteControl'])->name('delete_control');
+
+    Route::get('/ajax/marks/{subj}/{group}/{control}/info',[MarkController::class, 'apiIndex'])->name('get_info_control');
 });
 
 

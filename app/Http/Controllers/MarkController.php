@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Auth;
 
+
 class MarkController extends Controller
 {
     function index()
@@ -15,6 +16,11 @@ class MarkController extends Controller
         return view('marks', [
             'oList' => Mark::tester()
         ]);
+    }
+
+    function apiIndex($subj, $group, $control)
+    {
+        return json_encode(Mark::getControlInfo($subj, $group, $control));
     }
 
     function list($subj, $group)
