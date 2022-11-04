@@ -7,6 +7,7 @@ use App\Models\Mark;
 use App\Models\User;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class MarkController extends Controller
@@ -122,4 +123,24 @@ class MarkController extends Controller
         delete();
         return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
     }
+
+    function updateControl(Request $request){
+        Mark::
+        where('kod_prep',Auth::user()->usercode)->
+        where('kod_subj',$request->input('sbjcode'))->
+        where('kod_grup',$request->input('grcode'))->
+        where('vid_kontrol',$request->input('oldcontrol'))->
+        
+        update(
+            [
+                'vid_kontrol'=>$request->input('control'),
+                'data_'=>$request->input('datetime2')
+            ]
+        );
+        
+        
+        return redirect()->route('get_marks', ['subj' => $request->input('sbjcode'), 'group' => $request->input('grcode')]);
+    }
+
+    
 }
