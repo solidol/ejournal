@@ -105,7 +105,7 @@ class MarkController extends Controller
         $markFields['kod_prep'] = Auth::user()->usercode;
         $markFields['kod_subj'] = $request->input('sbjcode');
         $markFields['kod_grup'] = $request->input('grcode');
-        $markFields['kod_stud'] = null;
+        $markFields['kod_stud'] = 0;
         $markFields['vid_kontrol'] = $request->input('control');
         $markFields['data_'] = $request->input('datetime1');
         $subj = $markFields['kod_subj'];

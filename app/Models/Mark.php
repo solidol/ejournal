@@ -17,13 +17,16 @@ class Mark extends Model
 
     public static function getControlInfo($subj, $group, $control){
 
-        return Mark::select('*',DB::raw('DATE_FORMAT(ocenki.data_,"%d.%m.%y") as dateFormatted'))->
+        return ( Mark::select('*',DB::raw('DATE_FORMAT(ocenki.data_,"%d.%m.%y") as dateFormatted'))->
         where('kod_grup', $group)->
         where('kod_prep', Auth::user()->usercode)->
         where('kod_subj', $subj)->
         where('vid_kontrol', $control)->
-        where('data_','>','0000-00-00')->
-        first();
+        //whereNotNull('data_')->
+        //whereNull('kod_stud')->
+        where('kod_stud',0)->
+        //where('data_','>','0000-00-00')->
+        first());
 
     }
 
@@ -51,6 +54,7 @@ class Mark extends Model
         )->
         where('spisok_stud.kod_grup',$group)->
         orderBy('FIO_stud')->
+        distinct()->
         get();
 
         foreach($marks as &$mItem){
@@ -71,12 +75,14 @@ class Mark extends Model
 
     public static function getControls($subj, $group)
     {
-        return Mark::where('kod_prep', Auth::user()->usercode)->
+        return Mark::select('vid_kontrol','data_')->
+        where('kod_prep', Auth::user()->usercode)->
         where('kod_grup', $group)->
         where('kod_subj', $subj)->
-        select('vid_kontrol')->
-        orderBy('data_')->
+        //whereNull('kod_stud')->
+        where('kod_stud',0)->
         distinct()->
+        orderBy('data_', 'ASC')->
         get();
     }
 
@@ -84,13 +90,14 @@ class Mark extends Model
     {
         
         $controls = Mark::getControls($subj, $group);
-        
+        //dd($controls);
         $res = array();
         $i=1;
-        
+        $cl=[];
         foreach ($controls as $cItem) {
             $controlInfo = Mark::getControlInfo($subj, $group, $cItem->vid_kontrol);
             //dd($controlInfo);
+            $cl[]=$controlInfo;
             $arTmp=array();
             $arTmp['meta']['title']=$controlInfo->vid_kontrol??'-1';
             $arTmp['meta']['group']=$controlInfo->kod_grup??0;
@@ -105,7 +112,7 @@ class Mark extends Model
             $i++;
            
         }
-
+//dd($cl);
         return $res;
     }
 }
