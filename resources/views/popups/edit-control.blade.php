@@ -45,10 +45,7 @@
                             <option>ЛР</option>
                             <option>Підсумок</option>
                             <option>Екзамен</option>
-
                         </select>
-
-
                     </div>
                     <div class="mb-3">
                         <label for="maxval1" class="form-label">Максимальна оцінка</label>
