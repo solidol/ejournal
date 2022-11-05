@@ -50,6 +50,10 @@
 
 
                     </div>
+                    <div class="mb-3">
+                        <label for="maxval1" class="form-label">Максимальна оцінка</label>
+                        <input type="text" class="form-control" id="maxval1" name="maxval" placeholder="30">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success" >Зберегти</button>
@@ -80,6 +84,7 @@
                 $('#datetime2').val(data.data_);
                 $('#control1').val(data.vid_kontrol);
                 $('#oldcontrol').val(data.vid_kontrol);
+                $('#maxval1').val(data.ocenka);
             });
         });
 

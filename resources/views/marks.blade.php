@@ -50,7 +50,7 @@
 
     <li class="nav-item" role="presentation">
         <button class="nav-link <?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'active' : '' ?>" id="<?= 'tl-' . $oSubList['meta']['slug'] ?>" data-bs-toggle="tab" data-bs-target="#{{$oSubList['meta']['slug']}}" type="button" role="tab" aria-controls="<?= $oSubList['meta']['slug'] ?>" aria-selected="<?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'true' : 'false' ?>">
-            {{ $oSubList['meta']['title'] }}
+            {{ $oSubList['meta']['title'] }} ({{$oSubList['meta']['maxval']}})б.
         </button>
     </li>
     @endforeach

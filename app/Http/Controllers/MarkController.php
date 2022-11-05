@@ -72,7 +72,7 @@ class MarkController extends Controller
             $searchKeys['kod_grup'] = $tmpKeys[2];
             $searchKeys['kod_stud'] = $tmpKeys[3];
             $searchKeys['vid_kontrol'] = $tmpKeys[4];
-            
+
             $updateKeys['ocenka'] = $value;
 
             /*
@@ -102,10 +102,24 @@ class MarkController extends Controller
 
     function createControl(Request $request)
     {
+        $maxval = $request->input('maxval');
+        switch ($maxval) {
+
+            case 'З':
+            case 'з':
+            case 'Зар':
+            case 'зар':
+                $maxval = -2;
+                break;
+            default:
+                break;
+        }
+        if (!is_numeric($maxval)) $maxval = 0;
         $markFields['kod_prep'] = Auth::user()->usercode;
         $markFields['kod_subj'] = $request->input('sbjcode');
         $markFields['kod_grup'] = $request->input('grcode');
         $markFields['kod_stud'] = 0;
+        $markFields['ocenka'] = $maxval;
         $markFields['vid_kontrol'] = $request->input('control');
         $markFields['data_'] = $request->input('datetime1');
         $subj = $markFields['kod_subj'];
@@ -114,33 +128,23 @@ class MarkController extends Controller
         return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
     }
 
-    function deleteControl($subj, $group, $control){
-        Mark::
-        where('kod_prep',Auth::user()->usercode)->
-        where('kod_subj',$subj)->
-        where('kod_grup',$group)->
-        where('vid_kontrol',$control)->
-        delete();
+    function deleteControl($subj, $group, $control)
+    {
+        Mark::where('kod_prep', Auth::user()->usercode)->where('kod_subj', $subj)->where('kod_grup', $group)->where('vid_kontrol', $control)->delete();
         return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
     }
 
-    function updateControl(Request $request){
-        Mark::
-        where('kod_prep',Auth::user()->usercode)->
-        where('kod_subj',$request->input('sbjcode'))->
-        where('kod_grup',$request->input('grcode'))->
-        where('vid_kontrol',$request->input('oldcontrol'))->
-        
-        update(
-            [
-                'vid_kontrol'=>$request->input('control'),
-                'data_'=>$request->input('datetime2')
-            ]
-        );
-        
-        
+    function updateControl(Request $request)
+    {
+        Mark::where('kod_prep', Auth::user()->usercode)->where('kod_subj', $request->input('sbjcode'))->where('kod_grup', $request->input('grcode'))->where('vid_kontrol', $request->input('oldcontrol'))->update(
+                [
+                    'vid_kontrol' => $request->input('control'),
+                    'data_' => $request->input('datetime2'),
+                    'ocenka' => $request->input('maxval')
+                ]
+            );
+
+
         return redirect()->route('get_marks', ['subj' => $request->input('sbjcode'), 'group' => $request->input('grcode')]);
     }
-
-    
 }

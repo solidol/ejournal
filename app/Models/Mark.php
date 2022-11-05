@@ -75,7 +75,7 @@ class Mark extends Model
 
     public static function getControls($subj, $group)
     {
-        return Mark::select('vid_kontrol','data_')->
+        return Mark::select('vid_kontrol','ocenka','data_')->
         where('kod_prep', Auth::user()->usercode)->
         where('kod_grup', $group)->
         where('kod_subj', $subj)->
@@ -100,6 +100,7 @@ class Mark extends Model
             $cl[]=$controlInfo;
             $arTmp=array();
             $arTmp['meta']['title']=$controlInfo->vid_kontrol??'-1';
+            $arTmp['meta']['maxval']=$controlInfo->ocenka??0;
             $arTmp['meta']['group']=$controlInfo->kod_grup??0;
             $arTmp['meta']['subj']=$controlInfo->kod_subj??0;
             

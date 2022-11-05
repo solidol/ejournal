@@ -50,6 +50,10 @@
 
 
                     </div>
+                    <div class="mb-3">
+                        <label for="maxval" class="form-label">Максимальна оцінка</label>
+                        <input type="text" class="form-control" id="maxval" name="maxval" placeholder="30">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Зберегти</button>
