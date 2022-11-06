@@ -81,6 +81,7 @@ class Mark extends Model
         where('kod_subj', $subj)->
         //whereNull('kod_stud')->
         where('kod_stud',0)->
+        where('vid_kontrol','<>','')->
         distinct()->
         orderBy('data_', 'ASC')->
         get();
