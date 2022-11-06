@@ -21,26 +21,7 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    //Route::get('/journal', function(){ 
-    //    return redirect()->route('get_subjects',['prep'=>Auth::user()->usercode]);
-    //});
-/*
-    Route::get('/journal/{prep}', [UserController::class, 'listSubjects'])->name('get_subjects');
 
-    Route::get('/journal/{prep}/{subj}/{group}', [UserController::class, 'showJournal'])->name('get_journal');
-
-    Route::get('/journal/{prep}/{subj}/{group}/marks', [MarksController::class, 'list'])->name('get_marks');
-
-    Route::get('/journal/{prep}/{subj}/{group}/lessons', [LessonController::class, 'list'])->name('get_lessons');
-
-    Route::post('/journal/{prep}/{subj}/{group}/lessons/create', [LessonController::class, 'create'])->name('create_lesson');
-
-    Route::post('/journal/lesson:{lessId}/update', [LessonController::class, 'update'])->name('update_lesson');
-
-    Route::get('/journal/lesson:{lessId}/edit',[LessonController::class, 'edit'])->name('edit_lesson');
-
-    Route::get('/journal/lesson:{lessId}/delete',[LessonController::class, 'destroy'])->name('delete_lesson');
-    */
     Route::get('/journal', [UserController::class, 'listSubjects'])->name('get_subjects');
 
     //Route::get('/journal/{subj}/{group}', [UserController::class, 'showJournal'])->name('get_journal');

@@ -21,7 +21,7 @@ class MarkController extends Controller
 
     function apiIndex($subj, $group, $control)
     {
-        return json_encode(Mark::getControlInfo($subj, $group, $control));
+        return response()->json(Mark::getControlInfo($subj, $group, $control));
     }
 
     function list($subj, $group)
