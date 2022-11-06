@@ -76,8 +76,9 @@
             let url = $(this).data('url');
             console.log(url);
             $.get(url, function(data, status) {
-                //alert("Data: " + data + "\nStatus: " + status);
-                data=JSON.parse(data);
+                //console.log(data);
+                //alert("Data: " + data.data_ + "\nStatus: " + status);
+                //data=JSON.parse(data);
                 $('#datetime2').val(data.data_);
                 $('#control1').val(data.vid_kontrol);
                 $('#oldcontrol').val(data.vid_kontrol);
