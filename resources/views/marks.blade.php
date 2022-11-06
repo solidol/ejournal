@@ -50,7 +50,7 @@
 
     <li class="nav-item" role="presentation">
         <button class="nav-link <?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'active' : '' ?>" id="<?= 'tl-' . $oSubList['meta']['slug'] ?>" data-bs-toggle="tab" data-bs-target="#{{$oSubList['meta']['slug']}}" type="button" role="tab" aria-controls="<?= $oSubList['meta']['slug'] ?>" aria-selected="<?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'true' : 'false' ?>">
-            {{ $oSubList['meta']['title'] }} ({{$oSubList['meta']['maxval']}})б.
+            {{ $oSubList['meta']['title'] }} ({{$oSubList['meta']['maxval']}}б.)
         </button>
     </li>
     @endforeach
@@ -79,7 +79,7 @@
                             {{ $oItem->FIO_stud}}
                         </td>
                         <td>
-                            <input type="text" class="form form-control" name="marks[{{$oItem->kod_prep}}_{{$oItem->kod_subj}}_{{$oItem->kod_grup}}_{{$oItem->kod_stud}}_{{$oItem->vid_kontrol}}]" value="{{ $oItem->ocenka }}" placeholder="Max = ({{$oSubList['meta']['maxval']}})б.">
+                            <input type="text" class="form form-control" name="marks[{{$oItem->kod_prep}}_{{$oItem->kod_subj}}_{{$oItem->kod_grup}}_{{$oItem->kod_stud}}_{{$oItem->vid_kontrol}}]" value="{{ $oItem->ocenka }}" placeholder="Max = {{$oSubList['meta']['maxval']}}">
                         </td>
 
 
