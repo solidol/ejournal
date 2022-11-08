@@ -43,12 +43,13 @@
 
                             <input type="radio" class="btn-check" name="lessnom" id="btnradio6" value="6" autocomplete="off">
                             <label class="btn btn-outline-primary" for="btnradio6">6</label>
-
+<!--
                             <input type="radio" class="btn-check" name="lessnom" id="btnradio7" value="7" autocomplete="off">
                             <label class="btn btn-outline-primary" for="btnradio7">7</label>
 
                             <input type="radio" class="btn-check" name="lessnom" id="btnradio8" value="8" autocomplete="off">
                             <label class="btn btn-outline-primary" for="btnradio8">8</label>
+-->
                         </div>
                     </div>
                     <div class="mb-3">
