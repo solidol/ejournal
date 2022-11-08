@@ -31,23 +31,23 @@
 
             <div class="mb-3">
                 <label for="datetime1" class="form-label">Дата</label>
-                <input type="date" class="form-control" id="datetime1" name="datetime" value="{{$lesson->data_}}">
+                <input type="date" class="form-control" id="datetime1" name="datetime" value="{{$lesson->data_}}" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Номер пари</label>
-                <input type="number" class="form-control" id="lessnom" name="lessnom" min="1" step="1" max="6" value="{{$lesson->nom_pari}}">
+                <input type="number" class="form-control" id="lessnom" name="lessnom" min="1" step="1" max="6" value="{{$lesson->nom_pari}}" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Години</label>
-                <input type="number" class="form-control" id="hours" name="hours" min="1" step="1" max="4" value="{{$lesson->kol_chasov}}">
+                <input type="number" class="form-control" id="hours" name="hours" min="1" step="1" max="4" value="{{$lesson->kol_chasov}}" required>
             </div>
             <div class="mb-3">
                 <label for="thesis" class="form-label">Тема</label>
-                <textarea class="form-control" placeholder="Leave a comment here" id="thesis" name="thesis">{{$lesson->tema}}</textarea>
+                <textarea class="form-control" placeholder="Leave a comment here" id="thesis" name="thesis" required>{{$lesson->tema}}</textarea>
             </div>
             <div class="mb-3">
                 <label for="zadanaie">Що задано</label>
-                <textarea class="form-control" placeholder="Leave a comment here" id="homework" name="homework">{{$lesson->zadanaie}}</textarea>
+                <textarea class="form-control" placeholder="Leave a comment here" id="homework" name="homework" required>{{$lesson->zadanaie}}</textarea>
                 <button id="addlect" type="button" class="btn btn-secondary">Конспект</button>
                 <button id="addrep" type="button" class="btn btn-secondary">Звіт</button>
             </div>

@@ -72,11 +72,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="thesis" class="form-label">Тема</label>
-                        <textarea class="form-control" placeholder="Leave a comment here" id="thesis" name="thesis"></textarea>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="thesis" name="thesis" required></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="zadanaie">Що задано</label>
-                        <textarea class="form-control" placeholder="Leave a comment here" id="homework" name="homework"></textarea>
+                        <textarea class="form-control" placeholder="Leave a comment here" id="homework" name="homework" required></textarea>
                         <button id="addlect" type="button" class="btn btn-secondary">Конспект</button>
                         <button id="addrep" type="button" class="btn btn-secondary">Звіт</button>
                     </div>
