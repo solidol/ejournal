@@ -47,7 +47,7 @@
             </div>
             <div class="mb-3">
                 <label for="zadanaie">Що задано</label>
-                <textarea class="form-control" placeholder="Leave a comment here" id="homework" name="homework" required>{{$lesson->zadanaie}}</textarea>
+                <textarea class="form-control" placeholder="Leave a comment here" id="homework" name="homework">{{$lesson->zadanaie}}</textarea>
                 <button id="addlect" type="button" class="btn btn-secondary">Конспект</button>
                 <button id="addrep" type="button" class="btn btn-secondary">Звіт</button>
             </div>
