@@ -51,9 +51,19 @@
                         <label for="maxval1" class="form-label">Максимальна оцінка</label>
                         <input type="text" class="form-control" id="maxval1" name="maxval" placeholder="30">
                     </div>
+                    <div class="mb-3">
+                        <label>Тип контроля</label>
+                        <select id="typecontrol1" name="typecontrol" class="form-select form-select-md" aria-label=".form-select-sm example">
+                            <option value="0" selected>Поточний (Опитування, ЛР, СР, Практичні, тощо)</option>
+                            <option value="1">Модульний (Модульні та тематичні контролі)</option>
+                            <option value="2">Підсумковий (Рубіжний, Семестровий, Підсумок, Іспит, Річна)</option>
+                        </select>
+
+
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" >Зберегти</button>
+                    <button type="submit" class="btn btn-success">Зберегти</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
                 </div>
             </div>
@@ -62,13 +72,9 @@
 </form>
 
 <script>
-    //document.getElementById('datetime').valueAsDate = new Date();
-
-
-
     $(document).ready(function() {
 
-        $('#updateControl').click(function(){
+        $('#updateControl').click(function() {
 
         });
 
@@ -76,13 +82,12 @@
             let url = $(this).data('url');
             console.log(url);
             $.get(url, function(data, status) {
-                //console.log(data);
-                //alert("Data: " + data.data_ + "\nStatus: " + status);
-                //data=JSON.parse(data);
+
                 $('#datetime2').val(data.data_);
                 $('#control1').val(data.vid_kontrol);
                 $('#oldcontrol').val(data.vid_kontrol);
                 $('#maxval1').val(data.ocenka);
+                $("typecontrol1 option[value=" + data.type_kontrol + "]").attr('selected', 'true');
             });
         });
 
@@ -90,7 +95,5 @@
             $('#control1').val($("#ftemp1 option:selected").text());
         });
 
-        //$('#datetime2').val(new Date().toISOString().split('T')[0]);
-        //$('#example').DataTable();
     });
 </script>

@@ -54,6 +54,16 @@
                         <label for="maxval" class="form-label">Максимальна оцінка</label>
                         <input type="text" class="form-control" id="maxval" name="maxval" placeholder="30">
                     </div>
+                    <div class="mb-3">
+                        <label>Тип контроля</label>
+                        <select id="typecontrol" name="typecontrol" class="form-select form-select-md" aria-label=".form-select-sm example">
+                            <option value="0" selected>Поточний (Опитування, ЛР, СР, Практичні, тощо)</option>
+                            <option value="1">Модульний (Модульні та тематичні контролі)</option>
+                            <option value="2">Підсумковий (Рубіжний, Семестровий, Підсумок, Іспит, Річна)</option>
+                        </select>
+
+
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Зберегти</button>

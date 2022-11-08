@@ -121,6 +121,7 @@ class MarkController extends Controller
         $markFields['kod_stud'] = 0;
         $markFields['ocenka'] = $maxval;
         $markFields['vid_kontrol'] = $request->input('control');
+        $markFields['type_kontrol'] = $request->input('typecontrol');
         $markFields['data_'] = $request->input('datetime1');
         $subj = $markFields['kod_subj'];
         $group = $markFields['kod_grup'];
@@ -140,7 +141,8 @@ class MarkController extends Controller
                 [
                     'vid_kontrol' => $request->input('control'),
                     'data_' => $request->input('datetime2'),
-                    'ocenka' => $request->input('maxval')
+                    'ocenka' => $request->input('maxval'),
+                    'type_kontrol' => $request->input('typecontrol')
                 ]
             );
 
