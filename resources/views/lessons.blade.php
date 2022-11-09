@@ -41,8 +41,8 @@
     <thead>
         <tr>
             <th></th>
-            <th>Дата Години</th>
-
+            <th>Дата</th>
+            <th>Години</th>
             <th>Тема</th>
             <th>Задано</th>
             <th></th>
@@ -56,7 +56,8 @@
             </td>
             <td>
                 {{ $oItem->date }}
-                <hr width="75%">
+            </td>
+            <td>
                 {{ $oItem->kol_chasov }}
             </td>
 
@@ -81,7 +82,8 @@
             buttons: [
                 'copy', 'csv', 'excel'
             ],
-            "paging": false
+            "paging": false,
+            "ordering": false
         });
     });
 </script>
