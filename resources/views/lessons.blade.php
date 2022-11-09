@@ -37,7 +37,7 @@
 
 <h2>{{$data['title1']}}</h2>
 
-<table id="example" class="display table table-striped">
+<table id="tblessons" class="display table table-striped">
     <thead>
         <tr>
             <th></th>
@@ -74,7 +74,17 @@
     </tbody>
 </table>
 
-
+<script>
+    $(document).ready(function() {
+        $('#tblessons').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel'
+            ],
+            "paging": false
+        });
+    });
+</script>
 
 
 @include('popups.new-lesson')

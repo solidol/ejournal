@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\User;
-
+use DateTime;
+use DatePeriod;
+use DateInterval;
 
 class LessonController extends Controller
 {
@@ -78,10 +80,10 @@ class LessonController extends Controller
             $lesson->kod_grupi = $request->input('grcode');
             $lesson->kod_prep = Auth::user()->usercode;
             $lesson->kod_subj = $request->input('sbjcode');
-            $lesson->nom_pari = abs(round(+$request->input('lessnom'),0));
+            $lesson->nom_pari = abs(round(+$request->input('lessnom'), 0));
             $lesson->tema = $request->input('thesis');
             $lesson->zadanaie = $request->input('homework');
-            $lesson->kol_chasov = abs(round(+$request->input('hours'),0));
+            $lesson->kol_chasov = abs(round(+$request->input('hours'), 0));
             $lesson->data_ = $request->input('datetime');
 
             $subj = $lesson->kod_subj;
@@ -107,5 +109,46 @@ class LessonController extends Controller
             'subj' => $routeData['subj'],
             'group' => $routeData['group']
         ]);;
+    }
+
+    public function getTable()
+    {
+        $period = new DatePeriod(
+            new DateTime('2022-08-15'),
+            new DateInterval('P1D'),
+            new DateTime('2022-12-31')
+        );
+
+        $dates = array();
+        foreach ($period as $dItem) {
+            $dates[] = $dItem->format('d.m.y');
+        }
+
+        $subjects = User::getMySubjects();
+        $arSubjects = array();
+        foreach ($subjects as $sItem) {
+            $tmp['data'] = Lesson::filterLs($sItem->kod_subj, $sItem->kod_grup);
+            $tmp['meta'] = Lesson::getSubjectInfo($sItem->kod_subj, $sItem->kod_grup);
+            //dd($tmp['meta']);
+            $arSubjects[] = $tmp;
+        }
+
+
+
+        //dd($additionalData);
+        return view(
+            'table',
+            [
+                /*
+            'data' => [
+                'title1' => 'Редагувати записану пару',
+                'prep' => $lesson->kod_prep,
+                'subj' => $lesson->kod_subj,
+                'group' => $lesson->kod_groupi
+            ],*/
+                'arDates' => $dates,
+                'arLessons' => $arSubjects
+            ]
+        );
     }
 }

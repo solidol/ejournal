@@ -2,3 +2,28 @@
     width: 100%; 
     min-height: 450px;
 }
+
+th.rotated-text {
+    height: 140px;
+    white-space: nowrap;
+    padding: 0 !important;
+
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}
+
+.table-table tr{
+    max-height: 20px;
+}
+
+table .subj-name{
+    max-width: 10%;
+    white-space: nowrap; /* Отменяем перенос текста */
+    overflow: hidden; /* Обрезаем содержимое */
+    text-overflow: ellipsis; /* Многоточие */
+}
+
+.table-table, .table-table td{
+    font-size: 1rem;
+    padding: 0 !important;
+}

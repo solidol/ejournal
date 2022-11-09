@@ -110,6 +110,6 @@
             $('#homework').val('Звіт');
         });
         $('#datetime1').val(new Date().toISOString().split('T')[0]);
-        //$('#example').DataTable();
+
     });
 </script>
