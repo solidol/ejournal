@@ -80,7 +80,8 @@
         $('#tblessons').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel'
+                { extend: 'copy', className: 'btn btn-success' },
+            { extend: 'excel', className: 'btn btn-success' }
             ],
             "paging": false,
             "ordering": false

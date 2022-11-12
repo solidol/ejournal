@@ -63,6 +63,7 @@
 
         <form action="{{route('store_marks')}}" method="post">
             <button type="submit" class="btn btn-success">Зберегти</button>
+            <input type="text" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V">
             <input type="hidden" name="cdate" value="{{$oSubList['meta']['data_']}}">
             @csrf
             <table class="table table-striped">
@@ -87,13 +88,35 @@
                     @endforeach
                 </tbody>
             </table>
-            
             <a href="{{URL::route('delete_control',['subj'=>$oSubList['meta']['subj'], 'group'=>$oSubList['meta']['group'], 'control'=>$oSubList['meta']['title']])}}" class="btn btn-danger" data-confirm="Видалити увесь контроль {{$oSubList['meta']['title']}} разом з оцінками?">Видалити контроль</a>
-            <button type="button"  data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['subj'=>$oSubList['meta']['subj'], 'group'=>$oSubList['meta']['group'], 'control'=>$oSubList['meta']['title']])}}" class="edit-control btn btn-warning">Редагувати контроль</button>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['subj'=>$oSubList['meta']['subj'], 'group'=>$oSubList['meta']['group'], 'control'=>$oSubList['meta']['title']])}}" class="edit-control btn btn-warning">Редагувати контроль</button>
         </form>
     </div>
     @endforeach
 </div>
+
+
+<script>
+    $(document).ready(function() {
+        $(".m-inputs").on('paste', function() {
+            var element = this;
+            let arInps = $(this).parent().find("table input");
+            setTimeout(function() {
+                var text = $(element).val();
+                $(element).val("");
+                let adMarks = text.split(' ');
+                if (arInps.length == adMarks.length) {
+
+                    for (let i = 0; i <= adMarks.length - 1; i++) {
+                        arInps[i].value = adMarks[i];
+                    }
+                } else {
+                    alert('Кількість оцінок і рядків не співпадають');
+                }
+            }, 100);
+        });
+    });
+</script>
 
 @include('popups.new-control')
 

@@ -32,6 +32,7 @@
 
 
     <link rel="stylesheet" href="/assets/css/datatables.min.css">
+<!--    <link rel="stylesheet" href="/assets/css/buttons.datatables.min.css">-->
 
 
 </head>
