@@ -27,3 +27,7 @@ table .subj-name{
     font-size: 1rem;
     padding: 0 !important;
 }
+
+.bg-dblue{
+    background-color: #40668d !important;
+}
