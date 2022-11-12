@@ -95,7 +95,6 @@
     @endforeach
 </div>
 
-
 <script>
     $(document).ready(function() {
         $(".m-inputs").on('paste', function() {
