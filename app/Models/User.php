@@ -18,7 +18,7 @@ class User extends Authenticatable
         return DB::table('subjects')->
         join('lessons_', 'subjects.kod_subj', '=', 'lessons_.kod_subj')->
         join('grups', 'lessons_.kod_grupi', '=', 'grups.kod_grup')->
-        where('kod_prep',Auth::user()->usercode)->
+        where('lessons_.kod_prep',Auth::user()->usercode)->
         select('nomer_grup','kod_grup','subjects.kod_subj', 'subject_name')->
         orderBy('nomer_grup')->
         distinct()->
