@@ -36,7 +36,7 @@
 <body>
     <div id="app">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dblue">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -50,6 +50,9 @@
                         @if (Auth::user())
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('get_subjects') }}">Мої журнали</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('my_table') }}">Мій табель</a>
                         </li>
                         @endif
                     </ul>
@@ -96,7 +99,7 @@
         </nav>
 
 
-        <div class="container">
+        <div class="container-fluid">
 
             @if (Auth::user())
 

@@ -1,6 +1,34 @@
-@extends('layouts.app-nosidebar')
+@extends('layouts.app')
 
-@section('title', 'Мої дисципліни')
+@section('title', 'Мої табелі')
+
+@section('sidebar')
+
+
+
+
+<h2>Навігація</h2>
+
+<nav class="nav flex-column">
+
+<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'08'])}}">Серпень</a>
+<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'09'])}}">Вересень</a>
+<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'10'])}}">Жовтень</a>
+<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'11'])}}">Листопад</a>
+<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'12'])}}">Грудень</a>
+<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'01'])}}">Січень</a>
+<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'02'])}}">Лютий</a>
+<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'03'])}}">Березень</a>
+<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'04'])}}">Квітень</a>
+<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'05'])}}">Травень</a>
+<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'06'])}}">Червень</a>
+
+</nav>
+
+
+
+@stop
+
 
 @section('content')
 

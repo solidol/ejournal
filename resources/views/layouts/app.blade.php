@@ -55,6 +55,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('get_subjects') }}">Мої журнали</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('my_table') }}">Мій табель</a>
+                        </li>
                         @endif
                     </ul>
 

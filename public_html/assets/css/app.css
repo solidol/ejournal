@@ -21,8 +21,8 @@ th.rotated-text {
     max-height: 20px;
 }
 
-table .subj-name {
-    max-width: 10%;
+table th.subj-name, table td.subj-name {
+    max-width: 200px;
     white-space: nowrap;
     /* Отменяем перенос текста */
     overflow: hidden;

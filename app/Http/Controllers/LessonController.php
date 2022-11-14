@@ -111,12 +111,13 @@ class LessonController extends Controller
         ]);;
     }
 
-    public function getTable()
+    public function getTable($year = '2022', $month = '08')
     {
+
         $period = new DatePeriod(
-            new DateTime('2022-08-15'),
+            new DateTime($year.'-'.$month.'-01'),
             new DateInterval('P1D'),
-            new DateTime('2022-12-31')
+            (new DateTime($year.'-'.$month.'-01'))->modify('last day of')
         );
 
         $dates = array();

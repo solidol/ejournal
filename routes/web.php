@@ -48,7 +48,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/journal/marks/control/update',[MarkController::class, 'updateControl'])->name('update_info_control');
 
-    //Route::get('/my/table',[LessonController::class, 'getTable'])->name('my_table');
+    Route::get('/my/table',[LessonController::class, 'getTable'])->name('my_table');
+
+    Route::get('/my/table/{year}/{month}',[LessonController::class, 'getTable'])->name('my_table_date');
 });
 
 
