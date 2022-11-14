@@ -1,5 +1,5 @@
-#chart_div{
-    width: 100%; 
+#chart_div {
+    width: 100%;
     min-height: 450px;
 }
 
@@ -12,22 +12,31 @@ th.rotated-text {
     transform: rotate(180deg);
 }
 
-.table-table tr{
+.table-table tr {
     max-height: 20px;
 }
 
-table .subj-name{
+table .subj-name {
     max-width: 10%;
-    white-space: nowrap; /* Отменяем перенос текста */
-    overflow: hidden; /* Обрезаем содержимое */
-    text-overflow: ellipsis; /* Многоточие */
+    white-space: nowrap;
+    /* Отменяем перенос текста */
+    overflow: hidden;
+    /* Обрезаем содержимое */
+    text-overflow: ellipsis;
+    /* Многоточие */
 }
 
-.table-table, .table-table td{
+.table-table,
+.table-table td {
     font-size: 1rem;
     padding: 0 !important;
 }
 
-.bg-dblue{
+.bg-dblue {
     background-color: #40668d !important;
+}
+
+.container{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
