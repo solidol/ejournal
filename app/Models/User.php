@@ -20,7 +20,7 @@ class User extends Authenticatable
         join('grups', 'lessons_.kod_grupi', '=', 'grups.kod_grup')->
         where('lessons_.kod_prep',Auth::user()->usercode)->
         select('nomer_grup','kod_grup','subjects.kod_subj', 'subject_name')->
-        orderBy('nomer_grup')->
+        orderBy('nomer_grup')->orderBy('subject_name')->
         distinct()->
         get();
     }
