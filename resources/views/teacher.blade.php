@@ -59,8 +59,8 @@
 
     @foreach($mList as $mItem)
     <div class="col">
-        <div class="card text-white bg-dblue  h-100">
-            <div class="card-header">
+        <div class="card h-100">
+            <div class="card-header text-white bg-dblue">
                 <h3>{{$mItem->nomer_grup}}</h3>
             </div>
             <div class="card-body">

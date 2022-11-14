@@ -1,3 +1,8 @@
+body {
+    background-color: #f1f1f1 !important;
+}
+
+
 #chart_div {
     width: 100%;
     min-height: 450px;
@@ -32,11 +37,20 @@ table .subj-name {
     padding: 0 !important;
 }
 
+.table thead {
+    color: #ffffff !important;
+    background-color: #40668d !important;
+}
+
 .bg-dblue {
     background-color: #40668d !important;
 }
 
-.container{
+.container {
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+.form-group {
+    margin: 1rem;
 }
