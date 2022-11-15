@@ -26,7 +26,6 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="/assets/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
@@ -34,6 +33,7 @@
     <link rel="stylesheet" href="/assets/css/datatables.min.css">
     <!--    <link rel="stylesheet" href="/assets/css/buttons.datatables.min.css">-->
 
+    <link href="/assets/css/app.css" rel="stylesheet">
 
 </head>
 
