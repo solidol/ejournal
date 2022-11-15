@@ -13,21 +13,31 @@ body {
     background-color: #40668d !important;
 }
 
-.nav-item{
+.nav-item {
     margin: 0 5px 0 5px;
 }
-.nav-item .nav-link {
+
+.nav-item a.nav-link {
     color: #f1f1f1 !important;
     border-radius: 5px;
     border: 1px solid #2e4a65 !important;
 }
 
-.nav-item .nav-link:hover {
+.nav-item a.nav-link:hover {
     background-color: #2e4a65 !important;
-    border-radius: 5px;
-    border: 1px solid #1a2938 !important;
+   border: 1px solid #1a2938 !important;
 }
 
+
+.nav-item button.nav-link{
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #2e4a65 !important;  
+}
+.nav-item button.nav-link:hover{
+    background-color: #acbcdd  !important;
+    border: 1px solid #1a2938 !important; 
+}
 
 /* navbar */
 
