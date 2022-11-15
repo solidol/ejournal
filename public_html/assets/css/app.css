@@ -1,5 +1,25 @@
+/* common */
+
 body {
     background-color: #f1f1f1 !important;
+}
+
+.container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.bg-dblue {
+    background-color: #40668d !important;
+}
+
+
+
+
+/* navbar */
+
+.navbar-brand img {
+    max-height: 50px;
 }
 
 
@@ -7,6 +27,8 @@ body {
     width: 100%;
     min-height: 450px;
 }
+
+/* tables */
 
 th.rotated-text {
     height: 140px;
@@ -21,7 +43,8 @@ th.rotated-text {
     max-height: 20px;
 }
 
-table th.subj-name, table td.subj-name {
+table th.subj-name,
+table td.subj-name {
     max-width: 200px;
     white-space: nowrap;
     /* Отменяем перенос текста */
@@ -42,14 +65,7 @@ table th.subj-name, table td.subj-name {
     background-color: #40668d !important;
 }
 
-.bg-dblue {
-    background-color: #40668d !important;
-}
-
-.container {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-}
+/* forms */
 
 .form-group {
     margin: 1rem;

@@ -43,7 +43,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dblue">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="/assets/img/logo.png"> {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -53,10 +53,10 @@
                     <ul class="navbar-nav mr-auto">
                         @if (Auth::user())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('get_subjects') }}">Мої журнали</a>
+                            <a class="nav-link" href="{{ route('get_subjects') }}"><i class="bi bi-book"></i> Мої журнали</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('my_table') }}">Мій табель</a>
+                            <a class="nav-link" href="{{ route('my_table') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
                         </li>
                         @endif
                     </ul>
@@ -67,7 +67,7 @@
                         @guest
                         @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Увійти</a>
+                            <a class="nav-link" href="{{ route('login') }}"><i class="bi bi-box-arrow-in-right"></i> Увійти</a>
                         </li>
                         @endif
                         @if (Route::has('register'))
@@ -79,13 +79,13 @@
 
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                <i class="bi bi-person-bounding-box"></i> {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
     document.getElementById('logout-form').submit();">
-                                        Вихід
+                                        <i class="bi bi-box-arrow-right"></i> Вихід
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

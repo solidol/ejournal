@@ -61,10 +61,10 @@
     <div class="col">
         <div class="card h-100">
             <div class="card-header text-white bg-dblue">
-                <h3>{{$mItem->nomer_grup}}</h3>
+                <h3><i class="bi bi-people"></i> {{$mItem->nomer_grup}}</h3>
             </div>
             <div class="card-body">
-                <p>{{$mItem->subject_name}}</p>
+                <p><i class="bi bi-book"></i> {{$mItem->subject_name}}</p>
             </div>
             <div class="card-footer">
                 <a class="btn btn-success" href="{{URL::route('get_lessons',['subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">
