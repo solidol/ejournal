@@ -32,11 +32,11 @@ body {
 .nav-item button.nav-link{
     margin: 5px;
     border-radius: 5px;
-    border: 1px solid #2e4a65 !important;  
+    border: 1px solid #7ea7cd !important;  
 }
 .nav-item button.nav-link:hover{
     background-color: #acbcdd  !important;
-    border: 1px solid #1a2938 !important; 
+    border: 1px solid #4d657d !important; 
 }
 
 /* navbar */
