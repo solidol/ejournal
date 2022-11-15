@@ -5,8 +5,6 @@
 @section('sidebar')
 
 
-
-
 <h2>Навігація</h2>
 
 <nav class="nav flex-column">
@@ -32,6 +30,7 @@
 
 @section('content')
 
+<h2>{{$data['title1']}}</h2>
 
 <table class="table table-striped table-bordered table-table">
     <thead>
