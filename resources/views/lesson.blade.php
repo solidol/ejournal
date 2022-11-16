@@ -37,7 +37,7 @@
                 {{$absItem->FIO_stud}}
             </td>
             <td>
-                {{$absItem->nom_pari}}
+                {{$absItem->nom_pari?'нб':''}}
             </td>
         </tr>
         @endforeach
