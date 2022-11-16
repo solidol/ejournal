@@ -52,7 +52,7 @@
         @foreach ($oList as $key=>$oItem)
         <tr>
             <td>
-                <a class="text-primary" href="{{URL::route('edit_lesson',['lessId'=>$oItem->kod_pari])}}"><i class="bi bi-pencil-square"></i></a>
+                <a class="text-primary" href="{{URL::route('show_lesson',['lessonId'=>$oItem->kod_pari])}}"><i class="bi bi-pencil-square"></i></a>
             </td>
             <td>
                 {{ $oItem->date }}
@@ -68,7 +68,7 @@
                 {!! nl2br($oItem->zadanaie) !!}
             </td>
             <td>
-                <a class="text-danger" href="{{URL::route('delete_lesson',['lessId'=>$oItem->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i></a>
+                <a class="text-danger" href="{{URL::route('delete_lesson',['lessonId'=>$oItem->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i></a>
             </td>
         </tr>
         @endforeach

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\User;
+use App\Models\Absent;
 use DateTime;
 use DatePeriod;
 use DateInterval;
@@ -44,9 +45,33 @@ class LessonController extends Controller
         ]);
     }
 
-    public function edit($lessId)
+
+    public function show($lessonId)
     {
-        $lesson = Lesson::findOrFail($lessId);
+        $lesson = Lesson::findOrFail($lessonId);
+        if (Auth::user()->usercode != $lesson->kod_prep)
+            return view('noelement');
+        $lesson->dateFormatted = (new DateTime($lesson->data_))->format('d.m.y');
+        $arAbs = Absent::listByLesson($lessonId);
+        return view(
+            'lesson',
+            [
+                'data' => [
+                    'title1' => 'Перегляд пари та запис відсутніх',
+                    'prep' => $lesson->kod_prep,
+                    'subj' => $lesson->kod_subj,
+                    'group' => $lesson->kod_grupi
+                ],
+                'arAbsent' => $arAbs,
+                'storeRoute' => route('update_lesson', ['lessonId' => $lessonId]),
+                'lesson' => $lesson
+            ]
+        );
+    }
+
+    public function edit($lessonId)
+    {
+        $lesson = Lesson::findOrFail($lessonId);
 
         if (Auth::user()->usercode != $lesson->kod_prep)
             return view('noelement');
@@ -59,7 +84,7 @@ class LessonController extends Controller
                     'subj' => $lesson->kod_subj,
                     'group' => $lesson->kod_groupi
                 ],
-                'storeRoute' => route('update_lesson', ['lessId' => $lessId]),
+                'storeRoute' => route('update_lesson', ['lessonId' => $lessonId]),
                 'lesson' => $lesson
             ]
         );
@@ -106,14 +131,15 @@ class LessonController extends Controller
         }
         // redirect
         // Session::flash('message', 'Successfully updated post!');
-        return redirect()->route('get_lessons', ['subj' => $subj, 'group' => $group]);
+        return redirect()->route('show_lesson', ['lessonId' => $request->get('lesscode')]);
+        //return redirect()->route('show_lesson', ['subj' => $subj, 'group' => $group]);
         //  }*/
     }
 
-    public function destroy($lessId)
+    public function destroy($lessonId)
     {
         // delete
-        $lesson = Lesson::find($lessId);
+        $lesson = Lesson::find($lessonId);
         $routeData['subj'] = $lesson->kod_subj;
         $routeData['group'] = $lesson->kod_grupi;
         $lesson->delete();
@@ -129,9 +155,9 @@ class LessonController extends Controller
     {
 
         $period = new DatePeriod(
-            new DateTime($year.'-'.$month.'-01'),
+            new DateTime($year . '-' . $month . '-01'),
             new DateInterval('P1D'),
-            (new DateTime($year.'-'.$month.'-01'))->modify('last day of')
+            (new DateTime($year . '-' . $month . '-01'))->modify('last day of')
         );
 
         $dates = array();
@@ -154,11 +180,11 @@ class LessonController extends Controller
         return view(
             'table',
             [
-                
-            'data' => [
-                'title1' => 'Табель за '.LessonController::$mothStrings[$month].' '.$year.'p.',
 
-            ],
+                'data' => [
+                    'title1' => 'Табель за ' . LessonController::$mothStrings[$month] . ' ' . $year . 'p.',
+
+                ],
                 'arDates' => $dates,
                 'arLessons' => $arSubjects
             ]

@@ -28,9 +28,7 @@
                 <a class="btn btn-primary" href="{{URL::route('get_marks',['subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">
                     Оцінки
                 </a>
-                <a class="btn btn-secondary" href="#">
-                    Відсутні
-                </a>
+
             </div>
         </div>
     </div>

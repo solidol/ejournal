@@ -35,9 +35,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/journal/lesson/update', [LessonController::class, 'update'])->name('update_lesson');
 
-    Route::get('/journal/lesson:{lessId}/edit',[LessonController::class, 'edit'])->name('edit_lesson');
+    Route::get('/journal/lesson:{lessonId}/more', [LessonController::class, 'show'])->name('show_lesson');
 
-    Route::get('/journal/lesson:{lessId}/delete',[LessonController::class, 'destroy'])->name('delete_lesson'); 
+    Route::get('/journal/lesson:{lessonId}/edit',[LessonController::class, 'edit'])->name('edit_lesson');
+
+    Route::get('/journal/lesson:{lessonId}/delete',[LessonController::class, 'destroy'])->name('delete_lesson'); 
     
     Route::post('/journal/marks/store', [MarkController::class, 'store'])->name('store_marks');
 
@@ -55,7 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
     
 //    Route::get('/journal/absents/{date}/{subj}/{group}/{lesson}', [AbsentController::class, 'listAbsents'])->name('get_absents');
 
-//    Route::get('/journal/absents/{lessonId}', [AbsentController::class, 'listAbsentsByLesson'])->name('get_absents_by_lesson');
+    
 
 });
 

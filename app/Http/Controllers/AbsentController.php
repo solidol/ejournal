@@ -17,7 +17,18 @@ class AbsentController extends Controller
     }
 
     public function listAbsentsByLesson($lessonId){
-        dd(Absent::listByLesson($lessonId));
-        return response()->json(Absent::listByLesson($lessonId));
+        $arAbs = Absent::listByLesson($lessonId);
+        return view('absents', [
+            'data' => [
+                'title1' => '',
+                'prep' => Auth::user()->usercode,
+                //'subj' => $subj,
+                //'group' => $group
+            ],
+            'storeRoute' => route('create_lesson', ['subj' => -1, 'group' => -1]),
+            //'oList' => Lesson::filterLs($subj, $group),
+            //'mList' => User::getMySubjects()
+        ]);
+        
     }
 }
