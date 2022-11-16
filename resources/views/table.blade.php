@@ -9,17 +9,17 @@
 
 <nav class="nav flex-column">
 
-<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'08'])}}">Серпень</a>
-<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'09'])}}">Вересень</a>
-<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'10'])}}">Жовтень</a>
-<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'11'])}}">Листопад</a>
-<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'12'])}}">Грудень</a>
-<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'01'])}}">Січень</a>
-<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'02'])}}">Лютий</a>
-<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'03'])}}">Березень</a>
-<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'04'])}}">Квітень</a>
-<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'05'])}}">Травень</a>
-<a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'06'])}}">Червень</a>
+    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'08'])}}">Серпень</a>
+    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'09'])}}">Вересень</a>
+    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'10'])}}">Жовтень</a>
+    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'11'])}}">Листопад</a>
+    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'12'])}}">Грудень</a>
+    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'01'])}}">Січень</a>
+    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'02'])}}">Лютий</a>
+    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'03'])}}">Березень</a>
+    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'04'])}}">Квітень</a>
+    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'05'])}}">Травень</a>
+    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'06'])}}">Червень</a>
 
 </nav>
 
@@ -32,42 +32,43 @@
 
 <h2>{{$data['title1']}}</h2>
 
-<table class="table table-striped table-bordered table-table">
-    <thead>
-        <tr>
-            <th class="subj-name">
-                Предмет
-            </th>
-            @foreach($arDates as $dItem)
-            <th class="rotated-text">
+<div class="div-table">
+    <table class="table table-striped table-bordered table-table">
+        <thead>
+            <tr>
+                <th class="subj-name">
+                    Предмет
+                </th>
+                @foreach($arDates as $dItem)
+                <th class="rotated-text">
 
-                {{$dItem}}
+                    {{$dItem}}
 
-            </th>
-            @endforeach
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($arLessons as $lessList)
-        <tr>
-            <td class="subj-name">
-                {{$lessList['meta']->nomer_grup}} {{$lessList['meta']->subject_name}}
-            </td>
-
-            @foreach($arDates as $dItem)
-            <td>
-
-                @foreach($lessList['data'] as $lessItem)
-                @if ($lessItem->date == $dItem)
-                {{$lessItem->kol_chasov}}
-                @endif
+                </th>
                 @endforeach
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($arLessons as $lessList)
+            <tr>
+                <td class="subj-name">
+                    {{$lessList['meta']->nomer_grup}} {{$lessList['meta']->subject_name}}
+                </td>
 
-            </td>
+                @foreach($arDates as $dItem)
+                <td>
+
+                    @foreach($lessList['data'] as $lessItem)
+                    @if ($lessItem->date == $dItem)
+                    {{$lessItem->kol_chasov}}
+                    @endif
+                    @endforeach
+
+                </td>
+                @endforeach
+            </tr>
             @endforeach
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
 @stop
