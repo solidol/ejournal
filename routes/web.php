@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MarkController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AbsentController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/my/table',[LessonController::class, 'getTable'])->name('my_table');
 
     Route::get('/my/table/{year}/{month}',[LessonController::class, 'getTable'])->name('my_table_date');
+    
+//    Route::get('/journal/absents/{date}/{subj}/{group}/{lesson}', [AbsentController::class, 'listAbsents'])->name('get_absents');
+
+//    Route::get('/journal/absents/{lessonId}', [AbsentController::class, 'listAbsentsByLesson'])->name('get_absents_by_lesson');
+
 });
 
 
