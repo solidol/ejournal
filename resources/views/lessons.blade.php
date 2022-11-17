@@ -40,7 +40,7 @@
 <table id="tblessons" class="display table table-striped">
     <thead>
         <tr>
-            <th></th>
+
             <th>Дата</th>
             <th>Години</th>
             <th>Тема</th>
@@ -51,9 +51,7 @@
     <tbody>
         @foreach ($oList as $key=>$oItem)
         <tr>
-            <td>
-                <a class="text-primary" href="{{URL::route('show_lesson',['lessonId'=>$oItem->kod_pari])}}"><i class="bi bi-pencil-square"></i></a>
-            </td>
+
             <td>
                 {{ $oItem->date }}
             </td>
@@ -68,7 +66,7 @@
                 {!! nl2br($oItem->zadanaie) !!}
             </td>
             <td>
-                <a class="text-danger" href="{{URL::route('delete_lesson',['lessonId'=>$oItem->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i></a>
+                <a class="btn btn-primary" href="{{URL::route('show_lesson',['lessonId'=>$oItem->kod_pari])}}"><i class="bi bi-pencil-square"></i></a>
             </td>
         </tr>
         @endforeach
@@ -79,9 +77,14 @@
     $(document).ready(function() {
         $('#tblessons').DataTable({
             dom: 'Bfrtip',
-            buttons: [
-                { extend: 'copy', className: 'btn btn-success' },
-            { extend: 'excel', className: 'btn btn-success' }
+            buttons: [{
+                    extend: 'copy',
+                    className: 'btn btn-success'
+                },
+                {
+                    extend: 'excel',
+                    className: 'btn btn-success'
+                }
             ],
             "paging": false,
             "ordering": false

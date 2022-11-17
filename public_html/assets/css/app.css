@@ -68,6 +68,16 @@ button.active {
     min-height: 450px;
 }
 
+/* accordion */
+
+.accordion {
+    margin: 1rem 0 1rem 0;
+}
+
+.accrdion .accordion-header {
+    background-color: #2e4a65 !important;
+}
+
 /* tables */
 
 .div-table {
@@ -75,7 +85,9 @@ button.active {
     overflow-y: scroll;
 }
 
-
+table {
+    margin: 1rem 0 1rem 0;
+}
 
 th.rotated-text {
     height: 140px;

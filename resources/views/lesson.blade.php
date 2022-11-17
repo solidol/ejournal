@@ -13,11 +13,30 @@
 
 @section('content')
 
-<h2>{{$data['title1']}} <a class="text-primary" href="#"  data-bs-toggle="modal" data-bs-target="#editLesson"><i class="bi bi-pencil-square"></i></a></h2>
+<h2>{{$data['title1']}} </h2>
 
-<h3>{{$lesson->dateFormatted}} {{$lesson->tema}}</h3>
+<h3>
+    <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#editLesson"><i class="bi bi-pencil-square"></i> Редагувати</a>
+    {{$lesson->dateFormatted}} {{$lesson->tema}}
+</h3>
 
 <p>{{$lesson->zadanaie}}</p>
+
+
+
+<div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed bg-dblue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Додатково
+            </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body"> <a class="btn btn-danger" href="{{URL::route('delete_lesson',['lessonId'=>$lesson->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i> Видалити</a></div>
+        </div>
+    </div>
+
+</div>
 
 <table id="tab-absent" class="table table-striped">
     <thead>
@@ -42,7 +61,7 @@
         </tr>
         @endforeach
     </tbody>
-</tabel>
+</table>
 
 <script>
     //document.getElementById('datetime').valueAsDate = new Date();
