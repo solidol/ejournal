@@ -10,7 +10,7 @@
 
 <h2>Навігація</h2>
 <nav class="nav flex-column">
-
+    <a class="nav-link" href="{{URL::route('get_subjects')}}">Ha головну</a>
     <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$data['subj'],'group'=>$data['group']])}}">До журналу</a>
 
 </nav>
@@ -20,7 +20,7 @@
 
 <h2>{{$data['title1']}} </h2>
 
-<h3>
+<h3 class="bg-light-grey">
     <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#editLesson"><i class="bi bi-pencil-square"></i> Редагувати</a>
     {{$lesson->dateFormatted}} {{$lesson->tema}}
 </h3>

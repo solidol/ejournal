@@ -13,6 +13,17 @@ body {
     background-color: #40668d !important;
 }
 
+.bg-light-grey {
+    background-color: #b1c6da !important;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    padding: 0.5rem;
+}
+
 /* buttons */
 
 button.active {
