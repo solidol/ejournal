@@ -71,8 +71,19 @@ class Mark extends Model
     public static function getControls($subj, $group)
     {
         return Mark::select('vid_kontrol', 'ocenka', 'data_')->where('kod_prep', Auth::user()->usercode)->where('kod_grup', $group)->where('kod_subj', $subj)->
-            //whereNull('kod_stud')->
             where('kod_stud', 0)->where('vid_kontrol', '<>', '')->distinct()->orderBy('data_', 'ASC')->get();
+    }
+
+    public static function getControlsByDate($subj, $group, $date)
+    {
+        return Mark::select('vid_kontrol', 'ocenka', 'data_')->
+        where('kod_prep', Auth::user()->usercode)->
+        where('kod_grup', $group)->
+        where('data_', $date)->
+        where('kod_subj', $subj)->
+            where('kod_stud', 0)->
+            where('vid_kontrol', '<>', '')->
+            distinct()->orderBy('data_', 'ASC')->get();
     }
 
     public static function getOcTable($subj, $group)

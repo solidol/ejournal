@@ -15,9 +15,8 @@
 <h2>Навігація</h2>
 
 <nav class="nav flex-column">
-
     <a class="nav-link" href="{{URL::route('get_subjects')}}">Ha головну</a>
-
+    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$data['subj'],'group'=>$data['group']])}}">Записані пари</a>
 </nav>
 
 

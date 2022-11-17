@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\User;
 use App\Models\Absent;
+use App\Models\Mark;
 use DateTime;
 use DatePeriod;
 use DateInterval;
@@ -53,6 +54,8 @@ class LessonController extends Controller
             return view('noelement');
         $lesson->dateFormatted = (new DateTime($lesson->data_))->format('d.m.y');
         $arAbs = Absent::listByLesson($lessonId);
+
+        $arCtrls = Mark::getControlsByDate($lesson->kod_subj, $lesson->kod_grupi, $lesson->data_);
         return view(
             'lesson',
             [
@@ -63,7 +66,9 @@ class LessonController extends Controller
                     'group' => $lesson->kod_grupi
                 ],
                 'arAbsent' => $arAbs,
+                'arCtrls' => $arCtrls,
                 'storeRoute' => route('update_lesson', ['lessonId' => $lessonId]),
+                'createControlRoute' => route('create_control'),
                 'lesson' => $lesson
             ]
         );

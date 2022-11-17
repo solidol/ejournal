@@ -3,6 +3,11 @@
 @section('title', 'Записана пара')
 
 @section('sidebar')
+
+<button type="button" id="btnAddControl" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addControl">
+    Додати контроль
+</button>
+
 <h2>Навігація</h2>
 <nav class="nav flex-column">
 
@@ -20,23 +25,41 @@
     {{$lesson->dateFormatted}} {{$lesson->tema}}
 </h3>
 
-<p>{{$lesson->zadanaie}}</p>
+<h4>{{$lesson->zadanaie}}</h4>
 
+<h3>Контролі сьогодні</h3>
+<table id="tab-absent" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Назва
+            </th>
+            <th>
+                Макс
+            </th>
+            <th>
 
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @foreach ($arCtrls as $ctrlItem)
+            <td>
+                {{$ctrlItem->vid_kontrol}}
+            </td>
+            <td>
+                {{$ctrlItem->ocenka}}
+            </td>
+            <td>
 
-<div class="accordion accordion-flush" id="accordionFlushExample">
-    <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingOne">
-            <button class="accordion-button collapsed bg-dblue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                Додатково
-            </button>
-        </h2>
-        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body"> <a class="btn btn-danger" href="{{URL::route('delete_lesson',['lessonId'=>$lesson->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i> Видалити</a></div>
-        </div>
-    </div>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
-</div>
+<h3>Відсутні</h3>
 
 <table id="tab-absent" class="table table-striped">
     <thead>
@@ -63,6 +86,23 @@
     </tbody>
 </table>
 
+<h3 class="text-danger">Небезпечна зона</h3>
+<div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed bg-dblue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Натиснути для перегляду
+            </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body"> <a class="btn btn-danger" href="{{URL::route('delete_lesson',['lessonId'=>$lesson->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i> Видалити</a></div>
+        </div>
+    </div>
+
+</div>
+
+
+
 <script>
     //document.getElementById('datetime').valueAsDate = new Date();
 
@@ -80,11 +120,15 @@
             $('#homework').val('Звіт');
         });
         //$('#datetime1').val(new Date().toISOString().split('T')[0]);
-
+        $('#btnAddControl').click(function() {
+            $('#datetimeAddControl').val('{{$lesson->data_}}');
+        });
     });
 </script>
 
 
 @include('popups.edit-lesson')
+
+@include('popups.new-control')
 
 @stop

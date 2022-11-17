@@ -19,7 +19,7 @@
 <nav class="nav flex-column">
 
     <a class="nav-link" href="{{URL::route('get_subjects')}}">Ha головну</a>
-
+    <a class="nav-link" href="{{URL::route('get_marks',['subj'=>$data['subj'],'group'=>$data['group']])}}">Оцінки</a>
 </nav>
 
 
@@ -42,7 +42,7 @@
         <tr>
 
             <th>Дата</th>
-            <th>Години</th>
+            <th>Г.</th>
             <th>Тема</th>
             <th>Задано</th>
             <th></th>
@@ -66,7 +66,7 @@
                 {!! nl2br($oItem->zadanaie) !!}
             </td>
             <td>
-                <a class="btn btn-primary" href="{{URL::route('show_lesson',['lessonId'=>$oItem->kod_pari])}}"><i class="bi bi-pencil-square"></i></a>
+                <a class="text-success" href="{{URL::route('show_lesson',['lessonId'=>$oItem->kod_pari])}}"><i class="bi bi-pencil-square"></i></a>
             </td>
         </tr>
         @endforeach

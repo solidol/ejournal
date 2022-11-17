@@ -1,6 +1,3 @@
-
-
-
 <!-- Modal -->
 <form action="{{$storeRoute}}" method="post">
     @csrf
@@ -43,7 +40,7 @@
 
                             <input type="radio" class="btn-check" name="lessnom" id="btnradio6" value="6" autocomplete="off">
                             <label class="btn btn-outline-primary" for="btnradio6">6</label>
-<!--
+                            <!--
                             <input type="radio" class="btn-check" name="lessnom" id="btnradio7" value="7" autocomplete="off">
                             <label class="btn btn-outline-primary" for="btnradio7">7</label>
 
@@ -86,7 +83,6 @@
                     <button type="submit" class="btn btn-success">Зберегти</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
                     <button type="button" class="btn btn-danger" id="freset">Очистити</button>
-
                 </div>
             </div>
         </div>
@@ -94,10 +90,6 @@
 </form>
 
 <script>
-    //document.getElementById('datetime').valueAsDate = new Date();
-
-
-
     $(document).ready(function() {
         $('#freset').click(function() {
             $('#homework').val('');

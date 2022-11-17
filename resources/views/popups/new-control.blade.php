@@ -19,8 +19,8 @@
                         <input type="text" class="form-control" id="control" name="control" placeholder="Опитування 0">
                     </div>
                     <div class="mb-3">
-                        <label for="datetime1" class="form-label">Дата проведення</label>
-                        <input type="date" class="form-control" id="datetime1" name="datetime1">
+                        <label for="datetimeAddControl" class="form-label">Дата проведення</label>
+                        <input type="date" class="form-control" id="datetimeAddControl" name="datetime1">
                     </div>
                     <div class="mb-3">
                         <label>Швидкі шаблони</label>
@@ -84,7 +84,7 @@
             $('#control').val($("#ftemp option:selected").text());
         });
 
-        $('#datetime1').val(new Date().toISOString().split('T')[0]);
+        $('#datetimeAddControl').val(new Date().toISOString().split('T')[0]);
         //$('#example').DataTable();
     });
 </script>
