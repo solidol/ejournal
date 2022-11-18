@@ -61,7 +61,9 @@
         <h3>Дата контролю {{$oSubList['meta']['dateFormatted']}} | {{$oSubList['meta']['typecontrol']}}</h3>
 
         <form action="{{route('store_marks')}}" method="post">
-            <button type="submit" class="btn btn-success">Зберегти</button>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Зберегти</button>
+            </div>
             <input type="text" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V">
             <input type="hidden" name="cdate" value="{{$oSubList['meta']['data_']}}">
             @csrf
@@ -87,9 +89,12 @@
                     @endforeach
                 </tbody>
             </table>
+        </form>
+        <h3 class="text-danger">Небезпечна зона</h3>
+        <div class="mb-3">
             <a href="{{URL::route('delete_control',['subj'=>$oSubList['meta']['subj'], 'group'=>$oSubList['meta']['group'], 'control'=>$oSubList['meta']['title']])}}" class="btn btn-danger" data-confirm="Видалити увесь контроль {{$oSubList['meta']['title']}} разом з оцінками?">Видалити контроль</a>
             <button type="button" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['subj'=>$oSubList['meta']['subj'], 'group'=>$oSubList['meta']['group'], 'control'=>$oSubList['meta']['title']])}}" class="edit-control btn btn-warning">Редагувати контроль</button>
-        </form>
+        </div>
     </div>
     @endforeach
 </div>
