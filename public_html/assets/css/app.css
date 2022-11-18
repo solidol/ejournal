@@ -1,7 +1,14 @@
 /* common */
 
+:root {
+    --dark-bg-color: #40668d;
+    --white-bg-color: #f1f1f1;
+    --dark-border-color: #2e4a65;
+  }
+  
+
 body {
-    background-color: #f1f1f1 !important;
+    background-color: var(--white-bg-color)  !important;
 }
 
 .container {
@@ -10,7 +17,7 @@ body {
 }
 
 .bg-dblue {
-    background-color: #40668d !important;
+    background-color: var(--dark-bg-color) !important;
 }
 
 .bg-light-grey {
@@ -27,17 +34,17 @@ h4 {
 /* buttons */
 
 button.active {
-    background-color: #40668d !important;
-    border-color: #2e4a65 !important;
+    background-color: var(--dark-bg-color) !important;
+    border-color: var(--dark-border-color) !important;
 }
 
 .btn-primary {
-    background-color: #40668d !important;
-    border-color: #2e4a65 !important;
+    background-color: var(--dark-bg-color) !important;
+    border-color: var(--dark-border-color) !important;
 }
 
 .btn-primary:hover {
-    background-color: #2e4a65 !important;
+    background-color: var(--dark-border-color) !important;
 }
 
 /* navbar */
@@ -49,7 +56,7 @@ button.active {
 .nav-item a.nav-link {
     color: #f1f1f1 !important;
     border-radius: 5px;
-    border: 1px solid #2e4a65 !important;
+    border: 1px solid var(--dark-border-color) !important;
 }
 
 .nav-item a.nav-link:hover {
@@ -132,7 +139,7 @@ table td.subj-name {
 
 .table thead {
     color: #ffffff !important;
-    background-color: #40668d !important;
+    background-color: var(--dark-bg-color) !important;
 }
 
 /* forms */
