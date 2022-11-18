@@ -89,11 +89,11 @@
 <h3 class="text-danger">Небезпечна зона</h3>
 <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingOne">
+        <div class="accordion-header" id="flush-headingOne">
             <button class="accordion-button collapsed bg-dblue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                 Натиснути для перегляду
             </button>
-        </h2>
+        </div>
         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body"> <a class="btn btn-danger" href="{{URL::route('delete_lesson',['lessonId'=>$lesson->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i> Видалити</a></div>
         </div>
