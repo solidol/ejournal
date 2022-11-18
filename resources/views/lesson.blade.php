@@ -86,12 +86,12 @@
     </tbody>
 </table>
 
-<h3 class="text-danger">Небезпечна зона</h3>
+<h3 class="text-danger">Видалення записаної пари</h3>
 <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
         <div class="accordion-header" id="flush-headingOne">
             <button class="accordion-button collapsed bg-dblue text-white" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                Натиснути для перегляду
+                Натиснути для видалення
             </button>
         </div>
         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
