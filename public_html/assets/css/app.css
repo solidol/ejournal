@@ -115,7 +115,7 @@ table {
 }
 
 .table tr{
-    border-bottom: 1px solid var(--cl-ddd-blue) !important;
+  /*  border-bottom: 1px solid var(--cl-ddd-blue) !important;*/
 }
 
 .table thead th{
