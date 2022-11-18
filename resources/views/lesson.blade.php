@@ -59,7 +59,7 @@
     </tbody>
 </table>
 
-<h3>Відсутні</h3>
+<h3>Відсутні (тільки перегляд)</h3>
 
 <table id="tab-absent" class="table table-striped">
     <thead>
