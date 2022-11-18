@@ -26,7 +26,7 @@ class Absent extends Model
         $lessonInfo = Lesson::find($lessonId);
 
         return DB::table('spisok_stud')->select(
-            'vidsutni.kod_stud',
+            'spisok_stud.kod_stud',
             'spisok_stud.kod_grup',
             'spisok_stud.FIO_stud',
             'vidsutni.data_',
@@ -34,7 +34,8 @@ class Absent extends Model
             'vidsutni.kod_subj',
             'vidsutni.nom_pari',
             'vidsutni.kod_lesson',
-            DB::raw('DATE_FORMAT(vidsutni.data_,"%d.%m.%y") as dateFormatted')
+            DB::raw('DATE_FORMAT(vidsutni.data_,"%d.%m.%y") as dateFormatted'),
+            DB::raw("$lessonId as lesson_id")
         )->leftJoinSub(
             Absent::select('kod_stud', 'kod_prepod', 'kod_subj', 'nom_pari', 'kod_lesson', 'data_')->where('kod_prepod', Auth::user()->usercode)->where('kod_lesson', $lessonId),
             'vidsutni',

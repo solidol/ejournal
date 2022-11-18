@@ -79,7 +79,7 @@
                 {{$absItem->FIO_stud}}
             </td>
             <td>
-                {{$absItem->nom_pari?'нб':''}}
+                <input type="text" class="form form-control" name="abs[{{$absItem->kod_stud}}_{{$absItem->lesson_id}}]" value="{{$absItem->nom_pari?'нб':''}}" placeholder="">
             </td>
         </tr>
         @endforeach
