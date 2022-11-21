@@ -19,7 +19,7 @@
                 <h3><i class="bi bi-people"></i> {{$mItem->nomer_grup}}</h3>
             </div>
             <div class="card-body">
-                <p><i class="bi bi-book"></i> {{$mItem->subject_name}}</p>
+                <h5><i class="bi bi-book"></i> {{$mItem->subject_name}}</h5>
             </div>
             <div class="card-footer">
                 <a class="btn btn-success" href="{{URL::route('get_lessons',['subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">
