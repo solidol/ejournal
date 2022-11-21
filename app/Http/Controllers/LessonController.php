@@ -167,7 +167,9 @@ class LessonController extends Controller
 
         $dates = array();
         foreach ($period as $dItem) {
-            $dates[] = $dItem->format('d.m.y');
+            $tmp['formatted']=$dItem->format('d.m.y');
+            $tmp['dw']=$dItem->format('w');
+            $dates[] = $tmp;
         }
 
         $subjects = User::getMySubjects();
@@ -175,13 +177,8 @@ class LessonController extends Controller
         foreach ($subjects as $sItem) {
             $tmp['data'] = Lesson::filterLs($sItem->kod_subj, $sItem->kod_grup);
             $tmp['meta'] = Lesson::getSubjectInfo($sItem->kod_subj, $sItem->kod_grup);
-            //dd($tmp['meta']);
             $arSubjects[] = $tmp;
         }
-
-
-
-        //dd($additionalData);
         return view(
             'table',
             [

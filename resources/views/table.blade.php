@@ -42,7 +42,7 @@
                 @foreach($arDates as $dItem)
                 <th class="rotated-text">
 
-                    {{$dItem}}
+                    {{$dItem['formatted']}}
 
                 </th>
                 @endforeach
@@ -56,10 +56,10 @@
                 </td>
 
                 @foreach($arDates as $dItem)
-                <td>
+                <td class="{{($dItem['dw']=='6' || $dItem['dw']=='0')?'we-cols':''}}">
 
                     @foreach($lessList['data'] as $lessItem)
-                    @if ($lessItem->date == $dItem)
+                    @if ($lessItem->date == $dItem['formatted'])
                     {{$lessItem->kol_chasov}}
                     @endif
                     @endforeach
