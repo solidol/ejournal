@@ -152,11 +152,15 @@ table td.subj-name {
 
 .table-table,
 .table-table td {
-    text-align: center;
-    vertical-align: center;
     font-size: 1rem;
     padding: 0 !important;
 }
+
+.table-table td.hr-cnt {
+    text-align: center;
+    vertical-align: center;
+}
+
 
 .table thead {
     color: var(--cl-d-white) !important;

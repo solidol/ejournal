@@ -56,7 +56,7 @@
                 </td>
 
                 @foreach($arDates as $dItem)
-                <td class="{{($dItem['dw']=='6' || $dItem['dw']=='0')?'we-cols':''}}">
+                <td class="hr-cnt {{($dItem['dw']=='6' || $dItem['dw']=='0')?'we-cols':''}}">
 
                     @foreach($lessList['data'] as $lessItem)
                     @if ($lessItem->date == $dItem['formatted'])
