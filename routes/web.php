@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/my/table/{year}/{month}', [LessonController::class, 'getTableDate'])->name('my_table_date');
 
-    //    Route::post('/journal/absents/store', [AbsentController::class, 'store'])->name('store_absents');
+    Route::post('/journal/absents/store', [AbsentController::class, 'store'])->name('store_absents');
 
     //    Route::get('/journal/absents/{date}/{subj}/{group}/{lesson}', [AbsentController::class, 'listAbsents'])->name('get_absents');
 

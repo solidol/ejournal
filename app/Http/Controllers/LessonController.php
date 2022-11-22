@@ -61,6 +61,9 @@ class LessonController extends Controller
             [
                 'data' => [
                     'title1' => 'Перегляд пари та запис відсутніх',
+                    'lessid' => $lesson->kod_pari,
+                    'lessnom' => $lesson->nom_pari,
+                    'date' => $lesson->data_,
                     'prep' => $lesson->kod_prep,
                     'subj' => $lesson->kod_subj,
                     'group' => $lesson->kod_grupi
@@ -69,6 +72,7 @@ class LessonController extends Controller
                 'arCtrls' => $arCtrls,
                 'storeRoute' => route('update_lesson', ['lessonId' => $lessonId]),
                 'createControlRoute' => route('create_control'),
+                'storeAbsentsRoute' => route('store_absents'),
                 'lesson' => $lesson
             ]
         );
@@ -97,8 +101,6 @@ class LessonController extends Controller
 
     public function create(Request $request)
     {
-
-
         if ($request->get('lesscode') < 1) {
             $lesson = new Lesson();
             $lesson->kod_grupi = $request->input('grcode');

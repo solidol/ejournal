@@ -59,33 +59,44 @@
     </tbody>
 </table>
 
-<h3>Відсутні (тільки перегляд)</h3>
-
-<table id="tab-absent" class="table table-striped">
-    <thead>
-        <tr>
-            <th>
-                ПІБ студента
-            </th>
-            <th>
-                Відсутній
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            @foreach ($arAbsent as $absItem)
-            <td>
-                {{$absItem->FIO_stud}}
-            </td>
-            <td>
-                <input type="text" class="form form-control" name="abs[{{$absItem->kod_stud}}_{{$absItem->lesson_id}}]" value="{{$absItem->nom_pari?'нб':''}}" placeholder="">
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-
+<h3>Відсутні</h3>
+<p>Будь-яка позначка або подвійний клік для відмітки. Обов'язково натисніть "Зберегти"</p>
+<form action="{{$storeAbsentsRoute}}" method="post">
+    @csrf
+    <input type="hidden" name="lessonid" value="{{$data['lessid']}}">
+    <input type="hidden" name="date" value="{{$data['date']}}">
+    <input type="hidden" name="less_nom" value="{{$data['lessnom']}}">
+    <input type="hidden" name="group" value="{{$data['group']}}">
+    <input type="hidden" name="prep" value="{{$data['prep']}}">
+    <input type="hidden" name="subj" value="{{$data['subj']}}">
+    <table id="tab-absent" class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    ПІБ студента
+                </th>
+                <th>
+                    Відсутній
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                @foreach ($arAbsent as $absItem)
+                <td>
+                    {{$absItem->FIO_stud}}
+                </td>
+                <td>
+                    <input type="text" class="inp-abs form form-control" name="abs[{{$absItem->kod_stud}}]" value="{{$absItem->nom_pari?'нб':''}}" placeholder="">
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Зберегти</button>
+    </div>
+</form>
 <h3 class="text-danger">Видалення записаної пари</h3>
 <div class="accordion accordion-flush" id="accordionFlushExample">
     <div class="accordion-item">
@@ -104,10 +115,6 @@
 
 
 <script>
-    //document.getElementById('datetime').valueAsDate = new Date();
-
-
-
     $(document).ready(function() {
         $('#freset').click(function() {
             $('#homework').val('');
@@ -119,9 +126,14 @@
         $('#addrep').click(function() {
             $('#homework').val('Звіт');
         });
-        //$('#datetime1').val(new Date().toISOString().split('T')[0]);
         $('#btnAddControl').click(function() {
             $('#datetimeAddControl').val('{{$lesson->data_}}');
+        });
+        $('.inp-abs').dblclick(function() {
+            if ($(this).val() == '')
+                $(this).val('нб')
+            else
+                $(this).val('')
         });
     });
 </script>

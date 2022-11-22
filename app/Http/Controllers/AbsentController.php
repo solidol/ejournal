@@ -34,47 +34,26 @@ class AbsentController extends Controller
 
     function store(Request $request)
     {
-        $lessonId = $request->input('marks');
-        foreach ($request->input('marks') as $key => $value) {
-            switch ($value) {
-                case 'Н/А':
-                case 'НА':
-                case 'н/а':
-                case 'на':
-                    $value = -1;
-                    break;
-                case 'З':
-                case 'з':
-                case 'Зар':
-                case 'зар':
-                    $value = -2;
-                    break;
-                default:
-                    break;
-            }
-            if (!is_numeric($value)) $value = null;
-            $tmpKeys = explode("_", $key);
-            $searchKeys['kod_prep'] = $tmpKeys[0];
-            $searchKeys['kod_subj'] = $tmpKeys[1];
-            $searchKeys['kod_grup'] = $tmpKeys[2];
-            $searchKeys['kod_stud'] = $tmpKeys[3];
-            $searchKeys['vid_kontrol'] = $tmpKeys[4];
+        $lessonId = $request->input('lessonid');
+        $date = $request->input('date');
+        $lessNom = $request->input('less_nom');
+        $prep = $request->input('prep');
+        $group = $request->input('group');
+        $subj = $request->input('subj');
 
-            $updateKeys['ocenka'] = $value;
-
-            $subj = $searchKeys['kod_subj'];
-            $group = $searchKeys['kod_grup'];
-
-            if ($mark = Absent::where($searchKeys)->first()) {
-
-                $mark->ocenka = $value;
-                $mark->data_ = $request->input('cdate');
-                $mark->save();
-            } else if (!is_null($value)) {
-
-                $searchKeys['ocenka'] = $value;
-                $searchKeys['data_'] = $request->input('cdate');
-                Absent::insert($searchKeys);
+        $searchKeys['kod_lesson'] = $lessonId;
+        Absent::where($searchKeys)->delete();
+        foreach ($request->input('abs') as $key => $value) {
+            if (!empty($value)) {
+                $updateKeys['kod_lesson'] = $lessonId;
+                $updateKeys['kod_prepod'] = $prep;
+                $updateKeys['kod_subj'] = $subj;
+                $updateKeys['kod_grup'] = $group;
+                $updateKeys['kod_stud'] = $key;
+                $updateKeys['data_'] = $date;
+                $updateKeys['nom_pari'] = $lessNom;
+                $updateKeys['pricina'] = 'test';
+                Absent::insert($updateKeys);
             }
         }
 
