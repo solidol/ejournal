@@ -156,7 +156,13 @@ class LessonController extends Controller
         ]);;
     }
 
-    public function getTable($year = '2022', $month = '08')
+    public function getTable()
+    {
+        $date = new DateTime();
+        return redirect()->route('my_table_date', ['year' => $date->format('Y'), 'month' => $date->format('m')]);
+    }
+
+    public function getTableDate($year = '2022', $month = '08')
     {
 
         $period = new DatePeriod(
@@ -167,8 +173,8 @@ class LessonController extends Controller
 
         $dates = array();
         foreach ($period as $dItem) {
-            $tmp['formatted']=$dItem->format('d.m.y');
-            $tmp['dw']=$dItem->format('w');
+            $tmp['formatted'] = $dItem->format('d.m.y');
+            $tmp['dw'] = $dItem->format('w');
             $dates[] = $tmp;
         }
 

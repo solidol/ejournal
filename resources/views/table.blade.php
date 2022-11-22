@@ -33,7 +33,7 @@
 <h2>{{$data['title1']}}</h2>
 
 <div class="div-table">
-    <table class="table table-striped table-bordered table-table">
+    <table id="tbtable" class="table table-striped table-bordered table-table">
         <thead>
             <tr>
                 <th class="subj-name">
@@ -71,4 +71,23 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#tbtable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'copy',
+                    className: 'btn btn-success'
+                },
+                {
+                    extend: 'excel',
+                    className: 'btn btn-success'
+                }
+            ],
+            "paging": false,
+            "ordering": false
+        });
+    });
+</script>
 @stop

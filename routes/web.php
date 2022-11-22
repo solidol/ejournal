@@ -37,27 +37,29 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/journal/lesson:{lessonId}/more', [LessonController::class, 'show'])->name('show_lesson');
 
-    Route::get('/journal/lesson:{lessonId}/edit',[LessonController::class, 'edit'])->name('edit_lesson');
+    Route::get('/journal/lesson:{lessonId}/edit', [LessonController::class, 'edit'])->name('edit_lesson');
 
-    Route::get('/journal/lesson:{lessonId}/delete',[LessonController::class, 'destroy'])->name('delete_lesson'); 
-    
+    Route::get('/journal/lesson:{lessonId}/delete', [LessonController::class, 'destroy'])->name('delete_lesson');
+
     Route::post('/journal/marks/store', [MarkController::class, 'store'])->name('store_marks');
 
     Route::post('/journal/marks/create-control', [MarkController::class, 'createControl'])->name('create_control');
 
     Route::get('/journal/marks/{subj}/{group}/{control}/del-control', [MarkController::class, 'deleteControl'])->name('delete_control');
 
-    Route::get('/ajax/marks/{subj}/{group}/{control}/info',[MarkController::class, 'apiIndex'])->name('get_info_control');
+    Route::get('/ajax/marks/{subj}/{group}/{control}/info', [MarkController::class, 'apiIndex'])->name('get_info_control');
 
-    Route::post('/journal/marks/control/update',[MarkController::class, 'updateControl'])->name('update_info_control');
+    Route::post('/journal/marks/control/update', [MarkController::class, 'updateControl'])->name('update_info_control');
 
-    Route::get('/my/table',[LessonController::class, 'getTable'])->name('my_table');
+    Route::get('/my/table', [LessonController::class, 'getTable'])->name('my_table');
 
-    Route::get('/my/table/{year}/{month}',[LessonController::class, 'getTable'])->name('my_table_date');
-    
-//    Route::get('/journal/absents/{date}/{subj}/{group}/{lesson}', [AbsentController::class, 'listAbsents'])->name('get_absents');
+    Route::get('/my/table/{year}/{month}', [LessonController::class, 'getTableDate'])->name('my_table_date');
 
-    
+    //    Route::post('/journal/absents/store', [AbsentController::class, 'store'])->name('store_absents');
+
+    //    Route::get('/journal/absents/{date}/{subj}/{group}/{lesson}', [AbsentController::class, 'listAbsents'])->name('get_absents');
+
+
 
 });
 
@@ -66,5 +68,4 @@ Auth::routes([
     'register' => false, // Registration Routes...
     'reset' => false, // Password Reset Routes...
     'verify' => false, // Email Verification Routes...
-  ]);
-
+]);
