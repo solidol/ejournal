@@ -69,6 +69,11 @@
     <input type="hidden" name="group" value="{{$data['group']}}">
     <input type="hidden" name="prep" value="{{$data['prep']}}">
     <input type="hidden" name="subj" value="{{$data['subj']}}">
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Зберегти</button>
+    </div>
+
     <table id="tab-absent" class="table table-striped">
         <thead>
             <tr>
@@ -93,9 +98,7 @@
             @endforeach
         </tbody>
     </table>
-    <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Зберегти</button>
-    </div>
+
 </form>
 <h3 class="text-danger">Видалення записаної пари</h3>
 <div class="accordion accordion-flush" id="accordionFlushExample">
