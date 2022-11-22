@@ -31,7 +31,12 @@
 @section('content')
 
 <h2>{{$data['title1']}}</h2>
-
+<div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" value="" id="showSubject">
+    <label class="form-check-label" for="showSubject">
+        Показати повністю назву дисципліни
+    </label>
+</div>
 <div class="div-table">
     <table id="tbtable" class="table table-striped table-bordered table-table">
         <thead>
@@ -74,6 +79,17 @@
 
 <script>
     $(document).ready(function() {
+        $('#showSubject').click(function() {
+            if ($(this).is(':checked')) {
+                $('table th.subj-name, table td.subj-name').css('overflow', 'none');
+                $('table th.subj-name, table td.subj-name').css('max-width', 'none');
+            } else {
+                $('table th.subj-name, table td.subj-name').css('overflow', 'hidden');
+                $('table th.subj-name, table td.subj-name').css('max-width', '200px');
+            }
+        });
+
+
         $('#tbtable').DataTable({
             dom: 'Bfrtip',
             buttons: [{
