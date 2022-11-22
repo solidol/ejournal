@@ -46,8 +46,6 @@ class MarkController extends Controller
 
     function store(Request $request)
     {
-        //var_dump($request->input('marks'));
-        //die();
         foreach ($request->input('marks') as $key => $value) {
             switch ($value) {
                 case 'Н/А':
@@ -75,12 +73,6 @@ class MarkController extends Controller
 
             $updateKeys['ocenka'] = $value;
 
-            /*
-            Mark::updateOrCreate(
-                $searchKeys,
-                $updateKeys
-            );
-*/
             $subj = $searchKeys['kod_subj'];
             $group = $searchKeys['kod_grup'];
 
@@ -145,8 +137,6 @@ class MarkController extends Controller
                     'type_kontrol' => $request->input('typecontrol')
                 ]
             );
-
-
         return redirect()->route('get_marks', ['subj' => $request->input('sbjcode'), 'group' => $request->input('grcode')]);
     }
 }
