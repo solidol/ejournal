@@ -28,6 +28,7 @@
 <h4>{{$lesson->zadanaie}}</h4>
 
 <h3>Контролі сьогодні</h3>
+@if ($arCtrls->isNotEmpty())
 <table id="tab-absent" class="table table-striped">
     <thead>
         <tr>
@@ -43,8 +44,8 @@
         </tr>
     </thead>
     <tbody>
+        @foreach ($arCtrls as $ctrlItem)
         <tr>
-            @foreach ($arCtrls as $ctrlItem)
             <td>
                 {{$ctrlItem->vid_kontrol}}
             </td>
@@ -58,6 +59,9 @@
         @endforeach
     </tbody>
 </table>
+@else
+<p class="bg-light-grey">Немає контролів в цей день</p>
+@endif
 
 <h3>Відсутні</h3>
 <p>Будь-яка позначка або подвійний клік для відмітки. Обов'язково натисніть "Зберегти"</p>
