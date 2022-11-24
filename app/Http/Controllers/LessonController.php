@@ -14,6 +14,7 @@ use DateInterval;
 
 class LessonController extends Controller
 {
+    
     static $mothStrings = [
         '01' => 'Січень',
         '02' => 'Лютий',
@@ -30,19 +31,20 @@ class LessonController extends Controller
     ];
     function list($subj, $group)
     {
+        $user = Auth::user();
         $additionalData = Lesson::getSubjectInfo($subj, $group);
         if ($additionalData == null)
             return view('noelement');
         return view('lessons', [
             'data' => [
                 'title1' => $additionalData->nomer_grup . ' - ' . $additionalData->subject_name,
-                'prep' => Auth::user()->usercode,
+                'prep' => $user->usercode,
                 'subj' => $subj,
                 'group' => $group
             ],
             'storeRoute' => route('create_lesson', ['subj' => $subj, 'group' => $group]),
             'oList' => Lesson::filterLs($subj, $group),
-            'mList' => User::getMySubjects()
+            'mList' => $user->getMySubjects()
         ]);
     }
 
@@ -166,7 +168,7 @@ class LessonController extends Controller
 
     public function getTableDate($year = '2022', $month = '08')
     {
-
+        $user = Auth::user();
         $period = new DatePeriod(
             new DateTime($year . '-' . $month . '-01'),
             new DateInterval('P1D'),
@@ -180,7 +182,7 @@ class LessonController extends Controller
             $dates[] = $tmp;
         }
 
-        $subjects = User::getMySubjects();
+        $subjects = $user->getMySubjects();
         $arSubjects = array();
         foreach ($subjects as $sItem) {
             $tmp['data'] = Lesson::filterLs($sItem->kod_subj, $sItem->kod_grup);

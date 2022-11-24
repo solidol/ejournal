@@ -26,7 +26,7 @@ class MarkController extends Controller
 
     function list($subj, $group)
     {
-
+        $user = Auth::user();
         $additionalData = Lesson::getSubjectInfo($subj, $group);
         if ($additionalData == null)
             return view('noelement');
@@ -38,7 +38,7 @@ class MarkController extends Controller
                 'group' => $group
             ],
             'oList' => Mark::getOcTable($subj, $group),
-            'mList' => User::getMySubjects(),
+            'mList' => $user->getMySubjects(),
             'storeRoute' => route('store_marks'),
             'createControlRoute' => route('create_control'),
         ]);
@@ -130,13 +130,13 @@ class MarkController extends Controller
     function updateControl(Request $request)
     {
         Mark::where('kod_prep', Auth::user()->usercode)->where('kod_subj', $request->input('sbjcode'))->where('kod_grup', $request->input('grcode'))->where('vid_kontrol', $request->input('oldcontrol'))->update(
-                [
-                    'vid_kontrol' => $request->input('control'),
-                    'data_' => $request->input('datetime2'),
-                    'ocenka' => $request->input('maxval'),
-                    'type_kontrol' => $request->input('typecontrol')
-                ]
-            );
+            [
+                'vid_kontrol' => $request->input('control'),
+                'data_' => $request->input('datetime2'),
+                'ocenka' => $request->input('maxval'),
+                'type_kontrol' => $request->input('typecontrol')
+            ]
+        );
         return redirect()->route('get_marks', ['subj' => $request->input('sbjcode'), 'group' => $request->input('grcode')]);
     }
 }

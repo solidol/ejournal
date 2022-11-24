@@ -9,20 +9,21 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    function listSubjects(){
+    function listSubjects()
+    {
 
         return view('teacher', [
-            'data' => array('prep'=>Auth::user()->usercode),
-            'mList' => User::getMySubjects()
-        ]);        
+            'data' => array('prep' => Auth::user()->usercode),
+            'mList' => Auth::user()->getMySubjects()
+        ]);
     }
 
-    function showJournal($group, $subj){
+    function showJournal($group, $subj)
+    {
+        $user = Auth::user();
         return view('journal', [
-            'data' => array('prep'=>Auth::user()->usercode, 'group'=>$group, 'subj'=>$subj),
-            'mList' => User::getMySubjects(Auth::user()->usercode)
-        ]);        
+            'data' => array('prep' => Auth::user()->usercode, 'group' => $group, 'subj' => $subj),
+            'mList' => $user->getMySubjects()
+        ]);
     }
-
-
 }
