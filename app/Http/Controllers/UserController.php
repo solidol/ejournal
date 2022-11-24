@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
 
+    function show()
+    {
+        $user = Auth::user();
+        return view('auth.profile',['user'=>$user]);
+    }
+
     function anotherLoginForm()
     {
         if (Auth::user()->isAdmin()) {
