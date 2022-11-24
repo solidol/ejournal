@@ -60,7 +60,8 @@ Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/journal/absents/{date}/{subj}/{group}/{lesson}', [AbsentController::class, 'listAbsents'])->name('get_absents');
 
 
-
+    Route::get('/my/another-user', [UserController::class, 'anotherLoginForm'])->name('another_login');
+    Route::post('/another/login', [UserController::class, 'anotherLogin'])->name('another_auth');
 });
 
 

@@ -9,12 +9,34 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    function listSubjects()
+
+    function anotherLoginForm()
+    {
+        if (Auth::user()->isAdmin()) {
+            $users = User::orderBy('name')->get();
+            return view('auth.another', ['users' => $users]);
+        } else
+            return view('auth.login');
+    }
+
+    function anotherLogin(Request $request)
     {
 
+        if (Auth::user()->isAdmin() && $request->input('userid') > 0) {
+
+            Auth::loginUsingId($request->input('userid'));
+
+            return redirect()->route('get_subjects');
+        } else
+            return view('auth.login');
+    }
+
+    function listSubjects()
+    {
+        $user = Auth::user();
         return view('teacher', [
-            'data' => array('prep' => Auth::user()->usercode),
-            'mList' => Auth::user()->getMySubjects()
+            'data' => array('prep' => $user->usercode),
+            'mList' => $user->getMySubjects()
         ]);
     }
 
@@ -22,7 +44,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         return view('journal', [
-            'data' => array('prep' => Auth::user()->usercode, 'group' => $group, 'subj' => $subj),
+            'data' => array('prep' => $user->usercode, 'group' => $group, 'subj' => $subj),
             'mList' => $user->getMySubjects()
         ]);
     }
