@@ -9,18 +9,26 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    function index()
+    {
+        if (Auth::user()->isAdmin()) {
+            $users = User::orderBy('name')->get();
+            return view('admin.users', ['users' => $users]);
+        } else
+            return view('auth.login');
+    }
 
     function show()
     {
         $user = Auth::user();
-        return view('auth.profile',['user'=>$user]);
+        return view('auth.profile', ['user' => $user]);
     }
 
     function anotherLoginForm()
     {
         if (Auth::user()->isAdmin()) {
             $users = User::orderBy('name')->get();
-            return view('auth.another', ['users' => $users]);
+            return view('admin.another', ['users' => $users]);
         } else
             return view('auth.login');
     }

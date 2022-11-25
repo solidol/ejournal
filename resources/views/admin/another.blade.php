@@ -1,4 +1,9 @@
-@extends('layouts.app-nosidebar')
+@extends('layouts.app')
+
+@section('sidebar')
+<h1>Адмінпанель</h1>
+<h2>Увійти від імені</h2>
+@endsection
 
 @section('content')
 <div class="container">
@@ -8,7 +13,7 @@
                 <div class="card-header text-white bg-dblue">Вхід у журнал</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('another_auth') }}">
+                    <form method="POST" action="{{ route('admin_another_auth') }}">
                         @csrf
 
                         <div class="form-group row mb-2">
