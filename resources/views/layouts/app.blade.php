@@ -87,7 +87,10 @@
                                 </li>
                                 @if (Auth::user()->isAdmin())
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('another_login') }}"><i class="bi bi-list-ol"></i> Інший користувач</a>
+                                    <a class="dropdown-item" href="№"><i class="bi bi-list-ol"></i> Користувачі</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('another_login') }}"><i class="bi bi-box-arrow-in-right"></i> Увійти як</a>
                                 </li>
                                 @endif
                                 <li>
