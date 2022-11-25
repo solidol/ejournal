@@ -45,17 +45,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- -->
-                    <ul class="navbar-nav mr-auto">
-                        @if (Auth::user())
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('get_subjects') }}"><i class="bi bi-book"></i> Мої журнали</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('my_table') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
-                        </li>
-                        @endif
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -71,8 +60,14 @@
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         @endif
-                        @else
-
+                        @endguest
+                        @if (Auth::user())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('get_subjects') }}"><i class="bi bi-book"></i> Мої журнали</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('my_table') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-bounding-box"></i> {{ Auth::user()->name }} <span class="caret"></span>
@@ -81,14 +76,7 @@
                                 <li>
                                     <a class="dropdown-item" href="{{ route('show_profile') }}"><i class="bi bi-person-lines-fill"></i> Мій профіль</a>
                                 </li>
-                                @if (Auth::user()->isAdmin())
-                                <li>
-                                    <a class="dropdown-item" href="№"><i class="bi bi-list-ol"></i> Користувачі</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('another_login') }}"><i class="bi bi-box-arrow-in-right"></i> Увійти як</a>
-                                </li>
-                                @endif
+
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
     document.getElementById('logout-form').submit();">
@@ -102,8 +90,27 @@
 
                             </ul>
                         </li>
+                        @if (Auth::user()->isAdmin())
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-square"></i> Адміністрування <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
 
-                        @endguest
+                                @if (Auth::user()->isAdmin())
+                                <li>
+                                    <a class="dropdown-item" href="#"><i class="bi bi-list-ol"></i> Користувачі</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('another_login') }}"><i class="bi bi-box-arrow-in-right"></i> Увійти як</a>
+                                </li>
+                                @endif
+
+
+                            </ul>
+                        </li>
+                        @endif
+                        @endif
                     </ul>
                 </div>
             </div>
