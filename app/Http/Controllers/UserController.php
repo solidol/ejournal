@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -13,7 +14,10 @@ class UserController extends Controller
     {
         if (Auth::user()->isAdmin()) {
             $users = User::orderBy('name')->get();
-            return view('admin.users', ['users' => $users]);
+            $teachers = Teacher::orderBy('FIO_prep')->
+            leftJoin('users','users.usercode','=','prepod.kod_prep')->
+            get();
+            return view('admin.users', ['users' => $users, 'teachers' => $teachers]);
         } else
             return view('auth.login');
     }
