@@ -6,15 +6,32 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header text-white bg-dblue">
-                    <h5 class="modal-title" id="exampleModalLabel">Записати пару</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Записати першу пару</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
                     <input type="hidden" name="lesscode" value="-1">
-                    <input type="hidden" name="grcode" value="{{$data['group']}}">
-                    <input type="hidden" name="sbjcode" value="{{$data['subj']}}">
-
+                    <div class="mb-3">
+                        <label>Оберіть дисципліну</label>
+                        <select id="sbjcode" name="sbjcode" class="form-select form-select-md" 
+                        aria-label=".form-select-sm example" required placeholder="Оберіть дисципліну">
+                            <option selected></option>
+                            @foreach ($sbjList as $sItem)
+                            <option value="{{$sItem->kod_subj}}">{{$sItem->subject_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label>Оберіть групу</label>
+                        <select id="grcode" name="grcode" class="form-select form-select-md" 
+                        aria-label=".form-select-sm example" required placeholder="Оберіть групу">
+                            <option selected></option>
+                            @foreach ($grList as $gItem)
+                            <option value="{{$gItem->kod_grup}}">{{$gItem->nomer_grup}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <label for="datetime1" class="form-label">Дата</label>
                         <input type="date" class="form-control" id="datetime1" name="datetime">

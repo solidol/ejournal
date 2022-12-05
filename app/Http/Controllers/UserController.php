@@ -52,9 +52,13 @@ class UserController extends Controller
     function listSubjects()
     {
         $user = Auth::user();
+        $groups = DB::table('grups')->orderBy('nomer_grup')->get();
+        $subjects = DB::table('subjects')->orderBy('subject_name')->get();
         return view('teacher', [
             'data' => array('prep' => $user->usercode),
-            'mList' => $user->getMySubjects()
+            'mySubjList' => $user->getMySubjects(),
+            'grList' => $groups,
+            'sbjList' => $subjects,
         ]);
     }
 

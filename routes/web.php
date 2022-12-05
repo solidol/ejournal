@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/journal/{subj}/{group}/lessons', [LessonController::class, 'list'])->name('get_lessons');
 
-    Route::post('/journal/{subj}/{group}/lessons/create', [LessonController::class, 'create'])->name('create_lesson');
+    Route::post('/journal/lessons/store', [LessonController::class, 'create'])->name('create_lesson');
 
     Route::post('/journal/lesson/update', [LessonController::class, 'update'])->name('update_lesson');
 
