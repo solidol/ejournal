@@ -29,8 +29,11 @@
 
 
 @section('content')
-
-<h2>{{$data['title1']}}</h2>
+<h2>
+    <a href="{{URL::route('my_table_date',['year'=>'2022','month'=>$data['last_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-left"></i></a>
+    {{$data['title1']}}
+    <a href="{{URL::route('my_table_date',['year'=>'2022','month'=>$data['next_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-right"></i></a>
+</h2>
 <div class="form-check mb-3">
     <input class="form-check-input" type="checkbox" value="" id="showSubject">
     <label class="form-check-label" for="showSubject">
