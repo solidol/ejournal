@@ -42,7 +42,7 @@
         <tr>
 
             <th>Дата</th>
-            <th>Г.</th>
+            <th class="sum">Г.</th>
             <th>Тема</th>
             <th>Задано</th>
             <th></th>
@@ -55,7 +55,7 @@
             <td>
                 {{ $oItem->date }}
             </td>
-            <td>
+            <td class="sum">
                 {{ $oItem->kol_chasov }}
             </td>
 
@@ -71,11 +71,21 @@
         </tr>
         @endforeach
     </tbody>
+    <tfoot>
+        <tr>
+
+            <th>Всього</th>
+            <th class="sum"></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </tfoot>
 </table>
 
 <script>
     $(document).ready(function() {
-        $('#tblessons').DataTable({
+        table = $('#tblessons').DataTable({
             dom: 'Bfrtip',
             buttons: [{
                     extend: 'copy',
@@ -87,8 +97,26 @@
                 }
             ],
             "paging": false,
-            "ordering": false
+            "ordering": false,
+            "footerCallback": function(row, data, start, end, display) {
+                var api = this.api();
+                api.columns('.sum', {
+                    page: 'current'
+                }).every(function() {
+                    var sum = this
+                        .data()
+                        .reduce(function(a, b) {
+                            var x = parseFloat(a) || 0;
+                            var y = parseFloat(b) || 0;
+                            return x + y;
+                        }, 0);
+                    console.log(sum); //alert(sum);
+                    $(this.footer()).html(sum);
+                });
+            }
         });
+
+
     });
 </script>
 
