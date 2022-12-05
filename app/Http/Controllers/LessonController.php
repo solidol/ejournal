@@ -172,7 +172,7 @@ class LessonController extends Controller
         $period = new DatePeriod(
             new DateTime($year . '-' . $month . '-01'),
             new DateInterval('P1D'),
-            (new DateTime($year . '-' . $month . '-01'))->modify('last day of')
+            (new DateTime($year . '-' . $month . '-01'))->modify('first day of next month')
         );
 
         $dates = array();
