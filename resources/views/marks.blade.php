@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Оцінки')
+@section('title', 'Оцінки '.$data['title1'])
 
 @section('sidebar')
 
@@ -67,7 +67,7 @@
             <input type="text" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V">
             <input type="hidden" name="cdate" value="{{$oSubList['meta']['data_']}}">
             @csrf
-            <table class="table table-striped">
+            <table class="table table-striped table-marks">
                 <thead>
                     <tr>
                         <th>ПІБ студента</th>
@@ -81,6 +81,9 @@
                             {{ $oItem->FIO_stud}}
                         </td>
                         <td>
+                            <p style="display:none">
+                                {{ $oItem->ocenka }}
+                            </p>
                             <input type="text" class="form form-control" name="marks[{{$oItem->kod_prep}}_{{$oItem->kod_subj}}_{{$oItem->kod_grup}}_{{$oItem->kod_stud}}_{{$oItem->vid_kontrol}}]" value="{{ $oItem->ocenka }}" placeholder="Max = {{$oSubList['meta']['maxval']}}">
                         </td>
 
@@ -101,6 +104,22 @@
 
 <script>
     $(document).ready(function() {
+
+        $('.table-marks').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'copy',
+                    className: 'btn btn-success'
+                },
+                {
+                    extend: 'excel',
+                    className: 'btn btn-success'
+                }
+            ],
+            "paging": false,
+            "ordering": false,
+        });
+
         $(".m-inputs").on('paste', function() {
             var element = this;
             let arInps = $(this).parent().find("table input");

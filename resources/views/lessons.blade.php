@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Записані пари')
+@section('title', 'Записані пари '.$data['title1'])
 
 @section('sidebar')
 
