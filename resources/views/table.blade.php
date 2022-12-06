@@ -131,6 +131,13 @@
                         }, 0);
 
                     $(this.footer()).html(sum > 0 ? sum : '');
+                    if (sum > 8) {
+                        $(this.footer()).css('color', 'red');
+                        $(this.footer()).css('background-color', 'white');
+                    } else {
+                        $(this.footer()).css('color', '');
+                        $(this.footer()).css('background-color', '');
+                    }
                 });
             }
         });
