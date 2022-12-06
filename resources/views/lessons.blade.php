@@ -89,11 +89,11 @@
             dom: 'Bfrtip',
             buttons: [{
                     extend: 'copy',
-                    className: 'btn btn-success'
+                    className: 'btn btn-primary'
                 },
                 {
                     extend: 'excel',
-                    className: 'btn btn-success'
+                    className: 'btn btn-primary'
                 }
             ],
             "paging": false,
