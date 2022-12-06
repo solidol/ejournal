@@ -127,7 +127,7 @@
 
             <div class="row">
                 <aside class="col-lg-3 col-md-5 col-sm-12 col-xs-12">
-                    <h1>@yield('title')</h1>
+                    <h1>@yield('side-title')</h1>
                     @yield('sidebar')
                 </aside>
                 <main class="col-lg-9 col-md-7 col-sm-12 col-xs-12">

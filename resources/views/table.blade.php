@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Мої табелі')
-
+@section('side-title', 'Мої табелі')
 @section('sidebar')
 
 

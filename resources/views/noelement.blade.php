@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Електронний журнал')
+@section('title', 'Не знайдено')
+@section('side-title', 'Не знайдено')
 
 @section('sidebar')
 <h2>Навігація</h2>

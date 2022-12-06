@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\User;
 use App\Models\Absent;
 use App\Models\Mark;
+
 use DateTime;
 use DatePeriod;
 use DateInterval;
 
 class LessonController extends Controller
 {
-    
+
     static $mothStrings = [
         '01' => 'Січень',
         '02' => 'Лютий',
@@ -58,11 +60,15 @@ class LessonController extends Controller
         $arAbs = Absent::listByLesson($lessonId);
 
         $arCtrls = Mark::getControlsByDate($lesson->kod_subj, $lesson->kod_grupi, $lesson->data_);
+
+        $subj = DB::table('subjects')->where('kod_subj', $lesson->kod_subj)->get()->first();
+        $group = DB::table('grups')->where('kod_grup', $lesson->kod_grupi)->get()->first();
         return view(
             'lesson',
             [
                 'data' => [
-                    'title1' => 'Перегляд пари та запис відсутніх',
+                    'title1' => $group->nomer_grup . " " . $subj->subject_name,
+                    'title2' => 'Перегляд пари та запис відсутніх',
                     'lessid' => $lesson->kod_pari,
                     'lessnom' => $lesson->nom_pari,
                     'date' => $lesson->data_,

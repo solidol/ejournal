@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title', 'Мої дисципліни')
+@section('side-title', 'Мої дисципліни')
 
 @section('sidebar')
 
