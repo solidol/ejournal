@@ -57,10 +57,23 @@
     <tbody>
         @foreach($teachers as $teacher)
         <tr>
-            <td>{{$teacher->FIO_prep}}</td>
+            <td data-tid="{{$teacher->kod_prep}}">
+                
+                {{$teacher->FIO_prep}}
+            </td>
             <td>{{$teacher->email}}</td>
-            <td>{{$teacher->usertype}}</td>
-            <td></td>
+            <td>
+                @if (is_null($teacher->email))
+                <button type="button" class="btn btn-success btn-adduser" data-bs-toggle="modal" data-bs-target="#addWebuser">
+                    Додати
+                </button>
+                @else
+                {{$teacher->usertype}}
+                @endif
+            </td>
+            <td>
+
+            </td>
         </tr>
         @endforeach
     </tbody>
@@ -83,4 +96,7 @@
         });
     });
 </script>
+
+@include('popups.new-webuser')
+
 @endsection

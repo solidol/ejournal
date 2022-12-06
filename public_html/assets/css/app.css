@@ -114,25 +114,8 @@ table {
     margin: 1rem 0 1rem 0;
 }
 
-.table tr {
-    /*  border-bottom: 1px solid var(--cl-ddd-blue) !important;*/
-}
-
 table td.we-cols {
     background-color: var(--cl-l-blue) !important;
-}
-
-.table thead th {
-    border: 1px solid var(--cl-d-white) !important;
-}
-
-th.rotated-text {
-    height: 140px;
-    white-space: nowrap;
-    padding: 0 !important;
-
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
 }
 
 .table-table tr {
@@ -162,9 +145,28 @@ table td.subj-name {
 }
 
 
-.table thead {
+.table thead,
+.table tfoot {
     color: var(--cl-d-white) !important;
     background-color: var(--cl-d-blue) !important;
+}
+
+.table th {
+    vertical-align: middle !important;
+    text-align: center !important;
+    border: 1px solid var(--cl-d-white) !important;
+    font-size: 1rem;
+    font-weight: 600 !important;
+    padding: 0 !important;
+}
+
+th.rotated-text {
+    height: 140px;
+    white-space: nowrap;
+    padding: 0 !important;
+
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
 }
 
 /* forms */

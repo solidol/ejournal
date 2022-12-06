@@ -66,6 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/admin/user/list', [UserController::class, 'index'])->name('admin_userlist');
 
+    Route::post('/admin/user/create', [UserController::class, 'store'])->name('admin_create_user');
+
     Route::post('/admin/another/login', [UserController::class, 'anotherLogin'])->name('admin_another_auth');
 });
 

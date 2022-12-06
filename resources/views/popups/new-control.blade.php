@@ -75,16 +75,12 @@
 </form>
 
 <script>
-    //document.getElementById('datetime').valueAsDate = new Date();
-
-
-
+    
     $(document).ready(function() {
         $('#ftemp').change(function() {
             $('#control').val($("#ftemp option:selected").text());
         });
 
         $('#datetimeAddControl').val(new Date().toISOString().split('T')[0]);
-        //$('#example').DataTable();
     });
 </script>

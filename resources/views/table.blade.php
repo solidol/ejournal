@@ -48,7 +48,7 @@
                     Предмет
                 </th>
                 @foreach($arDates as $dItem)
-                <th class="rotated-text">
+                <th class="rotated-text sum">
 
                     {{$dItem['formatted']}}
 
@@ -77,6 +77,17 @@
             </tr>
             @endforeach
         </tbody>
+        <tfoot>
+            <tr>
+                <th>
+                    Всього за день:
+                </th>
+                @foreach($arDates as $dItem)
+                <th>
+                </th>
+                @endforeach
+            </tr>
+        </tfoot>
     </table>
 </div>
 
@@ -105,7 +116,23 @@
                 }
             ],
             "paging": false,
-            "ordering": false
+            "ordering": false,
+            "footerCallback": function(row, data, start, end, display) {
+                var api = this.api();
+                api.columns('.sum', {
+                    page: 'current'
+                }).every(function() {
+                    var sum = this
+                        .data()
+                        .reduce(function(a, b) {
+                            var x = parseFloat(a) || 0;
+                            var y = parseFloat(b) || 0;
+                            return x + y;
+                        }, 0);
+
+                    $(this.footer()).html(sum > 0 ? sum : '');
+                });
+            }
         });
     });
 </script>
