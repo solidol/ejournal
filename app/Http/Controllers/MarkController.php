@@ -33,7 +33,7 @@ class MarkController extends Controller
         return view('marks', [
             'data' => [
                 'title1' => $additionalData->group->nomer_grup . ' - ' . $additionalData->subject->subject_name,
-                'prep' => Auth::user()->usercode,
+                'prep' => Auth::user()->userable_id,
                 'subj' => $subj,
                 'group' => $group
             ],
@@ -107,7 +107,7 @@ class MarkController extends Controller
                 break;
         }
         if (!is_numeric($maxval)) $maxval = 0;
-        $markFields['kod_prep'] = Auth::user()->usercode;
+        $markFields['kod_prep'] = Auth::user()->userable_id;
         $markFields['kod_subj'] = $request->input('sbjcode');
         $markFields['kod_grup'] = $request->input('grcode');
         $markFields['kod_stud'] = 0;
@@ -123,13 +123,13 @@ class MarkController extends Controller
 
     function deleteControl($subj, $group, $control)
     {
-        Mark::where('kod_prep', Auth::user()->usercode)->where('kod_subj', $subj)->where('kod_grup', $group)->where('vid_kontrol', $control)->delete();
+        Mark::where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $subj)->where('kod_grup', $group)->where('vid_kontrol', $control)->delete();
         return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
     }
 
     function updateControl(Request $request)
     {
-        Mark::where('kod_prep', Auth::user()->usercode)->where('kod_subj', $request->input('sbjcode'))->where('kod_grup', $request->input('grcode'))->where('vid_kontrol', $request->input('oldcontrol'))->update(
+        Mark::where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $request->input('sbjcode'))->where('kod_grup', $request->input('grcode'))->where('vid_kontrol', $request->input('oldcontrol'))->update(
             [
                 'vid_kontrol' => $request->input('control'),
                 'data_' => $request->input('datetime2'),

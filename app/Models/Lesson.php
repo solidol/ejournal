@@ -30,7 +30,7 @@ class Lesson extends Model
 
     public static function filterLs($subj, $group)
     {
-        return Lesson::where('lessons_.kod_prep', Auth::user()->usercode)->
+        return Lesson::where('lessons_.kod_prep', Auth::user()->userable_id)->
         where('lessons_.kod_grupi', $group)->
         where('lessons_.kod_subj', $subj)->
         orderBy('lessons_.data_')->get();
@@ -39,7 +39,7 @@ class Lesson extends Model
     public static function getSubjectInfo($subj, $group)
     {
         return Lesson::
-        where('kod_prep',Auth::user()->usercode)->
+        where('kod_prep',Auth::user()->userable_id)->
         where('kod_subj',$subj)->
         where('kod_grupi',$group)->
         first();

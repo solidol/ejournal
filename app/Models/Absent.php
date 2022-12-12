@@ -17,7 +17,7 @@ class Absent extends Model
 
     public static function listBy($date, $subj, $group, $lessonNo)
     {
-        return Absent::where('kod_prepod', Auth::user()->usercode)->where('kod_subj', $subj)->where('kod_grup', $group)->where('data_', $date)->get();
+        return Absent::where('kod_prepod', Auth::user()->userable_id)->where('kod_subj', $subj)->where('kod_grup', $group)->where('data_', $date)->get();
     }
 
     public static function listByLesson($lessonId)
@@ -37,7 +37,7 @@ class Absent extends Model
             DB::raw('DATE_FORMAT(vidsutni.data_,"%d.%m.%y") as dateFormatted'),
             DB::raw("$lessonId as lesson_id")
         )->leftJoinSub(
-            Absent::select('kod_stud', 'kod_prepod', 'kod_subj', 'nom_pari', 'kod_lesson', 'data_')->where('kod_prepod', Auth::user()->usercode)->where('kod_lesson', $lessonId),
+            Absent::select('kod_stud', 'kod_prepod', 'kod_subj', 'nom_pari', 'kod_lesson', 'data_')->where('kod_prepod', Auth::user()->userable_id)->where('kod_lesson', $lessonId),
             'vidsutni',
             function ($join) {
                 $join->on('vidsutni.kod_stud', '=', 'spisok_stud.kod_stud');

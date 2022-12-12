@@ -22,7 +22,7 @@
                             <div class="col-md-6">
                                 <select class="form-select" name="userid" size="10" aria-label="size 3 select example">
                                     @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                    <option value="{{$user->id}}">{{$user->userable->FIO_prep}}</option>
                                     @endforeach
                                 </select>
                             </div>

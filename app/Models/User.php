@@ -42,18 +42,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    public function userable()
+    {
+        return $this->morphTo();
+    }
 
     public function isAdmin()
     {
-        if ($this->usertype == 'admin') return true;
+        return $this->hasRole('admin');
+    }
+
+    public function hasRole($role = false)
+    {
+        if (!$role) return false;
+        $roles = explode(',', $this->roles);
+        if (in_array($role, $roles)) return true;
         else return false;
     }
 
     public function getMySubjects()
     {
         return $lessons = Lesson::select('kod_grupi', 'kod_subj', 'kod_prep')->
-        where('kod_prep', $this->usercode)->distinct()->get();
+        where('kod_prep', $this->userable_id)->distinct()->get();
     }
 
     function getStudents($group)

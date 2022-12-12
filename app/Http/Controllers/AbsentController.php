@@ -22,7 +22,7 @@ class AbsentController extends Controller
         return view('absents', [
             'data' => [
                 'title1' => '',
-                'prep' => Auth::user()->usercode,
+                'prep' => Auth::user()->userable_id,
                 //'subj' => $subj,
                 //'group' => $group
             ],

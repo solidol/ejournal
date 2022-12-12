@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         if (Auth::user()->isAdmin()) {
             $users = User::orderBy('name')->get();
-            $teachers = Teacher::orderBy('FIO_prep')->leftJoin('users', 'users.usercode', '=', 'prepod.kod_prep')->get();
+            $teachers = Teacher::orderBy('FIO_prep')->leftJoin('users', 'users.userable_id', '=', 'prepod.kod_prep')->get();
             return view('admin.users', ['users' => $users, 'teachers' => $teachers]);
         } else
             return view('auth.login');
@@ -54,7 +54,7 @@ class UserController extends Controller
         $groups = DB::table('grups')->orderBy('nomer_grup')->get();
         $subjects = DB::table('subjects')->orderBy('subject_name')->get();
         return view('teacher', [
-            'data' => array('prep' => $user->usercode),
+            'data' => array('prep' => $user->userable_id),
             'mySubjList' => $user->getMySubjects(),
             'grList' => $groups,
             'sbjList' => $subjects,
@@ -65,7 +65,7 @@ class UserController extends Controller
     {
         $user = Auth::user();
         return view('journal', [
-            'data' => array('prep' => $user->usercode, 'group' => $group, 'subj' => $subj),
+            'data' => array('prep' => $user->userable_id, 'group' => $group, 'subj' => $subj),
             'mList' => $user->getMySubjects()
         ]);
     }

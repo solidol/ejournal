@@ -24,7 +24,7 @@ class Mark extends Model
     public static function getControlInfo($subj, $group, $control)
     {
         return Mark::where('kod_grup', $group)->
-        where('kod_prep', Auth::user()->usercode)->
+        where('kod_prep', Auth::user()->userable_id)->
         where('kod_subj', $subj)->
         where('vid_kontrol', $control)->
         where('kod_stud', 0)->
@@ -47,7 +47,7 @@ class Mark extends Model
                 'ocenki.data_',
                 DB::raw('DATE_FORMAT(ocenki.data_,"%d.%m.%y") as dateFormatted')
             )->leftJoinSub(
-                Mark::select('kod_stud', 'kod_prep', 'kod_grup', 'kod_subj', 'vid_kontrol', 'ocenka', 'data_')->where('kod_grup', $group)->where('kod_prep', Auth::user()->usercode)->where('kod_subj', $subj)->where('vid_kontrol', $control),
+                Mark::select('kod_stud', 'kod_prep', 'kod_grup', 'kod_subj', 'vid_kontrol', 'ocenka', 'data_')->where('kod_grup', $group)->where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $subj)->where('vid_kontrol', $control),
                 'ocenki',
                 function ($join) {
                     $join->on('ocenki.kod_stud', '=', 'spisok_stud.kod_stud');
@@ -56,7 +56,7 @@ class Mark extends Model
 
         foreach ($marks as &$mItem) {
 
-            $mItem->kod_prep = Auth::user()->usercode;
+            $mItem->kod_prep = Auth::user()->userable_id;
             $mItem->kod_subj = $subj;
             $mItem->vid_kontrol = $control;
 
@@ -76,14 +76,14 @@ class Mark extends Model
 
     public static function getControls($subj, $group)
     {
-        return Mark::select('vid_kontrol', 'ocenka', 'data_')->where('kod_prep', Auth::user()->usercode)->where('kod_grup', $group)->where('kod_subj', $subj)->
+        return Mark::select('vid_kontrol', 'ocenka', 'data_')->where('kod_prep', Auth::user()->userable_id)->where('kod_grup', $group)->where('kod_subj', $subj)->
             where('kod_stud', 0)->where('vid_kontrol', '<>', '')->distinct()->orderBy('data_', 'ASC')->get();
     }
 
     public static function getControlsByDate($subj, $group, $date)
     {
         return Mark::select('vid_kontrol', 'ocenka', 'data_')->
-        where('kod_prep', Auth::user()->usercode)->
+        where('kod_prep', Auth::user()->userable_id)->
         where('kod_grup', $group)->
         where('data_', $date)->
         where('kod_subj', $subj)->

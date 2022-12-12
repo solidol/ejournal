@@ -40,7 +40,7 @@ class LessonController extends Controller
         return view('lessons', [
             'data' => [
                 'title1' => $additionalData->group->nomer_grup . ' - ' . $additionalData->subject->subject_name,
-                'prep' => $user->usercode,
+                'prep' => $user->userable_id,
                 'subj' => $subj,
                 'group' => $group
             ],
@@ -54,7 +54,7 @@ class LessonController extends Controller
     public function show($lessonId)
     {
         $lesson = Lesson::findOrFail($lessonId);
-        if (Auth::user()->usercode != $lesson->kod_prep)
+        if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
         $lesson->dateFormatted = (new DateTime($lesson->data_))->format('d.m.y');
         $arAbs = Absent::listByLesson($lessonId);
@@ -90,7 +90,7 @@ class LessonController extends Controller
     {
         $lesson = Lesson::findOrFail($lessonId);
 
-        if (Auth::user()->usercode != $lesson->kod_prep)
+        if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
         return view(
             'edit-lesson',
@@ -112,7 +112,7 @@ class LessonController extends Controller
         if ($request->get('lesscode') < 1) {
             $lesson = new Lesson();
             $lesson->kod_grupi = $request->input('grcode');
-            $lesson->kod_prep = Auth::user()->usercode;
+            $lesson->kod_prep = Auth::user()->userable_id;
             $lesson->kod_subj = $request->input('sbjcode');
             $lesson->nom_pari = $request->input('lessnom');
             $lesson->tema = $request->input('thesis');
@@ -132,7 +132,7 @@ class LessonController extends Controller
         if ($request->get('lesscode') > 0) {
             $lesson = Lesson::findOrFail($request->get('lesscode'));
             $lesson->kod_grupi = $request->input('grcode');
-            $lesson->kod_prep = Auth::user()->usercode;
+            $lesson->kod_prep = Auth::user()->userable_id;
             $lesson->kod_subj = $request->input('sbjcode');
             $lesson->nom_pari = abs(round(+$request->input('lessnom'), 0));
             $lesson->tema = $request->input('thesis');
@@ -160,7 +160,7 @@ class LessonController extends Controller
         $lesson->delete();
 
         return redirect()->route('get_lessons', [
-            'prep' => Auth::user()->usercode,
+            'prep' => Auth::user()->userable_id,
             'subj' => $routeData['subj'],
             'group' => $routeData['group']
         ]);;
