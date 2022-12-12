@@ -15,7 +15,7 @@ class Lesson extends Model
 
     public function group()
     {
-        return $this->belongsTo(Group::class, 'kod_grupi', 'kod_grup');
+        return $this->belongsTo(Group::class, 'kod_grupi');
     }
 
     public function subject()
@@ -38,16 +38,11 @@ class Lesson extends Model
 
     public static function getSubjectInfo($subj, $group)
     {
-        
-        return DB::table('subjects')->
-        join('lessons_', 'subjects.kod_subj', '=', 'lessons_.kod_subj')->
-        join('grups', 'lessons_.kod_grupi', '=', 'grups.kod_grup')->
-        select('nomer_grup','kod_grup','subjects.kod_subj', 'subject_name')->
-        where('lessons_.kod_prep',Auth::user()->usercode)->
-        where('lessons_.kod_subj',$subj)->
-        where('lessons_.kod_grupi',$group)->
-        distinct()->first();
-        
+        return Lesson::
+        where('kod_prep',Auth::user()->usercode)->
+        where('kod_subj',$subj)->
+        where('kod_grupi',$group)->
+        first();
     }
 
 }

@@ -39,7 +39,7 @@ class LessonController extends Controller
             return view('noelement');
         return view('lessons', [
             'data' => [
-                'title1' => $additionalData->nomer_grup . ' - ' . $additionalData->subject_name,
+                'title1' => $additionalData->group->nomer_grup . ' - ' . $additionalData->subject->subject_name,
                 'prep' => $user->usercode,
                 'subj' => $subj,
                 'group' => $group
@@ -183,7 +183,8 @@ class LessonController extends Controller
 
         $dates = array();
         foreach ($period as $dItem) {
-            $tmp['formatted'] = $dItem->format('d.m.y');
+            
+            $tmp['raw'] = $dItem;
             $tmp['dw'] = $dItem->format('w');
             $dates[] = $tmp;
         }
@@ -191,8 +192,10 @@ class LessonController extends Controller
         $subjects = $user->getMySubjects();
         $arSubjects = array();
         foreach ($subjects as $sItem) {
-            $tmp['data'] = Lesson::filterLs($sItem->kod_subj, $sItem->kod_grup);
-            $tmp['meta'] = Lesson::getSubjectInfo($sItem->kod_subj, $sItem->kod_grup);
+            $tmp['data'] = Lesson::filterLs($sItem->kod_subj, $sItem->kod_grupi);
+            
+            $tmp['meta'] = Lesson::getSubjectInfo($sItem->kod_subj, $sItem->kod_grupi);
+            
             $arSubjects[] = $tmp;
         }
         return view(

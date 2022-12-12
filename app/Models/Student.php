@@ -18,4 +18,9 @@ class Student extends Model
     {
         return $this->belongsTo(Group::class, 'kod_grup');
     }
+
+    public function marks()
+    {
+        return $this->hasMany(Mark::class, 'kod_stud');
+    }
 }

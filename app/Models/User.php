@@ -49,17 +49,7 @@ class User extends Authenticatable
         if ($this->usertype == 'admin') return true;
         else return false;
     }
-/* old
-    public static function getMySubjects()
-    {
-        return DB::table('subjects')->
-        join('lessons_', 'subjects.kod_subj', '=', 'lessons_.kod_subj')->
-        join('grups', 'lessons_.kod_grupi', '=', 'grups.kod_grup')->
-        where('lessons_.kod_prep', Auth::user()->usercode)->
-        select('nomer_grup', 'kod_grup', 'subjects.kod_subj', 'subject_name')->
-        orderBy('nomer_grup')->orderBy('subject_name')->distinct()->get();
-    }
-*/
+
     public function getMySubjects()
     {
         return $lessons = Lesson::select('kod_grupi', 'kod_subj', 'kod_prep')->
@@ -68,6 +58,6 @@ class User extends Authenticatable
 
     function getStudents($group)
     {
-        return DB::table('spisok_stud')->where('kod_grup', $group)->orderBy('FIO_stud')->get();
+        return Students::where('kod_grup', $group)->orderBy('FIO_stud')->get();
     }
 }

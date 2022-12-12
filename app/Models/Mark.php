@@ -13,17 +13,23 @@ class Mark extends Model
     protected $table = 'ocenki';
     protected $primaryKey = 'kod_ocenki';
     protected $fillable = ['ocenka'];
+    protected $dates = ['data_'];
     public $timestamps = false;
+
+    public function student()
+    {
+        return $this->belongsTo(GStudentroup::class, 'kod_stud');
+    }
 
     public static function getControlInfo($subj, $group, $control)
     {
+        return Mark::where('kod_grup', $group)->
+        where('kod_prep', Auth::user()->usercode)->
+        where('kod_subj', $subj)->
+        where('vid_kontrol', $control)->
+        where('kod_stud', 0)->
+        first();
 
-        return (Mark::select('*', DB::raw('DATE_FORMAT(ocenki.data_,"%d.%m.%y") as dateFormatted'))->where('kod_grup', $group)->where('kod_prep', Auth::user()->usercode)->where('kod_subj', $subj)->where('vid_kontrol', $control)->
-            //whereNotNull('data_')->
-            //whereNull('kod_stud')->
-            where('kod_stud', 0)->
-            //where('data_','>','0000-00-00')->
-            first());
     }
 
     public static function filterOc($subj, $group, $control)

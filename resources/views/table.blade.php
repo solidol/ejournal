@@ -50,7 +50,7 @@
                 @foreach($arDates as $dItem)
                 <th class="rotated-text sum">
 
-                    {{$dItem['formatted']}}
+                    {{$dItem['raw']->format('d.m.y')}}
 
                 </th>
                 @endforeach
@@ -60,14 +60,14 @@
             @foreach($arLessons as $lessList)
             <tr>
                 <td class="subj-name">
-                    {{$lessList['meta']->nomer_grup}} {{$lessList['meta']->subject_name}}
+                    {{$lessList['meta']->group->nomer_grup}} {{$lessList['meta']->subject->subject_name}}
                 </td>
 
                 @foreach($arDates as $dItem)
                 <td class="hr-cnt {{($dItem['dw']=='6' || $dItem['dw']=='0')?'we-cols':''}}">
 
                     @foreach($lessList['data'] as $lessItem)
-                    @if ($lessItem->date == $dItem['formatted'])
+                    @if ($lessItem->data_ == $dItem['raw'])
                     {{$lessItem->kol_chasov}}
                     @endif
                     @endforeach

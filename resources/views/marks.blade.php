@@ -25,7 +25,7 @@
 
 <nav class="nav flex-column d-none d-md-block">
     @foreach($mList as $mItem)
-    <a class="nav-link" href="{{URL::route('get_marks',['subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grupi])}}">{{$mItem->nomer_grup}} - {{ $mItem->subject_name }}</a>
+    <a class="nav-link" href="{{URL::route('get_marks',['subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grupi])}}">{{$mItem->group->nomer_grup}} - {{ $mItem->subject->subject_name }}</a>
     @endforeach
 </nav>
 

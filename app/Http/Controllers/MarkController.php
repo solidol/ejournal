@@ -32,7 +32,7 @@ class MarkController extends Controller
             return view('noelement');
         return view('marks', [
             'data' => [
-                'title1' => $additionalData->nomer_grup . ' - ' . $additionalData->subject_name,
+                'title1' => $additionalData->group->nomer_grup . ' - ' . $additionalData->subject->subject_name,
                 'prep' => Auth::user()->usercode,
                 'subj' => $subj,
                 'group' => $group
