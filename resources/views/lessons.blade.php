@@ -28,7 +28,7 @@
 
 <nav class="nav flex-column d-none d-md-block">
     @foreach($mList as $mItem)
-    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grup])}}">{{$mItem->nomer_grup}} - {{$mItem->subject_name}}</a>
+    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grupi])}}">{{$mItem->group->nomer_grup}} - {{$mItem->subject->subject_name}}</a>
     @endforeach
 </nav>
 
@@ -54,7 +54,7 @@
         <tr>
 
             <td>
-                {{ $oItem->date }}
+                {{ $oItem->data_->format('d.y.m') }}
             </td>
             <td class="sum">
                 {{ $oItem->kol_chasov }}
@@ -83,6 +83,9 @@
         </tr>
     </tfoot>
 </table>
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addLesson">
+    Записати пару
+</button>
 
 <script>
     $(document).ready(function() {

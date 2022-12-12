@@ -9,13 +9,28 @@ use Illuminate\Support\Facades\DB;
 class Lesson extends Model
 {
     protected $table = 'lessons_';
+    protected $dates = ['data_'];
     public $timestamps = false;
     protected $primaryKey = 'kod_pari';
 
+    public function group()
+    {
+        return $this->belongsTo(Group::class, 'kod_grupi', 'kod_grup');
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'kod_subj');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'kod_prep');
+    }
+
     public static function filterLs($subj, $group)
     {
-        return Lesson::select('*',DB::raw('DATE_FORMAT(data_,"%d.%m.%y") as date'))->
-        where('lessons_.kod_prep', Auth::user()->usercode)->
+        return Lesson::where('lessons_.kod_prep', Auth::user()->usercode)->
         where('lessons_.kod_grupi', $group)->
         where('lessons_.kod_subj', $subj)->
         orderBy('lessons_.data_')->get();
@@ -23,6 +38,7 @@ class Lesson extends Model
 
     public static function getSubjectInfo($subj, $group)
     {
+        
         return DB::table('subjects')->
         join('lessons_', 'subjects.kod_subj', '=', 'lessons_.kod_subj')->
         join('grups', 'lessons_.kod_grupi', '=', 'grups.kod_grup')->

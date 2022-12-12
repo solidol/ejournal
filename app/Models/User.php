@@ -62,12 +62,8 @@ class User extends Authenticatable
 */
     public function getMySubjects()
     {
-        return DB::table('subjects')->
-        join('lessons_', 'subjects.kod_subj', '=', 'lessons_.kod_subj')->
-        join('grups', 'lessons_.kod_grupi', '=', 'grups.kod_grup')->
-        where('lessons_.kod_prep', $this->usercode)->
-        select('nomer_grup', 'kod_grup', 'subjects.kod_subj', 'subject_name')->
-        orderBy('nomer_grup')->orderBy('subject_name')->distinct()->get();
+        return $lessons = Lesson::select('kod_grupi', 'kod_subj', 'kod_prep')->
+        where('kod_prep', $this->usercode)->distinct()->get();
     }
 
     function getStudents($group)
