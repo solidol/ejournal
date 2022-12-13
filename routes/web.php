@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welc');
+    if (Auth::user()) return redirect()->route('get_subjects');
+    else return view('welc');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -31,7 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/journal/{subj}/{group}/lessons', [LessonController::class, 'list'])->name('get_lessons');
 
-    Route::post('/journal/lessons/store', [LessonController::class, 'create'])->name('create_lesson');
+    Route::post('/journal/lessons/store', [LessonController::class, 'store'])->name('store_lesson');
 
     Route::post('/journal/lesson/update', [LessonController::class, 'update'])->name('update_lesson');
 

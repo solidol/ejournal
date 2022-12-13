@@ -23,12 +23,8 @@ class AbsentController extends Controller
             'data' => [
                 'title1' => '',
                 'prep' => Auth::user()->userable_id,
-                //'subj' => $subj,
-                //'group' => $group
             ],
             'storeRoute' => route('create_lesson', ['subj' => -1, 'group' => -1]),
-            //'oList' => Lesson::filterLs($subj, $group),
-            //'mList' => User::getMySubjects()
         ]);
     }
 

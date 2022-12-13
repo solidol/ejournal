@@ -38,9 +38,11 @@
 </head>
 
 <body>
-    <div id="app">
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dblue">
+
+
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dblue fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="/assets/img/logo.png"> {{ config('app.name', 'Laravel') }}
@@ -69,9 +71,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('get_subjects') }}"><i class="bi bi-book"></i> Мої журнали</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('my_table') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
-                        </li>
+                        @yield('custom-menu')
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="bi bi-person-bounding-box"></i> {{ Auth::user()->name }} <span class="caret"></span>
@@ -79,6 +79,9 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <a class="dropdown-item" href="{{ route('show_profile') }}"><i class="bi bi-person-lines-fill"></i> Мій профіль</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('my_table') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
                                 </li>
 
                                 <li>
@@ -143,6 +146,9 @@
             @endif
         </div>
     </div>
+    <script>
+
+    </script>
 </body>
 
 </html>

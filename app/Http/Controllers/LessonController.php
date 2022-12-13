@@ -11,7 +11,7 @@ use App\Models\Subject;
 use App\Models\Absent;
 use App\Models\Student;
 use App\Models\Mark;
-
+use Session;
 use DateTime;
 use DatePeriod;
 use DateInterval;
@@ -46,7 +46,6 @@ class LessonController extends Controller
                 'subj' => $subj,
                 'group' => $group
             ],
-            'storeRoute' => route('create_lesson', ['subj' => $subj, 'group' => $group]),
             'oList' => Lesson::filterLs($subj, $group),
             'mList' => $user->getMySubjects()
         ]);
@@ -58,7 +57,6 @@ class LessonController extends Controller
         $lesson = Lesson::findOrFail($lessonId);
         if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
-        $lesson->dateFormatted = (new DateTime($lesson->data_))->format('d.m.y');
 
         $subj = Subject::where('kod_subj', $lesson->kod_subj)->get()->first();
 
@@ -97,7 +95,7 @@ class LessonController extends Controller
         );
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         if ($request->get('lesscode') < 1) {
             $lesson = new Lesson();
@@ -111,9 +109,7 @@ class LessonController extends Controller
             $lesson->data_ = $request->input('datetime');
             $lesson->save();
         }
-
-        // redirect
-
+        Session::flash('message', 'Пару збережено');
         return redirect()->route('get_lessons', ['subj' => $lesson->kod_subj, 'group' => $lesson->kod_grupi]);
     }
 

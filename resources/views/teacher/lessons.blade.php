@@ -4,25 +4,10 @@
 @section('side-title', 'Записані пари')
 
 @section('sidebar')
-
-
-
-
-
-
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addLesson">
-    Записати пару
+    <i class="bi bi-clipboard-plus"></i> Записати пару
 </button>
-
-<h2>Навігація</h2>
-
-<nav class="nav flex-column">
-
-    <a class="nav-link" href="{{URL::route('get_subjects')}}">Ha головну</a>
-    <a class="nav-link" href="{{URL::route('get_marks',['subj'=>$data['subj'],'group'=>$data['group']])}}">Оцінки</a>
-</nav>
-
 
 <h2 class="d-sm-none d-md-block">Записані пари з інших дисциплін</h2>
 
@@ -34,7 +19,24 @@
 
 @stop
 
+@section('custom-menu')
+<li class="nav-item">
+    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addLesson"><i class="bi bi-pencil-square"></i> Записати пару</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{URL::route('get_marks',['subj'=>$data['subj'],'group'=>$data['group']])}}"><i class="bi bi-5-square"></i> Оцінки</a>
+</li>
+@stop
+
 @section('content')
+
+@if (session()->has('message'))
+<div class="alert alert-success position-fixed  top-2 start-50 translate-middle" id="success-alert" style="z-index: 11">
+    <strong>{{ session('message') }}</strong>
+
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+@endif
 
 <h2>{{$data['title1']}}</h2>
 
@@ -89,6 +91,11 @@
 
 <script>
     $(document).ready(function() {
+
+        $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+            $("#success-alert").slideUp(500);
+        });
+
         table = $('#tblessons').DataTable({
             dom: 'Bfrtip',
             buttons: [{
