@@ -76,8 +76,14 @@ class Mark extends Model
 
     public static function getControls($subj, $group)
     {
-        return Mark::select('vid_kontrol', 'ocenka', 'data_')->where('kod_prep', Auth::user()->userable_id)->where('kod_grup', $group)->where('kod_subj', $subj)->
-            where('kod_stud', 0)->where('vid_kontrol', '<>', '')->distinct()->orderBy('data_', 'ASC')->get();
+        return Mark::select('vid_kontrol', 'ocenka', 'data_')->
+        where('kod_prep', Auth::user()->userable_id)->
+        where('kod_grup', $group)->
+        where('kod_subj', $subj)->
+        where('kod_stud', 0)->
+        where('vid_kontrol', '<>', '')->
+        //whereNotNull('data_')->
+        distinct()->orderBy('data_', 'ASC')->get();
     }
 
     public static function getControlsByDate($subj, $group, $date)
@@ -106,13 +112,13 @@ class Mark extends Model
             $cl[] = $controlInfo;
             $arTmp = array();
             $arTmp['data'] = Mark::filterOc($subj, $group, $cItem->vid_kontrol);
+            
             $arTmp['meta']['title'] = $controlInfo->vid_kontrol ?? 'Undefined';
             $arTmp['meta']['maxval'] = $controlInfo->ocenka ?? 0;
             $arTmp['meta']['group'] = $controlInfo->kod_grup ?? 0;
             $arTmp['meta']['subj'] = $controlInfo->kod_subj ?? 0;
             $arTmp['meta']['slug'] = 'tab-id' . $i;
-            $arTmp['meta']['dateFormatted'] = $controlInfo->dateFormatted ?? '';
-            $arTmp['meta']['data_'] = $controlInfo->data_ ?? $arTmp['data'][0]->data_;
+            $arTmp['meta']['data_'] = $controlInfo->data_ ?? '2000-01-01';//$arTmp['data']->first()->data_;
             $controlInfo->type_kontrol = $controlInfo->type_kontrol >= 0 ? $controlInfo->type_kontrol : -1;
             switch ($controlInfo->type_kontrol) {
                 case 0:

@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
 use App\Models\User;
+use App\Models\Subject;
 use App\Models\Absent;
+use App\Models\Student;
 use App\Models\Mark;
 
 use DateTime;
@@ -37,7 +39,7 @@ class LessonController extends Controller
         $additionalData = Lesson::getSubjectInfo($subj, $group);
         if ($additionalData == null)
             return view('noelement');
-        return view('lessons', [
+        return view('teacher.lessons', [
             'data' => [
                 'title1' => $additionalData->group->nomer_grup . ' - ' . $additionalData->subject->subject_name,
                 'prep' => $user->userable_id,
@@ -57,30 +59,18 @@ class LessonController extends Controller
         if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
         $lesson->dateFormatted = (new DateTime($lesson->data_))->format('d.m.y');
-        $arAbs = Absent::listByLesson($lessonId);
 
-        $arCtrls = Mark::getControlsByDate($lesson->kod_subj, $lesson->kod_grupi, $lesson->data_);
+        $subj = Subject::where('kod_subj', $lesson->kod_subj)->get()->first();
 
-        $subj = DB::table('subjects')->where('kod_subj', $lesson->kod_subj)->get()->first();
-        $group = DB::table('grups')->where('kod_grup', $lesson->kod_grupi)->get()->first();
         return view(
-            'lesson',
+            'teacher.lesson',
             [
                 'data' => [
-                    'title1' => $group->nomer_grup . " " . $subj->subject_name,
+                    'title1' => $lesson->group->nomer_grup . " " . $subj->subject_name,
                     'title2' => 'Перегляд пари та запис відсутніх',
-                    'lessid' => $lesson->kod_pari,
-                    'lessnom' => $lesson->nom_pari,
-                    'date' => $lesson->data_,
-                    'prep' => $lesson->kod_prep,
-                    'subj' => $lesson->kod_subj,
-                    'group' => $lesson->kod_grupi
                 ],
-                'arAbsent' => $arAbs,
-                'arCtrls' => $arCtrls,
-                'storeRoute' => route('update_lesson', ['lessonId' => $lessonId]),
-                'createControlRoute' => route('create_control'),
-                'storeAbsentsRoute' => route('store_absents'),
+                'arAbsent' => Student::listByLesson($lessonId),
+                'arCtrls' =>  Mark::getControlsByDate($lesson->kod_subj, $lesson->kod_grupi, $lesson->data_),
                 'lesson' => $lesson
             ]
         );
@@ -93,7 +83,7 @@ class LessonController extends Controller
         if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
         return view(
-            'edit-lesson',
+            'teacher.edit-lesson',
             [
                 'data' => [
                     'title1' => 'Редагувати записану пару',
@@ -199,7 +189,7 @@ class LessonController extends Controller
             $arSubjects[] = $tmp;
         }
         return view(
-            'table',
+            'teacher.table',
             [
 
                 'data' => [

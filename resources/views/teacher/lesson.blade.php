@@ -12,7 +12,7 @@
 <h2>Навігація</h2>
 <nav class="nav flex-column">
     <a class="nav-link" href="{{URL::route('get_subjects')}}">Ha головну</a>
-    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$data['subj'],'group'=>$data['group']])}}">Всі пари дисципліни</a>
+    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi])}}">Всі пари дисципліни</a>
 
 </nav>
 @stop
@@ -66,14 +66,14 @@
 
 <h3>Відсутні</h3>
 <p>Будь-яка позначка або подвійний клік для відмітки. Обов'язково натисніть "Зберегти"</p>
-<form action="{{$storeAbsentsRoute}}" method="post">
+<form action="{{URL::route('store_absents')}}" method="post">
     @csrf
-    <input type="hidden" name="lessonid" value="{{$data['lessid']}}">
-    <input type="hidden" name="date" value="{{$data['date']}}">
-    <input type="hidden" name="less_nom" value="{{$data['lessnom']}}">
-    <input type="hidden" name="group" value="{{$data['group']}}">
-    <input type="hidden" name="prep" value="{{$data['prep']}}">
-    <input type="hidden" name="subj" value="{{$data['subj']}}">
+    <input type="hidden" name="lessonid" value="{{$lesson->kod_pari}}">
+    <input type="hidden" name="date" value="{{$lesson->data_}}">
+    <input type="hidden" name="less_nom" value="{{$lesson->nom_pari}}">
+    <input type="hidden" name="group" value="{{$lesson->kod_grupi}}">
+    <input type="hidden" name="prep" value="{{$lesson->kod_prep}}">
+    <input type="hidden" name="subj" value="{{$lesson->kod_subj}}">
 
     <div class="mb-3">
         <button type="submit" class="btn btn-primary">Зберегти</button>
@@ -97,7 +97,7 @@
                     {{$absItem->FIO_stud}}
                 </td>
                 <td>
-                    <input type="text" class="inp-abs form form-control" name="abs[{{$absItem->kod_stud}}]" value="{{$absItem->nom_pari?'нб':''}}" placeholder="">
+                    <input type="text" class="inp-abs form form-control" name="abs[{{$absItem->kod_stud}}]" value="{{$absItem->absents->where('kod_lesson',$lesson->kod_pari)->first()?'нб':''}}" placeholder="">
                 </td>
             </tr>
             @endforeach

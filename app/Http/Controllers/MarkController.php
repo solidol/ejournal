@@ -21,26 +21,25 @@ class MarkController extends Controller
 
     function apiIndex($subj, $group, $control)
     {
-        return response()->json(Mark::getControlInfo($subj, $group, $control));
+        $info = Mark::getControlInfo($subj, $group, $control);
+        if (!$info->data_) $info->data_="2000-00-00";
+        return response()->json($info);
     }
 
     function list($subj, $group)
     {
         $user = Auth::user();
-        $additionalData = Lesson::getSubjectInfo($subj, $group);
-        if ($additionalData == null)
+        $lesson = Lesson::getSubjectInfo($subj, $group);
+
+        if ($lesson == null)
             return view('noelement');
-        return view('marks', [
+        return view('teacher.marks', [
             'data' => [
-                'title1' => $additionalData->group->nomer_grup . ' - ' . $additionalData->subject->subject_name,
-                'prep' => Auth::user()->userable_id,
-                'subj' => $subj,
-                'group' => $group
+                'title1' => $lesson->group->nomer_grup . ' - ' . $lesson->subject->subject_name,
             ],
             'oList' => Mark::getOcTable($subj, $group),
             'mList' => $user->getMySubjects(),
-            'storeRoute' => route('store_marks'),
-            'createControlRoute' => route('create_control'),
+            'lesson' => $lesson,
         ]);
     }
 

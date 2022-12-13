@@ -15,6 +15,11 @@ class Absent extends Model
     protected $primaryKey = 'kod';
     public $timestamps = false;
 
+    public function student()
+    {
+        return $this->belongsTo(GStudentroup::class, 'kod_stud');
+    }
+
     public static function listBy($date, $subj, $group, $lessonNo)
     {
         return Absent::where('kod_prepod', Auth::user()->userable_id)->where('kod_subj', $subj)->where('kod_grup', $group)->where('data_', $date)->get();
@@ -25,6 +30,8 @@ class Absent extends Model
 
         $lessonInfo = Lesson::find($lessonId);
 
+        return Student::where('kod_grup', $lessonInfo->kod_grupi)->orderBy('FIO_stud')->get();
+        /*
         return DB::table('spisok_stud')->select(
             'spisok_stud.kod_stud',
             'spisok_stud.kod_grup',
@@ -43,6 +50,7 @@ class Absent extends Model
                 $join->on('vidsutni.kod_stud', '=', 'spisok_stud.kod_stud');
             }
         )->where('spisok_stud.kod_grup', $lessonInfo->kod_grupi)->orderBy('FIO_stud')->get();
-
+*/
     }
+
 }

@@ -23,4 +23,15 @@ class Student extends Model
     {
         return $this->hasMany(Mark::class, 'kod_stud');
     }
+
+    public function absents()
+    {
+        return $this->hasMany(Absent::class, 'kod_stud');
+    }
+
+    public static function listByLesson($lessonId)
+    {
+        $lessonInfo = Lesson::find($lessonId);
+        return Student::where('kod_grup', $lessonInfo->kod_grupi)->orderBy('FIO_stud')->get();
+    }
 }

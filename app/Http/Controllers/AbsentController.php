@@ -19,7 +19,7 @@ class AbsentController extends Controller
     public function listAbsentsByLesson($lessonId)
     {
         $arAbs = Absent::listByLesson($lessonId);
-        return view('absents', [
+        return view('teacher.absents', [
             'data' => [
                 'title1' => '',
                 'prep' => Auth::user()->userable_id,

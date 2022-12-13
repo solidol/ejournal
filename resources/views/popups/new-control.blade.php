@@ -1,5 +1,5 @@
 <!-- Modal -->
-<form action="{{$createControlRoute}}" method="post">
+<form action="{{URL::route('create_control')}}" method="post">
     @csrf
     <!-- {{ csrf_field() }} -->
     <div class="modal fade" id="addControl" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -11,8 +11,8 @@
                 </div>
                 <div class="modal-body">
 
-                    <input type="hidden" name="grcode" value="{{$data['group']}}">
-                    <input type="hidden" name="sbjcode" value="{{$data['subj']}}">
+                    <input type="hidden" name="grcode" value="{{$lesson->kod_grupi}}">
+                    <input type="hidden" name="sbjcode" value="{{$lesson->kod_subj}}">
 
                     <div class="mb-3">
                         <label for="control" class="form-label">Назва контролю</label>

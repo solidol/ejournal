@@ -53,7 +53,7 @@ class UserController extends Controller
         $user = Auth::user();
         $groups = DB::table('grups')->orderBy('nomer_grup')->get();
         $subjects = DB::table('subjects')->orderBy('subject_name')->get();
-        return view('teacher', [
+        return view('teacher.journals', [
             'data' => array('prep' => $user->userable_id),
             'mySubjList' => $user->getMySubjects(),
             'grList' => $groups,
@@ -64,7 +64,7 @@ class UserController extends Controller
     function showJournal($group, $subj)
     {
         $user = Auth::user();
-        return view('journal', [
+        return view('teacher.journal', [
             'data' => array('prep' => $user->userable_id, 'group' => $group, 'subj' => $subj),
             'mList' => $user->getMySubjects()
         ]);

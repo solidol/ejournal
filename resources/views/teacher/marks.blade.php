@@ -17,7 +17,7 @@
 
 <nav class="nav flex-column">
     <a class="nav-link" href="{{URL::route('get_subjects')}}">Ha головну</a>
-    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$data['subj'],'group'=>$data['group']])}}">Всі пари дисципліни</a>
+    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi])}}">Всі пари дисципліни</a>
 </nav>
 
 
@@ -59,7 +59,7 @@
 <div class="tab-content" id="myTabContent">
     @foreach ($oList as $key=>$oSubList)
     <div class="tab-pane fade <?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'show active' : '' ?> " id="{{$oSubList['meta']['slug']}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $oSubList['meta']['slug'] ?>">
-        <h3>Дата контролю {{$oSubList['meta']['dateFormatted']}} | {{$oSubList['meta']['typecontrol']}}</h3>
+        <h3>Дата контролю {{date_format(date_create($oSubList['meta']['data_']),'d.m.y')}} | {{$oSubList['meta']['typecontrol']}}</h3>
 
         <form action="{{route('store_marks')}}" method="post">
             <div class="mb-3">

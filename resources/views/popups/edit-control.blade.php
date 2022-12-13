@@ -11,8 +11,8 @@
                 </div>
                 <div class="modal-body">
 
-                    <input type="hidden" id="grcode" name="grcode" value="{{$data['group']}}">
-                    <input type="hidden" id="sbjcode" name="sbjcode" value="{{$data['subj']}}">
+                    <input type="hidden" id="grcode" name="grcode" value="{{$lesson->kod_grupi}}">
+                    <input type="hidden" id="sbjcode" name="sbjcode" value="{{$lesson->kod_subj}}">
                     <input type="hidden" id="oldcontrol" name="oldcontrol" value="">
                     <div class="mb-3">
                         <label for="control1" class="form-label">Назва контролю</label>
@@ -82,8 +82,8 @@
             let url = $(this).data('url');
             console.log(url);
             $.get(url, function(data, status) {
-
-                $('#datetime2').val(data.data_);
+console.log(data.data_);
+                $('#datetime2').val((data.data_).split('T')[0]);
                 $('#control1').val(data.vid_kontrol);
                 $('#oldcontrol').val(data.vid_kontrol);
                 $('#maxval1').val(data.ocenka);
