@@ -19,32 +19,32 @@
                         <input type="text" class="form-control" id="control" name="control" placeholder="Опитування 0">
                     </div>
                     <div class="mb-3">
-                        <label for="datetimeAddControl" class="form-label">Дата проведення</label>
-                        <input type="date" class="form-control" id="datetimeAddControl" name="datetime1">
+                        <label for="datetAddControl" class="form-label">Дата проведення</label>
+                        <input type="date" class="form-control" id="datetAddControl" name="date_control" value="{{$lesson?$lesson->data_->format('Y-m-d'):''}}">
                     </div>
                     <div class="mb-3">
                         <label>Швидкі шаблони</label>
                         <select id="ftemp" class="form-select form-select-md" aria-label=".form-select-sm example">
                             <option selected></option>
-                            <option >Опитування</option>
-                            <option >Опитування 1</option>
-                            <option >Опитування 2</option>
-                            <option >Опитування 3</option>
-                            <option >Опитування 4</option>
-                            <option >Опитування 5</option>
-                            <option >Опитування 6</option>
-                            <option >Самостійна робота</option>
-                            <option >МК 1</option>
-                            <option >СМ 1</option>
-                            <option >МК 2</option>
-                            <option >СМ 2</option>
-                            <option >МК 3</option>
-                            <option >СМ 3</option>
-                            <option >МК 4</option>
-                            <option >СМ 4</option>
-                            <option >ЛР</option>
-                            <option >Підсумок</option>
-                            <option >Екзамен</option>
+                            <option>Опитування</option>
+                            <option>Опитування 1</option>
+                            <option>Опитування 2</option>
+                            <option>Опитування 3</option>
+                            <option>Опитування 4</option>
+                            <option>Опитування 5</option>
+                            <option>Опитування 6</option>
+                            <option>Самостійна робота</option>
+                            <option>МК 1</option>
+                            <option>СМ 1</option>
+                            <option>МК 2</option>
+                            <option>СМ 2</option>
+                            <option>МК 3</option>
+                            <option>СМ 3</option>
+                            <option>МК 4</option>
+                            <option>СМ 4</option>
+                            <option>ЛР</option>
+                            <option>Підсумок</option>
+                            <option>Екзамен</option>
 
                         </select>
 
@@ -75,12 +75,13 @@
 </form>
 
 <script>
-    
     $(document).ready(function() {
         $('#ftemp').change(function() {
             $('#control').val($("#ftemp option:selected").text());
         });
+        
+        if ($('#dateAddControl').val()=="")
+            $('#dateAddControl').val(new Date().toISOString().split('T')[0]);
 
-        $('#datetimeAddControl').val(new Date().toISOString().split('T')[0]);
     });
 </script>

@@ -17,19 +17,20 @@
     <div class="col">
         <div class="card h-100">
             <div class="card-header text-white bg-dblue">
-                <h3><i class="bi bi-people"></i> {{$mItem->group->nomer_grup}}</h3>
+                <h3><i class="bi bi-people"></i> {{$mItem->group->nomer_grup}} | Вичитано {{$mItem->hrsum}} г.</h3>
             </div>
             <div class="card-body">
-                <h5><i class="bi bi-book"></i> {{$mItem->subject->subject_name}}</h5>
+                <h5><i class="bi bi-book"></i> {{$mItem->subject->subject_name}} </h5>
             </div>
             <div class="card-footer">
-                <a class="btn btn-success" href="{{URL::route('get_lessons',['subj'=>$mItem->subject->kod_subj,'group'=>$mItem->group->kod_grup])}}">
-                    Пари
-                </a>
-                <a class="btn btn-primary" href="{{URL::route('get_marks',['subj'=>$mItem->subject->kod_subj,'group'=>$mItem->group->kod_grup])}}">
-                    Оцінки
-                </a>
-
+                <p>
+                    <a class="btn btn-success" href="{{URL::route('get_lessons',['subj'=>$mItem->subject->kod_subj,'group'=>$mItem->group->kod_grup])}}">
+                        Пари
+                    </a>
+                    <a class="btn btn-primary" href="{{URL::route('get_marks',['subj'=>$mItem->subject->kod_subj,'group'=>$mItem->group->kod_grup])}}">
+                        Оцінки
+                    </a>
+                </p>
             </div>
         </div>
     </div>

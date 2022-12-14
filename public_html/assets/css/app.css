@@ -36,20 +36,48 @@ h1,
 h2,
 h3,
 h4 {
-    padding: 0.5rem;
+
     margin: 0;
+}
+
+h1 {
+    margin: 1rem;
+    font-size: 2rem;
+}
+
+h2 {
+    margin: 1rem;
+    font-size: 1.7rem;
+}
+
+h3 {
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.3rem;
+}
+
+h5 {
+    font-size: 1.2rem;
+}
+
+h6 {
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 /* buttons */
 
 button.active {
     background-color: var(--cl-d-blue) !important;
-    border-color: var(--dark-border-color) !important;
+    border-color: var(--cl-d-blue) !important;
 }
 
 .btn-primary {
     background-color: var(--cl-d-blue) !important;
-    border-color: var(--dark-border-color) !important;
+    border-color: var(--cl-d-blue) !important;
 }
 
 .btn-primary:hover {
@@ -58,8 +86,8 @@ button.active {
 
 /* navbar */
 
-.navbar{
-    padding: 0;
+.navbar {
+    padding: 0.2rem;
 }
 
 .nav-item {
@@ -69,12 +97,12 @@ button.active {
 .nav-item a.nav-link {
     color: var(--cl-d-white) !important;
     border-radius: 5px;
-    border: 1px solid var(--dark-border-color) !important;
+    border: 1px solid var(--cl-d-bluer) !important;
 }
 
 .nav-item a.nav-link:hover {
     background-color: var(--cl-dd-blue) !important;
-    border: 1px solid var(--cl-ddd-blue) !important;
+    border-color: var(--cl-ddd-blue) !important;
 }
 
 
@@ -184,7 +212,10 @@ th.rotated-text {
 
 /* cards */
 
-.card-header{
+.card-header {
     padding: 0 5px 0 5px;
 }
 
+.card-header h3 {
+    margin: 0.2rem;
+}

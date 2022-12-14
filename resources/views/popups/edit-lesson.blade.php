@@ -15,7 +15,7 @@
 
                     <div class="mb-3">
                         <label for="datetime1" class="form-label">Дата</label>
-                        <input type="date" class="form-control" id="datetime1" name="datetime" value="{{$lesson->data_}}" required>
+                        <input type="date" class="form-control" id="datetime1" name="datetime" value="{{$lesson->data_->format('Y-m-d')}}" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Номер пари</label>

@@ -78,12 +78,12 @@ class MarkController extends Controller
             if ($mark = Mark::where($searchKeys)->first()) {
 
                 $mark->ocenka = $value;
-                $mark->data_ = $request->input('cdate');
+                $mark->data_ = $request->input('date_control');
                 $mark->save();
             } else if (!is_null($value)) {
 
                 $searchKeys['ocenka'] = $value;
-                $searchKeys['data_'] = $request->input('cdate');
+                $searchKeys['data_'] = $request->input('date_control');
                 Mark::insert($searchKeys);
             }
         }
@@ -113,7 +113,7 @@ class MarkController extends Controller
         $markFields['ocenka'] = $maxval;
         $markFields['vid_kontrol'] = $request->input('control');
         $markFields['type_kontrol'] = $request->input('typecontrol');
-        $markFields['data_'] = $request->input('datetime1');
+        $markFields['data_'] = $request->input('date_control');
         $subj = $markFields['kod_subj'];
         $group = $markFields['kod_grup'];
         Mark::insert($markFields);
@@ -132,7 +132,7 @@ class MarkController extends Controller
             [
                 'vid_kontrol' => $request->input('control'),
                 'data_' => $request->input('datetime2'),
-                'ocenka' => $request->input('maxval'),
+                //'ocenka' => $request->input('maxval'),
                 'type_kontrol' => $request->input('typecontrol')
             ]
         );

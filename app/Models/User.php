@@ -62,8 +62,16 @@ class User extends Authenticatable
 
     public function getMySubjects()
     {
-        return $lessons = Lesson::select('kod_grupi', 'kod_subj', 'kod_prep')->
+        $lessons = Lesson::select('kod_grupi', 'kod_subj', 'kod_prep')->
         where('kod_prep', $this->userable_id)->distinct()->get();
+        foreach ($lessons as &$lesson){
+            $lesson->hrsum = Lesson::
+            where('kod_prep',Auth::user()->userable_id)->
+            where('kod_subj',$lesson->kod_subj)->
+            where('kod_grupi',$lesson->kod_grupi)->
+            sum('kol_chasov');
+        }
+        return $lessons;
     }
 
     function getStudents($group)

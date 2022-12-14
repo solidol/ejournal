@@ -5,10 +5,11 @@
 
 @section('sidebar')
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addLesson">
-    <i class="bi bi-clipboard-plus"></i> Записати пару
-</button>
-
+<div class="mb-3 mt-3">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLesson">
+        <i class="bi bi-clipboard-plus"></i> Записати пару
+    </button>
+</div>
 <h2 class="d-sm-none d-md-block">Записані пари з інших дисциплін</h2>
 
 <nav class="nav flex-column d-none d-md-block">
@@ -85,9 +86,11 @@
         </tr>
     </tfoot>
 </table>
-<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addLesson">
-    Записати пару
-</button>
+<div class="mb-3 mt-3">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLesson">
+        <i class="bi bi-clipboard-plus"></i> Записати пару
+    </button>
+</div>
 
 <script>
     $(document).ready(function() {

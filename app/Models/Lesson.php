@@ -15,12 +15,12 @@ class Lesson extends Model
 
     public function group()
     {
-        return $this->belongsTo(Group::class, 'kod_grupi');
+        return $this->belongsTo(Group::class, 'kod_grupi')->orderBy('nomer_grup');
     }
 
     public function subject()
     {
-        return $this->belongsTo(Subject::class, 'kod_subj');
+        return $this->belongsTo(Subject::class, 'kod_subj')->orderBy('subject_name');
     }
 
     public function teacher()

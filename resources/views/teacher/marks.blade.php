@@ -7,19 +7,11 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addControl">
-    Додати контроль
-</button>
-
-
-
-<h2>Навігація</h2>
-
-<nav class="nav flex-column">
-    <a class="nav-link" href="{{URL::route('get_subjects')}}">Ha головну</a>
-    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi])}}">Всі пари дисципліни</a>
-</nav>
-
+<div class="mb-3 mt-3">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addControl">
+        Додати контроль
+    </button>
+</div>
 
 <h2 class="d-sm-none d-md-block">Оцінки з інших дисциплін</h2>
 
@@ -30,6 +22,15 @@
 </nav>
 
 
+@stop
+
+@section('custom-menu')
+<li class="nav-item">
+    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi])}}"><i class="bi bi-5-square"></i> Пари дисципліни</a>
+</li>
 @stop
 
 @section('content')

@@ -4,17 +4,21 @@
 @section('side-title', 'Записана пара')
 
 @section('sidebar')
+<div class="mb-3 mt-3">
+    <button type="button" id="btnAddControl" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addControl">
+        Додати контроль
+    </button>
+</div>
 
-<button type="button" id="btnAddControl" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addControl">
-    Додати контроль
-</button>
+@stop
 
-<h2>Навігація</h2>
-<nav class="nav flex-column">
-    <a class="nav-link" href="{{URL::route('get_subjects')}}">Ha головну</a>
-    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi])}}">Всі пари дисципліни</a>
-
-</nav>
+@section('custom-menu')
+<li class="nav-item">
+    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi])}}"><i class="bi bi-5-square"></i> Пари дисципліни</a>
+</li>
 @stop
 
 @section('content')
@@ -23,7 +27,7 @@
 
 <h3 class="bg-light-grey">
     <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#editLesson"><i class="bi bi-pencil-square"></i> Редагувати</a>
-    {{$lesson->dateFormatted}} {{$lesson->tema}}
+    {{$lesson->data_->format('d.m.y')}} {{$lesson->tema}}
 </h3>
 
 <h4>{{$lesson->zadanaie}}</h4>
@@ -76,7 +80,9 @@
     <input type="hidden" name="subj" value="{{$lesson->kod_subj}}">
 
     <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Зберегти</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-clipboard-plus"></i> Зберегти
+        </button>
     </div>
 
     <table id="tab-absent" class="table table-striped">
@@ -103,7 +109,11 @@
             @endforeach
         </tbody>
     </table>
-
+    <div class="mb-3 mt-3">
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-clipboard-plus"></i> Зберегти
+        </button>
+    </div>
 </form>
 <h3 class="text-danger">Видалення записаної пари</h3>
 <div class="accordion accordion-flush" id="accordionFlushExample">
