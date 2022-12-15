@@ -128,11 +128,28 @@ class MarkController extends Controller
 
     function updateControl(Request $request)
     {
-        Mark::where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $request->input('sbjcode'))->where('kod_grup', $request->input('grcode'))->where('vid_kontrol', $request->input('oldcontrol'))->update(
+        Mark::where('kod_prep', Auth::user()->userable_id)->
+        where('kod_subj', $request->input('sbjcode'))->
+        where('kod_grup', $request->input('grcode'))->
+        where('vid_kontrol', $request->input('oldcontrol'))->
+        where('kod_stud','>',0)->
+        update(
             [
                 'vid_kontrol' => $request->input('control'),
                 'data_' => $request->input('datetime2'),
-                //'ocenka' => $request->input('maxval'),
+                'type_kontrol' => $request->input('typecontrol')
+            ]
+        );
+        Mark::where('kod_prep', Auth::user()->userable_id)->
+        where('kod_subj', $request->input('sbjcode'))->
+        where('kod_grup', $request->input('grcode'))->
+        where('vid_kontrol', $request->input('oldcontrol'))->
+        where('kod_stud',0)->
+        update(
+            [
+                'vid_kontrol' => $request->input('control'),
+                'data_' => $request->input('datetime2'),
+                'ocenka' => $request->input('maxval'),
                 'type_kontrol' => $request->input('typecontrol')
             ]
         );

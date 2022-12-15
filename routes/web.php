@@ -63,13 +63,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/my/profile', [UserController::class, 'show'])->name('show_profile');
 
-    Route::get('/admin/another-user', [UserController::class, 'anotherLoginForm'])->name('admin_another_login');
+    Route::get('/admin/user/login-as', [UserController::class, 'anotherLoginForm'])->name('admin_another_login');
+
+    Route::post('/admin/user/login-as', [UserController::class, 'anotherLogin'])->name('admin_another_auth');
 
     Route::get('/admin/user/list', [UserController::class, 'index'])->name('admin_userlist');
 
-    Route::post('/admin/user/create', [UserController::class, 'store'])->name('admin_create_user');
+    Route::post('/admin/user/create', [UserController::class, 'WUStore'])->name('admin_create_user');
 
-    Route::post('/admin/another/login', [UserController::class, 'anotherLogin'])->name('admin_another_auth');
 });
 
 

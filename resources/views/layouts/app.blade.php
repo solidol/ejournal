@@ -69,7 +69,7 @@
                         @endguest
                         @if (Auth::user())
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('get_subjects') }}"><i class="bi bi-book"></i> Мої журнали</a>
+                            <a class="nav-link" href="{{ route('get_subjects') }}"><i class="bi bi-book"></i> <span class="d-md-inline d-lg-none">Мої журнали</span></a>
                         </li>
                         @yield('custom-menu')
                         <li class="nav-item dropdown">

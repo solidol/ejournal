@@ -11,7 +11,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <input type="hidden" name="lesscode" value="-1">
+                    <input type="hidden" id="userable_id" name="userable_id" value="-1">
 
 
                     <div class="form-group row">

@@ -29,7 +29,7 @@
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi])}}"><i class="bi bi-5-square"></i> Пари дисципліни</a>
+    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
 </li>
 @stop
 

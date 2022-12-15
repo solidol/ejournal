@@ -8,34 +8,10 @@
 @section('content')
 
 @csrf
+@if($errors->any())
+    {{ implode('', $errors->all('<div>:message</div>')) }}
+@endif
 
-<!--
-<h2>Користувачі web-інтерфейсу</h2>
-<table class="table table-stripped table-bordered">
-    <thead>
-        <tr>
-            <th>
-                Ім'я
-            </th>
-            <th>
-                email
-            </th>
-            <th>
-                Роль
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($users as $user)
-        <tr>
-            <td>{{$user->name}}</td>
-            <td>{{$user->email}}</td>
-            <td>{{$user->usertype}}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
--->
 <h2>Користувачі журналу</h2>
 <table id="journal_users" class="table table-stripped table-bordered">
     <thead>
@@ -58,7 +34,6 @@
         @foreach($teachers as $teacher)
         <tr>
             <td data-tid="{{$teacher->kod_prep}}">
-                
                 {{$teacher->FIO_prep}}
             </td>
             <td>{{$teacher->email}}</td>
@@ -80,6 +55,13 @@
 </table>
 <script>
     $(document).ready(function() {
+        $('.btn-adduser').click(function() {
+            let thisrow = $(this).parent().parent();
+            let teacher_id = $(thisrow).children().first().data('tid');
+            let fullname = $(thisrow).children().first().text().trim();
+            $('#name').val(fullname);
+            $('#userable_id').val(teacher_id);
+        });
         $('#journal_users').DataTable({
             dom: 'Bfrtip',
             buttons: [{
