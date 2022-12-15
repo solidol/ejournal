@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Mark;
+
 
 class Lesson extends Model
 {
@@ -45,4 +47,15 @@ class Lesson extends Model
         first();
     }
 
+    public function hasControl(){
+        $cn = Mark::
+        where('kod_grup', $this->kod_grupi)->
+        where('kod_prep', $this->kod_prep)->
+        where('kod_subj', $this->kod_subj)->
+        where('data_', $this->data_)->
+        count();
+        return $cn>0?true:false;
+    }
+
+    
 }

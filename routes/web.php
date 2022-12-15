@@ -63,6 +63,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/my/profile', [UserController::class, 'show'])->name('show_profile');
 
+    Route::get('/my/messages', [MessageController::class, 'list'])->name('list_messages');
+
     Route::get('/admin/user/login-as', [UserController::class, 'anotherLoginForm'])->name('admin_another_login');
 
     Route::post('/admin/user/login-as', [UserController::class, 'anotherLogin'])->name('admin_another_auth');

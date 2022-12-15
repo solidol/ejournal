@@ -65,6 +65,9 @@
 
             <td>
                 {!! nl2br($oItem->tema) !!}
+                @if ($oItem->hasControl())
+                <span class="badge rounded-pill text-bg-danger">контроль</span>
+                @endif
             </td>
             <td>
                 {!! nl2br($oItem->zadanaie) !!}
