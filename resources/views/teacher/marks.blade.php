@@ -73,7 +73,7 @@
                 <thead>
                     <tr>
                         <th>ПІБ студента</th>
-                        <th>Оцінка</th>
+                        <th class="sum">Оцінка</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -93,6 +93,12 @@
                     </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Якість Успішність</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
             </table>
         </form>
         <h3 class="text-danger">Редагування та видалення</h3>
@@ -120,6 +126,23 @@
             ],
             "paging": false,
             "ordering": false,
+            "footerCallback": function(row, data, start, end, display) {
+                var api = this.api();
+                api.columns('.sum', {
+                    page: 'current'
+                }).every(function() {
+                    console.log($(this.nodes()));
+                    var sum = this
+                        .data()
+                        .reduce(function(a, b) {
+                            var x = parseFloat(a) || 0;
+                            var y = parseFloat(b) || 0;
+                            return x + y;
+                        }, 0);
+                    console.log(sum); //alert(sum);
+                    $(this.footer()).html(sum);
+                });
+            }
         });
 
         $(".m-inputs").on('paste', function() {

@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\MarkController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AbsentController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,8 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function () {
 
+    // Журнал та пари
+
     Route::get('/journal', [UserController::class, 'listSubjects'])->name('get_subjects');
 
     //Route::get('/journal/{subj}/{group}', [UserController::class, 'showJournal'])->name('get_journal');
@@ -42,6 +46,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/journal/lesson:{lessonId}/delete', [LessonController::class, 'destroy'])->name('delete_lesson');
 
+
+    // Журнал та оцінки
+
     Route::post('/journal/marks/store', [MarkController::class, 'store'])->name('store_marks');
 
     Route::post('/journal/marks/create-control', [MarkController::class, 'createControl'])->name('create_control');
@@ -52,18 +59,43 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/journal/marks/control/update', [MarkController::class, 'updateControl'])->name('update_info_control');
 
+    //    Табель
+
     Route::get('/my/table', [LessonController::class, 'getTable'])->name('my_table');
 
     Route::get('/my/table/{year}/{month}', [LessonController::class, 'getTableDate'])->name('my_table_date');
+
+    // журнал та ідсутні
 
     Route::post('/journal/absents/store', [AbsentController::class, 'store'])->name('store_absents');
 
     //    Route::get('/journal/absents/{date}/{subj}/{group}/{lesson}', [AbsentController::class, 'listAbsents'])->name('get_absents');
 
 
+    // Повідомлення
+
+    Route::get('/messages/index', [MessageController::class, 'list'])->name('message_index');
+
+    Route::post('/messages/send', [MessageController::class, 'send'])->name('message_send');
+
+    Route::post('/messages/send-system', [MessageController::class, 'sendSystem'])->name('message_send_system');
+
+    Route::post('/messages/share-lesson', [MessageController::class, 'shareLesson'])->name('message_share_lesson');
+
+    Route::get('/messages/lesson/accept/{messId}',[MessageController::class, 'acceptLesson'])->name('message_accept_lesson');
+
+    Route::get('/messages/delete/{messId}',[MessageController::class, 'deleteLesson'])->name('message_delete');
+
+
+    // Профіль
+
     Route::get('/my/profile', [UserController::class, 'show'])->name('show_profile');
 
     Route::get('/my/messages', [MessageController::class, 'list'])->name('list_messages');
+
+
+
+    // Адмінпанель
 
     Route::get('/admin/user/login-as', [UserController::class, 'anotherLoginForm'])->name('admin_another_login');
 
@@ -72,6 +104,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/user/list', [UserController::class, 'index'])->name('admin_userlist');
 
     Route::post('/admin/user/create', [UserController::class, 'WUStore'])->name('admin_create_user');
+
+    Route::get('/admin/log/list', [LogController::class, 'index'])->name('admin_loglist');
 
 });
 

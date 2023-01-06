@@ -51,6 +51,10 @@ class LessonController extends Controller
         ]);
     }
 
+    public function apiGet($lessonId){
+        $lesson = Lesson::findOrFail($lessonId);
+        return response()->json($lesson);
+    }
 
     public function show($lessonId)
     {
@@ -69,7 +73,8 @@ class LessonController extends Controller
                 ],
                 'arAbsent' => Student::listByLesson($lessonId),
                 'arCtrls' =>  Mark::getControlsByDate($lesson->kod_subj, $lesson->kod_grupi, $lesson->data_),
-                'lesson' => $lesson
+                'lesson' => $lesson,
+                'arUsers' => User::all(),
             ]
         );
     }
@@ -146,7 +151,6 @@ class LessonController extends Controller
         $lesson->delete();
 
         return redirect()->route('get_lessons', [
-            'prep' => Auth::user()->userable_id,
             'subj' => $routeData['subj'],
             'group' => $routeData['group']
         ]);;

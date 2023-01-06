@@ -57,7 +57,7 @@
         <tr>
 
             <td>
-                {{ $oItem->data_->format('d.m.y') }}
+                {{ $oItem->data_?$oItem->data_->format('d.m.y'):'' }}
             </td>
             <td class="sum">
                 {{ $oItem->kol_chasov }}

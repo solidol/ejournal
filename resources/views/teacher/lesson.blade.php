@@ -17,7 +17,7 @@
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi])}}"><i class="bi bi-5-square"></i> Пари дисципліни</a>
+    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
 </li>
 @stop
 
@@ -28,9 +28,13 @@
 <h3 class="bg-light-grey">
     <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#editLesson"><i class="bi bi-pencil-square"></i> Редагувати</a>
     {{$lesson->data_->format('d.m.y')}} {{$lesson->tema}}
+    <a class="btn btn-success" href="#" data-bs-toggle="modal" data-bs-target="#shareLesson"><i class="bi bi-share-fill"></i> Поширити</a>
 </h3>
 
-<h4>{{$lesson->zadanaie}}</h4>
+
+
+<h3>Задано:</h3>
+<p>{{$lesson->zadanaie}}</p>
 
 <h3>Контролі сьогодні</h3>
 @if ($arCtrls->isNotEmpty())
@@ -158,6 +162,8 @@
 
 
 @include('popups.edit-lesson')
+
+@include('popups.share-lesson')
 
 @include('popups.new-control')
 

@@ -9,4 +9,10 @@ class Message extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    public $fillable = ['from_id', 'to_id', 'message_type', 'content', 'created_at'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'from_id');
+    }
 }
