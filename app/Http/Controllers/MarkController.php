@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Session;
 
 class MarkController extends Controller
 {
@@ -22,7 +22,7 @@ class MarkController extends Controller
     function apiIndex($subj, $group, $control)
     {
         $info = Mark::getControlInfo($subj, $group, $control);
-        if (!$info->data_) $info->data_="2000-00-00";
+        if (!$info->data_) $info->data_ = "2000-00-00";
         return response()->json($info);
     }
 
@@ -109,15 +109,23 @@ class MarkController extends Controller
         $markFields['kod_prep'] = Auth::user()->userable_id;
         $markFields['kod_subj'] = $request->input('sbjcode');
         $markFields['kod_grup'] = $request->input('grcode');
-        $markFields['kod_stud'] = 0;
-        $markFields['ocenka'] = $maxval;
         $markFields['vid_kontrol'] = $request->input('control');
-        $markFields['type_kontrol'] = $request->input('typecontrol');
-        $markFields['data_'] = $request->input('date_control');
         $subj = $markFields['kod_subj'];
         $group = $markFields['kod_grup'];
-        Mark::insert($markFields);
-        return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
+
+        $controlCount = Mark::where($markFields)->count();
+        if ($controlCount > 0) {
+            Session::flash('warning', 'Контроль вже існує!');
+            return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
+        } else {
+            $markFields['ocenka'] = $maxval;
+            $markFields['type_kontrol'] = $request->input('typecontrol');
+            $markFields['data_'] = $request->input('date_control');
+            $markFields['kod_stud'] = 0;
+            Mark::create($markFields);
+            Session::flash('message', 'Контроль створено');
+            return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
+        }
     }
 
     function deleteControl($subj, $group, $control)
@@ -128,24 +136,14 @@ class MarkController extends Controller
 
     function updateControl(Request $request)
     {
-        Mark::where('kod_prep', Auth::user()->userable_id)->
-        where('kod_subj', $request->input('sbjcode'))->
-        where('kod_grup', $request->input('grcode'))->
-        where('vid_kontrol', $request->input('oldcontrol'))->
-        where('kod_stud','>',0)->
-        update(
+        Mark::where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $request->input('sbjcode'))->where('kod_grup', $request->input('grcode'))->where('vid_kontrol', $request->input('oldcontrol'))->where('kod_stud', '>', 0)->update(
             [
                 'vid_kontrol' => $request->input('control'),
                 'data_' => $request->input('datetime2'),
                 'type_kontrol' => $request->input('typecontrol')
             ]
         );
-        Mark::where('kod_prep', Auth::user()->userable_id)->
-        where('kod_subj', $request->input('sbjcode'))->
-        where('kod_grup', $request->input('grcode'))->
-        where('vid_kontrol', $request->input('oldcontrol'))->
-        where('kod_stud',0)->
-        update(
+        Mark::where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $request->input('sbjcode'))->where('kod_grup', $request->input('grcode'))->where('vid_kontrol', $request->input('oldcontrol'))->where('kod_stud', 0)->update(
             [
                 'vid_kontrol' => $request->input('control'),
                 'data_' => $request->input('datetime2'),
