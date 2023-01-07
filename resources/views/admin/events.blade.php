@@ -2,7 +2,7 @@
 
 @section('sidebar')
 <h1>Адмінпанель</h1>
-<h2>Користувачі</h2>
+<h2>Журнал подій</h2>
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
     {{ implode('', $errors->all('<div>:message</div>')) }}
 @endif
 
-<h2>Користувачі журналу</h2>
+<h2>Журнал подій</h2>
 <table id="logtab" class="table table-stripped table-bordered">
     <thead>
         <tr>

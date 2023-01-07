@@ -20,11 +20,20 @@ class Log extends Model
         Log::create([
             'user_id' => Auth::id(),
             'event' => 'login',
-            'comment' => 'Авторизація у веб-інтерфейс. Користувач ' . Auth::user()->name,
+            'comment' => "Авторизація у веб-інтерфейс.\n Користувач " . Auth::user()->name . " IP:" . \Request::ip(),
         ]);
     }
 
     public static function loginAs($id)
+    {
+        Log::create([
+            'user_id' => Auth::id(),
+            'event' => 'login',
+            'comment' => 'Адміністратор ' . Auth::user()->name . ' авторизується як користувач ' . User::find($id)->name . "\n IP:" . \Request::ip(),
+        ]);
+    }
+
+    public static function loginAs1($id)
     {
         Log::create([
             'user_id' => Auth::id(),
