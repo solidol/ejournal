@@ -19,10 +19,6 @@
                         <input type="text" class="form-control" id="control" name="control" placeholder="Опитування 0">
                     </div>
                     <div class="mb-3">
-                        <label for="datetAddControl" class="form-label">Дата проведення</label>
-                        <input type="date" class="form-control" id="datetAddControl" name="date_control" value="{{$lesson?$lesson->data_->format('Y-m-d'):''}}">
-                    </div>
-                    <div class="mb-3">
                         <label>Швидкі шаблони</label>
                         <select id="ftemp" class="form-select form-select-md" aria-label=".form-select-sm example">
                             <option selected></option>
@@ -45,10 +41,11 @@
                             <option>ЛР</option>
                             <option>Підсумок</option>
                             <option>Екзамен</option>
-
                         </select>
-
-
+                    </div>
+                    <div class="mb-3">
+                        <label for="datetAddControl" class="form-label">Дата проведення</label>
+                        <input type="date" class="form-control" id="datetAddControl" name="date_control" value="{{$lesson?$lesson->data_->format('Y-m-d'):''}}">
                     </div>
                     <div class="mb-3">
                         <label for="maxval" class="form-label">Максимальна оцінка</label>
@@ -79,8 +76,8 @@
         $('#ftemp').change(function() {
             $('#control').val($("#ftemp option:selected").text());
         });
-        
-        if ($('#dateAddControl').val()=="")
+
+        if ($('#dateAddControl').val() == "")
             $('#dateAddControl').val(new Date().toISOString().split('T')[0]);
 
     });

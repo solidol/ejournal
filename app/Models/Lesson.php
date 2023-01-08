@@ -15,6 +15,7 @@ class Lesson extends Model
     public $timestamps = false;
     protected $primaryKey = 'kod_pari';
 
+    protected $guarded = [];
     public function group()
     {
         return $this->belongsTo(Group::class, 'kod_grupi')->orderBy('nomer_grup');

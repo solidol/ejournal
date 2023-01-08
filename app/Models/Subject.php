@@ -9,7 +9,8 @@ class Subject extends Model
 {
     use HasFactory;
     protected $table = 'subjects';
-
+    protected $guarded = [];
+    
     public $timestamps = false;
     protected $primaryKey = 'kod_subj';
 

@@ -10,7 +10,8 @@ class Teacher extends Model
     use HasFactory;
     protected $table = 'prepod';
     protected $primaryKey = 'kod_prep';
-
+    protected $guarded = [];
+    
     public $timestamps = false;
 
     public function user()

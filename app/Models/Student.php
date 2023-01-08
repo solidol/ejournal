@@ -10,7 +10,8 @@ class Student extends Model
     use HasFactory;
 
     protected $table = 'spisok_stud';
-
+    protected $guarded = [];
+    
     public $timestamps = false;
     protected $primaryKey = 'kod_stud';
     

@@ -10,6 +10,7 @@ class Group extends Model
     use HasFactory;
     protected $table = 'grups';
 
+    protected $guarded = [];
     public $timestamps = false;
     protected $primaryKey = 'kod_grup';
 

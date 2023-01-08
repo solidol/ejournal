@@ -7,12 +7,16 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
+
+
+
 class Mark extends Model
 {
     //
     protected $table = 'ocenki';
     protected $primaryKey = 'kod_ocenki';
-    protected $fillable = ['ocenka'];
+    protected $guarded = [];
+    //protected $fillable = ['data_','ocenka','kod_prep','kod_subj','kod_grup','kod_stud','vid_kontrol'];
     protected $dates = ['data_'];
     public $timestamps = false;
 

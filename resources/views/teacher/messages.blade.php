@@ -70,8 +70,8 @@
     </table>
 
     <h2>
+        <a class="btn btn-success" href="#" data-bs-toggle="modal" data-bs-target="#shareLesson"><i class="bi bi-envelope-paper"></i> Створити</a>
         Текстові
-        <a class="btn btn-success" href="#" data-bs-toggle="modal" data-bs-target="#shareLesson"><i class="bi bi-share-fill"></i> Створити</a>
     </h2>
     <table class="table table-striped table-bordered">
         <thead>

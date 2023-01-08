@@ -14,7 +14,8 @@ class Absent extends Model
     protected $table = 'vidsutni';
     protected $primaryKey = 'kod';
     public $timestamps = false;
-
+    protected $guarded = [];
+    
     public function student()
     {
         return $this->belongsTo(GStudentroup::class, 'kod_stud');

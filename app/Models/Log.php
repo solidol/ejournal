@@ -10,7 +10,8 @@ use App\Models\User;
 class Log extends Model
 {
     use HasFactory;
-    public $fillable = ['user_id', 'event', 'comment'];
+    //public $fillable = ['user_id', 'event', 'comment'];
+    protected $guarded = [];
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
