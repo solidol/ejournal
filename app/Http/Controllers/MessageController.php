@@ -17,7 +17,8 @@ class MessageController extends Controller
         $user = Auth::user();
         $messLess = Message::where('to_id', $user->id)->where('message_type', 'lesson')->get();
         $messText = Message::where('to_id', $user->id)->where('message_type', 'text')->get();
-        $messAlerts = Message::where('to_id', $user->id)->orWhere('to_id', 0)->where('message_type', 'alert')->get();
+        $messAlerts = Message::where('message_type', 'alerts')->where('to_id', $user->id)->orWhere('to_id', 0)->get();
+        $messSystem = Message::where('message_type', 'system')->where('to_id', $user->id)->orWhere('to_id', 0)->get();
         foreach ($messLess as &$l) {
             $content = json_decode($l->content);
             $l->content = Lesson::find($content->id);
@@ -26,6 +27,7 @@ class MessageController extends Controller
             'arLessons' => $messLess,
             'arTexts' => $messText,
             'arAlesrts' => $messAlerts,
+            'arSystem' => $messSystem,
             'arUsers' => User::all(),
         ]);
     }

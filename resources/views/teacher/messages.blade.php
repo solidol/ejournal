@@ -108,7 +108,34 @@
 
     </table>
 
+    <h2>
+        Системні
+    </h2>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Від
+                </th>
+                <th>
+                    Зміст
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($arSystem as $text)
+            <tr>
+                <td>
+                    {{$text->user->userable->FIO_prep}}
+                </td>
+                <td>
+                    {!! nl2br($text->content) !!}
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
 
+    </table>
 </div>
 
 
