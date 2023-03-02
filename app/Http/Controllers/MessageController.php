@@ -15,13 +15,18 @@ class MessageController extends Controller
     public function list()
     {
         $user = Auth::user();
-        $messLess = Message::where('to_id', $user->id)->where('message_type', 'lesson')->get();
+        $messLessTmp = Message::where('to_id', $user->id)->where('message_type', 'lesson')->get();
+        $messLess = array();
         $messText = Message::where('to_id', $user->id)->where('message_type', 'text')->get();
         $messAlerts = Message::where('message_type', 'alerts')->where('to_id', $user->id)->orWhere('to_id', 0)->get();
         $messSystem = Message::where('message_type', 'system')->where('to_id', $user->id)->orWhere('to_id', 0)->get();
-        foreach ($messLess as &$l) {
+        foreach ($messLessTmp as $l) {
             $content = json_decode($l->content);
-            $l->content = Lesson::find($content->id);
+            $lesson = Lesson::find($content->id);
+            if ($lesson) {
+                $messLess[] = $l;
+                $l->content = $lesson;
+            }
         }
         return view('teacher.messages', [
             'arLessons' => $messLess,

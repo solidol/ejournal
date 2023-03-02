@@ -44,7 +44,7 @@
                     {{$lesson->user->userable->FIO_prep}}
                 </td>
                 <td>
-                    {{$lesson->content->group->nomer_grup}}
+                    {{$lesson->content->group}}
                 </td>
                 <td>
                     {{$lesson->content->subject->subject_name}}
