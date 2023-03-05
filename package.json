@@ -13,5 +13,11 @@
         "postcss": "^8.1.14",
         "sass": "^1.32.11",
         "vite": "^3.0.0"
+    },
+    "dependencies": {
+        "datatables.net": "^1.13.3",
+        "inputmask": "^5.0.7",
+        "jquery": "^3.6.3",
+        "laravel-datatables-vite": "^0.5.2"
     }
 }
