@@ -46,14 +46,11 @@
                     {{$journal->subject->subject_name}}
                 </td>
                 <td>
-                    {{$journal->lessons->sum('kol_chs')}} г.
+                    {{$journal->lessons->sum('kol_chasov')}} г.
                 </td>
                 <td>
-                    <a class="btn btn-success" href="{{URL::route('get_lessons',['id'=>$journal->id])}}">
-                        Пари
-                    </a>
-                    <a class="btn btn-primary" href="{{URL::route('get_marks',['id'=>$journal->id])}}">
-                        Оцінки
+                    <a class="btn btn-success pt-0 pb-0" href="{{URL::route('show_journal',['id'=>$journal->id])}}">
+                        Переглянути
                     </a>
                 </td>
             </tr>

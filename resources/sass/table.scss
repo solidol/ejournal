@@ -1,0 +1,69 @@
+/* tables */
+
+
+
+
+
+.div-table {
+    max-width: 100%;
+    overflow-y: scroll;
+}
+
+table {
+    margin: 1rem 0.5rem 1rem 0.5rem;
+}
+
+table td.we-cols {
+    background-color: var(--cl-l-blue) !important;
+}
+
+.table-table tr {
+    max-height: 20px;
+}
+
+table th.subj-name,
+table td.subj-name {
+    max-width: 200px;
+    white-space: nowrap;
+    /* Отменяем перенос текста */
+    overflow: hidden;
+    /* Обрезаем содержимое */
+    text-overflow: ellipsis;
+    /* Многоточие */
+}
+
+.table-table,
+.table-table td {
+    font-size: 1rem;
+    padding: 0 !important;
+}
+
+.table-table td.hr-cnt {
+    text-align: center;
+    vertical-align: center;
+}
+
+
+.table thead,
+.table tfoot {
+    color: var(--cl-d-white) !important;
+    background-color: var(--cl-d-blue) !important;
+}
+
+.table th {
+    vertical-align: middle !important;
+    text-align: center !important;
+    border: 1px solid var(--cl-d-white) !important;
+    font-size: 1rem;
+    font-weight: 600 !important;
+    padding: 0 !important;
+}
+
+th.rotated-text {
+    height: 140px;
+    white-space: nowrap;
+    padding: 0 !important;
+
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+}

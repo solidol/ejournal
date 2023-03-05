@@ -61,10 +61,15 @@
 </ul>
 
 <ul class="nav nav-pills mb-3" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="tl-tab-all" data-bs-toggle="tab" data-bs-target="#tab-all" type="button" role="tab" aria-controls="<?= $oSubList['meta']['slug'] ?>" aria-selected="<?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'true' : 'false' ?>">
+            Всі оцінки
+        </button>
+    </li>
     @foreach ($oList as $key=>$oSubList)
 
     <li class="nav-item" role="presentation">
-        <button class="nav-link <?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'active' : '' ?>" id="<?= 'tl-' . $oSubList['meta']['slug'] ?>" data-bs-toggle="tab" data-bs-target="#{{$oSubList['meta']['slug']}}" type="button" role="tab" aria-controls="<?= $oSubList['meta']['slug'] ?>" aria-selected="<?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'true' : 'false' ?>">
+        <button class="nav-link" id="<?= 'tl-' . $oSubList['meta']['slug'] ?>" data-bs-toggle="tab" data-bs-target="#{{$oSubList['meta']['slug']}}" type="button" role="tab" aria-controls="<?= $oSubList['meta']['slug'] ?>" aria-selected="<?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'true' : 'false' ?>">
             {{ $oSubList['meta']['title'] }} ({{$oSubList['meta']['maxval']}}б.)
         </button>
     </li>
@@ -72,8 +77,38 @@
 </ul>
 
 <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="tab-all" role="tabpanel" aria-labelledby="tl-tab-all">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>ПІБ</th>
+                    @foreach($currentJournal->controls as $control)
+                    <th class="rotate">
+                        <div>
+                            {{$control->title}}
+                        </div>
+                    </th>
+                    @endforeach
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($currentJournal->group->students as $student)
+                <tr>
+                    <td>
+                        {{$student->FIO_stud}}
+                    </td>
+                    @foreach($currentJournal->controls as $control)
+                    <td>
+                        {{$control->mark($student->id)->mark_str}}
+                    </td>
+                    @endforeach
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     @foreach ($oList as $key=>$oSubList)
-    <div class="tab-pane fade <?= ($oSubList['meta']['slug'] == 'tab-id1') ? 'show active' : '' ?> " id="{{$oSubList['meta']['slug']}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $oSubList['meta']['slug'] ?>">
+    <div class="tab-pane fade  " id="{{$oSubList['meta']['slug']}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $oSubList['meta']['slug'] ?>">
         <h3>Дата контролю {{date_format(date_create($oSubList['meta']['data_']),'d.m.y')}} | {{$oSubList['meta']['typecontrol']}}</h3>
 
         <form action="{{route('store_marks')}}" method="post">
