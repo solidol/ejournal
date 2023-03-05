@@ -7,6 +7,7 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AbsentController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\JournalController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    if (Auth::user()) return redirect()->route('get_subjects');
+    if (Auth::user()) return redirect()->route('get_journals');
     else return view('welc');
 });
 
@@ -28,36 +29,40 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Журнал та пари
 
-    Route::get('/journal', [UserController::class, 'listSubjects'])->name('get_subjects');
+    Route::get('/journals', [JournalController::class, 'list'])->name('get_journals');
 
     //Route::get('/journal/{subj}/{group}', [UserController::class, 'showJournal'])->name('get_journal');
 
-    Route::get('/journal/{subj}/{group}/marks', [MarkController::class, 'list'])->name('get_marks');
+    Route::get('/journals/show:{id}', [JournalController::class, 'show'])->name('show_journal');
 
-    Route::get('/journal/{subj}/{group}/lessons', [LessonController::class, 'list'])->name('get_lessons');
+    Route::get('/journals/show:{id}/marks', [MarkController::class, 'list'])->name('get_marks');
 
-    Route::post('/journal/lessons/store', [LessonController::class, 'store'])->name('store_lesson');
+    Route::get('/journals/show:{id}/lessons', [LessonController::class, 'list'])->name('get_lessons');
 
-    Route::post('/journal/lesson/update', [LessonController::class, 'update'])->name('update_lesson');
+    Route::post('/journals/store', [JournalController::class, 'store'])->name('store_journal');
 
-    Route::get('/journal/lesson:{lessonId}/more', [LessonController::class, 'show'])->name('show_lesson');
+    Route::post('/lessons/store', [LessonController::class, 'store'])->name('store_lesson');
 
-    Route::get('/journal/lesson:{lessonId}/edit', [LessonController::class, 'edit'])->name('edit_lesson');
+    Route::post('/lesson/update', [LessonController::class, 'update'])->name('update_lesson');
 
-    Route::get('/journal/lesson:{lessonId}/delete', [LessonController::class, 'destroy'])->name('delete_lesson');
+    Route::get('/lessons/show:{id}', [LessonController::class, 'show'])->name('show_lesson');
+
+    Route::get('/lessons/edit:{id}', [LessonController::class, 'edit'])->name('edit_lesson');
+
+    Route::get('/lessons/delete:{id}', [LessonController::class, 'destroy'])->name('delete_lesson');
 
 
     // Журнал та оцінки
 
-    Route::post('/journal/marks/store', [MarkController::class, 'store'])->name('store_marks');
+    Route::post('/marks/store', [MarkController::class, 'store'])->name('store_marks');
 
-    Route::post('/journal/marks/create-control', [MarkController::class, 'createControl'])->name('create_control');
+    Route::post('/marks/create-control', [MarkController::class, 'createControl'])->name('create_control');
 
-    Route::get('/journal/marks/{subj}/{group}/{control}/del-control', [MarkController::class, 'deleteControl'])->name('delete_control');
+    Route::get('/marks/{subj}/{group}/{control}/del-control', [MarkController::class, 'deleteControl'])->name('delete_control');
 
     Route::get('/ajax/marks/{subj}/{group}/{control}/info', [MarkController::class, 'apiIndex'])->name('get_info_control');
 
-    Route::post('/journal/marks/control/update', [MarkController::class, 'updateControl'])->name('update_info_control');
+    Route::post('/marks/control/update', [MarkController::class, 'updateControl'])->name('update_info_control');
 
     //    Табель
 

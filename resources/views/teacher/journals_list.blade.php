@@ -37,22 +37,22 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($mySubjList as $mItem)
+            @foreach($journals as $journal)
             <tr>
                 <td>
-                    {{$mItem->group->nomer_grup}}
+                    {{$journal->group->nomer_grup}}
                 </td>
                 <td>
-                    {{$mItem->subject->subject_name}}
+                    {{$journal->subject->subject_name}}
                 </td>
                 <td>
-                    {{$mItem->hrsum}} г.
+                    {{$journal->lessons->sum('kol_chs')}} г.
                 </td>
                 <td>
-                    <a class="btn btn-success" href="{{URL::route('get_lessons',['subj'=>$mItem->subject->kod_subj,'group'=>$mItem->group->kod_grup])}}">
+                    <a class="btn btn-success" href="{{URL::route('get_lessons',['id'=>$journal->id])}}">
                         Пари
                     </a>
-                    <a class="btn btn-primary" href="{{URL::route('get_marks',['subj'=>$mItem->subject->kod_subj,'group'=>$mItem->group->kod_grup])}}">
+                    <a class="btn btn-primary" href="{{URL::route('get_marks',['id'=>$journal->id])}}">
                         Оцінки
                     </a>
                 </td>

@@ -62,6 +62,7 @@ class User extends Authenticatable
 
     public function getMySubjects()
     {
+        /*
         $lessons = Lesson::select('lessons_.kod_grupi', 'lessons_.kod_subj', 'lessons_.kod_prep','G.nomer_grup','S.subject_name')->
         join('grups as G','lessons_.kod_grupi','=','G.kod_grup')->
         join('subjects as S','lessons_.kod_subj','=','S.kod_subj')->
@@ -74,8 +75,9 @@ class User extends Authenticatable
             where('lessons_.kod_subj',$lesson->kod_subj)->
             where('lessons_.kod_grupi',$lesson->kod_grupi)->
             sum('kol_chasov');
-        }
-        return $lessons;
+        }*/
+        $journals = $this->userable->journals;
+        return $journals;
     }
 
     function getStudents($group)

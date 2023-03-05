@@ -1,5 +1,5 @@
 <!-- Modal -->
-<form action="{{URL::route('store_lesson')}}" method="post">
+<form action="{{URL::route('store_journal')}}" method="post">
     @csrf
     <!-- {{ csrf_field() }} -->
     <div class="modal fade" id="addLesson" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -14,8 +14,7 @@
                     <input type="hidden" name="lesscode" value="-1">
                     <div class="mb-3">
                         <label>Оберіть дисципліну</label>
-                        <select id="sbjcode" name="sbjcode" class="form-select form-select-md" 
-                        aria-label=".form-select-sm example" required placeholder="Оберіть дисципліну">
+                        <select id="sbjcode" name="sbjcode" class="form-select form-select-md" aria-label=".form-select-sm example" required placeholder="Оберіть дисципліну">
                             <option selected></option>
                             @foreach ($sbjList as $sItem)
                             <option value="{{$sItem->kod_subj}}">{{$sItem->subject_name}}</option>
@@ -24,14 +23,18 @@
                     </div>
                     <div class="mb-3">
                         <label>Оберіть групу</label>
-                        <select id="grcode" name="grcode" class="form-select form-select-md" 
-                        aria-label=".form-select-sm example" required placeholder="Оберіть групу">
+                        <select id="grcode" name="grcode" class="form-select form-select-md" aria-label=".form-select-sm example" required placeholder="Оберіть групу">
                             <option selected></option>
                             @foreach ($grList as $gItem)
                             <option value="{{$gItem->kod_grup}}">{{$gItem->nomer_grup}}</option>
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="datetime1" class="form-label">Коментар</label>
+                        <textarea class="form-control" name="description"></textarea>
+                    </div>
+                    <hr>
                     <div class="mb-3">
                         <label for="datetime1" class="form-label">Дата</label>
                         <input type="date" class="form-control" id="datetime1" name="datetime">

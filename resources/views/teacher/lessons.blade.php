@@ -13,8 +13,8 @@
 <h2 class="d-sm-none d-md-block">Записані пари з інших дисциплін</h2>
 
 <nav class="nav flex-column d-none d-md-block">
-    @foreach($mList as $mItem)
-    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$mItem->kod_subj,'group'=>$mItem->kod_grupi])}}">{{$mItem->group->nomer_grup}} - {{$mItem->subject->subject_name}}</a>
+    @foreach($journals as $journal)
+    <a class="nav-link" href="{{URL::route('get_lessons',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
     @endforeach
 </nav>
 
@@ -25,7 +25,7 @@
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addLesson"><i class="bi bi-pencil-square"></i> Записати пару</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('get_marks',['subj'=>$data['subj'],'group'=>$data['group']])}}"><i class="bi bi-5-square"></i> Оцінки</a>
+    <a class="nav-link" href="{{URL::route('get_marks',['id'=>$journal->id])}}"><i class="bi bi-5-square"></i> Оцінки</a>
 </li>
 @stop
 
@@ -53,27 +53,26 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($oList as $key=>$oItem)
+        @foreach ($currentJournal->lessons as $lesson)
         <tr>
 
             <td>
-                {{ $oItem->data_?$oItem->data_->format('d.m.y'):'' }}
+                {{ $lesson->data_?$lesson->data_->format('d.m.y'):'' }}
             </td>
             <td class="sum">
-                {{ $oItem->kol_chasov }}
+                {{ $lesson->kol_chasov }}
             </td>
-
             <td>
-                {!! nl2br($oItem->tema) !!}
-                @if ($oItem->hasControl())
+                {!! nl2br($lesson->tema) !!}
+                @if ($lesson->hasControl())
                 <span class="badge rounded-pill text-bg-danger">контроль</span>
                 @endif
             </td>
             <td>
-                {!! nl2br($oItem->zadanaie) !!}
+                {!! nl2br($lesson->zadanaie) !!}
             </td>
             <td>
-                <a class="text-success" href="{{URL::route('show_lesson',['lessonId'=>$oItem->kod_pari])}}"><i class="bi bi-pencil-square"></i></a>
+                <a class="text-success" href="{{URL::route('show_lesson',['id'=>$lesson->id])}}"><i class="bi bi-pencil-square"></i></a>
             </td>
         </tr>
         @endforeach
@@ -95,7 +94,7 @@
     </button>
 </div>
 
-<script>
+<script type="module">
     $(document).ready(function() {
 
         $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {

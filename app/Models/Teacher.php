@@ -18,4 +18,9 @@ class Teacher extends Model
     {
         return $this->morphOne(App\Models\User::class, 'userable');
     }
+
+    public function journals()
+    {
+        return $this->hasMany(Journal::class, 'teacher_id');
+    }
 }

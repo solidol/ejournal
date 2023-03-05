@@ -12,8 +12,8 @@
                 <div class="modal-body">
 
                     <input type="hidden" name="lesscode" value="-1">
-                    <input type="hidden" name="grcode" value="{{$data['group']}}">
-                    <input type="hidden" name="sbjcode" value="{{$data['subj']}}">
+                    <input type="hidden" name="journal_id" value="{{$currentJournal->id}}">
+
 
                     <div class="mb-3">
                         <label for="datetime1" class="form-label">Дата</label>
@@ -89,7 +89,7 @@
     </div>
 </form>
 
-<script>
+<script type="module">
     $(document).ready(function() {
         $('#freset').click(function() {
             $('#homework').val('');

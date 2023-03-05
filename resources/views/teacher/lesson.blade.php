@@ -17,7 +17,7 @@
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('get_lessons',['subj'=>$lesson->kod_subj,'group'=>$lesson->kod_grupi])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
+    <a class="nav-link" href="{{URL::route('get_lessons',['id'=>$lesson->journal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
 </li>
 @stop
 
@@ -128,7 +128,7 @@
             </button>
         </div>
         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body"> <a class="btn btn-danger" href="{{URL::route('delete_lesson',['lessonId'=>$lesson->kod_pari])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i> Видалити</a></div>
+            <div class="accordion-body"> <a class="btn btn-danger" href="{{URL::route('delete_lesson',['id'=>$lesson->id])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i> Видалити</a></div>
         </div>
     </div>
 

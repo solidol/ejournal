@@ -11,6 +11,7 @@ use App\Models\Subject;
 use App\Models\Absent;
 use App\Models\Student;
 use App\Models\Mark;
+use App\Models\Journal;
 use Session;
 use DateTime;
 use DatePeriod;
@@ -33,32 +34,31 @@ class LessonController extends Controller
         '11' => 'Листопад',
         '12' => 'Грудень',
     ];
-    function list($subj, $group)
+    function list($id)
     {
         $user = Auth::user();
-        $additionalData = Lesson::getSubjectInfo($subj, $group);
-        if ($additionalData == null)
+        $journal = Auth::user()->userable->journals->find($id);
+        if ($journal == null)
             return view('noelement');
         return view('teacher.lessons', [
             'data' => [
-                'title1' => $additionalData->group->nomer_grup . ' - ' . $additionalData->subject->subject_name,
+                'title1' => $journal->group->nomer_grup . ' - ' . $journal->subject->subject_name,
                 'prep' => $user->userable_id,
-                'subj' => $subj,
-                'group' => $group
             ],
-            'oList' => Lesson::filterLs($subj, $group),
-            'mList' => $user->getMySubjects()
+            'currentJournal' => $journal,
+            'journals' => Auth::user()->userable->journals
         ]);
     }
 
-    public function apiGet($lessonId){
-        $lesson = Lesson::findOrFail($lessonId);
+    public function apiGet($id)
+    {
+        $lesson = Lesson::findOrFail($id);
         return response()->json($lesson);
     }
 
-    public function show($lessonId)
+    public function show($id)
     {
-        $lesson = Lesson::findOrFail($lessonId);
+        $lesson = Lesson::findOrFail($id);
         if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
 
@@ -71,7 +71,7 @@ class LessonController extends Controller
                     'title1' => $lesson->group->nomer_grup . " " . $subj->subject_name,
                     'title2' => 'Перегляд пари та запис відсутніх',
                 ],
-                'arAbsent' => Student::listByLesson($lessonId),
+                'arAbsent' => Student::listByLesson($id),
                 'arCtrls' =>  Mark::getControlsByDate($lesson->kod_subj, $lesson->kod_grupi, $lesson->data_),
                 'lesson' => $lesson,
                 'arUsers' => User::all(),
@@ -79,9 +79,9 @@ class LessonController extends Controller
         );
     }
 
-    public function edit($lessonId)
+    public function edit($id)
     {
-        $lesson = Lesson::findOrFail($lessonId);
+        $lesson = Lesson::findOrFail($id);
 
         if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
@@ -94,7 +94,7 @@ class LessonController extends Controller
                     'subj' => $lesson->kod_subj,
                     'group' => $lesson->kod_groupi
                 ],
-                'storeRoute' => route('update_lesson', ['lessonId' => $lessonId]),
+                'storeRoute' => route('update_lesson', ['id' => $id]),
                 'lesson' => $lesson
             ]
         );
@@ -102,11 +102,13 @@ class LessonController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->get('lesscode') < 1) {
+        if ($request->lesscode < 1 && $request->journal_id > 0) {
+            $journal = Journal::find($request->journal_id);
             $lesson = new Lesson();
-            $lesson->kod_grupi = $request->input('grcode');
-            $lesson->kod_prep = Auth::user()->userable_id;
-            $lesson->kod_subj = $request->input('sbjcode');
+            $lesson->kod_grupi = $journal->group_id;
+            $lesson->kod_prep = $journal->teacher_id;
+            $lesson->kod_subj = $journal->subject_id;
+            $lesson->journal_id = $journal->id;
             $lesson->nom_pari = $request->input('lessnom');
             $lesson->tema = $request->input('thesis');
             $lesson->zadanaie = $request->input('homework');
@@ -115,7 +117,7 @@ class LessonController extends Controller
             $lesson->save();
         }
         Session::flash('message', 'Пару збережено');
-        return redirect()->route('get_lessons', ['subj' => $lesson->kod_subj, 'group' => $lesson->kod_grupi]);
+        return redirect()->route('get_lessons', ['id' => $journal->id]);
     }
 
     public function update(Request $request)
@@ -137,23 +139,25 @@ class LessonController extends Controller
         }
         // redirect
         // Session::flash('message', 'Successfully updated post!');
-        return redirect()->route('show_lesson', ['lessonId' => $request->get('lesscode')]);
+        return redirect()->route('show_lesson', ['id' => $request->get('lesscode')]);
         //return redirect()->route('show_lesson', ['subj' => $subj, 'group' => $group]);
         //  }*/
     }
 
-    public function destroy($lessonId)
+    public function destroy($id)
     {
         // delete
-        $lesson = Lesson::find($lessonId);
-        $routeData['subj'] = $lesson->kod_subj;
-        $routeData['group'] = $lesson->kod_grupi;
+        $lesson = Lesson::find($id);
+        $journal = $lesson->journal;
         $lesson->delete();
-
-        return redirect()->route('get_lessons', [
-            'subj' => $routeData['subj'],
-            'group' => $routeData['group']
-        ]);;
+        if ($journal->lessons->count() > 0) {
+            return redirect()->route('get_lessons', [
+                'id' => $journal->id
+            ]);
+        } else {
+            $journal->delete();
+            return redirect()->route('get_journals');
+        }
     }
 
     public function getTable()
@@ -173,7 +177,7 @@ class LessonController extends Controller
 
         $dates = array();
         foreach ($period as $dItem) {
-            
+
             $tmp['raw'] = $dItem;
             $tmp['dw'] = $dItem->format('w');
             $dates[] = $tmp;
@@ -183,9 +187,9 @@ class LessonController extends Controller
         $arSubjects = array();
         foreach ($subjects as $sItem) {
             $tmp['data'] = Lesson::filterLs($sItem->kod_subj, $sItem->kod_grupi);
-            
+
             $tmp['meta'] = Lesson::getSubjectInfo($sItem->kod_subj, $sItem->kod_grupi);
-            
+
             $arSubjects[] = $tmp;
         }
         return view(

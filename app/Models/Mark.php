@@ -19,6 +19,45 @@ class Mark extends Model
     //protected $fillable = ['data_','ocenka','kod_prep','kod_subj','kod_grup','kod_stud','vid_kontrol'];
     protected $dates = ['data_'];
     public $timestamps = false;
+    protected $appends = ['type_control_title', 'mark_str'];
+
+
+    public function getMarkStrAttribute()
+    {
+        if ($this->ocenka > 0) {
+            return $this->ocenka;
+        } else {
+            switch ($this->ocenka) {
+                case -1:
+                    return "Н/А";
+                    break;
+                case -2:
+                    return "Зар";
+                    break;
+                default:
+                    return '-';
+                    break;
+            }
+        }
+    }
+
+    public function getTypeControlTytleAttribute()
+    {
+        switch ($this->type_kontrol) {
+            case 0:
+                "Поточний";
+                break;
+            case 1:
+                "Модульний";
+                break;
+            case 2:
+                "Підсумковий";
+                break;
+            default:
+                "-";
+                break;
+        }
+    }
 
     public function student()
     {
@@ -27,13 +66,7 @@ class Mark extends Model
 
     public static function getControlInfo($subj, $group, $control)
     {
-        return Mark::where('kod_grup', $group)->
-        where('kod_prep', Auth::user()->userable_id)->
-        where('kod_subj', $subj)->
-        where('vid_kontrol', $control)->
-        where('kod_stud', 0)->
-        first();
-
+        return Mark::where('kod_grup', $group)->where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $subj)->where('vid_kontrol', $control)->where('kod_stud', 0)->first();
     }
 
     public static function filterOc($subj, $group, $control)
@@ -42,21 +75,21 @@ class Mark extends Model
 
 
         $marks = DB::table('spisok_stud')->select(
-                'spisok_stud.kod_stud',
-                'spisok_stud.kod_grup',
-                'spisok_stud.FIO_stud',
-                'ocenki.ocenka',
-                'ocenki.kod_subj',
-                'ocenki.vid_kontrol',
-                'ocenki.data_',
-                DB::raw('DATE_FORMAT(ocenki.data_,"%d.%m.%y") as dateFormatted')
-            )->leftJoinSub(
-                Mark::select('kod_stud', 'kod_prep', 'kod_grup', 'kod_subj', 'vid_kontrol', 'ocenka', 'data_')->where('kod_grup', $group)->where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $subj)->where('vid_kontrol', $control),
-                'ocenki',
-                function ($join) {
-                    $join->on('ocenki.kod_stud', '=', 'spisok_stud.kod_stud');
-                }
-            )->where('spisok_stud.kod_grup', $group)->orderBy('FIO_stud')->distinct()->get();
+            'spisok_stud.kod_stud',
+            'spisok_stud.kod_grup',
+            'spisok_stud.FIO_stud',
+            'ocenki.ocenka',
+            'ocenki.kod_subj',
+            'ocenki.vid_kontrol',
+            'ocenki.data_',
+            DB::raw('DATE_FORMAT(ocenki.data_,"%d.%m.%y") as dateFormatted')
+        )->leftJoinSub(
+            Mark::select('kod_stud', 'kod_prep', 'kod_grup', 'kod_subj', 'vid_kontrol', 'ocenka', 'data_')->where('kod_grup', $group)->where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $subj)->where('vid_kontrol', $control),
+            'ocenki',
+            function ($join) {
+                $join->on('ocenki.kod_stud', '=', 'spisok_stud.kod_stud');
+            }
+        )->where('spisok_stud.kod_grup', $group)->orderBy('FIO_stud')->distinct()->get();
 
         foreach ($marks as &$mItem) {
 
@@ -80,26 +113,14 @@ class Mark extends Model
 
     public static function getControls($subj, $group)
     {
-        return Mark::select('vid_kontrol', 'ocenka', 'data_')->
-        where('kod_prep', Auth::user()->userable_id)->
-        where('kod_grup', $group)->
-        where('kod_subj', $subj)->
-        where('kod_stud', 0)->
-        where('vid_kontrol', '<>', '')->
-        //whereNotNull('data_')->
-        distinct()->orderBy('data_', 'ASC')->get();
+        return Mark::select('vid_kontrol', 'ocenka', 'data_')->where('kod_prep', Auth::user()->userable_id)->where('kod_grup', $group)->where('kod_subj', $subj)->where('kod_stud', 0)->where('vid_kontrol', '<>', '')->
+            //whereNotNull('data_')->
+            distinct()->orderBy('data_', 'ASC')->get();
     }
 
     public static function getControlsByDate($subj, $group, $date)
     {
-        return Mark::select('vid_kontrol', 'ocenka', 'data_')->
-        where('kod_prep', Auth::user()->userable_id)->
-        where('kod_grup', $group)->
-        where('data_', $date)->
-        where('kod_subj', $subj)->
-            where('kod_stud', 0)->
-            where('vid_kontrol', '<>', '')->
-            distinct()->orderBy('data_', 'ASC')->get();
+        return Mark::select('vid_kontrol', 'ocenka', 'data_')->where('kod_prep', Auth::user()->userable_id)->where('kod_grup', $group)->where('data_', $date)->where('kod_subj', $subj)->where('kod_stud', 0)->where('vid_kontrol', '<>', '')->distinct()->orderBy('data_', 'ASC')->get();
     }
 
     public static function getOcTable($subj, $group)
@@ -116,13 +137,13 @@ class Mark extends Model
             $cl[] = $controlInfo;
             $arTmp = array();
             $arTmp['data'] = Mark::filterOc($subj, $group, $cItem->vid_kontrol);
-            
+
             $arTmp['meta']['title'] = $controlInfo->vid_kontrol ?? 'Undefined';
             $arTmp['meta']['maxval'] = $controlInfo->ocenka ?? 0;
             $arTmp['meta']['group'] = $controlInfo->kod_grup ?? 0;
             $arTmp['meta']['subj'] = $controlInfo->kod_subj ?? 0;
             $arTmp['meta']['slug'] = 'tab-id' . $i;
-            $arTmp['meta']['data_'] = $controlInfo->data_ ?? '2000-01-01';//$arTmp['data']->first()->data_;
+            $arTmp['meta']['data_'] = $controlInfo->data_ ?? '2000-01-01'; //$arTmp['data']->first()->data_;
             $controlInfo->type_kontrol = $controlInfo->type_kontrol >= 0 ? $controlInfo->type_kontrol : -1;
             switch ($controlInfo->type_kontrol) {
                 case 0:

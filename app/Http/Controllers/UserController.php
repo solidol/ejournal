@@ -56,19 +56,6 @@ class UserController extends Controller
             return view('auth.login');
     }
 
-    function listSubjects()
-    {
-        $user = Auth::user();
-        $groups = DB::table('grups')->orderBy('nomer_grup')->get();
-        $subjects = DB::table('subjects')->orderBy('subject_name')->get();
-        return view('teacher.journals', [
-            'data' => array('prep' => $user->userable_id),
-            'mySubjList' => $user->getMySubjects(),
-            'grList' => $groups,
-            'sbjList' => $subjects,
-        ]);
-    }
-
     function showJournal($group, $subj)
     {
         $user = Auth::user();

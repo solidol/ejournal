@@ -13,14 +13,23 @@ class Group extends Model
     protected $guarded = [];
     public $timestamps = false;
     protected $primaryKey = 'kod_grup';
+    protected $appends = ['id'];
 
+    public function getIdAttribute()
+    {
+        return $this->kod_grup;
+    }
     public function students()
     {
-        return $this->hasMany(Student::class, 'kod_grup', 'kod_stud');
+        return $this->hasMany(Student::class, 'kod_grup', 'kod_grup');
     }
 
     public function lessons()
     {
         return $this->hasMany(Lesson::class, 'kod_grupi', 'kod_grup');
+    }
+    public function journals()
+    {
+        return $this->hasMany(Journal::class);
     }
 }

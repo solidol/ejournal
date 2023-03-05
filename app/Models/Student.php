@@ -11,10 +11,15 @@ class Student extends Model
 
     protected $table = 'spisok_stud';
     protected $guarded = [];
-    
+
     public $timestamps = false;
     protected $primaryKey = 'kod_stud';
-    
+    protected $appends = ['id'];
+
+    public function getIdAttribute()
+    {
+        return $this->kod_stud;
+    }
     public function group()
     {
         return $this->belongsTo(Group::class, 'kod_grup');
