@@ -7,7 +7,10 @@ $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Colors
-$blue: #3490dc;
+$blue: #40668d;
+$dark-blue: #2e4a65;
+$light-blue: #b1c6da;
+$ultra-dark-blue: #1a2938;
 $indigo: #6574cd;
 $purple: #9561e2;
 $pink: #f66d9b;
@@ -17,16 +20,15 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+$white: #ffffff;
 
-:root {
 
+$primary:       $blue;
+$secondary:     $light-blue;
+$success:       $green;
+$info:          $cyan;
+$warning:       $yellow;
+$danger:        $red;
+$light:         $light-blue;
+$dark:          $blue;
 
-    --cl-d-blue: #40668d;
-
-    --cl-dd-blue: #2e4a65;
-
-    --cl-l-blue: #b1c6da;
-
-    --cl-d-white: #f1f1f1;
-    --cl-ddd-blue: #1a2938;
-}

@@ -47,7 +47,7 @@
         <a href="#" class="btn nav-link active">Пари</a>
     </li>
     <li class="nav-item" role="presentation">
-        <a href="{{URL::route('get_marks',['id'=>$journal->id])}}" class="btn nav-link">Оцінки</a>
+        <a href="{{URL::route('get_marks',['id'=>$currentJournal->id])}}" class="btn nav-link">Оцінки</a>
     </li>
     <li class="nav-item" role="presentation">
         <a href="#" class="btn nav-link">Пропуски</a>

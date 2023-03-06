@@ -14,7 +14,7 @@ table {
 }
 
 table td.we-cols {
-    background-color: var(--cl-l-blue) !important;
+    background-color: $white !important;
 }
 
 .table-table tr {
@@ -46,14 +46,14 @@ table td.subj-name {
 
 .table thead,
 .table tfoot {
-    color: var(--cl-d-white) !important;
-    background-color: var(--cl-d-blue) !important;
+    color: $white !important;
+    background-color: $blue !important;
 }
 
 .table th {
     vertical-align: middle !important;
     text-align: center !important;
-    border: 1px solid var(--cl-d-white) !important;
+    border: 1px solid $white !important;
     font-size: 1rem;
     font-weight: 600 !important;
     padding: 0 !important;

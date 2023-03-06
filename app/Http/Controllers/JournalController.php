@@ -39,6 +39,18 @@ class JournalController extends Controller
             'journals' => Auth::user()->userable->journals
         ]);
     }
+    function marks($id)
+    {
+        $user = Auth::user();
+        $journal = Auth::user()->userable->journals->find($id);
+        if ($journal == null)
+            return view('noelement');
+        return view('teacher.marks_show', [
+
+            'currentJournal' => $journal,
+            'journals' => Auth::user()->userable->journals
+        ]);
+    }
     public function store(Request $request)
     {
 
