@@ -20,7 +20,6 @@ class Mark extends Model
     public $timestamps = false;
     protected $appends = ['type_control_title', 'mark_str'];
 
-
     public function getMarkStrAttribute()
     {
         if ($this->ocenka > 0) {

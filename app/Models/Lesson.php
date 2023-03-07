@@ -15,7 +15,6 @@ class Lesson extends Model
     protected $appends = ['id'];
     public $timestamps = false;
     protected $primaryKey = 'kod_pari';
-
     protected $guarded = [];
 
     public function getIdAttribute()
