@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Mark;
+use App\Models\Control;
 
 
 class Lesson extends Model
@@ -42,19 +43,13 @@ class Lesson extends Model
         return $this->belongsTo(Journal::class);
     }
 
-    public static function filterLs($subj, $group)
-    {
-        return Lesson::where('lessons_.kod_prep', Auth::user()->userable_id)->where('lessons_.kod_grupi', $group)->where('lessons_.kod_subj', $subj)->orderBy('lessons_.data_')->get();
-    }
-
-    public static function getSubjectInfo($subj, $group)
-    {
-        return Lesson::where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $subj)->where('kod_grupi', $group)->first();
-    }
-
     public function hasControl()
     {
-        $cn = Mark::where('kod_grup', $this->kod_grupi)->where('kod_prep', $this->kod_prep)->where('kod_subj', $this->kod_subj)->where('data_', $this->data_)->count();
-        return $cn > 0 ? true : false;
+        return Control::where('date_', $this->data_)->where('journal_id', $this->journal_id)->count() > 0 ? true : false;
+    }
+
+    public function controls()
+    {
+        return Control::where('date_', $this->data_)->where('journal_id', $this->journal_id)->get();
     }
 }

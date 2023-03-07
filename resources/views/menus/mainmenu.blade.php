@@ -37,7 +37,7 @@
                             <a class="dropdown-item" href="{{ route('show_profile') }}"><i class="bi bi-person-lines-fill"></i> Мій профіль</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('my_table') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
+                            <a class="dropdown-item" href="{{ route('my_timesheet') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
                         </li>
 
                         <li>

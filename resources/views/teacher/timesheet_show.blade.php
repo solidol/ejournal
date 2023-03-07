@@ -9,17 +9,17 @@
 
 <nav class="nav flex-column">
 
-    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'08'])}}">Серпень</a>
-    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'09'])}}">Вересень</a>
-    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'10'])}}">Жовтень</a>
-    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'11'])}}">Листопад</a>
-    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2022','month'=>'12'])}}">Грудень</a>
-    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'01'])}}">Січень</a>
-    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'02'])}}">Лютий</a>
-    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'03'])}}">Березень</a>
-    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'04'])}}">Квітень</a>
-    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'05'])}}">Травень</a>
-    <a class="nav-link" href="{{URL::route('my_table_date',['year'=>'2023','month'=>'06'])}}">Червень</a>
+    <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'08'])}}">Серпень</a>
+    <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'09'])}}">Вересень</a>
+    <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'10'])}}">Жовтень</a>
+    <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'11'])}}">Листопад</a>
+    <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'12'])}}">Грудень</a>
+    <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'01'])}}">Січень</a>
+    <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'02'])}}">Лютий</a>
+    <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'03'])}}">Березень</a>
+    <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'04'])}}">Квітень</a>
+    <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'05'])}}">Травень</a>
+    <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'06'])}}">Червень</a>
 
 </nav>
 
@@ -30,9 +30,9 @@
 
 @section('content')
 <h2>
-    <a href="{{URL::route('my_table_date',['year'=>'2022','month'=>$data['last_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-left"></i></a>
+    <a href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>$data['last_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-left"></i></a>
     {{$data['title1']}}
-    <a href="{{URL::route('my_table_date',['year'=>'2022','month'=>$data['next_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-right"></i></a>
+    <a href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>$data['next_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-right"></i></a>
 </h2>
 <div class="form-check mb-3">
     <input class="form-check-input" type="checkbox" value="" id="showSubject">
@@ -57,18 +57,18 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($arLessons as $lessList)
+            @foreach($journals as $journal)
             <tr>
                 <td class="subj-name">
-                    {{$lessList['meta']->group->nomer_grup}} {{$lessList['meta']->subject->subject_name}}
+                    {{$journal->group->nomer_grup}} {{$journal->subject->subject_name}}
                 </td>
 
                 @foreach($arDates as $dItem)
                 <td class="hr-cnt {{($dItem['dw']=='6' || $dItem['dw']=='0')?'we-cols':''}}">
 
-                    @foreach($lessList['data'] as $lessItem)
-                    @if ($lessItem->data_ == $dItem['raw'])
-                    {{$lessItem->kol_chasov}}
+                    @foreach($journal->lessons as $lesson)
+                    @if ($lesson->data_ == $dItem['raw'])
+                    {{$lesson->kol_chasov}}
                     @endif
                     @endforeach
 
@@ -91,7 +91,7 @@
     </table>
 </div>
 
-<script>
+<script type="module">
     $(document).ready(function() {
         $('#showSubject').click(function() {
             if ($(this).is(':checked')) {

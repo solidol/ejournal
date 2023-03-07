@@ -9,6 +9,7 @@ use App\Http\Controllers\AbsentController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ControlController;
+use App\Http\Controllers\TimesheetController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -67,9 +68,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     //    Табель
 
-    Route::get('/my/table', [LessonController::class, 'getTable'])->name('my_table');
+    Route::get('/my/timesheet', [TimesheetController::class, 'getTimesheet'])->name('my_timesheet');
 
-    Route::get('/my/table/{year}/{month}', [LessonController::class, 'getTableDate'])->name('my_table_date');
+    Route::get('/my/timesheet/{year}/{month}', [TimesheetController::class, 'getTimesheetDate'])->name('my_timesheet_date');
 
     // журнал та ідсутні
 

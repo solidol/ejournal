@@ -155,50 +155,5 @@ class LessonController extends Controller
         }
     }
 
-    public function getTable()
-    {
-        $date = new DateTime();
-        return redirect()->route('my_table_date', ['year' => $date->format('Y'), 'month' => $date->format('m')]);
-    }
-
-    public function getTableDate($year = '2022', $month = '08')
-    {
-        $user = Auth::user();
-        $period = new DatePeriod(
-            new DateTime($year . '-' . $month . '-01'),
-            new DateInterval('P1D'),
-            (new DateTime($year . '-' . $month . '-01'))->modify('first day of next month')
-        );
-
-        $dates = array();
-        foreach ($period as $dItem) {
-
-            $tmp['raw'] = $dItem;
-            $tmp['dw'] = $dItem->format('w');
-            $dates[] = $tmp;
-        }
-
-        $subjects = $user->getMySubjects();
-        $arSubjects = array();
-        foreach ($subjects as $sItem) {
-            $tmp['data'] = Lesson::filterLs($sItem->kod_subj, $sItem->kod_grupi);
-
-            $tmp['meta'] = Lesson::getSubjectInfo($sItem->kod_subj, $sItem->kod_grupi);
-
-            $arSubjects[] = $tmp;
-        }
-        return view(
-            'teacher.table',
-            [
-
-                'data' => [
-                    'title1' => 'Табель за ' . LessonController::$mothStrings[$month] . ' ' . $year . 'p.',
-                    'last_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('last month')->format('m'),
-                    'next_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('next month')->format('m'),
-                ],
-                'arDates' => $dates,
-                'arLessons' => $arSubjects
-            ]
-        );
-    }
+ 
 }

@@ -37,7 +37,7 @@
 <p>{{$lesson->zadanaie}}</p>
 
 <h3>Контролі сьогодні</h3>
-@if ($arCtrls->isNotEmpty())
+@if ($lesson->hasControl())
 <table id="tab-absent" class="table table-striped">
     <thead>
         <tr>
@@ -53,16 +53,18 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($arCtrls as $ctrlItem)
+        @foreach ($lesson->controls() as $control)
         <tr>
             <td>
-                {{$ctrlItem->vid_kontrol}}
+                {{$control->title}}
             </td>
             <td>
-                {{$ctrlItem->ocenka}}
+                {{$control->max_grade}}
             </td>
             <td>
-
+                <a class="btn btn-success pt-0 pb-0" href="{{URL::route('get_marks',['id'=>$control->journal_id])}}">
+                    <i class="bi bi-pencil-square"></i> Переглянути
+                </a>
             </td>
         </tr>
         @endforeach
