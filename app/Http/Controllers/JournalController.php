@@ -45,7 +45,7 @@ class JournalController extends Controller
         $journal = Auth::user()->userable->journals->find($id);
         if ($journal == null)
             return view('noelement');
-        return view('teacher.marks_show', [
+        return view('teacher.marks_tabs_show', [
             'lesson' => false,
             'currentJournal' => $journal,
             'journals' => Auth::user()->userable->journals

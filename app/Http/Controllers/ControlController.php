@@ -66,8 +66,12 @@ class ControlController extends Controller
     
     function delete($id)
     {
-        Mark::where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $subj)->where('kod_grup', $group)->where('vid_kontrol', $control)->delete();
-        return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
+        $control = Control::find($id);
+        Session::flash('message', 'Контроль '.$control->title.' успішно видалено!');
+        $journal_id = $control->journal_id;
+        $control->marks()->delete();
+        $control->delete();
+        return redirect()->route('get_marks', ['id'=>$journal_id]);
     }
 
     function update($id, Request $request)

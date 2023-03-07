@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Записана пара '.$data['title1'])
+@section('title', 'Записана пара '. $lesson->data_->format('d.m.y') . ' '. $lesson->tema)
 @section('side-title', 'Записана пара')
 
 @section('sidebar')
@@ -23,7 +23,7 @@
 
 @section('content')
 
-<h2>{{$data['title1']}} </h2>
+<h2>{{$lesson->journal->group->nomer_grup}} {{$lesson->journal->subject->subject_name}} </h2>
 
 <h3 class="bg-light-grey">
     <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#editLesson"><i class="bi bi-pencil-square"></i> Редагувати</a>

@@ -12,6 +12,7 @@ use App\Models\Absent;
 use App\Models\Student;
 use App\Models\Mark;
 use App\Models\Journal;
+use App\Models\Control;
 use Session;
 use DateTime;
 use DatePeriod;
@@ -61,20 +62,14 @@ class LessonController extends Controller
         $lesson = Lesson::findOrFail($id);
         if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
-
-        $subj = Subject::where('kod_subj', $lesson->kod_subj)->get()->first();
-
         return view(
             'teacher.lesson_show',
             [
-                'data' => [
-                    'title1' => $lesson->group->nomer_grup . " " . $subj->subject_name,
-                    'title2' => 'Перегляд пари та запис відсутніх',
-                ],
+                'currentJournal' => $lesson->journal,
                 'arAbsent' => Student::listByLesson($id),
-                'arCtrls' =>  Mark::getControlsByDate($lesson->kod_subj, $lesson->kod_grupi, $lesson->data_),
+                'arCtrls' =>  Control::where('date_', $lesson->data_)->get(),
                 'lesson' => $lesson,
-                'arUsers' => User::all(),
+                'arUsers' => User::all()
             ]
         );
     }
