@@ -7,17 +7,17 @@ $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Colors
-$blue: #40668d;
-$dark-blue: #2e4a65;
-$light-blue: #b1c6da;
+$blue: #1c5791;
+$dark-blue: #12375d;
+$light-blue: #e6f3ff;
 $ultra-dark-blue: #1a2938;
 $indigo: #6574cd;
 $purple: #9561e2;
 $pink: #f66d9b;
-$red: #e3342f;
+$red: #a22226;
 $orange: #f6993f;
 $yellow: #ffed4a;
-$green: #38c172;
+$green: #11572e;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 $white: #ffffff;
@@ -32,3 +32,11 @@ $danger:        $red;
 $light:         $light-blue;
 $dark:          $blue;
 
+$navbar-dark-color:                 $white ;
+$navbar-dark-hover-color:           rgba($light-blue, .75);
+$navbar-dark-active-color:          $light-blue;
+$navbar-dark-disabled-color:        rgba($white, .25);
+$navbar-dark-toggler-icon-bg:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+$navbar-dark-toggler-border-color:  rgba($white, .1);
+$navbar-dark-brand-color:           $navbar-dark-active-color;
+$navbar-dark-brand-hover-color:     $navbar-dark-active-color;

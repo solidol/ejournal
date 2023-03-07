@@ -17,7 +17,7 @@
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('get_lessons',['id'=>$lesson->journal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
+    <a class="nav-link" href="{{URL::route('show_journal',['id'=>$lesson->journal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
 </li>
 @stop
 
@@ -134,7 +134,7 @@
 
 </div>
 
-
+@include('popups.new-control')
 
 <script>
     $(document).ready(function() {

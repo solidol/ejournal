@@ -10,6 +10,7 @@ class Control extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $guarded = [];
     protected $appendds = [];
     public function marks()
     {

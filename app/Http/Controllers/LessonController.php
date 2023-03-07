@@ -65,7 +65,7 @@ class LessonController extends Controller
         $subj = Subject::where('kod_subj', $lesson->kod_subj)->get()->first();
 
         return view(
-            'teacher.lesson',
+            'teacher.lesson_show',
             [
                 'data' => [
                     'title1' => $lesson->group->nomer_grup . " " . $subj->subject_name,

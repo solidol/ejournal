@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AbsentController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\JournalController;
+use App\Http\Controllers\ControlController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/marks/store', [MarkController::class, 'store'])->name('store_marks');
 
-    Route::post('/marks/create-control', [MarkController::class, 'createControl'])->name('create_control');
+    Route::post('/marks/control/store', [ControlController::class, 'store'])->name('store_control');
 
     Route::get('/marks/{subj}/{group}/{control}/del-control', [MarkController::class, 'deleteControl'])->name('delete_control');
 

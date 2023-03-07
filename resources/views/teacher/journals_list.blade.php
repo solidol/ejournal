@@ -50,7 +50,7 @@
                 </td>
                 <td>
                     <a class="btn btn-success pt-0 pb-0" href="{{URL::route('show_journal',['id'=>$journal->id])}}">
-                        Переглянути
+                        <i class="bi bi-pencil-square"></i> Переглянути
                     </a>
                 </td>
             </tr>

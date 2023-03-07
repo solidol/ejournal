@@ -31,13 +31,6 @@
 
 @section('content')
 
-@if (session()->has('message'))
-<div class="alert alert-success position-fixed  top-2 start-50 translate-middle" id="success-alert" style="z-index: 11">
-    <strong>{{ session('message') }}</strong>
-
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
-@endif
 
 <h2>{{$currentJournal->group->nomer_grup}} - {{$currentJournal->subject->subject_name}}</h2>
 
@@ -85,7 +78,9 @@
                 {!! nl2br($lesson->zadanaie) !!}
             </td>
             <td>
-                <a class="text-success" href="{{URL::route('show_lesson',['id'=>$lesson->id])}}"><i class="bi bi-pencil-square"></i></a>
+                <a class="btn btn-success pt-0 pb-0" href="{{URL::route('show_lesson',['id'=>$lesson->id])}}">
+                    <i class="bi bi-pencil-square"></i> Переглянути
+                </a>
             </td>
         </tr>
         @endforeach

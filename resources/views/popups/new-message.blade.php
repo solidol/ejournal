@@ -3,7 +3,7 @@
     <div class="modal fade" id="shareLesson" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header text-white bg-dblue">
+                <div class="modal-header text-white bg-dark">
                     <h5 class="modal-title" id="exampleModalLabel">Надіслати повідомлення</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

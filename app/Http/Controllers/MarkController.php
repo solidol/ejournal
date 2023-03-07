@@ -91,42 +91,7 @@ class MarkController extends Controller
         return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
     }
 
-    function createControl(Request $request)
-    {
-        $maxval = $request->input('maxval');
-        switch ($maxval) {
 
-            case 'З':
-            case 'з':
-            case 'Зар':
-            case 'зар':
-                $maxval = -2;
-                break;
-            default:
-                break;
-        }
-        if (!is_numeric($maxval)) $maxval = 0;
-        $markFields['kod_prep'] = Auth::user()->userable_id;
-        $markFields['kod_subj'] = $request->input('sbjcode');
-        $markFields['kod_grup'] = $request->input('grcode');
-        $markFields['vid_kontrol'] = $request->input('control');
-        $subj = $markFields['kod_subj'];
-        $group = $markFields['kod_grup'];
-
-        $controlCount = Mark::where($markFields)->count();
-        if ($controlCount > 0) {
-            Session::flash('warning', 'Контроль вже існує!');
-            return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
-        } else {
-            $markFields['ocenka'] = $maxval;
-            $markFields['type_kontrol'] = $request->input('typecontrol');
-            $markFields['data_'] = $request->input('date_control');
-            $markFields['kod_stud'] = 0;
-            Mark::create($markFields);
-            Session::flash('message', 'Контроль створено');
-            return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
-        }
-    }
 
     function deleteControl($subj, $group, $control)
     {

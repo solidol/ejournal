@@ -1,22 +1,21 @@
 <!-- Modal -->
-<form action="{{URL::route('create_control')}}" method="post">
+<form action="{{URL::route('store_control')}}" method="post">
     @csrf
     <!-- {{ csrf_field() }} -->
     <div class="modal fade" id="addControl" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header text-white bg-dblue">
+                <div class="modal-header text-white bg-dark">
                     <h5 class="modal-title" id="exampleModalLabel">Додати контроль</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
-                    <input type="hidden" name="grcode" value="{{$lesson->kod_grupi}}">
-                    <input type="hidden" name="sbjcode" value="{{$lesson->kod_subj}}">
+                    <input type="hidden" name="journal_id" value="{{$currentJournal->id}}">
 
                     <div class="mb-3">
                         <label for="control" class="form-label">Назва контролю</label>
-                        <input type="text" class="form-control" id="control" name="control" placeholder="Опитування 0">
+                        <input type="text" class="form-control" id="control" name="title" placeholder="Опитування 0">
                     </div>
                     <div class="mb-3">
                         <label>Швидкі шаблони</label>
@@ -53,7 +52,7 @@
                     </div>
                     <div class="mb-3">
                         <label>Тип контроля</label>
-                        <select id="typecontrol" name="typecontrol" class="form-select form-select-md" aria-label=".form-select-sm example">
+                        <select id="typecontrol" name="control_type" class="form-select form-select-md" aria-label=".form-select-sm example">
                             <option value="0" selected>Поточний (Опитування, ЛР, СР, Практичні, тощо)</option>
                             <option value="1">Модульний (Модульні та тематичні контролі)</option>
                             <option value="2">Підсумковий (Рубіжний, Семестровий, Підсумок, Іспит, Річна)</option>
@@ -71,7 +70,7 @@
     </div>
 </form>
 
-<script>
+<script type="module">
     $(document).ready(function() {
         $('#ftemp').change(function() {
             $('#control').val($("#ftemp option:selected").text());

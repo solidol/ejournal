@@ -31,13 +31,6 @@
 
 @section('content')
 
-@if (session()->has('message'))
-<div class="alert alert-success position-fixed  top-2 start-50 translate-middle" id="success-alert" style="z-index: 11">
-    <strong>{{ session('message') }}</strong>
-
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
-@endif
 
 <h2>{{$data['title1']}}</h2>
 
@@ -97,8 +90,8 @@
 <script type="module">
     $(document).ready(function() {
 
-        $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
-            $("#success-alert").slideUp(500);
+        $(".alert").fadeTo(2000, 500).slideUp(500, function() {
+            $(".alert").slideUp(500);
         });
 
         table = $('#tblessons').DataTable({
