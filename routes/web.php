@@ -59,11 +59,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/marks/control/store', [ControlController::class, 'store'])->name('store_control');
 
-    Route::get('/marks/{subj}/{group}/{control}/del-control', [MarkController::class, 'deleteControl'])->name('delete_control');
+    Route::get('/marks/control:{id}/delete', [ControlController::class, 'delete'])->name('delete_control');
 
-    Route::get('/ajax/marks/{subj}/{group}/{control}/info', [MarkController::class, 'apiIndex'])->name('get_info_control');
+    Route::post('/marks/control:{id}/update', [ControlController::class, 'update'])->name('update_info_control');
 
-    Route::post('/marks/control/update', [MarkController::class, 'updateControl'])->name('update_info_control');
+    Route::get('/ajax/marks/control:{id}/info', [ControlController::class, 'apiShow'])->name('get_info_control');
 
     //    Табель
 
