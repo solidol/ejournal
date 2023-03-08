@@ -110,6 +110,7 @@
 
         $('.table-marks').DataTable({
             dom: 'Bfrtip',
+            language: languageUk,
             buttons: [{
                     extend: 'copy',
                     className: 'btn btn-primary'

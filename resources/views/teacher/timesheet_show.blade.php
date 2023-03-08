@@ -30,9 +30,9 @@
 
 @section('content')
 <h2>
-    <a href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>$data['last_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-left"></i></a>
+    <!--<a href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>$data['last_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-left"></i></a>-->
     {{$data['title1']}}
-    <a href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>$data['next_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-right"></i></a>
+    <!--<a href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>$data['next_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-right"></i></a>-->
 </h2>
 <div class="form-check mb-3">
     <input class="form-check-input" type="checkbox" value="" id="showSubject">
@@ -106,6 +106,7 @@
 
         $('#tbtable').DataTable({
             dom: 'Bfrtip',
+            language: languageUk,
             buttons: [{
                     extend: 'copy',
                     className: 'btn btn-success'

@@ -51,7 +51,7 @@ class UserController extends Controller
             Log::loginAs($request->input('userid'));
             Auth::loginUsingId($request->input('userid'));
 
-            return redirect()->route('get_subjects');
+            return redirect()->route('get_journals');
         } else
             return view('auth.login');
     }

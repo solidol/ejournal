@@ -34,7 +34,7 @@
 
 <h2>{{$currentJournal->group->nomer_grup}} - {{$currentJournal->subject->subject_name}}</h2>
 
-
+<!--
 <ul class="nav nav-pills mb-3">
     <li class="nav-item" role="presentation">
         <a href="#" class="btn nav-link active">Пари</a>
@@ -46,6 +46,7 @@
         <a href="#" class="btn nav-link">Пропуски</a>
     </li>
 </ul>
+-->
 
 <table id="tblessons" class="display table table-striped">
     <thead>
@@ -54,7 +55,6 @@
             <th>Дата</th>
             <th class="sum">Г.</th>
             <th>Тема</th>
-            <th>Задано</th>
             <th></th>
         </tr>
     </thead>
@@ -75,11 +75,11 @@
                 @endif
             </td>
             <td>
-                {!! nl2br($lesson->zadanaie) !!}
-            </td>
-            <td>
-                <a class="btn btn-success pt-0 pb-0" href="{{URL::route('show_lesson',['id'=>$lesson->id])}}">
-                    <i class="bi bi-pencil-square"></i> Переглянути
+                <a class="btn btn-success m-1" href="{{URL::route('show_lesson',['id'=>$lesson->id])}}">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                <a class="btn btn-outline-danger show-lesson m-1" href="#" data-bs-toggle="modal" data-bs-target="#viewLesson" data-url="{{route('get_info_lesson',['id'=>$lesson->id])}}">
+                    <i class="bi bi-exclamation-triangle"></i>
                 </a>
             </td>
         </tr>
@@ -92,7 +92,6 @@
             <th class="sum"></th>
             <th></th>
             <th></th>
-            <th></th>
         </tr>
     </tfoot>
 </table>
@@ -103,26 +102,21 @@
 </div>
 </div>
 
-
+@include('popups.show-lesson')
 
 <script type="module">
     $(document).ready(function() {
-
         $("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
             $("#success-alert").slideUp(500);
         });
 
-        table = $('#tblessons').DataTable({
+        $('#tblessons').DataTable({
             dom: 'Bfrtip',
+            language: languageUk,
             buttons: [{
-                    extend: 'copy',
-                    className: 'btn btn-primary'
-                },
-                {
-                    extend: 'excel',
-                    className: 'btn btn-primary'
-                }
-            ],
+                extend: 'copy',
+                className: 'btn btn-primary'
+            }],
             "paging": false,
             "ordering": false,
             "footerCallback": function(row, data, start, end, display) {
@@ -137,7 +131,6 @@
                             var y = parseFloat(b) || 0;
                             return x + y;
                         }, 0);
-                    console.log(sum); //alert(sum);
                     $(this.footer()).html(sum);
                 });
             }

@@ -47,10 +47,7 @@
         </div>
     </div>
 </form>
-<script>
-    //document.getElementById('datetime').valueAsDate = new Date();
-
-
+<script type="module">
 
     $(document).ready(function() {
         $('#freset').click(function() {
@@ -63,7 +60,5 @@
         $('#addrep').click(function() {
             $('#homework').val('Звіт');
         });
-        //$('#datetime1').val(new Date().toISOString().split('T')[0]);
-
     });
 </script>

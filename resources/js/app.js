@@ -9,5 +9,5 @@ $(document).ready(function () {
         "mask": "+38 099 999 99 99"
     });*/
 
-    $('.dataTables_wrapper > :first-child').css('display', 'none');
+
 });

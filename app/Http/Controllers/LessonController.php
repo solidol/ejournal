@@ -21,20 +21,6 @@ use DateInterval;
 class LessonController extends Controller
 {
 
-    static $mothStrings = [
-        '01' => 'Січень',
-        '02' => 'Лютий',
-        '03' => 'Березень',
-        '04' => 'Квітень',
-        '05' => 'Травень',
-        '06' => 'Червень',
-        '07' => 'Липень',
-        '08' => 'Серпень',
-        '09' => 'Вересень',
-        '10' => 'Жовтень',
-        '11' => 'Листопад',
-        '12' => 'Грудень',
-    ];
     function list($id)
     {
         $user = Auth::user();
@@ -51,7 +37,7 @@ class LessonController extends Controller
         ]);
     }
 
-    public function apiGet($id)
+    public function apiShow($id)
     {
         $lesson = Lesson::findOrFail($id);
         return response()->json($lesson);

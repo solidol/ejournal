@@ -77,7 +77,7 @@
     </div>
 </form>
 
-<script>
+<script type="module">
     $(document).ready(function() {
         $('.btn-adduser').click(function() {
             let row = $(this).parent('#journal_users tbody tr');

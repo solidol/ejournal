@@ -11,16 +11,23 @@
 
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
+@import "datatables.net-bs5/css/dataTables.bootstrap5.css";
+
+@import "datatables.net-buttons-bs5/css/buttons.bootstrap5.css";
 
 @import 'table';
 
 /* common */
 
-
+*{
+    margin: 0;
+    padding: 0;
+}
 
 body {
     background-color: var(--cl-d-white) !important;
     padding-top: 4rem;
+    font-size: 105%;
 }
 
 .container {
@@ -34,19 +41,23 @@ h1,
 h2,
 h3,
 h4 {
-
+    color: $dark-blue;
     margin: 0;
     margin-bottom: 1rem;
 }
 
 h1 {
-
+    //background-color: $light-blue;
     font-size: 2rem;
+    padding: 1rem;
+    border-bottom: 3px solid $dark-blue;
 }
 
 h2 {
-
+    //background-color: $light-blue;
     font-size: 1.7rem;
+    padding: 0.5rem;
+    border-bottom: 3px solid $dark-blue;
 }
 
 h3 {
@@ -129,15 +140,15 @@ h6 {
 
 th.rotate {
     /* Something you can count on */
-	height: 200px ;
-	position: relative ;
+    height: 200px;
+    position: relative;
 }
 
 th.rotate>div {
-	bottom: 5px ;
-	left: 50% ;
-	position: absolute ;
-	transform: rotate( -90deg ) ;
-	transform-origin: center left ;
-	white-space: nowrap ;
+    bottom: 5px;
+    left: 50%;
+    position: absolute;
+    transform: rotate(-90deg);
+    transform-origin: center left;
+    white-space: nowrap;
 }

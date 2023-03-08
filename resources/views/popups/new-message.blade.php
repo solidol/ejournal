@@ -34,7 +34,7 @@
         </div>
     </div>
 </form>
-<script>
+<script type="module">
     $(document).ready(function() {
         $('#freset').click(function() {
             $('#thesis').val('');

@@ -159,7 +159,7 @@
     @endforeach
 </div>
 
-<script>
+<script type="module">
     $(document).ready(function() {
         $(".message-alert").fadeTo(2000, 500).slideUp(500, function() {
             $(".message-alert").slideUp(500);

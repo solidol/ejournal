@@ -23,20 +23,29 @@ $cyan: #6cb2eb;
 $white: #ffffff;
 
 
-$primary:       $blue;
-$secondary:     $light-blue;
-$success:       $green;
-$info:          $cyan;
-$warning:       $yellow;
-$danger:        $red;
-$light:         $light-blue;
-$dark:          $blue;
+$primary: $blue;
+$secondary: $light-blue;
+$success: $green;
+$info: $cyan;
+$warning: $yellow;
+$danger: $red;
+$light: $light-blue;
+$dark: $blue;
 
-$navbar-dark-color:                 $white ;
-$navbar-dark-hover-color:           rgba($light-blue, .75);
-$navbar-dark-active-color:          $light-blue;
-$navbar-dark-disabled-color:        rgba($white, .25);
-$navbar-dark-toggler-icon-bg:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
-$navbar-dark-toggler-border-color:  rgba($white, .1);
-$navbar-dark-brand-color:           $navbar-dark-active-color;
-$navbar-dark-brand-hover-color:     $navbar-dark-active-color;
+$navbar-dark-color: $white ;
+$navbar-dark-hover-color: rgba($light-blue, .75);
+$navbar-dark-active-color: $light-blue;
+$navbar-dark-disabled-color: rgba($white, .25);
+$navbar-dark-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+$navbar-dark-toggler-border-color: rgba($white, .1);
+$navbar-dark-brand-color: $navbar-dark-active-color;
+$navbar-dark-brand-hover-color: $navbar-dark-active-color;
+
+
+$accordion-bg: $light-blue;
+$accordion-border-radius: 10px;
+$accordion-color: $red;
+$accordion-border-color: $red;
+$accordion-border-width: 3px;
+$accordion-button-focus-border-color:   $red;
+$accordion-button-border-color:   $red;

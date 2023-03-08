@@ -71,7 +71,7 @@
     </div>
 </form>
 
-<script>
+<script type="module">
     $(document).ready(function() {
 
         $('#updateControl').click(function() {
@@ -82,7 +82,7 @@
             let url = $(this).data('url');
             console.log(url);
             $.get(url, function(data, status) {
-console.log(data.data_);
+
                 $('#datetime2').val((data.data_).split('T')[0]);
                 $('#control1').val(data.vid_kontrol);
                 $('#oldcontrol').val(data.vid_kontrol);

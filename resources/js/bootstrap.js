@@ -5,7 +5,14 @@ window._ = _;
 
 import "bootstrap";
 
-import 'laravel-datatables-vite';
+
+import DataTable from 'datatables.net-bs5';
+window.DataTable = DataTable;
+import languageUk from 'datatables.net-plugins/i18n/uk.json';
+window.languageUk = languageUk;
+import 'datatables.net-buttons';
+import 'datatables.net-buttons-bs5';
+
 import 'inputmask';
 
 /**

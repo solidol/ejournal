@@ -13,9 +13,7 @@ table {
     margin: 1rem 0.5rem 1rem 0.5rem;
 }
 
-table td.we-cols {
-    background-color: $white !important;
-}
+
 
 .table-table tr {
     max-height: 20px;
@@ -66,4 +64,9 @@ th.rotated-text {
 
     writing-mode: vertical-rl;
     transform: rotate(180deg);
+}
+
+
+table td.we-cols {
+    background-color: $cyan !important;
 }
