@@ -27,21 +27,25 @@ class JournalController extends Controller
             'sbjList' => $subjects,
         ]);
     }
+    function studentList()
+    {
+        $journals = Auth::user()->userable->group->journals;
+        return view('student.journals_list', [
+            'journals' => $journals,
+        ]);
+    }
     function show($id)
     {
-        $user = Auth::user();
         $journal = Auth::user()->userable->journals->find($id);
         if ($journal == null)
             return view('noelement');
         return view('teacher.journal_show', [
-
             'currentJournal' => $journal,
             'journals' => Auth::user()->userable->journals
         ]);
     }
     function marks($id)
     {
-        $user = Auth::user();
         $journal = Auth::user()->userable->journals->find($id);
         if ($journal == null)
             return view('noelement');
@@ -51,6 +55,20 @@ class JournalController extends Controller
             'journals' => Auth::user()->userable->journals
         ]);
     }
+
+    function studentMarks($id)
+    {
+        $journal = Auth::user()->userable->group->journals->find($id);
+        //dd($journal);
+        if ($journal == null)
+            return view('noelement');
+        return view('student.marks_show', [
+            'lesson' => false,
+            'currentJournal' => $journal,
+            'journals' => Auth::user()->userable->group->journals
+        ]);
+    }
+
     public function store(Request $request)
     {
 

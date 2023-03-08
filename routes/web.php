@@ -23,13 +23,12 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    if (Auth::user()) return redirect()->route('get_journals');
+    if (Auth::user()) return redirect()->route('home');
     else return view('welc');
 });
 
-
-
 Route::group(['middleware' => 'auth'], function () {
+
     Route::get('/home', function () {
         return view('home');
     })->name('home');
@@ -52,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'student'], function () {
+        Route::get('/student/journal/show:{id}/marks', [JournalController::class, 'studentMarks'])->name('student_get_marks');
+        Route::get('/student/journals', [JournalController::class, 'studentList'])->name('student_get_journals');
     });
 
 

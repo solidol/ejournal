@@ -24,10 +24,31 @@
                 @endif
                 @endguest
                 @if (Auth::user())
+                @if (Auth::user()->isTeacher())
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('get_journals') }}"><i class="bi bi-book"></i> <span class="d-md-inline d-lg-none">Мої журнали</span></a>
                 </li>
                 @yield('custom-menu')
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-bounding-box"></i> Викладацьке <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('my_timesheet') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="{{ route('message_index') }}"><i class="bi bi-envelope-paper"></i> Мої повідомлення</a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+                @if (Auth::user()->isStudent())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('student_get_journals') }}"><i class="bi bi-book"></i> Мої журнали</a>
+                </li>
+                @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-bounding-box"></i> {{ Auth::user()->name }} <span class="caret"></span>
@@ -36,14 +57,6 @@
                         <li>
                             <a class="dropdown-item" href="{{ route('show_profile') }}"><i class="bi bi-person-lines-fill"></i> Мій профіль</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('my_timesheet') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item" href="{{ route('message_index') }}"><i class="bi bi-envelope-paper"></i> Мої повідомлення</a>
-                        </li>
-
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
     document.getElementById('logout-form').submit();">
@@ -54,17 +67,15 @@
                                 @csrf
                             </form>
                         </li>
-
                     </ul>
                 </li>
+
                 @if (Auth::user()->isAdmin())
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-square"></i> Адміністрування <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-
-                        @if (Auth::user()->isAdmin())
                         <li>
                             <a class="dropdown-item" href="{{ route('admin_userlist') }}"><i class="bi bi-list-ol"></i> Користувачі</a>
                         </li>
@@ -74,9 +85,6 @@
                         <li>
                             <a class="dropdown-item" href="{{ route('admin_loglist') }}"><i class="bi bi-list-ol"></i> Лог подій</a>
                         </li>
-                        @endif
-
-
                     </ul>
                 </li>
                 @endif

@@ -18,7 +18,7 @@ class Mark extends Model
     protected $guarded = [];
     protected $dates = ['data_'];
     public $timestamps = false;
-    protected $appends = ['type_control_title', 'mark_str'];
+    protected $appends = ['type_control_title', 'mark_str', 'date_formatted'];
 
     public function getMarkStrAttribute()
     {
@@ -72,6 +72,9 @@ class Mark extends Model
         return $this->belongsTo(Journal::class, 'journal_id');
     }
 
-
+    public function getDateFormattedAttribute()
+    {
+        return $this->data_->format('d.m.Y');
+    }
   
 }

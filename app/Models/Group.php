@@ -23,13 +23,12 @@ class Group extends Model
     {
         return $this->hasMany(Student::class, 'kod_grup', 'kod_grup');
     }
-
     public function lessons()
     {
         return $this->hasMany(Lesson::class, 'kod_grupi', 'kod_grup');
     }
     public function journals()
     {
-        return $this->hasMany(Journal::class);
+        return $this->hasMany(Journal::class, 'group_id', 'kod_grup');
     }
 }

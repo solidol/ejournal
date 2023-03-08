@@ -12,7 +12,7 @@ class Control extends Model
     public $timestamps = false;
     protected $guarded = [];
     protected $appendds = ['type_title'];
-    protected $dates = ['date_'];
+    protected $dates = ['date_', 'date_formatted'];
     public function getTypeTitleAttribute()
     {
         switch ($this->type_) {
@@ -29,6 +29,10 @@ class Control extends Model
                 return "-";
                 break;
         }
+    }
+    public function getDateFormattedAttribute()
+    {
+        return $this->date_?$this->date_->format('d.m.Y'):'00.00.0000';
     }
     public function marks()
     {

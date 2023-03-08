@@ -51,10 +51,12 @@ class User extends Authenticatable
     {
         return $this->hasRole('admin');
     }
+
     public function isTeacher()
     {
         return $this->hasRole('teacher');
     }
+    
     public function isStudent()
     {
         return $this->hasRole('student');

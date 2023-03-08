@@ -22,7 +22,7 @@ class Student extends Model
     }
     public function group()
     {
-        return $this->belongsTo(Group::class, 'kod_grup');
+        return $this->belongsTo(Group::class, 'kod_grup', 'kod_grup');
     }
 
     public function marks()
