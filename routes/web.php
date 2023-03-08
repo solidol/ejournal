@@ -27,13 +27,18 @@ Route::get('/', function () {
     else return view('welc');
 });
 
-Route::get('/home', function () {
-    if (Auth::user()) return redirect()->route('get_journals');
-    else return view('welc');
-});
+
+
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
+
+    Route::group(['middleware' => ['admin', 'student', 'teacher']], function () {
+    });
+
     Route::group(['middleware' => 'admin'], function () {
-        // Адмінпанель
+
 
         Route::get('/admin/user/login-as', [UserController::class, 'anotherLoginForm'])->name('admin_another_login');
 
@@ -46,9 +51,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/admin/log/list', [LogController::class, 'index'])->name('admin_loglist');
     });
 
+    Route::group(['middleware' => 'student'], function () {
+    });
+
+
     Route::group(['middleware' => 'teacher'], function () {
 
-        // Журнал та пари
+        // Пари
 
         Route::get('/journals', [JournalController::class, 'list'])->name('get_journals');
 
@@ -75,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/ajax/lessons/lessons:{id}', [LessonController::class, 'apiShow'])->name('get_info_lesson');
 
 
-        // Журнал та оцінки
+        // Оцінки
 
         Route::post('/marks/store', [MarkController::class, 'store'])->name('store_marks');
 
@@ -93,7 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/my/timesheet/{year}/{month}', [TimesheetController::class, 'getTimesheetDate'])->name('my_timesheet_date');
 
-        // журнал та ідсутні
+        // Відсутні
 
         Route::post('/journal/absents/store', [AbsentController::class, 'store'])->name('store_absents');
 

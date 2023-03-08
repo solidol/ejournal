@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card mt-3">
-                <div class="card-header text-white bg-dblue">Вхід у журнал</div>
+                <div class="card-header text-white bg-dark">Вхід у журнал</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
