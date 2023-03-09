@@ -23,6 +23,9 @@
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
 </li>
 <li class="nav-item">
+    <a class="nav-link" href="{{URL::route('get_marks',['id'=>$currentJournal->id])}}"><i class="bi bi-5-square"></i> Оцінки</a>
+</li>
+<li class="nav-item">
     <a class="nav-link" href="{{URL::route('show_journal',['id'=>$lesson->journal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
 </li>
 @stop
@@ -78,11 +81,8 @@
 
         <h3>Відсутні</h3>
         <p>Будь-яка позначка або подвійний клік для відмітки. Обов'язково натисніть "Зберегти"</p>
-        <form action="{{URL::route('store_absents')}}" method="post">
+        <form action="{{URL::route('store_absents',['id'=>$lesson->id])}}" method="post">
             @csrf
-            <input type="hidden" name="lesson_id" value="{{$lesson->kod_pari}}">
-
-
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">
                     <i class="bi bi-clipboard-plus"></i> Зберегти

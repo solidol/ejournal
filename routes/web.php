@@ -76,7 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/lesson/update', [LessonController::class, 'update'])->name('update_lesson');
 
-        Route::get('/lessons/lessons:{id}', [LessonController::class, 'show'])->name('show_lesson');
+        Route::get('/lessons/show:{id}', [LessonController::class, 'show'])->name('show_lesson');
 
         Route::get('/lessons/edit:{id}', [LessonController::class, 'edit'])->name('edit_lesson');
 
@@ -105,7 +105,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Відсутні
 
-        Route::post('/journal/absents/store', [AbsentController::class, 'store'])->name('store_absents');
+        Route::post('/absents/lesson:{id}/store', [AbsentController::class, 'store'])->name('store_absents');
 
         //    Route::get('/journal/absents/{date}/{subj}/{group}/{lesson}', [AbsentController::class, 'listAbsents'])->name('get_absents');
 

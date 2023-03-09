@@ -14,29 +14,22 @@ class AbsentController extends Controller
 
     function store($id, Request $request)
     {
-        $lessonId = $request->input('lessonid');
-        $date = $request->input('date');
-        $lessNom = $request->input('less_nom');
-        $prep = $request->input('prep');
-        $group = $request->input('group');
-        $subj = $request->input('subj');
-
-        $searchKeys['kod_lesson'] = $lessonId;
+        $lesson = Lesson::find($id);
+        $searchKeys['kod_lesson'] = $lesson->id;
         Absent::where($searchKeys)->delete();
-        foreach ($request->input('abs') as $key => $value) {
+        foreach ($request->abs as $key => $value) {
             if (!empty($value)) {
-                $updateKeys['kod_lesson'] = $lessonId;
-                $updateKeys['kod_prepod'] = $prep;
-                $updateKeys['kod_subj'] = $subj;
-                $updateKeys['kod_grup'] = $group;
+                $updateKeys['kod_lesson'] = $lesson->id;
+                $updateKeys['kod_prepod'] = $lesson->journal->teacher_id;
+                $updateKeys['kod_subj'] = $lesson->journal->subject_id;
+                $updateKeys['kod_grup'] = $lesson->journal->group_id;
                 $updateKeys['kod_stud'] = $key;
-                $updateKeys['data_'] = $date;
-                $updateKeys['nom_pari'] = $lessNom;
+                $updateKeys['data_'] = $lesson->data_;
+                $updateKeys['nom_pari'] = $lesson->nom_pari;
                 $updateKeys['pricina'] = 'test';
                 Absent::insert($updateKeys);
             }
         }
-
-        return redirect()->route('show_lesson', ['lessonId' => $lessonId]);
+        return redirect()->route('show_lesson', ['id' => $lesson->id]);
     }
 }
