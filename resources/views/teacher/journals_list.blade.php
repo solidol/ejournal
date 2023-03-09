@@ -17,9 +17,9 @@
     </button>
 </h1>
 
-<div class="mb-3 mt-1 row row-cols-1 row-cols-xl-3 row-cols-md-2 row-cols-sm-1 row-cols-xs-1 g-4 card-row">
+<div class="mb-3 mt-1 table-responsive">
 
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered m-0">
         <thead>
             <tr>
                 <th>

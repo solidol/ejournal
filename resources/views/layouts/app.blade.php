@@ -34,14 +34,18 @@
             @if (Auth::user())
 
             <div class="row">
-                <aside class="col-lg-3 col-md-5 col-sm-12 col-xs-12">
-                    <h1>@yield('side-title')</h1>
-                    @yield('sidebar')
-                </aside>
-                <main class="col-lg-9 col-md-7 col-sm-12 col-xs-12">
-                    @include('popups.popup-messages')
-                    @yield('content')
-                </main>
+                <div class="col-lg-3 col-md-5 col-sm-12 col-xs-12">
+                    <aside class="m-1 p-2 bg-white rounded-2">
+                        <h1>@yield('side-title')</h1>
+                        @yield('sidebar')
+                    </aside>
+                </div>
+                <div class="col-lg-9 col-md-7 col-sm-12 col-xs-12">
+                    <main class="m-1 p-2 bg-white rounded-2">
+                        @include('popups.popup-messages')
+                        @yield('content')
+                    </main>
+                </div>
             </div>
             @else
             <main>

@@ -48,7 +48,7 @@
 </ul>
 -->
 
-<table id="tblessons" class="display table table-striped">
+<table id="tblessons" class="display table table-striped m-0">
     <thead>
         <tr>
 

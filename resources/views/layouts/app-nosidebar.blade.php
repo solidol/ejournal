@@ -27,7 +27,7 @@
         @include('menus.mainmenu')
 
         <div class="container">
-            <main>
+            <main class="m-1 p-2 bg-white rounded-2">
                 @include('popups.popup-messages')
                 @yield('content')
             </main>

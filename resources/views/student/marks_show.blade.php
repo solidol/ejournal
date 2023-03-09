@@ -33,7 +33,7 @@
 </ul>
 
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered m-0">
     <thead>
         <tr>
             <th>Дата</th>

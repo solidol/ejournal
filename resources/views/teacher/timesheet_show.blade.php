@@ -41,7 +41,7 @@
     </label>
 </div>
 <div class="div-table">
-    <table id="tbtable" class="table table-striped table-bordered table-table">
+    <table id="tbtable" class="table table-striped table-bordered table-table m-0">
         <thead>
             <tr>
                 <th class="subj-name">
