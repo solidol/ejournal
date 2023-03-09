@@ -52,7 +52,6 @@ class LessonController extends Controller
             'teacher.lesson_show',
             [
                 'currentJournal' => $lesson->journal,
-                'arAbsent' => Student::listByLesson($id),
                 'arCtrls' =>  Control::where('date_', $lesson->data_)->get(),
                 'lesson' => $lesson,
                 'arUsers' => User::all()

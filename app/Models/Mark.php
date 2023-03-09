@@ -18,7 +18,12 @@ class Mark extends Model
     protected $guarded = [];
     protected $dates = ['data_'];
     public $timestamps = false;
-    protected $appends = ['type_control_title', 'mark_str', 'date_formatted'];
+    protected $appends = ['id','type_control_title', 'mark_str', 'date_formatted'];
+
+    public function getIdAttribute()
+    {
+        return $this->kod_ocenki;
+    }
 
     public function getMarkStrAttribute()
     {

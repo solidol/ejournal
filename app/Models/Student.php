@@ -20,6 +20,10 @@ class Student extends Model
     {
         return $this->kod_stud;
     }
+    public function user()
+    {
+        return $this->morphOne(App\Models\User::class, 'userable');
+    }
     public function group()
     {
         return $this->belongsTo(Group::class, 'kod_grup', 'kod_grup');
@@ -33,11 +37,5 @@ class Student extends Model
     public function absents()
     {
         return $this->hasMany(Absent::class, 'kod_stud');
-    }
-
-    public static function listByLesson($lessonId)
-    {
-        $lessonInfo = Lesson::find($lessonId);
-        return Student::where('kod_grup', $lessonInfo->kod_grupi)->orderBy('FIO_stud')->get();
     }
 }

@@ -15,15 +15,21 @@ class Absent extends Model
     protected $primaryKey = 'kod';
     public $timestamps = false;
     protected $guarded = [];
+    protected $appends = ['id'];
+
+    public function getIdAttribute()
+    {
+        return $this->kod;
+    }
     
     public function student()
     {
-        return $this->belongsTo(GStudentroup::class, 'kod_stud');
+        return $this->belongsTo(Student::class, 'kod_stud');
     }
 
-    public static function listBy($date, $subj, $group, $lessonNo)
+    public function lesson()
     {
-        return Absent::where('kod_prepod', Auth::user()->userable_id)->where('kod_subj', $subj)->where('kod_grup', $group)->where('data_', $date)->get();
+        return $this->belongsTo(Lesson::class, 'kod_pari');
     }
 
 

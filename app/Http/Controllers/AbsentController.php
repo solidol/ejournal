@@ -11,24 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class AbsentController extends Controller
 {
-    //
-    public function listAbsents($date, $subj, $group, $lesson)
-    {
-    }
 
-    public function listAbsentsByLesson($lessonId)
-    {
-        $arAbs = Absent::listByLesson($lessonId);
-        return view('teacher.absents', [
-            'data' => [
-                'title1' => '',
-                'prep' => Auth::user()->userable_id,
-            ],
-            'storeRoute' => route('create_lesson', ['subj' => -1, 'group' => -1]),
-        ]);
-    }
-
-    function store(Request $request)
+    function store($id, Request $request)
     {
         $lessonId = $request->input('lessonid');
         $date = $request->input('date');

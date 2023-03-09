@@ -80,12 +80,8 @@
         <p>Будь-яка позначка або подвійний клік для відмітки. Обов'язково натисніть "Зберегти"</p>
         <form action="{{URL::route('store_absents')}}" method="post">
             @csrf
-            <input type="hidden" name="lessonid" value="{{$lesson->kod_pari}}">
-            <input type="hidden" name="date" value="{{$lesson->data_}}">
-            <input type="hidden" name="less_nom" value="{{$lesson->nom_pari}}">
-            <input type="hidden" name="group" value="{{$lesson->kod_grupi}}">
-            <input type="hidden" name="prep" value="{{$lesson->kod_prep}}">
-            <input type="hidden" name="subj" value="{{$lesson->kod_subj}}">
+            <input type="hidden" name="lesson_id" value="{{$lesson->kod_pari}}">
+
 
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">
@@ -106,12 +102,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        @foreach ($arAbsent as $absItem)
+                        @foreach ($lesson->group->students as $student)
                         <td>
-                            {{$absItem->FIO_stud}}
+                            {{$student->FIO_stud}}
                         </td>
                         <td>
-                            <input type="text" class="inp-abs form form-control" name="abs[{{$absItem->kod_stud}}]" value="{{$absItem->absents->where('kod_lesson',$lesson->kod_pari)->first()?'нб':''}}" placeholder="">
+                            <input type="text" class="inp-abs form form-control" name="abs[{{$student->id}}]" value="{{$lesson->absent($student->id)?'нб':''}}" placeholder="">
                         </td>
                     </tr>
                     @endforeach

@@ -13,7 +13,12 @@ class Teacher extends Model
     protected $guarded = [];
     
     public $timestamps = false;
+    protected $appends = ['id'];
 
+    public function getIdAttribute()
+    {
+        return $this->kod_prep;
+    }
     public function user()
     {
         return $this->morphOne(App\Models\User::class, 'userable');
