@@ -1,6 +1,9 @@
-@extends('layouts.app-nosidebar')
+@extends('layouts.app-simple')
+
+@section('title', 'Електронний журнал')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 bg-tranparent">
@@ -8,6 +11,7 @@
                 <div class="card-header text-white bg-dark">Вхід у журнал</div>
 
                 <div class="card-body">
+                    
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

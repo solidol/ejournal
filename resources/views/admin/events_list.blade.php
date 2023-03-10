@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
+@section('title', 'Адмінпанель. Журнал подій')
+@section('side-title', 'Адмінпанель')
+
+
 @section('sidebar')
-<h1>Адмінпанель</h1>
 <h2>Журнал подій</h2>
 @endsection
 
@@ -13,7 +16,7 @@
 @endif
 
 <h2>Журнал подій</h2>
-<table id="logtab" class="table table-stripped table-bordered">
+<table id="logtab" class="table table-stripped table-bordered m-0">
     <thead>
         <tr>
             <th>

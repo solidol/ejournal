@@ -127,7 +127,9 @@
                 <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#editLesson"><i class="bi bi-pencil-square"></i> Редагувати</a>
             </div>
             <div class="mb-2 mt-2">
-                <a class="btn btn-success" href="#" data-bs-toggle="modal" data-bs-target="#shareLesson"><i class="bi bi-share-fill"></i> Поширити</a>
+                <!--
+                <a class="btn btn-success" disabled="disabled" href="#" data-bs-toggle="modal" data-bs-target="#shareLesson"><i class="bi bi-share-fill"></i> Поширити</a>
+-->
             </div>
             <h3 class="text-danger">Видалення записаної пари</h3>
             <div class="accordion accordion-flush" id="accordionFlushExample">

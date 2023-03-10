@@ -29,20 +29,7 @@
                     <a class="nav-link" href="{{ route('get_journals') }}"><i class="bi bi-book"></i> <span class="d-md-inline d-lg-none">Мої журнали</span></a>
                 </li>
                 @yield('custom-menu')
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-bounding-box"></i> Викладацьке <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a class="dropdown-item" href="{{ route('my_timesheet') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
-                        </li>
 
-                        <li>
-                            <a class="dropdown-item" href="{{ route('message_index') }}"><i class="bi bi-envelope-paper"></i> Мої повідомлення</a>
-                        </li>
-                    </ul>
-                </li>
                 @endif
                 @if (Auth::user()->isStudent())
                 <li class="nav-item">
@@ -67,6 +54,15 @@
                                 @csrf
                             </form>
                         </li>
+                        @if (Auth::user()->isTeacher())
+                        <li>
+                            <a class="dropdown-item" href="{{ route('my_timesheet') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="{{ route('message_index') }}"><i class="bi bi-envelope-paper"></i> Мої повідомлення</a>
+                        </li>
+                        @endif
                     </ul>
                 </li>
 

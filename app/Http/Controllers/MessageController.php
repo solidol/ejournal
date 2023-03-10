@@ -28,7 +28,7 @@ class MessageController extends Controller
                 $l->content = $lesson;
             }
         }
-        return view('teacher.messages', [
+        return view('teacher.messages_list', [
             'arLessons' => $messLess,
             'arTexts' => $messText,
             'arAlesrts' => $messAlerts,
@@ -56,11 +56,11 @@ class MessageController extends Controller
             'to_id' => $request->user_id,
             'message_type' => 'lesson',
 
-            'content' => json_encode(['id' => $lesson->kod_pari, 'title' => $lesson->tema]),
+            'content' => json_encode(['id' => $lesson->id, 'title' => $lesson->tema]),
             'created_at' => date("Y-m-d H:i:s"),
 
         ]);
-        return redirect()->route('show_lesson', ['lessonId' => $lesson->kod_pari]);
+        return redirect()->route('show_lesson', ['id' => $lesson->id]);
     }
 
     public function acceptLesson($messId)
@@ -83,7 +83,7 @@ class MessageController extends Controller
 
         $m->delete();
         Session::flash('message', 'Пару збережено');
-        return redirect()->route('get_lessons', ['subj' => $lesson->kod_subj, 'group' => $lesson->kod_grupi]);
+        return redirect()->route('show_journal', ['id' => $lesson->journal_id]);
     }
 
     public function deleteLesson($messId)

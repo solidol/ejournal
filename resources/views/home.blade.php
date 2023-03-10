@@ -1,23 +1,21 @@
-@extends('layouts.app-nosidebar')
+@extends('layouts.app-simple')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header  text-white bg-dark">{{ __('Dashboard') }}</div>
+                <div class="card-header  text-white bg-dark">Вхід у журнал</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <h1>Ви виконали вхід в журнал</h1>
+                    @if (Auth::user()->isTeacher())
+                    <p>Якщо ви викладач - перейдіть до ваших журналів в головному меню - <a class="btn btn-outline-primary" href="{{ route('get_journals') }}"><i class="bi bi-book"></i></a>
+                    </p>
                     @endif
 
-                    {{ __('You are logged in!') }}
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
