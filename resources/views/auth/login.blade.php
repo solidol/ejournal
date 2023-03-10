@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8 bg-tranparent">
+        <div class="col-md-6 bg-tranparent">
             <div class="card mt-3">
                 <div class="card-header text-white bg-dark">Вхід у журнал</div>
 
