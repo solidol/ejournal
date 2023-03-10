@@ -70,3 +70,18 @@ th.rotated-text {
 table td.we-cols {
     background-color: $cyan !important;
 }
+
+th.rotate {
+    /* Something you can count on */
+    height: 200px;
+    position: relative;
+}
+
+th.rotate>div {
+    bottom: 5px;
+    left: 50%;
+    position: absolute;
+    transform: rotate(-90deg);
+    transform-origin: center left;
+    white-space: nowrap;
+}

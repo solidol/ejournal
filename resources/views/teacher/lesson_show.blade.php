@@ -10,12 +10,14 @@
     </button>
 </div>
 
-<h2>Інші пари дисципліни</h2>
-<nav class="nav flex-column d-none d-md-block">
-    @foreach($currentJournal->lessons as $lessonItem)
-    <a class="nav-link" href="{{route('show_lesson',['id'=>$lessonItem->kod_pari])}}">{{$lessonItem->data_->format('d.m')}} - {{$lessonItem->tema}}</a>
-    @endforeach
-</nav>
+<div class="d-none d-md-block">
+    <h2>Інші пари дисципліни</h2>
+    <nav class="nav flex-column">
+        @foreach($currentJournal->lessons as $lessonItem)
+        <a class="nav-link" href="{{route('show_lesson',['id'=>$lessonItem->kod_pari])}}">{{$lessonItem->data_->format('d.m')}} - {{$lessonItem->tema}}</a>
+        @endforeach
+    </nav>
+</div>
 @stop
 
 @section('custom-menu')
@@ -43,7 +45,7 @@
 
         <h3>Контролі сьогодні</h3>
         @if ($lesson->hasControl())
-        <table id="tab-absent" class="table table-striped">
+        <table id="tab-absent" class="table table-striped m-0">
             <thead>
                 <tr>
                     <th>
@@ -89,7 +91,7 @@
                 </button>
             </div>
 
-            <table id="tab-absent" class="table table-striped">
+            <table id="tab-absent" class="table table-striped m-0">
                 <thead>
                     <tr>
                         <th>

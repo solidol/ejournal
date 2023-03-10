@@ -10,13 +10,17 @@
         <i class="bi bi-clipboard-plus"></i> Записати пару
     </button>
 </div>
-<h2 class="d-sm-none d-md-block">Інші журнали</h2>
 
-<nav class="nav flex-column d-none d-md-block">
-    @foreach($journals as $journal)
-    <a class="nav-link" href="{{URL::route('show_journal',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
-    @endforeach
-</nav>
+<div class="d-none d-md-block">
+
+    <h2>Інші журнали</h2>
+
+    <nav class="nav flex-column">
+        @foreach($journals as $journal)
+        <a class="nav-link" href="{{URL::route('show_journal',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
+        @endforeach
+    </nav>
+</div>
 
 @stop
 
