@@ -39,19 +39,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'admin'], function () {
 
 
-        Route::get('/admin/user/login-as', [UserController::class, 'anotherLoginForm'])->name('admin_another_login');
+        Route::get('/admin/users/login-as', [UserController::class, 'anotherLoginForm'])->name('admin_another_login');
 
-        Route::post('/admin/user/login-as', [UserController::class, 'anotherLogin'])->name('admin_another_auth');
+        Route::post('/admin/users/login-as', [UserController::class, 'anotherLogin'])->name('admin_another_auth');
 
-        Route::get('/admin/user/list', [UserController::class, 'index'])->name('admin_userlist');
+        Route::get('/admin/users/list', [UserController::class, 'index'])->name('admin_userlist');
 
-        Route::post('/admin/user/create', [UserController::class, 'WUStore'])->name('admin_create_user');
+        Route::post('/admin/users/create', [UserController::class, 'WUStore'])->name('admin_create_user');
 
         Route::get('/admin/log/list', [LogController::class, 'index'])->name('admin_loglist');
     });
 
     Route::group(['middleware' => 'student'], function () {
-        Route::get('/student/journal/show:{id}/marks', [JournalController::class, 'studentMarks'])->name('student_get_marks');
+        Route::get('/student/journals/{id}/show/marks', [JournalController::class, 'studentMarks'])->name('student_get_marks');
         Route::get('/student/journals', [JournalController::class, 'studentList'])->name('student_get_journals');
     });
 
@@ -74,7 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/lessons/store', [LessonController::class, 'store'])->name('store_lesson');
 
-        Route::post('/lesson/update', [LessonController::class, 'update'])->name('update_lesson');
+        Route::post('/lessons/update', [LessonController::class, 'update'])->name('update_lesson');
 
         Route::get('/lessons/show/{id}', [LessonController::class, 'show'])->name('show_lesson');
 
@@ -127,9 +127,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Профіль
 
-        Route::get('/my/profile', [UserController::class, 'show'])->name('show_profile');
+        Route::get('/users/profile', [UserController::class, 'show'])->name('show_profile');
 
-        Route::get('/my/messages', [MessageController::class, 'list'])->name('list_messages');
+        Route::get('/users/messages', [MessageController::class, 'list'])->name('list_messages');
     });
 });
 
