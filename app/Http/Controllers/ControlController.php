@@ -12,8 +12,8 @@ class ControlController extends Controller
 {
     function apiShow($id)
     {
-        $info = Mark::getControlInfo($subj, $group, $control);
-        if (!$info->data_) $info->data_ = "2000-00-00";
+        $info = Control::find($id);
+        if (!$info->date_) $info->date_ = "2000-01-01";
         return response()->json($info);
     }
 
@@ -70,27 +70,35 @@ class ControlController extends Controller
         Session::flash('message', 'Контроль '.$control->title.' успішно видалено!');
         $journal_id = $control->journal_id;
         $control->marks()->delete();
+        $control->marksHeader()->delete();
         $control->delete();
         return redirect()->route('get_marks', ['id'=>$journal_id]);
     }
 
-    function update($id, Request $request)
+    function update(Request $request)
     {
-        Mark::where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $request->input('sbjcode'))->where('kod_grup', $request->input('grcode'))->where('vid_kontrol', $request->input('oldcontrol'))->where('kod_stud', '>', 0)->update(
-            [
-                'vid_kontrol' => $request->input('control'),
-                'data_' => $request->input('datetime2'),
-                'type_kontrol' => $request->input('typecontrol')
-            ]
-        );
-        Mark::where('kod_prep', Auth::user()->userable_id)->where('kod_subj', $request->input('sbjcode'))->where('kod_grup', $request->input('grcode'))->where('vid_kontrol', $request->input('oldcontrol'))->where('kod_stud', 0)->update(
-            [
-                'vid_kontrol' => $request->input('control'),
-                'data_' => $request->input('datetime2'),
-                'ocenka' => $request->input('maxval'),
-                'type_kontrol' => $request->input('typecontrol')
-            ]
-        );
-        return redirect()->route('get_marks', ['subj' => $request->input('sbjcode'), 'group' => $request->input('grcode')]);
+        if ($request->control_id<1) {
+            Session::flash('error', 'Контроль не оновлено! Не вистачає даних!');
+            return redirect()->route('get_journals');
+        } 
+        $control = Control::find($request->control_id);
+        $control->update([
+            'title' => $request->title,
+            'date_' => $request->edited_date,
+            'type_' => $request->typecontrol,
+            'max_grade' => $request->max_grade,
+        ]);
+        $control->marks()->update([
+            'vid_kontrol' => $request->title,
+            'data_' => $request->edited_date,
+            'type_kontrol' => $request->typecontrol
+        ]);
+        $control->marksHeader()->update([
+            'vid_kontrol' => $request->title,
+            'data_' => $request->edited_date,
+            'type_kontrol' => $request->typecontrol,
+            'ocenka' => $request->max_grade,
+        ]);
+        return redirect()->route('get_marks', ['id'=>$control->journal_id]);
     }
 }

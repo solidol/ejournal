@@ -64,9 +64,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         //Route::get('/journal/{subj}/{group}', [UserController::class, 'showJournal'])->name('get_journal');
 
-        Route::get('/journals/show:{id}', [JournalController::class, 'show'])->name('show_journal');
+        Route::get('/journals/show/{id}', [JournalController::class, 'show'])->name('show_journal');
 
-        Route::get('/journals/show:{id}/marks', [JournalController::class, 'marks'])->name('get_marks');
+        Route::get('/journals/show/{id}/marks', [JournalController::class, 'marks'])->name('get_marks');
 
         //Route::get('/journals/show:{id}/lessons', [LessonController::class, 'list'])->name('get_lessons');
 
@@ -76,26 +76,26 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/lesson/update', [LessonController::class, 'update'])->name('update_lesson');
 
-        Route::get('/lessons/show:{id}', [LessonController::class, 'show'])->name('show_lesson');
+        Route::get('/lessons/show/{id}', [LessonController::class, 'show'])->name('show_lesson');
 
-        Route::get('/lessons/edit:{id}', [LessonController::class, 'edit'])->name('edit_lesson');
+        Route::get('/lessons/edit/{id}', [LessonController::class, 'edit'])->name('edit_lesson');
 
-        Route::get('/lessons/delete:{id}', [LessonController::class, 'destroy'])->name('delete_lesson');
+        Route::get('/lessons/delete/{id}', [LessonController::class, 'destroy'])->name('delete_lesson');
 
-        Route::get('/ajax/lessons/lessons:{id}', [LessonController::class, 'apiShow'])->name('get_info_lesson');
+        Route::get('/ajax/lessons/lessons/{id}', [LessonController::class, 'apiShow'])->name('get_info_lesson');
 
 
         // Оцінки
 
-        Route::post('/marks/store', [MarkController::class, 'store'])->name('store_marks');
+        Route::post('/controls/{id}/marks/store', [MarkController::class, 'store'])->name('store_marks');
 
-        Route::post('/marks/control/store', [ControlController::class, 'store'])->name('store_control');
+        Route::post('/controls/store', [ControlController::class, 'store'])->name('store_control');
 
-        Route::get('/marks/control:{id}/delete', [ControlController::class, 'delete'])->name('delete_control');
+        Route::get('/controls/delete/{id}', [ControlController::class, 'delete'])->name('delete_control');
 
-        Route::post('/marks/control:{id}/update', [ControlController::class, 'update'])->name('update_info_control');
+        Route::post('/controls/update', [ControlController::class, 'update'])->name('update_info_control');
 
-        Route::get('/ajax/marks/control:{id}/info', [ControlController::class, 'apiShow'])->name('get_info_control');
+        Route::get('/ajax/controls/{id}/info', [ControlController::class, 'apiShow'])->name('get_info_control');
 
         //    Табель
 
@@ -105,7 +105,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Відсутні
 
-        Route::post('/absents/lesson:{id}/store', [AbsentController::class, 'store'])->name('store_absents');
+        Route::post('/absents/lesson/{id}/store', [AbsentController::class, 'store'])->name('store_absents');
 
         //    Route::get('/journal/absents/{date}/{subj}/{group}/{lesson}', [AbsentController::class, 'listAbsents'])->name('get_absents');
 

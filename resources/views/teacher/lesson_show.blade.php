@@ -121,26 +121,27 @@
         </form>
     </div>
     <div class="col-lg-4 col-md-12">
-        <h3 class="text-danger">Редагування та поширення</h3>
-        <div class="mb-2 mt-2">
-            <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#editLesson"><i class="bi bi-pencil-square"></i> Редагувати</a>
-        </div>
-        <div class="mb-2 mt-2">
-            <a class="btn btn-success" href="#" data-bs-toggle="modal" data-bs-target="#shareLesson"><i class="bi bi-share-fill"></i> Поширити</a>
-        </div>
-        <h3 class="text-danger">Видалення записаної пари</h3>
-        <div class="accordion accordion-flush" id="accordionFlushExample">
-            <div class="accordion-item">
-                <div class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Натиснути для видалення
-                    </button>
-                </div>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body"> <a class="btn btn-danger" href="{{URL::route('delete_lesson',['id'=>$lesson->id])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i> Видалити</a></div>
+        <div class="p-2 border border-2 border-primary rounded-2">
+            <h3 class="text-danger">Редагування та поширення</h3>
+            <div class="mb-2 mt-2">
+                <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#editLesson"><i class="bi bi-pencil-square"></i> Редагувати</a>
+            </div>
+            <div class="mb-2 mt-2">
+                <a class="btn btn-success" href="#" data-bs-toggle="modal" data-bs-target="#shareLesson"><i class="bi bi-share-fill"></i> Поширити</a>
+            </div>
+            <h3 class="text-danger">Видалення записаної пари</h3>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <div class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Натиснути для видалення
+                        </button>
+                    </div>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body"> <a class="btn btn-danger" href="{{URL::route('delete_lesson',['id'=>$lesson->id])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i> Видалити</a></div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

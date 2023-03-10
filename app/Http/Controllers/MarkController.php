@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Mark;
 use App\Models\User;
 use App\Models\Lesson;
+use App\Models\Control;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -38,8 +39,9 @@ class MarkController extends Controller
         ]);
     }
 
-    function store(Request $request)
+    function store($id, Request $request)
     {
+        $control = Control::find($id);
         foreach ($request->input('marks') as $key => $value) {
             switch ($value) {
                 case 'Н/А':
@@ -57,35 +59,26 @@ class MarkController extends Controller
                 default:
                     break;
             }
-            if (!is_numeric($value)) $value = null;
-            $tmpKeys = explode("_", $key);
-            $searchKeys['kod_prep'] = $tmpKeys[0];
-            $searchKeys['kod_subj'] = $tmpKeys[1];
-            $searchKeys['kod_grup'] = $tmpKeys[2];
-            $searchKeys['kod_stud'] = $tmpKeys[3];
-            $searchKeys['vid_kontrol'] = $tmpKeys[4];
+
+            $searchKeys['control_id'] = $id;
+            $searchKeys['kod_stud'] = $key;
 
             $updateKeys['ocenka'] = $value;
 
-            $subj = $searchKeys['kod_subj'];
-            $group = $searchKeys['kod_grup'];
-
             if ($mark = Mark::where($searchKeys)->first()) {
-
                 $mark->ocenka = $value;
-                $mark->data_ = $request->input('date_control');
                 $mark->save();
             } else if (!is_null($value)) {
-
+                $searchKeys['kod_prep'] = $control->journal->teacher_id;
+                $searchKeys['kod_subj'] = $control->journal->subject_id;
+                $searchKeys['kod_grup'] = $control->journal->group_id;
                 $searchKeys['ocenka'] = $value;
-                $searchKeys['data_'] = $request->input('date_control');
+                $searchKeys['data_'] = $control->date_;
+                $searchKeys['vid_kontrol'] = $control->title;
                 Mark::insert($searchKeys);
             }
         }
 
-        return redirect()->route('get_marks', ['subj' => $subj, 'group' => $group]);
+        return redirect()->route('get_marks', ['id' => $control->journal->id]);
     }
-
-
-
 }

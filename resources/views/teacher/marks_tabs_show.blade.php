@@ -80,52 +80,62 @@
 <div class="tab-content" id="myTabContent">
     <?php $i = 1; ?>
     @foreach ($currentJournal->controls as $control)
+
     <div class="tab-pane fade <?= ($i == 1) ? 'show active' : '' ?> " id="tab-{{$i}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $i ?>">
-        <h3>Дата контролю {{!is_null($control->date_)?$control->date_->format('d.m.Y'):''}} | {{$control->type_title}}</h3>
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <h3>Дата контролю {{!is_null($control->date_)?$control->date_->format('d.m.Y'):''}} | {{$control->type_title}}</h3>
 
-        <form action="{{route('store_marks')}}" method="post">
-            <div class="mb-3">
-                <button type="submit" class="btn btn-success">Зберегти</button>
+                <form action="{{route('store_marks',['id'=>$control->id])}}" method="post">
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-success">Зберегти</button>
+                    </div>
+                    <input type="text" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V">
+                    
+                    @csrf
+                    <table class="table table-striped table-marks">
+                        <thead>
+                            <tr>
+                                <th>ПІБ студента</th>
+                                <th class="sum">Оцінка</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($currentJournal->group->students as $student)
+                            <tr>
+                                <td>
+                                    {{$student->FIO_stud}}
+                                </td>
+                                <td>
+                                    <p style="display:none">
+                                        {{$control->max_grade}}
+                                    </p>
+                                    <input type="text" class="form form-control" name="marks[{{$student->id}}]" value="{{$control->mark($student->id)->mark_str??''}}" placeholder="Max = {{$control->max_grade}}">
+                                </td>
+
+
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Якість Успішність</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </form>
             </div>
-            <input type="text" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V">
-            <input type="hidden" name="control_id" value="{{$control->id}}">
-            @csrf
-            <table class="table table-striped table-marks">
-                <thead>
-                    <tr>
-                        <th>ПІБ студента</th>
-                        <th class="sum">Оцінка</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($currentJournal->group->students as $student)
-                    <tr>
-                        <td>
-                            {{$student->FIO_stud}}
-                        </td>
-                        <td>
-                            <p style="display:none">
-                                {{$control->max_grade}}
-                            </p>
-                            <input type="text" class="form form-control" name="marks[{{$control->id}}_{{$student->id}}]" value="{{$control->mark($student->id)->mark_str}}" placeholder="Max = {{$control->max_grade}}">
-                        </td>
 
-
-                    </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Якість Успішність</th>
-                        <th></th>
-                    </tr>
-                </tfoot>
-            </table>
-        </form>
-        <h3 class="text-danger">Редагування та видалення</h3>
-        <div class="mb-3">
-            <a href="{{URL::route('delete_control',['id'=>$control->id])}}" class="btn btn-danger" data-confirm="Видалити увесь контроль {{$control->title}} разом з оцінками?">Видалити контроль</a>
-            <button type="button" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['id'=>$control->id])}}" class="edit-control btn btn-warning">Редагувати контроль</button>
+            <div class="col-lg-4 col-md-12">
+                <div class="p-2 border border-2 border-primary rounded-2">
+                    <h3 class="text-danger">Редагування та видалення</h3>
+                    <div class="mb-3">
+                        <a href="{{URL::route('delete_control',['id'=>$control->id])}}" class="btn btn-danger m-2" data-confirm="Видалити увесь контроль {{$control->title}} разом з оцінками?">Видалити контроль</a>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['id'=>$control->id])}}" class="edit-control btn btn-warning m-2">Редагувати контроль</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <?php $i++; ?>
@@ -133,7 +143,7 @@
 </div>
 
 
-
+@include('popups.edit-control')
 
 @include('popups.new-control')
 

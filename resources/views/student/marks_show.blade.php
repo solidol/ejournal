@@ -33,9 +33,10 @@
 </ul>
 
 
-<table class="table table-striped table-bordered m-0">
+<table id="dtmarks" class="table table-striped table-bordered m-0">
     <thead>
         <tr>
+            <th>Дата</th>
             <th>Дата</th>
             <th>Контроль</th>
             <th>Оцінка</th>
@@ -45,13 +46,16 @@
         @foreach($currentJournal->controls as $control)
         <tr>
             <td>
+                {{$control->date_??'2000-01-01'}}
+            </td>
+            <td>
                 {{$control->date_formatted}}
             </td>
             <td>
                 {{$control->title}}
             </td>
             <td>
-                <b>{{$control->mark(Auth::user()->userable_id)->mark_str?$control->mark(Auth::user()->userable_id)->mark_str:'-'}}</b> з {{$control->max_grade}}
+                <b>{{$control->mark(Auth::user()->userable_id)->mark_str??'-'}}</b> з {{$control->max_grade}}
             </td>
         </tr>
         @endforeach
@@ -61,7 +65,26 @@
 
 
 <script type="module">
+    $(document).ready(function() {
 
+        $('#dtmarks').DataTable({
+            dom: 'Bfrtip',
+            language: languageUk,
+            buttons: [{
+                extend: 'copy',
+                className: 'btn btn-primary'
+            }],
+            paging: false,
+            ordering: false,
+            searching: false,
+            columnDefs: [{
+                target: 0,
+                visible: false,
+            }],
+        });
+
+
+    });
 </script>
 
 

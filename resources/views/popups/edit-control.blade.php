@@ -11,16 +11,15 @@
                 </div>
                 <div class="modal-body">
 
-                    <input type="hidden" id="grcode" name="grcode" value="{{$lesson->kod_grupi}}">
-                    <input type="hidden" id="sbjcode" name="sbjcode" value="{{$lesson->kod_subj}}">
-                    <input type="hidden" id="oldcontrol" name="oldcontrol" value="">
+                    <input type="hidden" id="control_id" name="control_id" value="">
+
                     <div class="mb-3">
                         <label for="control1" class="form-label">Назва контролю</label>
-                        <input type="text" class="form-control" id="control1" name="control" placeholder="Опитування 0">
+                        <input type="text" class="form-control" id="control1" name="title" placeholder="Опитування 0">
                     </div>
                     <div class="mb-3">
                         <label for="datetime2" class="form-label">Дата проведення</label>
-                        <input type="date" class="form-control" id="datetime2" name="datetime2">
+                        <input type="date" class="form-control" id="datetime2" name="edited_date">
                     </div>
                     <div class="mb-3">
                         <label>Швидкі шаблони</label>
@@ -49,7 +48,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="maxval1" class="form-label">Максимальна оцінка</label>
-                        <input type="text" class="form-control" id="maxval1" name="maxval" placeholder="30">
+                        <input type="text" class="form-control" id="maxval1" name="max_grade" placeholder="30">
                     </div>
                     <div class="mb-3">
                         <label>Тип контроля</label>
@@ -82,12 +81,11 @@
             let url = $(this).data('url');
             console.log(url);
             $.get(url, function(data, status) {
-
-                $('#datetime2').val((data.data_).split('T')[0]);
-                $('#control1').val(data.vid_kontrol);
-                $('#oldcontrol').val(data.vid_kontrol);
-                $('#maxval1').val(data.ocenka);
-                $("typecontrol1 option[value=" + data.type_kontrol + "]").attr('selected', 'true');
+                $('#control_id').val(data.id);
+                $('#datetime2').val((data.date_).split('T')[0]);
+                $('#control1').val(data.title);
+                $('#maxval1').val(data.max_grade);
+                $("typecontrol1 option[value=" + data.type_ + "]").attr('selected', 'true');
             });
         });
 

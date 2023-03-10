@@ -38,9 +38,16 @@ class Control extends Model
     {
         return $this->hasMany(Mark::class, 'control_id')->where('kod_stud', '>', 0);
     }
-
+    public function marksHeader()
+    {
+        return $this->hasMany(Mark::class, 'control_id')->where('kod_stud', 0);
+    }
     public function mark($student_id)
     {
-        return $this->marks->where('kod_stud', $student_id)->first() ?? ((object) array('mark_str' => '', 'ocenka' => '0'));
+        return $this->marks->where('kod_stud', $student_id)->first() ?? false;
+    }
+    public function journal()
+    {
+        return $this->belongsTo(Journal::class);
     }
 }
