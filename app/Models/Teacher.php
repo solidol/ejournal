@@ -11,7 +11,7 @@ class Teacher extends Model
     protected $table = 'prepod';
     protected $primaryKey = 'kod_prep';
     protected $guarded = [];
-    
+
     public $timestamps = false;
     protected $appends = ['id'];
 

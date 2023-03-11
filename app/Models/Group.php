@@ -13,11 +13,15 @@ class Group extends Model
     protected $guarded = [];
     public $timestamps = false;
     protected $primaryKey = 'kod_grup';
-    protected $appends = ['id'];
+    protected $appends = ['id', 'title'];
 
     public function getIdAttribute()
     {
         return $this->kod_grup;
+    }
+    public function getTitleAttribute()
+    {
+        return $this->nomer_grup;
     }
     public function students()
     {

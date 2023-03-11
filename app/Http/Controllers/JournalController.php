@@ -19,7 +19,7 @@ class JournalController extends Controller
         $user = Auth::user();
         $groups = DB::table('grups')->orderBy('nomer_grup')->get();
         $subjects = DB::table('subjects')->orderBy('subject_name')->get();
-        $journals = $user->userable->journals;
+        $journals = $user->userable->journals()->with('group')->get()->sortBy('group.title');
         return view('teacher.journals_list', [
             'data' => array('prep' => $user->userable_id),
             'journals' => $journals,
@@ -41,7 +41,7 @@ class JournalController extends Controller
             return view('noelement');
         return view('teacher.journal_show', [
             'currentJournal' => $journal,
-            'journals' => Auth::user()->userable->journals
+            'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
         ]);
     }
     function marks($id)
