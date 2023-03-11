@@ -52,7 +52,7 @@ class JournalController extends Controller
         return view('teacher.marks_tabs_show', [
             'lesson' => false,
             'currentJournal' => $journal,
-            'journals' => Auth::user()->userable->journals
+            'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
         ]);
     }
 
@@ -65,7 +65,7 @@ class JournalController extends Controller
         return view('student.marks_show', [
             'lesson' => false,
             'currentJournal' => $journal,
-            'journals' => Auth::user()->userable->group->journals
+            'journals' => Auth::user()->userable->group->journals()->with('group')->get()->sortBy('group.title')
         ]);
     }
 

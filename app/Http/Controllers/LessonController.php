@@ -33,7 +33,7 @@ class LessonController extends Controller
                 'prep' => $user->userable_id,
             ],
             'currentJournal' => $journal,
-            'journals' => Auth::user()->userable->journals
+            'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
         ]);
     }
 
