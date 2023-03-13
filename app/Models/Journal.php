@@ -18,7 +18,7 @@ class Journal extends Model
     }
     public function lessons()
     {
-        return $this->hasMany(Lesson::class);
+        return $this->hasMany(Lesson::class)->orderBy('data_');
     }
     public function group()
     {
