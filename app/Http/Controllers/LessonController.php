@@ -97,7 +97,7 @@ class LessonController extends Controller
             $lesson->save();
         }
         Session::flash('message', 'Пару збережено');
-        return redirect()->route('get_lessons', ['id' => $journal->id]);
+        return redirect()->route('show_journal', ['id' => $journal->id]);
     }
 
     public function update(Request $request)
