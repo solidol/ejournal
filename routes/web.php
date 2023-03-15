@@ -62,13 +62,11 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/journals', [JournalController::class, 'list'])->name('get_journals');
 
-        //Route::get('/journal/{subj}/{group}', [UserController::class, 'showJournal'])->name('get_journal');
-
         Route::get('/journals/show/{id}', [JournalController::class, 'show'])->name('show_journal');
 
         Route::get('/journals/show/{id}/marks', [JournalController::class, 'marks'])->name('get_marks');
 
-        //Route::get('/journals/show:{id}/lessons', [LessonController::class, 'list'])->name('get_lessons');
+        //Route::get('/journals/show:{id}/marks/sheet', [JournalController::class, 'marksSheet'])->name('get_marks_sheet');
 
         Route::post('/journals/store', [JournalController::class, 'store'])->name('store_journal');
 
