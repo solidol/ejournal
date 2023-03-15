@@ -18,7 +18,7 @@
 
 <nav class="nav flex-column d-none d-md-block">
     @foreach($journals as $journal)
-    <a class="nav-link" href="{{URL::route('get_marks',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
+    <a class="nav-link" href="{{URL::route('get_marks_sheet',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
     @endforeach
 </nav>
 
@@ -93,7 +93,7 @@
                 </td>
                 @foreach($currentJournal->controls as $control)
                 <td>
-                    {{$control->mark($student->id)->mark_str}}
+                    {{$control->mark($student->id)->mark_str??'-'}}
                 </td>
                 @endforeach
             </tr>

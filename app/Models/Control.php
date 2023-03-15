@@ -36,7 +36,7 @@ class Control extends Model
     }
     public function marks()
     {
-        return $this->hasMany(Mark::class, 'control_id')->where('kod_stud', '>', 0);
+        return $this->hasMany(Mark::class, 'control_id')->where('kod_stud', '>', 0)->orderBy('data_');
     }
     public function marksHeader()
     {

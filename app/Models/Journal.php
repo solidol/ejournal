@@ -14,7 +14,7 @@ class Journal extends Model
 
     public function controls()
     {
-        return $this->hasMany(Control::class);
+        return $this->hasMany(Control::class)->orderBy('date_');
     }
     public function lessons()
     {

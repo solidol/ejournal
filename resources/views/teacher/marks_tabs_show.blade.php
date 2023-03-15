@@ -76,6 +76,11 @@
     </li>
     <?php $i++; ?>
     @endforeach
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="tl-all" data-bs-toggle="tab" data-bs-target="#tab-all" type="button" role="tab" aria-controls="фдд" aria-selected="false">
+            Всі
+        </button>
+    </li>
 </ul>
 
 
@@ -95,7 +100,7 @@
                     <input type="text" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V">
 
                     @csrf
-                    <table class="table table-striped table-marks">
+                    <table class="table table-striped table-marks m-0">
                         <thead>
                             <tr>
                                 <th>ПІБ студента</th>
@@ -142,6 +147,45 @@
     </div>
     <?php $i++; ?>
     @endforeach
+    <div class="tab-pane fade" id="tab-all" role="tabpanel" aria-labelledby="tl-all">
+        <table id="table-all" class="table table-striped m-0">
+            <thead>
+                <tr>
+                    <th class="th-naming">ПІБ</th>
+                    @foreach($currentJournal->controls as $control)
+                    <th class="rotate">
+                        <div>
+                            {{$control->title}}
+                        </div>
+
+                    </th>
+                    @endforeach
+                </tr>
+                <th></th>
+                @foreach($currentJournal->controls as $control)
+                <th>
+                    <a class="text-success" href="#"><i class="bi bi-pencil-square text-light"></i></a>
+                </th>
+                @endforeach
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($currentJournal->group->students as $student)
+                <tr>
+                    <td>
+                        {{$student->FIO_stud}}
+                    </td>
+                    @foreach($currentJournal->controls as $control)
+                    <td>
+                        {{$control->mark($student->id)->mark_str??'-'}}
+                    </td>
+                    @endforeach
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 
@@ -152,6 +196,23 @@
 
 <script type="module">
     $(document).ready(function() {
+
+
+        $('#table-all_').DataTable({
+            dom: 'Bfrtip',
+            language: languageUk,
+            buttons: [{
+                    extend: 'copy',
+                    className: 'btn btn-primary'
+                },
+                {
+                    extend: 'excel',
+                    className: 'btn btn-primary'
+                }
+            ],
+            "paging": false,
+            "ordering": false
+        });
 
         $('.table-marks').DataTable({
             dom: 'Bfrtip',

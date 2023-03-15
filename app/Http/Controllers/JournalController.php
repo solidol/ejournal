@@ -56,6 +56,18 @@ class JournalController extends Controller
         ]);
     }
 
+    function marksSheet($id)
+    {
+        $journal = Auth::user()->userable->journals->find($id);
+        if ($journal == null)
+            return view('noelement');
+        return view('teacher.marks_show', [
+            'lesson' => false,
+            'currentJournal' => $journal,
+            'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
+        ]);
+    }
+
     function studentMarks($id)
     {
         $journal = Auth::user()->userable->group->journals->find($id);
