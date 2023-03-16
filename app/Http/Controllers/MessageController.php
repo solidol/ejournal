@@ -36,6 +36,14 @@ class MessageController extends Controller
             'arUsers' => User::all(),
         ]);
     }
+
+public function createAdmin(){
+    return view('admin.messages_create', [
+        'arUsers' => User::all(),
+    ]);
+}
+
+
     public function send(Request $request)
     {
         Message::create([

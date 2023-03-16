@@ -33,6 +33,11 @@ Route::group(['middleware' => 'auth'], function () {
         return view('home');
     })->name('home');
 
+
+    Route::post('/messages/send', [MessageController::class, 'send'])->name('message_send');
+
+        
+
     Route::group(['middleware' => ['admin', 'student', 'teacher']], function () {
     });
 
@@ -48,6 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/admin/users/create', [UserController::class, 'WUStore'])->name('admin_create_user');
 
         Route::get('/admin/log/list', [LogController::class, 'index'])->name('admin_loglist');
+
+        Route::get('/admin/message/create', [MessageController::class, 'createAdmin'])->name('admin_message_create');
     });
 
     Route::group(['middleware' => 'student'], function () {
@@ -111,8 +118,6 @@ Route::group(['middleware' => 'auth'], function () {
         // Повідомлення
 
         Route::get('/messages/index', [MessageController::class, 'list'])->name('message_index');
-
-        Route::post('/messages/send', [MessageController::class, 'send'])->name('message_send');
 
         Route::post('/messages/send-system', [MessageController::class, 'sendSystem'])->name('message_send_system');
 
