@@ -42,19 +42,6 @@
 
 
 <h2>{{$currentJournal->group->nomer_grup}} - {{$currentJournal->subject->subject_name}}</h2>
-<!--
-<ul class="nav nav-pills mb-3">
-    <li class="nav-item" role="presentation">
-        <a href="{{URL::route('show_journal',['id'=>$currentJournal->id])}}" class="btn nav-link">Пари</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a href="#" class="btn nav-link active">Оцінки</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a href="#" class="btn nav-link">Пропуски</a>
-    </li>
-</ul>
--->
 
 <ul>
     <li>
@@ -97,7 +84,7 @@
                     <div class="mb-3">
                         <button type="submit" class="btn btn-success">Зберегти</button>
                     </div>
-                    <input type="text" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V">
+                    <textarea rows="1" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V"></textarea>
 
                     @csrf
                     <table class="table table-striped table-marks m-0">
@@ -233,7 +220,7 @@
                 api.columns('.sum', {
                     page: 'current'
                 }).every(function() {
-                    console.log($(this.nodes()));
+                    //console.log($(this.nodes()));
                     var sum = this
                         .data()
                         .reduce(function(a, b) {
@@ -241,7 +228,7 @@
                             var y = parseFloat(b) || 0;
                             return x + y;
                         }, 0);
-                    console.log(sum); //alert(sum);
+                    //console.log(sum); //alert(sum);
                     $(this.footer()).html(sum);
                 });
             }
@@ -252,8 +239,9 @@
             let arInps = $(this).parent().find("table input");
             setTimeout(function() {
                 var text = $(element).val();
+                console.dir(text);
                 $(element).val("");
-                let adMarks = text.split(' ');
+                let adMarks = text.split("\n");
                 if (arInps.length == adMarks.length) {
 
                     for (let i = 0; i <= adMarks.length - 1; i++) {
