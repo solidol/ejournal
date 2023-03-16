@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
 @section('sidebar')
-<h1>Адмінпанель</h1>
-<h2>Увійти від імені</h2>
+<div class="baloon">
+    <h1>Адмінпанель</h1>
+    <h2>Увійти від імені</h2>
+</div>
 @endsection
 
 @section('content')

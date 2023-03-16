@@ -1,11 +1,11 @@
 @extends('layouts.app-nosidebar')
 
 @section('title', 'Мої повідомлення')
-@section('side-title', 'Мої повідомлення')
-
 @section('sidebar')
 
-
+<div class="baloon">
+    <h1>Мої повідомлення</h1>
+</div>
 
 @stop
 

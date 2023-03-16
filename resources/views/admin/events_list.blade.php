@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('title', 'Адмінпанель. Журнал подій')
-@section('side-title', 'Адмінпанель')
 
 
 @section('sidebar')
-<h2>Журнал подій</h2>
+<div class="baloon">
+    <h1>Адмінпанель</h1>
+    <h2>Журнал подій</h2>
+</div>
 @endsection
 
 @section('content')

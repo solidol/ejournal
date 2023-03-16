@@ -1,27 +1,28 @@
 @extends('layouts.app')
 
 @section('title', 'Оцінки '. $currentJournal->group->nomer_grup ." - " .$currentJournal->subject->subject_name)
-@section('side-title', 'Оцінки')
+
 
 @section('sidebar')
 
-
-<!-- Button trigger modal -->
-<div class="mb-3 mt-3">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addControl">
-        Додати контроль
-    </button>
+<div class="baloon">
+    <h1>Оцінки</h1>
+    <div class="mb-3 mt-3">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addControl">
+            Додати контроль
+        </button>
+    </div>
 </div>
 
-<h2 class="d-sm-none d-md-block">Оцінки з інших дисциплін</h2>
 
-
-<nav class="nav flex-column d-none d-md-block">
-    @foreach($journals as $journal)
-    <a class="nav-link" href="{{URL::route('get_marks_sheet',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
-    @endforeach
-</nav>
-
+<div class="baloon d-none d-md-block">
+    <h2 class="d-sm-none d-md-block">Оцінки з інших дисциплін</h2>
+    <nav class="nav flex-column d-none d-md-block">
+        @foreach($journals as $journal)
+        <a class="nav-link" href="{{URL::route('get_marks_sheet',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
+        @endforeach
+    </nav>
+</div>
 
 
 

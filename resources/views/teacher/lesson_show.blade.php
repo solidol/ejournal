@@ -1,16 +1,19 @@
 @extends('layouts.app')
 
 @section('title', 'Записана пара '. $lesson->data_->format('d.m.y') . ' '. $lesson->tema)
-@section('side-title', 'Записана пара')
+
 
 @section('sidebar')
-<div class="mb-3 mt-3">
-    <button type="button" id="btnAddControl" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addControl">
-        Додати контроль
-    </button>
+<div class="baloon">
+    <h1>Записана пара</h1>
+    <div class="mb-3 mt-3">
+        <button type="button" id="btnAddControl" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addControl">
+            Додати контроль
+        </button>
+    </div>
 </div>
 
-<div class="d-none d-md-block">
+<div class="baloon d-none d-md-block">
     <h2>Інші пари дисципліни</h2>
     <nav class="nav flex-column">
         @foreach($currentJournal->lessons as $lessonItem)

@@ -1,15 +1,17 @@
 @extends('layouts.app')
 
 @section('sidebar')
-<h1>Адмінпанель</h1>
-<h2>Користувачі</h2>
+<div class="baloon">
+    <h1>Адмінпанель</h1>
+    <h2>Користувачі</h2>
+</div>
 @endsection
 
 @section('content')
 
 @csrf
 @if($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
+{{ implode('', $errors->all('<div>:message</div>')) }}
 @endif
 
 <h2>Користувачі журналу</h2>
