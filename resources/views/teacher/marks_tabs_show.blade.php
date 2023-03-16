@@ -53,29 +53,70 @@
 </ul>
 
 <ul class="nav nav-pills mb-3" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="tl-all" data-bs-toggle="tab" data-bs-target="#tab-all" type="button" role="tab" aria-controls="all" aria-selected="false">
+            Всі
+        </button>
+    </li>
     <?php $i = 1; ?>
     @foreach ($currentJournal->controls as $control)
 
     <li class="nav-item" role="presentation">
-        <button class="nav-link <?= ($i == 1) ? 'active' : '' ?>" id="<?= 'tl-' . $i ?>" data-bs-toggle="tab" data-bs-target="#tab-{{$i}}" type="button" role="tab" aria-controls="{{$i}}" aria-selected="<?= ($i == 1) ? 'true' : 'false' ?>">
+        <button class="nav-link " id="<?= 'tl-' . $i ?>" data-bs-toggle="tab" data-bs-target="#tab-{{$i}}" type="button" role="tab" aria-controls="{{$i}}" aria-selected="<?= ($i == 1) ? 'true' : 'false' ?>">
             {{$control->title}}
         </button>
     </li>
     <?php $i++; ?>
     @endforeach
-    <li class="nav-item" role="presentation">
-        <button class="nav-link" id="tl-all" data-bs-toggle="tab" data-bs-target="#tab-all" type="button" role="tab" aria-controls="фдд" aria-selected="false">
-            Всі
-        </button>
-    </li>
+
 </ul>
 
 
 <div class="tab-content" id="myTabContent">
+
+<div class="tab-pane fade show active" id="tab-all" role="tabpanel" aria-labelledby="tl-all">
+        <table id="table-all" class="table table-striped m-0">
+            <thead>
+                <tr>
+                    <th class="th-naming">ПІБ</th>
+                    @foreach($currentJournal->controls as $control)
+                    <th class="rotate">
+                        <div>
+                            {{$control->title}}
+                        </div>
+
+                    </th>
+                    @endforeach
+                </tr>
+                <th></th>
+                @foreach($currentJournal->controls as $control)
+                <th>
+                    <a class="text-success" href="#"><i class="bi bi-pencil-square text-light"></i></a>
+                </th>
+                @endforeach
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($currentJournal->group->students as $student)
+                <tr>
+                    <td>
+                        {{$student->FIO_stud}}
+                    </td>
+                    @foreach($currentJournal->controls as $control)
+                    <td>
+                        {{$control->mark($student->id)->mark_str??'-'}}
+                    </td>
+                    @endforeach
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
     <?php $i = 1; ?>
     @foreach ($currentJournal->controls as $control)
 
-    <div class="tab-pane fade <?= ($i == 1) ? 'show active' : '' ?> " id="tab-{{$i}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $i ?>">
+    <div class="tab-pane fade " id="tab-{{$i}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $i ?>">
         <div class="row">
             <div class="col-lg-8 col-md-12">
                 <h3>Дата контролю {{!is_null($control->date_)?$control->date_->format('d.m.Y'):''}} | {{$control->type_title}}</h3>
@@ -134,44 +175,7 @@
     </div>
     <?php $i++; ?>
     @endforeach
-    <div class="tab-pane fade" id="tab-all" role="tabpanel" aria-labelledby="tl-all">
-        <table id="table-all" class="table table-striped m-0">
-            <thead>
-                <tr>
-                    <th class="th-naming">ПІБ</th>
-                    @foreach($currentJournal->controls as $control)
-                    <th class="rotate">
-                        <div>
-                            {{$control->title}}
-                        </div>
 
-                    </th>
-                    @endforeach
-                </tr>
-                <th></th>
-                @foreach($currentJournal->controls as $control)
-                <th>
-                    <a class="text-success" href="#"><i class="bi bi-pencil-square text-light"></i></a>
-                </th>
-                @endforeach
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($currentJournal->group->students as $student)
-                <tr>
-                    <td>
-                        {{$student->FIO_stud}}
-                    </td>
-                    @foreach($currentJournal->controls as $control)
-                    <td>
-                        {{$control->mark($student->id)->mark_str??'-'}}
-                    </td>
-                    @endforeach
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
 
 </div>
 
