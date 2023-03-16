@@ -44,7 +44,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="datetAddControl" class="form-label">Дата проведення</label>
-                        <input type="date" class="form-control" id="datetAddControl" name="date_control" value="{{$lesson?$lesson->data_->format('Y-m-d'):''}}">
+                        <input type="date" class="form-control" id="dateAddControl" name="date_control" value="{{$lesson?$lesson->data_->format('Y-m-d'):''}}">
+                    </div>
+                    <div class="mb-3">
+                        <label>Додати контроль до заняття</label>
+                        <select id="lsLesson" class="form-select form-select-md" aria-label=".form-select-sm example">
+                            <option selected></option>
+                            @foreach($currentJournal->lessons as $lesson)
+                            <option value="{{$lesson->data_}}">{{$lesson->tema}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="maxval" class="form-label">Максимальна оцінка</label>
@@ -78,6 +87,8 @@
 
         if ($('#dateAddControl').val() == "")
             $('#dateAddControl').val(new Date().toISOString().split('T')[0]);
-
+        $('#lsLesson').change(function() {
+            $('#dateAddControl').val($(this).val().split(' ')[0]);
+        });
     });
 </script>

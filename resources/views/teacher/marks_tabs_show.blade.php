@@ -74,7 +74,7 @@
 
 <div class="tab-content" id="myTabContent">
 
-<div class="tab-pane fade show active" id="tab-all" role="tabpanel" aria-labelledby="tl-all">
+    <div class="tab-pane fade show active" id="tab-all" role="tabpanel" aria-labelledby="tl-all">
         <table id="table-all" class="table table-striped m-0">
             <thead>
                 <tr>
@@ -88,12 +88,15 @@
                     </th>
                     @endforeach
                 </tr>
-                <th></th>
-                @foreach($currentJournal->controls as $control)
-                <th>
-                    <a class="text-success" href="#"><i class="bi bi-pencil-square text-light"></i></a>
-                </th>
-                @endforeach
+                <tr>
+                    <th></th>
+                    <?php $i = 1; ?>
+                    @foreach($currentJournal->controls as $control)
+                    <th>
+                        <button type="button" class="btn btn-outline-success edit-control p-0 m-0"  data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['id'=>$control->id])}}" ><i class="bi bi-pencil-square text-light"></i></button>
+                    </th>
+                    <?php $i++; ?>
+                    @endforeach
                 </tr>
             </thead>
             <tbody>
@@ -189,7 +192,7 @@
     $(document).ready(function() {
 
 
-        $('#table-all_').DataTable({
+        $('#table-all').DataTable({
             dom: 'Bfrtip',
             language: languageUk,
             buttons: [{
