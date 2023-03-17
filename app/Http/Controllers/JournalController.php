@@ -68,6 +68,18 @@ class JournalController extends Controller
         ]);
     }
 
+    function curatorMarks($id)
+    {
+        $journal = Journal::find($id);
+        if ($journal == null)
+            return view('noelement');
+        return view('curator.marks_show', [
+            'lesson' => false,
+            'currentJournal' => $journal,
+            'journals' => Auth::user()->userable->groups->first()->journals()->with('group')->get()->sortBy('group.title')
+        ]);
+    }
+
     function studentMarks($id)
     {
         $journal = Auth::user()->userable->group->journals->find($id);

@@ -57,6 +57,16 @@ class User extends Authenticatable
         return $this->hasRole('teacher');
     }
     
+    public function isCurator()
+    {
+        return $this->hasRole('curator');
+    }
+    
+    public function isDispatcher()
+    {
+        return $this->hasRole('dispatcher');
+    }
+    
     public function isStudent()
     {
         return $this->hasRole('student');

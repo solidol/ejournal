@@ -28,4 +28,9 @@ class Teacher extends Model
     {
         return $this->hasMany(Journal::class, 'teacher_id');
     }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class, 'kod_prep');
+    }
 }

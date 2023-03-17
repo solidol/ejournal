@@ -36,6 +36,11 @@
                     <a class="nav-link" href="{{ route('student_get_journals') }}"><i class="bi bi-book"></i> Мої журнали</a>
                 </li>
                 @endif
+                @if (Auth::user()->isCurator())
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('curator_get_journals') }}"><i class="bi bi-people"></i> <span class="d-md-inline d-lg-none">Журнали куратора</span></a>
+                </li>
+                @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-bounding-box"></i> {{ Auth::user()->name }} <span class="caret"></span>

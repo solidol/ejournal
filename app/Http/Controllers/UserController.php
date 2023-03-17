@@ -56,12 +56,15 @@ class UserController extends Controller
             return view('auth.login');
     }
 
-    function showJournal($group, $subj)
+
+    function curatorGroups()
     {
-        $user = Auth::user();
-        return view('teacher.journal', [
-            'data' => array('prep' => $user->userable_id, 'group' => $group, 'subj' => $subj),
-            'mList' => $user->getMySubjects()
+        $journal = false;
+
+        return view('curator.marks_show', [
+            'lesson' => false,
+            'currentJournal' => $journal,
+            'journals' => Auth::user()->userable->groups->first()->journals()->with('group')->get()->sortBy('group.title')
         ]);
     }
 
