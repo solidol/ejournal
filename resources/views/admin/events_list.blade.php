@@ -11,12 +11,6 @@
 @endsection
 
 @section('content')
-
-@csrf
-@if($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
-@endif
-
 <h2>Журнал подій</h2>
 <table id="logtab" class="table table-stripped table-bordered m-0">
     <thead>
@@ -54,7 +48,10 @@
         @endforeach
     </tbody>
 </table>
-<script>
+<div class="d-flex">
+    {!! $arEvents->links() !!}
+</div>
+<script type="module">
     $(document).ready(function() {
 
         $('#logtab').DataTable({
