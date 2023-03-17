@@ -22,9 +22,9 @@
                             <label for="sel" class="col-md-4 col-form-label text-md-right">Оберіть користувача</label>
 
                             <div class="col-md-6">
-                                <select class="form-select" name="userid" size="10" aria-label="size 3 select example">
+                                <select class="form-select" name="userid" size="20" aria-label="size 3 select example">
                                     @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->userable->FIO_prep}}</option>
+                                    <option value="{{$user->id}}">{{$user->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

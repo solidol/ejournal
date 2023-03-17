@@ -37,9 +37,9 @@ class UserController extends Controller
     function anotherLoginForm()
     {
         if (Auth::user()->isAdmin()) {
-            $users = User::orderBy('name')->get();
+            $users = User::get()->sortBy('name');
 
-            return view('admin.login-as', ['users' => $users]);
+            return view('admin.login-as_form', ['users' => $users]);
         } else
             return view('auth.login');
     }
