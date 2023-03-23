@@ -16,8 +16,7 @@ class UserController extends Controller
     {
         if (Auth::user()->isAdmin()) {
             $users = User::orderBy('name')->get();
-            $teachers = Teacher::orderBy('FIO_prep')->leftJoin('users', 'users.userable_id', '=', 'prepod.kod_prep')->get();
-            return view('admin.users', ['users' => $users, 'teachers' => $teachers]);
+            return view('admin.users_list', ['users' => $users]);
         } else
             return view('auth.login');
     }
@@ -32,16 +31,6 @@ class UserController extends Controller
     {
         $user = Auth::user();
         return view('auth.profile', ['user' => $user]);
-    }
-
-    function anotherLoginForm()
-    {
-        if (Auth::user()->isAdmin()) {
-            $users = User::get()->sortBy('name');
-
-            return view('admin.login-as_form', ['users' => $users]);
-        } else
-            return view('auth.login');
     }
 
     function anotherLogin(Request $request)
@@ -68,20 +57,4 @@ class UserController extends Controller
         ]);
     }
 
-    function WUStore(Request $request)
-    {
-        if (Auth::user()->isAdmin()) {
-            DB::table('users')->insert([
-                'name' => $request->name,
-                'email' => $request->email,
-                'userable_id' => $request->userable_id,
-                'userable_type' => 'App\Models\Teacher',
-                'password' => Hash::make($request->password),
-                'roles' => 'teacher',
-            ]);
-
-            return redirect()->route('admin_userlist');
-        } else
-            return view('auth.login');
-    }
 }

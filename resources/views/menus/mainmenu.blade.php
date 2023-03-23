@@ -81,9 +81,6 @@
                             <a class="dropdown-item" href="{{ route('admin_userlist') }}"><i class="bi bi-list-ol"></i> Користувачі</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('admin_another_login') }}"><i class="bi bi-box-arrow-in-right"></i> Увійти як</a>
-                        </li>
-                        <li>
                             <a class="dropdown-item" href="{{ route('admin_loglist') }}"><i class="bi bi-list-ol"></i> Лог подій</a>
                         </li>
                     </ul>

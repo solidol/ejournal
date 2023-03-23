@@ -22,31 +22,6 @@
                         <input type="date" class="form-control" id="datetime2" name="edited_date">
                     </div>
                     <div class="mb-3">
-                        <label>Швидкі шаблони</label>
-                        <select id="ftemp1" class="form-select form-select-md" aria-label=".form-select-sm example">
-                            <option selected></option>
-                            <option>Опитування</option>
-                            <option>Опитування 1</option>
-                            <option>Опитування 2</option>
-                            <option>Опитування 3</option>
-                            <option>Опитування 4</option>
-                            <option>Опитування 5</option>
-                            <option>Опитування 6</option>
-                            <option>Самостійна робота</option>
-                            <option>МК 1</option>
-                            <option>СМ 1</option>
-                            <option>МК 2</option>
-                            <option>СМ 2</option>
-                            <option>МК 3</option>
-                            <option>СМ 3</option>
-                            <option>МК 4</option>
-                            <option>СМ 4</option>
-                            <option>ЛР</option>
-                            <option>Підсумок</option>
-                            <option>Екзамен</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
                         <label for="maxval1" class="form-label">Максимальна оцінка</label>
                         <input type="text" class="form-control" id="maxval1" name="max_grade" placeholder="30">
                     </div>
@@ -72,11 +47,6 @@
 
 <script type="module">
     $(document).ready(function() {
-
-        $('#updateControl').click(function() {
-
-        });
-
         $('.edit-control').click(function() {
             let url = $(this).data('url');
             console.log(url);

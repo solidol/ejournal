@@ -15,6 +15,10 @@
 @endif
 
 <h2>Користувачі журналу</h2>
+<form action="{{ route('admin_another_auth') }}" id="form-login" method="post">
+    @csrf
+    <input type="hidden" name="userid" id="login-userid" value="">
+</form>
 <table id="journal_users" class="table table-stripped table-bordered">
     <thead>
         <tr>
@@ -25,44 +29,31 @@
                 email
             </th>
             <th>
-                Web-доступ
-            </th>
-            <th>
-
+                Вхід
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach($teachers as $teacher)
+        @foreach($users as $user)
         <tr>
-            <td data-tid="{{$teacher->kod_prep}}">
-                {{$teacher->FIO_prep}}
-            </td>
-            <td>{{$teacher->email}}</td>
             <td>
-                @if (is_null($teacher->email))
-                <button type="button" class="btn btn-success btn-adduser" data-bs-toggle="modal" data-bs-target="#addWebuser">
-                    Додати
+                {{$user->name}}
+            </td>
+            <td>{{$user->email}}</td>
+            <td>
+                <button type="button" class="btn btn-success btn-login" data-uid="{{$user->id}}">
+                    Увійти
                 </button>
-                @else
-                {{$teacher->usertype}}
-                @endif
-            </td>
-            <td>
-
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-<script>
+<script type="module">
     $(document).ready(function() {
-        $('.btn-adduser').click(function() {
-            let thisrow = $(this).parent().parent();
-            let teacher_id = $(thisrow).children().first().data('tid');
-            let fullname = $(thisrow).children().first().text().trim();
-            $('#name').val(fullname);
-            $('#userable_id').val(teacher_id);
+        $('.btn-login').click(function() {
+            $('#login-userid').val($(this).data('uid'));
+            $('#form-login').submit();
         });
         $('#journal_users').DataTable({
             dom: 'Bfrtip',
@@ -80,7 +71,5 @@
         });
     });
 </script>
-
-@include('popups.new-webuser')
 
 @endsection
