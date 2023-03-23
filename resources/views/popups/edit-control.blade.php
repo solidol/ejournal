@@ -28,7 +28,8 @@
                     <div class="mb-3">
                         <label>Тип контроля</label>
                         <select id="typecontrol1" name="typecontrol" class="form-select form-select-md" aria-label=".form-select-sm example">
-                            <option value="0" selected>Поточний (Опитування, ЛР, СР, Практичні, тощо)</option>
+                            <option value="-1" selected></option>
+                            <option value="0">Поточний (Опитування, ЛР, СР, Практичні, тощо)</option>
                             <option value="1">Модульний (Модульні та тематичні контролі)</option>
                             <option value="2">Підсумковий (Рубіжний, Семестровий, Підсумок, Іспит, Річна)</option>
                         </select>
@@ -55,7 +56,7 @@
                 $('#datetime2').val((data.date_).split('T')[0]);
                 $('#control1').val(data.title);
                 $('#maxval1').val(data.max_grade);
-                $("#typecontrol1 option").attr('selected', 'false');
+                $("#typecontrol1 option").removeAttr('selected');
                 $("#typecontrol1 option[value=" + data.type_ + "]").attr('selected', 'true');
             });
         });
