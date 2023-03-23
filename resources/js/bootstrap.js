@@ -11,7 +11,11 @@ window.DataTable = DataTable;
 import languageUk from 'datatables.net-plugins/i18n/uk.json';
 window.languageUk = languageUk;
 import 'datatables.net-buttons';
-import 'datatables.net-buttons-bs5';
+//import 'datatables.net-buttons-bs5';
+import JSZip from 'jszip';
+window.JSZip = JSZip;
+import 'datatables.net-buttons/js/buttons.html5';
+
 
 import 'inputmask';
 

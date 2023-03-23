@@ -74,24 +74,24 @@
         <table id="table-all" class="table table-striped m-0">
             <thead>
                 <tr>
+                    <th></th>
+                    <?php $i = 1; ?>
+                    @foreach($currentJournal->controls as $control)
+                    <th>
+                        <button type="button" class="btn btn-outline-success edit-control p-0 m-0" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['id'=>$control->id])}}"><i class="bi bi-pencil-square text-light"></i></button>
+                    </th>
+                    <?php $i++; ?>
+                    @endforeach
+                </tr>
+                <tr>
                     <th class="th-naming">ПІБ</th>
                     @foreach($currentJournal->controls as $control)
-                    <th class="rotate">
+                    <th class="rotate sum">
                         <div>
                             {{$control->title}}
                         </div>
 
                     </th>
-                    @endforeach
-                </tr>
-                <tr>
-                    <th></th>
-                    <?php $i = 1; ?>
-                    @foreach($currentJournal->controls as $control)
-                    <th>
-                        <button type="button" class="btn btn-outline-success edit-control p-0 m-0"  data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['id'=>$control->id])}}" ><i class="bi bi-pencil-square text-light"></i></button>
-                    </th>
-                    <?php $i++; ?>
                     @endforeach
                 </tr>
             </thead>
@@ -109,6 +109,16 @@
                 </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <th>Середнє <!--| Успішність | Якість--></th>
+                    @foreach($currentJournal->controls as $control)
+                    <th>
+
+                    </th>
+                    @endforeach
+                </tr>
+            </tfoot>
         </table>
     </div>
 
@@ -201,8 +211,33 @@
                 }
             ],
             "paging": false,
-            "ordering": false
+            "ordering": false,
+            "footerCallback": function(row, data, start, end, display) {
+                let api = this.api();
+                let rowCount = api
+                    .column(0, {
+                        page: 'current'
+                    })
+                    .data()
+                    .count();
+                api.columns('.sum', {
+                    page: 'current'
+                }).every(function() {
+                    let sum = this
+                        .data()
+                        .reduce(function(a, b) {
+                            var x = +a || 0;
+                            var y = +b || 0;
+                            return x + y;
+                        }, 0);
+
+                    $(this.footer()).html(sum > 0 ? Math.round(10 * sum / rowCount) / 10 : '');
+
+                });
+            }
         });
+
+
 
         $('.table-marks').DataTable({
             dom: 'Bfrtip',
