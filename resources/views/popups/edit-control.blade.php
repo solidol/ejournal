@@ -85,6 +85,7 @@
                 $('#datetime2').val((data.date_).split('T')[0]);
                 $('#control1').val(data.title);
                 $('#maxval1').val(data.max_grade);
+                $("#typecontrol1 option").attr('selected', 'false');
                 $("#typecontrol1 option[value=" + data.type_ + "]").attr('selected', 'true');
             });
         });

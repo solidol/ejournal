@@ -25,7 +25,7 @@ class Group extends Model
     }
     public function students()
     {
-        return $this->hasMany(Student::class, 'kod_grup', 'kod_grup');
+        return $this->hasMany(Student::class, 'kod_grup', 'kod_grup')->orderBy('FIO_stud');
     }
     public function lessons()
     {
