@@ -122,7 +122,10 @@
         </table>
     </div>
 
-    <?php $i = 1; ?>
+    <?php
+    $i = 1;
+
+    ?>
     @foreach ($currentJournal->controls as $control)
 
     <div class="tab-pane fade " id="tab-{{$i}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $i ?>">
@@ -145,7 +148,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php
+                            $studentsCount = $currentJournal->group->students->count();
+                            $countYak = 0;
+                            $countUsp = 0;
+                            ?>
+
                             @foreach($currentJournal->group->students as $student)
+                            <?php
+                            if (($control->mark($student->id)->mark_str ?? 0) >= (0.6 * $control->max_grade)) {
+                                $countUsp++;
+                            }
+                            if (($control->mark($student->id)->mark_str ?? 0) >= (0.75 * $control->max_grade)) {
+                                $countYak++;
+                            }
+                            ?>
                             <tr>
                                 <td>
                                     {{$student->FIO_stud}}
@@ -154,17 +171,19 @@
                                     <p style="display:none">
                                         {{$control->max_grade}}
                                     </p>
-                                    <input type="text" class="form form-control" name="marks[{{$student->id}}]" value="{{$control->mark($student->id)->mark_str??''}}" placeholder="Max = {{$control->max_grade}}">
+                                    <input type="text" class="form form-control m-0 p-1" name="marks[{{$student->id}}]" value="{{$control->mark($student->id)->mark_str??''}}" placeholder="Max = {{$control->max_grade}}">
                                 </td>
-
-
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Якість Успішність</th>
-                                <th></th>
+                                <th>Успішність</th>
+                                <th>{{round(1000*$countUsp/$studentsCount)/10}} %</th>
+                            </tr>
+                            <tr>
+                                <th>Якість</th>
+                                <th>{{round(1000*$countYak/$studentsCount)/10}} %</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -226,13 +245,9 @@
                     let sum = this
                         .data()
                         .reduce(function(a, b) {
-                            var x = +a || 0;
-                            var y = +b || 0;
-                            return x + y;
+                            return (+a || 0) + (+b || 0);
                         }, 0);
-
                     $(this.footer()).html(sum > 0 ? Math.round(10 * sum / rowCount) / 10 : '');
-
                 });
             }
         });
@@ -253,23 +268,6 @@
             ],
             "paging": false,
             "ordering": false,
-            "footerCallback": function(row, data, start, end, display) {
-                var api = this.api();
-                api.columns('.sum', {
-                    page: 'current'
-                }).every(function() {
-                    //console.log($(this.nodes()));
-                    var sum = this
-                        .data()
-                        .reduce(function(a, b) {
-                            var x = parseFloat(a) || 0;
-                            var y = parseFloat(b) || 0;
-                            return x + y;
-                        }, 0);
-                    //console.log(sum); //alert(sum);
-                    $(this.footer()).html(sum);
-                });
-            }
         });
 
         $(".m-inputs").on('paste', function() {
