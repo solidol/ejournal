@@ -79,8 +79,6 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/journals/show/{id}/marks', [JournalController::class, 'marks'])->name('get_marks');
 
-        //Route::get('/journals/show:{id}/marks/sheet', [JournalController::class, 'marksSheet'])->name('get_marks_sheet');
-
         Route::post('/journals/store', [JournalController::class, 'store'])->name('store_journal');
 
         Route::post('/lessons/store', [LessonController::class, 'store'])->name('store_lesson');
