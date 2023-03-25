@@ -116,8 +116,6 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/absents/lesson/{id}/store', [AbsentController::class, 'store'])->name('store_absents');
 
-        //    Route::get('/journal/absents/{date}/{subj}/{group}/{lesson}', [AbsentController::class, 'listAbsents'])->name('get_absents');
-
 
         // Повідомлення
 
