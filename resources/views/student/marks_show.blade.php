@@ -57,7 +57,7 @@
                 {{$control->title}}
             </td>
             <td>
-                <b>{{$control->mark(Auth::user()->userable_id)->mark_str??'-'}}</b> з {{$control->max_grade}}
+                <b class="mark-in-list">{{$control->mark(Auth::user()->userable_id)->mark_str??'-'}}</b><span>з {{$control->max_grade}}б.</span>
             </td>
         </tr>
         @endforeach
