@@ -27,13 +27,24 @@ class JournalController extends Controller
             'sbjList' => $subjects,
         ]);
     }
-    function studentList()
+
+    function studentMarks($id = false)
     {
-        $journals = Auth::user()->userable->group->journals;
-        return view('student.journals_list', [
-            'journals' => $journals,
+        if ($id) {
+            $journal = Auth::user()->userable->group->journals->find($id);
+        } else {
+            $journal = false;
+        }
+        if ($journal == null) {
+            $journal = false;
+        }
+        return view('student.marks_show', [
+            'lesson' => false,
+            'currentJournal' => $journal,
+            'journals' => Auth::user()->userable->group->journals()->with('group')->get()->sortBy('group.title')
         ]);
     }
+
     function show($id)
     {
         $journal = Auth::user()->userable->journals->find($id);
@@ -80,18 +91,7 @@ class JournalController extends Controller
         ]);
     }
 
-    function studentMarks($id)
-    {
-        $journal = Auth::user()->userable->group->journals->find($id);
-        //dd($journal);
-        if ($journal == null)
-            return view('noelement');
-        return view('student.marks_show', [
-            'lesson' => false,
-            'currentJournal' => $journal,
-            'journals' => Auth::user()->userable->group->journals()->with('group')->get()->sortBy('group.title')
-        ]);
-    }
+
 
     public function store(Request $request)
     {

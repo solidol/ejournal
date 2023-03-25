@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Оцінки '. $currentJournal->group->nomer_grup ." - " .$currentJournal->subject->subject_name)
+@section('title', 'Оцінки '. Auth::user()->name)
 @section('side-title', 'Оцінки')
 
 @section('sidebar')
@@ -20,6 +20,9 @@
 @section('content')
 
 
+@if (!$currentJournal)
+<h2>Оцінки. Оберіть журнал</h2>
+@else
 <h2>{{$currentJournal->group->nomer_grup}} - {{$currentJournal->subject->subject_name}}</h2>
 
 <ul>
@@ -60,6 +63,9 @@
         @endforeach
     </tbody>
 </table>
+
+
+@endif
 
 
 

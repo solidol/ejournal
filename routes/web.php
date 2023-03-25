@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'student'], function () {
         Route::get('/student/journals/{id}/show/marks', [JournalController::class, 'studentMarks'])->name('student_get_marks');
         
-        Route::get('/student/journals', [JournalController::class, 'studentList'])->name('student_get_journals');
+        Route::get('/student/journals', [JournalController::class, 'studentMarks'])->name('student_get_journals');
     });
 
 
