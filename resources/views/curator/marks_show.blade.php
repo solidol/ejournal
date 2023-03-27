@@ -34,6 +34,8 @@
 
 <h2>{{$currentJournal->group->nomer_grup}} - {{$currentJournal->subject->subject_name}}</h2>
 
+<p>Викладач - {{$currentJournal->teacher->FIO_prep}}</p>
+
 <ul>
     <li>
         Н/А, н/а, НА, на - неатестований

@@ -28,4 +28,8 @@ class Journal extends Model
     {
         return $this->belongsTo(Subject::class,'subject_id','kod_subj')->orderBy('subject_name');
     }
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class,'teacher_id','kod_prep');
+    }
 }
