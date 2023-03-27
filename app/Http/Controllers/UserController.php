@@ -49,11 +49,12 @@ class UserController extends Controller
     function curatorGroups()
     {
         $journal = false;
-
+        $groups = Auth::user()->userable->groups;
         return view('curator.marks_show', [
             'lesson' => false,
             'currentJournal' => $journal,
-            'journals' => Auth::user()->userable->groups->first()->journals()->with('group')->get()->sortBy('group.title')
+            'groups' => $groups,
+            //'journals' => Auth::user()->userable->groups->first()->journals()->with('group')->get()->sortBy('group.title')
         ]);
     }
 

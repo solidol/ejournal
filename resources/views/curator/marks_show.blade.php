@@ -14,8 +14,11 @@
 <div class="baloon d-none d-md-block">
     <h2 class="d-sm-none d-md-block">Оцінки з інших дисциплін</h2>
     <nav class="nav flex-column d-none d-md-block">
-        @foreach($journals as $journal)
+        @foreach($groups as $groupItem)
+        @foreach($groupItem->journals as $journal)
         <a class="nav-link" href="{{URL::route('curator_get_marks',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
+        @endforeach
+        <hr>
         @endforeach
     </nav>
 </div>
