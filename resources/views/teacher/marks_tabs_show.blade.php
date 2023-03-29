@@ -38,7 +38,7 @@
 
 
 <h2>{{$currentJournal->group->nomer_grup}} - {{$currentJournal->subject->subject_name}}</h2>
-
+<p>Класний керівник - {{$currentJournal->group->curator->FIO_prep}}</p>
 <ul>
     <li>
         Н/А, н/а, НА, на - неатестований

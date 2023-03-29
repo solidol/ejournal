@@ -37,7 +37,7 @@
 
 
 <h2>{{$currentJournal->group->nomer_grup}} - {{$currentJournal->subject->subject_name}}</h2>
-
+<p>Класний керівник - {{$currentJournal->group->curator->FIO_prep}}</p>
 <table id="tblessons" class="display table table-striped m-0">
     <thead>
         <tr>

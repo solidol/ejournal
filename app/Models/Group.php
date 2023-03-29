@@ -35,4 +35,8 @@ class Group extends Model
     {
         return $this->hasMany(Journal::class, 'group_id', 'kod_grup');
     }
+    public function curator()
+    {
+        return $this->belongsTo(Teacher::class, 'kod_prep');
+    }
 }
