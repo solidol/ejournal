@@ -14,12 +14,17 @@ use Session;
 
 class JournalController extends Controller
 {
-    function list()
+    function list($group = false)
     {
         $user = Auth::user();
         $groups = DB::table('grups')->orderBy('nomer_grup')->get();
         $subjects = DB::table('subjects')->orderBy('subject_name')->get();
-        $journals = $user->userable->journals()->with('group')->get()->sortBy('group.title');
+        if (!$group) {
+            $journals = $user->userable->journals()->with('group')->get()->sortBy('group.title');
+        } else {
+            $journals = $user->userable->journals()->where('group_id', $group)->with('group')->get()->sortBy('group.title');
+        }
+
         return view('teacher.journals_list', [
             'data' => array('prep' => $user->userable_id),
             'journals' => $journals,

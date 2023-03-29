@@ -5,6 +5,7 @@ use App\Http\Controllers\LogController;
 use App\Http\Controllers\MarkController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AbsentController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\JournalController;
@@ -70,10 +71,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::group(['middleware' => 'teacher'], function () {
+        // Пошук
+
+        Route::get('/students/search', [StudentController::class, 'find'])->name('find_student');
 
         // Пари
 
-        Route::get('/journals', [JournalController::class, 'list'])->name('get_journals');
+        Route::get('/journals/{group?}', [JournalController::class, 'list'])->name('get_journals');
 
         Route::get('/journals/show/{id}', [JournalController::class, 'show'])->name('show_journal');
 

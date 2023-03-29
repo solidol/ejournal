@@ -28,6 +28,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('get_journals') }}"><i class="bi bi-book"></i> <span class="d-md-inline d-lg-none">Мої журнали</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('find_student') }}"><i class="bi bi-search"></i> <span class="d-md-inline d-lg-none">Пошук студента</span></a>
+                </li>
                 @yield('custom-menu')
 
                 @endif
@@ -38,7 +41,7 @@
                 @endif
                 @if (Auth::user()->isCurator())
                 <li class="nav-item">
-                <a class="nav-link" href="{{ route('curator_get_journals') }}"><i class="bi bi-people"></i> <span class="d-md-inline d-lg-none">Журнали куратора</span></a>
+                    <a class="nav-link" href="{{ route('curator_get_journals') }}"><i class="bi bi-people"></i> <span class="d-md-inline d-lg-none">Журнали куратора</span></a>
                 </li>
                 @endif
                 <li class="nav-item dropdown">
