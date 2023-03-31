@@ -56,7 +56,7 @@ class AbsentController extends Controller
             [
                 'user' => $user,
                 'data' => [
-                    'title1' => 'Табель за ' . TimesheetController::$mothStrings[$month] . ' ' . $year . 'p.',
+                    'title1' => 'Пропуски за ' . AbsentController::$mothStrings[$month] . ' ' . $year . 'p.',
                     'last_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('last month')->format('m'),
                     'next_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('next month')->format('m'),
                 ],

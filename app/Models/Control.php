@@ -32,7 +32,7 @@ class Control extends Model
     }
     public function getDateFormattedAttribute()
     {
-        return $this->date_?$this->date_->format('d.m.Y'):'00.00.0000';
+        return $this->date_?$this->date_->format('d.m.Y'):'Відсутня дата';
     }
     public function marks()
     {

@@ -1,48 +1,39 @@
-@extends('layouts.app')
+@extends('layouts.app-nosidebar')
 
-@section('title', 'Мої табелі')
-
-@section('sidebar')
-
-<div class="baloon">
-    <h1>Мої табелі</h1>
-</div>
-
-<div class="baloon d-none d-md-block">
-    <h2>Навігація</h2>
-
-    <nav class="nav flex-column">
-
-        <a class="nav-link" href="{{URL::route('student_get_absents',['year'=>'2022','month'=>'08'])}}">Серпень</a>
-        <a class="nav-link" href="{{URL::route('student_get_absents',['year'=>'2022','month'=>'09'])}}">Вересень</a>
-        <a class="nav-link" href="{{URL::route('student_get_absents',['year'=>'2022','month'=>'10'])}}">Жовтень</a>
-        <a class="nav-link" href="{{URL::route('student_get_absents',['year'=>'2022','month'=>'11'])}}">Листопад</a>
-        <a class="nav-link" href="{{URL::route('student_get_absents',['year'=>'2022','month'=>'12'])}}">Грудень</a>
-        <a class="nav-link" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'01'])}}">Січень</a>
-        <a class="nav-link" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'02'])}}">Лютий</a>
-        <a class="nav-link" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'03'])}}">Березень</a>
-        <a class="nav-link" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'04'])}}">Квітень</a>
-        <a class="nav-link" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'05'])}}">Травень</a>
-        <a class="nav-link" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'06'])}}">Червень</a>
-
-    </nav>
-</div>
+@section('title', 'Мої пропуски')
 
 
-@stop
 
 
 @section('content')
+<h1>Мої пропуски</h1>
 <h2>
     {{$data['title1']}}
 </h2>
-<div class="form-check mb-3">
-    <input class="form-check-input" type="checkbox" value="" id="showSubject">
-    <label class="form-check-label" for="showSubject">
-        Показати повністю назву дисципліни
-    </label>
-</div>
+
+<nav class="nav">
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>'2022','month'=>'08'])}}">Серпень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>'2022','month'=>'09'])}}">Вересень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>'2022','month'=>'10'])}}">Жовтень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>'2022','month'=>'11'])}}">Листопад</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>'2022','month'=>'12'])}}">Грудень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'01'])}}">Січень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'02'])}}">Лютий</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'03'])}}">Березень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'04'])}}">Квітень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'05'])}}">Травень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>'2023','month'=>'06'])}}">Червень</a>
+
+</nav>
+
+
 <div class="div-table">
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" value="" id="showSubject">
+        <label class="form-check-label" for="showSubject">
+            Показати повністю назву дисципліни
+        </label>
+    </div>
     <table id="tbtable" class="table table-striped table-bordered table-table m-0">
         <thead>
             <tr>

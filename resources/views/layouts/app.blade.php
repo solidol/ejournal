@@ -22,13 +22,10 @@
 </head>
 
 <body>
-
-
+    @include('layouts.preloader')
 
     <div id="app">
-
         @include('menus.mainmenu')
-
         <div class="container-fluid">
 
             @if (Auth::user())

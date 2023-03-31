@@ -1,43 +1,27 @@
-@extends('layouts.app')
+@extends('layouts.app-nosidebar')
 
 @section('title', 'Мої табелі')
 
-@section('sidebar')
-
-<div class="baloon">
-    <h1>Мої табелі</h1>
-</div>
-
-<div class="baloon d-none d-md-block">
-    <h2>Навігація</h2>
-
-    <nav class="nav flex-column">
-
-        <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'08'])}}">Серпень</a>
-        <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'09'])}}">Вересень</a>
-        <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'10'])}}">Жовтень</a>
-        <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'11'])}}">Листопад</a>
-        <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'12'])}}">Грудень</a>
-        <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'01'])}}">Січень</a>
-        <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'02'])}}">Лютий</a>
-        <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'03'])}}">Березень</a>
-        <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'04'])}}">Квітень</a>
-        <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'05'])}}">Травень</a>
-        <a class="nav-link" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'06'])}}">Червень</a>
-
-    </nav>
-</div>
-
-
-@stop
 
 
 @section('content')
 <h2>
-    <!--<a href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>$data['last_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-left"></i></a>-->
     {{$data['title1']}}
-    <!--<a href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>$data['next_mon']])}}" class="btn btn-primary"><i class="bi bi-caret-right"></i></a>-->
 </h2>
+<nav class="nav">
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'08'])}}">Серпень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'09'])}}">Вересень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'10'])}}">Жовтень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'11'])}}">Листопад</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'12'])}}">Грудень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'01'])}}">Січень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'02'])}}">Лютий</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'03'])}}">Березень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'04'])}}">Квітень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'05'])}}">Травень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'06'])}}">Червень</a>
+
+</nav>
 <div class="form-check mb-3">
     <input class="form-check-input" type="checkbox" value="" id="showSubject">
     <label class="form-check-label" for="showSubject">
