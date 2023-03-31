@@ -8,9 +8,63 @@ use App\Models\User;
 use App\Models\Lesson;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Session;
+use DateTime;
+use DatePeriod;
+use DateInterval;
 
 class AbsentController extends Controller
 {
+    static $mothStrings = [
+        '01' => 'Січень',
+        '02' => 'Лютий',
+        '03' => 'Березень',
+        '04' => 'Квітень',
+        '05' => 'Травень',
+        '06' => 'Червень',
+        '07' => 'Липень',
+        '08' => 'Серпень',
+        '09' => 'Вересень',
+        '10' => 'Жовтень',
+        '11' => 'Листопад',
+        '12' => 'Грудень',
+    ];
+
+    function studentTable($year = false, $month = false)
+    {
+        if (!$year || !$month) {
+            $year = (new DateTime())->format('Y');
+            $month = (new DateTime())->format('m');
+        }
+        $user = Auth::user();
+        $period = new DatePeriod(
+            new DateTime($year . '-' . $month . '-01'),
+            new DateInterval('P1D'),
+            (new DateTime($year . '-' . $month . '-01'))->modify('first day of next month')
+        );
+        $dates = array();
+        foreach ($period as $dItem) {
+
+            $tmp['raw'] = $dItem;
+            $tmp['dw'] = $dItem->format('w');
+            $dates[] = $tmp;
+        }
+
+        $journals = $user->userable->group->journals;
+        return view(
+            'student.timesheet_show',
+            [
+                'user' => $user,
+                'data' => [
+                    'title1' => 'Табель за ' . TimesheetController::$mothStrings[$month] . ' ' . $year . 'p.',
+                    'last_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('last month')->format('m'),
+                    'next_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('next month')->format('m'),
+                ],
+                'arDates' => $dates,
+                'journals' => $journals
+            ]
+        );
+    }
 
     function store($id, Request $request)
     {

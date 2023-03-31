@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/messages/send', [MessageController::class, 'send'])->name('message_send');
 
-        
+
 
     Route::group(['middleware' => ['admin', 'student', 'teacher']], function () {
     });
@@ -58,14 +58,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'student'], function () {
         Route::get('/student/journals/{id}/show/marks', [JournalController::class, 'studentMarks'])->name('student_get_marks');
-        
+
         Route::get('/student/journals', [JournalController::class, 'studentMarks'])->name('student_get_journals');
+
+        Route::get('/student/absents/{year?}/{month?}', [AbsentController::class, 'studentTable'])->name('student_get_absents');
     });
 
 
     Route::group(['middleware' => 'curator'], function () {
         Route::get('/curator/journals/{id}/show/marks', [JournalController::class, 'curatorMarks'])->name('curator_get_marks');
-        
+
         Route::get('/curator/journals', [UserController::class, 'curatorGroups'])->name('curator_get_journals');
     });
 
@@ -112,9 +114,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         //    Табель
 
-        Route::get('/my/timesheet', [TimesheetController::class, 'getTimesheet'])->name('my_timesheet');
+        //Route::get('/my/timesheet', [TimesheetController::class, 'getTimesheet'])->name('my_timesheet');
 
-        Route::get('/my/timesheet/{year}/{month}', [TimesheetController::class, 'getTimesheetDate'])->name('my_timesheet_date');
+        Route::get('/my/timesheet/{year?}/{month?}', [TimesheetController::class, 'getTimesheetDate'])->name('my_timesheet_date');
 
         // Відсутні
 

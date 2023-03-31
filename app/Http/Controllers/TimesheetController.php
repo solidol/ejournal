@@ -36,14 +36,12 @@ class TimesheetController extends Controller
         '12' => 'Грудень',
     ];
 
-    public function getTimesheet()
+    public function getTimesheetDate($year = false, $month = false)
     {
-        $date = new DateTime();
-        return redirect()->route('my_timesheet_date', ['year' => $date->format('Y'), 'month' => $date->format('m')]);
-    }
-
-    public function getTimesheetDate($year = '2022', $month = '08')
-    {
+        if (!$year || !$month) {
+            $year = (new DateTime())->format('Y');
+            $month = (new DateTime())->format('m');
+        }
         $user = Auth::user();
         $period = new DatePeriod(
             new DateTime($year . '-' . $month . '-01'),

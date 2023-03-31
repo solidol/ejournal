@@ -38,6 +38,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('student_get_journals') }}"><i class="bi bi-book"></i> Мої журнали</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('student_get_absents') }}"><i class="bi bi-person-slash"></i> Мої пропуски</a>
+                </li>
                 @endif
                 @if (Auth::user()->isCurator())
                 <li class="nav-item">
@@ -64,7 +67,7 @@
                         </li>
                         @if (Auth::user()->isTeacher())
                         <li>
-                            <a class="dropdown-item" href="{{ route('my_timesheet') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
+                            <a class="dropdown-item" href="{{ route('my_timesheet_date') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
                         </li>
 
                         <li>

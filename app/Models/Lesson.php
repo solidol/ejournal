@@ -30,6 +30,10 @@ class Lesson extends Model
     {
         return $this->hasMany(Absent::class, 'kod_lesson');
     }
+    public function absent($student_id)
+    {
+        return $this->absents->where('kod_stud', $student_id)->first() ?? false;
+    }
     public function group()
     {
         return $this->belongsTo(Group::class, 'kod_grupi')->orderBy('nomer_grup');
@@ -60,8 +64,6 @@ class Lesson extends Model
         return Control::where('date_', $this->data_)->where('journal_id', $this->journal_id)->get();
     }
 
-    public function absent($student_id)
-    {
-        return $this->absents->where('kod_stud', $student_id)->first() ?? false;
-    }
+
+    
 }
