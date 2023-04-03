@@ -131,7 +131,7 @@ class LessonController extends Controller
         $journal = $lesson->journal;
         $lesson->delete();
         if ($journal->lessons->count() > 0) {
-            return redirect()->route('get_lessons', [
+            return redirect()->route('get_journals', [
                 'id' => $journal->id
             ]);
         } else {

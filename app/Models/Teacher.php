@@ -13,8 +13,12 @@ class Teacher extends Model
     protected $guarded = [];
 
     public $timestamps = false;
-    protected $appends = ['id'];
+    protected $appends = ['id', 'fullname'];
 
+    public function getFullnameAttribute()
+    {
+        return $this->FIO_prep;
+    }
     public function getIdAttribute()
     {
         return $this->kod_prep;

@@ -40,6 +40,9 @@
                 <th class="subj-name">
                     Предмет
                 </th>
+                <th class="subj-name">
+                    Викладач
+                </th>
                 @foreach($arDates as $dItem)
                 <th class="rotated-text sum">
 
@@ -57,6 +60,9 @@
             <tr>
                 <td class="subj-name">
                     {{$journal->subject->subject_name}}
+                </td>
+                <td class="subj-name">
+                    {{$journal->teacher->fullname}}
                 </td>
                 <?php
                 $cnt = 0;

@@ -4,8 +4,14 @@
 @section('side-title', 'Мої дисципліни')
 
 @section('sidebar')
-
-
+<div class="baloon">
+    <h2>Новини та повідомлення</h2>
+    @foreach ($messages as $mesItem)
+    <div class="mb-3 mt-3 p-2 border border-2 border-primary rounded-2">
+        <p class="text-danger fs-4">{{$mesItem->content}}</p>
+    </div>
+    @endforeach
+</div>
 
 @stop
 

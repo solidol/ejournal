@@ -1,27 +1,32 @@
-@if (session()->has('message'))
-<div class="alert alert-success position-fixed  top-2 start-50 translate-middle" style="z-index: 11">
-    <strong>{{ session('message') }}</strong>
+<div class="top-5 start-1 position-fixed" style="z-index: 11">
+    @if (session()->has('message'))
+    <div class="alert alert-success">
+        <strong>{{ session('message') }}</strong>
+    </div>
+    @endif
 
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+    @if (session()->has('error'))
+    <div class="alert alert-danger">
+        <strong>{{ session('error') }}</strong>
+    </div>
+    @endif
+
+    @if (session()->has('warning'))
+    <div class="alert alert-warning">
+        <strong>{{ session('warning') }}</strong>
+    </div>
+    @endif
+
+    @if (isset($messages)&&count($messages)>0)
+    <div class="alert alert-danger">
+        @foreach ($messages as $mesItem)
+        <div class="mb-3 mt-3 p-2 border border-2 border-white rounded-2">
+            <strong class="text-danger fs-5">{{$mesItem->content}}</strong>
+        </div>
+        @endforeach
+    </div>
+    @endif
 </div>
-@endif
-
-@if (session()->has('error'))
-<div class="alert alert-danger position-fixed  top-2 start-50 translate-middle" style="z-index: 11">
-    <strong>{{ session('error') }}</strong>
-
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
-@endif
-
-@if (session()->has('warning'))
-<div class="alert alert-warning position-fixed  top-2 start-50 translate-middle" style="z-index: 11">
-    <strong>{{ session('warning') }}</strong>
-
-    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
-@endif
-
 <script type="module">
     $(document).ready(function() {
         $(".alert").fadeTo(5000, 500).slideUp(500, function() {

@@ -38,7 +38,6 @@
                 </div>
                 <div class="col-lg-9 col-md-7 col-sm-12 col-xs-12">
                     <main class="baloon">
-                        @include('popups.popup-messages')
                         @yield('content')
                     </main>
                 </div>
@@ -51,7 +50,7 @@
             @endif
         </div>
     </div>
-
+    @include('popups.popup-messages')
 
 </body>
 

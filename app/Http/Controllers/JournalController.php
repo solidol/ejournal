@@ -8,9 +8,11 @@ use App\Models\User;
 use App\Models\Teacher;
 use App\Models\Journal;
 use App\Models\Lesson;
+use App\Models\Message;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Session;
+use DateTime;
 
 class JournalController extends Controller
 {
@@ -24,8 +26,14 @@ class JournalController extends Controller
         } else {
             $journals = $user->userable->journals()->where('group_id', $group)->with('group')->get()->sortBy('group.title');
         }
+        $messages = Message::where('to_id', 0)
+            ->where('message_type', 'text')
+            ->whereDate('datetime_end', '>', (new DateTime())->format('Y-m-d h:m:s'))
+            ->whereDate('datetime_start', '<', (new DateTime())->format('Y-m-d h:m:s'))
+            ->get();
 
         return view('teacher.journals_list', [
+            'messages' => $messages,
             'data' => array('prep' => $user->userable_id),
             'journals' => $journals,
             'grList' => $groups,
@@ -43,10 +51,11 @@ class JournalController extends Controller
         if ($journal == null) {
             $journal = false;
         }
+        $journals = Auth::user()->userable->group->journals()->with('subject')->get()->sortBy('subject.subject_name');
         return view('student.marks_show', [
             'lesson' => false,
             'currentJournal' => $journal,
-            'journals' => Auth::user()->userable->group->journals()->with('group')->get()->sortBy('group.title')
+            'journals' => $journals
         ]);
     }
 
@@ -122,6 +131,6 @@ class JournalController extends Controller
         $lesson->save();
 
         Session::flash('message', 'Пару збережено');
-        return redirect()->route('get_lessons', ['id' => $journal->id]);
+        return redirect()->route('get_journals', ['id' => $journal->id]);
     }
 }

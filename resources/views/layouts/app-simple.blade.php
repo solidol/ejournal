@@ -29,12 +29,11 @@
 
         <div class="container">
             <main class="m-1 p-2 bg-transparent rounded-2">
-                @include('popups.popup-messages')
                 @yield('content')
             </main>
         </div>
     </div>
-
+    @include('popups.popup-messages')
 </body>
 
 </html>
