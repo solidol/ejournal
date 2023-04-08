@@ -14,11 +14,15 @@ class Student extends Model
 
     public $timestamps = false;
     protected $primaryKey = 'kod_stud';
-    protected $appends = ['id'];
+    protected $appends = ['id','fullname'];
 
     public function getIdAttribute()
     {
         return $this->kod_stud;
+    }
+    public function getFullnameAttribute()
+    {
+        return $this->FIO_stud;
     }
     public function user()
     {

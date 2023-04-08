@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Models\Log;
+use Illuminate\Support\Facades\Auth;
 
 
 class LoginController extends Controller
@@ -30,6 +32,7 @@ class LoginController extends Controller
      */
     //protected $redirectTo = RouteServiceProvider::HOME;
     protected $redirectTo = '/home';
+    protected $loginType;
     /**
      * Create a new controller instance.
      *
@@ -38,12 +41,39 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->loginType = $this->checkLoginInput();
     }
     public function redirectTo()
     {
 
-        if (auth()->user()->id>0) {
+        if (auth()->user()->id > 0) {
             Log::login();
         }
+    }
+    public function login(Request $request)
+    {
+        
+        $this->validate($request, [
+            'login' => 'required|string',
+            'password' => 'required|string'
+        ]);
+        
+        $credentials = [
+            $this->loginType => $request->login,
+            'password'           => $request->password
+        ];
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended($this->redirectTo);
+        }
+        return redirect()->back()
+            ->withInput()
+            ->withErrors([
+                'login' => 'Ваш обліковий запис не знайдено в системі'
+            ]);
+    }
+    protected function  checkLoginInput()
+    {
+        $inputData = request()->get('login');
+        return  filter_var($inputData, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
     }
 }

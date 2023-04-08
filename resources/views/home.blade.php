@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <h1>Ви виконали вхід в журнал</h1>
-                    <p>Вітаємо, {{Auth::user()->name}}!</p>
+                    <p>Вітаємо, {{Auth::user()->userable->fullname}}!</p>
                     @if (Auth::user()->isTeacher())
                     <p>Перейдіть до ваших журналів в головному меню - <a class="btn btn-outline-primary" href="{{ route('get_journals') }}"><i class="bi bi-book"></i></a>
                     </p>

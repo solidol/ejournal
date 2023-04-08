@@ -38,9 +38,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('student_get_journals') }}"><i class="bi bi-book"></i> Мої журнали</a>
                 </li>
+                <!--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('student_get_absents') }}"><i class="bi bi-person-slash"></i> Мої пропуски</a>
                 </li>
+-->
                 @endif
                 @if (Auth::user()->isCurator())
                 <li class="nav-item">
@@ -49,7 +51,7 @@
                 @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-bounding-box"></i> {{ Auth::user()->name }} <span class="caret"></span>
+                        <i class="bi bi-person-bounding-box"></i> {{ Auth::user()->userable->fullname }} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>

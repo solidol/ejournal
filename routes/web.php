@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/messages/send', [MessageController::class, 'send'])->name('message_send');
 
-
+    Route::get('/users/profile', [UserController::class, 'show'])->name('show_profile');
 
     Route::group(['middleware' => ['admin', 'student', 'teacher']], function () {
     });
@@ -138,7 +138,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Профіль
 
-        Route::get('/users/profile', [UserController::class, 'show'])->name('show_profile');
+
 
         Route::get('/users/messages', [MessageController::class, 'list'])->name('list_messages');
     });
