@@ -11,6 +11,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ControlController;
 use App\Http\Controllers\TimesheetController;
+use App\Http\Controllers\GroupController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/student/journals/{id}/show/marks', [JournalController::class, 'studentMarks'])->name('student_get_marks');
 
         Route::get('/student/journals', [JournalController::class, 'studentMarks'])->name('student_get_journals');
+
+        Route::get('/student/absents/{year?}/{month?}', [AbsentController::class, 'studentTable'])->name('student_get_absents');
+        
+        Route::get('/student/teachers', [GroupController::class, 'studentTeachers'])->name('student_get_teachers');
 
         Route::get('/student/absents/{year?}/{month?}', [AbsentController::class, 'studentTable'])->name('student_get_absents');
     });

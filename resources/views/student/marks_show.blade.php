@@ -9,7 +9,7 @@
     <h2>Оцінки з інших дисциплін</h2>
     <nav class="nav flex-column">
         @foreach($journals as $journal)
-        <a class="nav-link" href="{{URL::route('student_get_marks',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
+        <a class="nav-link" href="{{URL::route('student_get_marks',['id'=>$journal->id])}}">{{$journal->subject->subject_name}}</a>
         @endforeach
     </nav>
 </div>

@@ -39,4 +39,8 @@ class Group extends Model
     {
         return $this->belongsTo(Teacher::class, 'kod_prep');
     }
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'journals', 'group_id', 'teacher_id')->distinct();
+    }
 }
