@@ -7,8 +7,14 @@
             <div class="card mt-1">
                 <div class="card-header text-white bg-dblue">Перегляд профілю</div>
 
-                <div class="card-body">
+                <div class="card-body row">
 
+                    <div class="col-4">
+                        @if (Auth::user()->isTeacher())
+                        <img class="w-100" src="{{asset('/storage/images/'.Auth::user()->userable->image)}}">
+                        @endif
+                    </div>
+                    <div class="col-8">
 
                         <div class="form-group row mb-2">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Ім'я</label>
@@ -24,7 +30,7 @@
                                 {{ $user->name }}
                             </div>
                         </div>
-
+                    </div>
                 </div>
             </div>
         </div>

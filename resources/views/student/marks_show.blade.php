@@ -23,17 +23,23 @@
 @if (!$currentJournal)
 <h2>Оцінки. Оберіть журнал</h2>
 @else
-<h2>{{$currentJournal->group->nomer_grup}} - {{$currentJournal->subject->subject_name}}</h2>
-<p class="fs-3">Викладач - {{$currentJournal->teacher->FIO_prep}}</p>
-<ul>
-    <li>
-        Н/А, н/а, НА, на - неатестований
-    </li>
-    <li>
-        Зар, зар, З, з - зараховано
-    </li>
-</ul>
-
+<div class="row m-3">
+    <div class="col-3">
+        <img class="w-75" src="{{asset('/storage/images/'.$currentJournal->teacher->image)}}">
+    </div>
+    <div class="col-9">
+        <h2>{{$currentJournal->subject->subject_name}}</h2>
+        <p class="fs-3">Викладач - {{$currentJournal->teacher->FIO_prep}}</p>
+        <ul>
+            <li>
+                Н/А, н/а, НА, на - неатестований
+            </li>
+            <li>
+                Зар, зар, З, з - зараховано
+            </li>
+        </ul>
+    </div>
+</div>
 
 <table id="dtmarks" class="table table-striped table-bordered m-0">
     <thead>
