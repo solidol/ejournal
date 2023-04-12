@@ -41,9 +41,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('student_get_teachers') }}"><i class="bi bi-people"></i> Мої викладачі</a>
                 </li>
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a class="nav-link" href="{{ route('student_get_absents') }}"><i class="bi bi-person-slash"></i> Мої пропуски</a>
-                </li>
+                </li>-->
                 @endif
                 @if (Auth::user()->isCurator())
                 <li class="nav-item">
