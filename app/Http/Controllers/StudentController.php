@@ -9,11 +9,11 @@ class StudentController extends Controller
 {
     public function find(Request $request)
     {
-
-        if ($request->fullname == null) {
+        $res = str_ireplace(['\'', '"', ',', '.', ':', '*', ';', '<', '>', '%', '\n'], '', $request->fullname);
+        if ($res == null) {
             $students = array();
         } else {
-            $students = Student::where('FIO_stud', 'LIKE', '%' . $request->fullname . '%')->get();
+            $students = Student::where('FIO_stud', 'LIKE', '%' . $res . '%')->get();
         }
         return view('teacher.students_list', ['students' => $students]);
     }
