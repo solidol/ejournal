@@ -41,9 +41,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('student_get_teachers') }}"><i class="bi bi-people"></i> Мої викладачі</a>
                 </li>
-                <!--<li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('student_get_absents') }}"><i class="bi bi-person-slash"></i> Мої пропуски</a>
-                </li>-->
+                </li>
                 @endif
                 @if (Auth::user()->isCurator())
                 <li class="nav-item">
@@ -87,7 +87,10 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="{{ route('admin_userlist') }}"><i class="bi bi-list-ol"></i> Користувачі</a>
+                            <a class="dropdown-item" href="{{ route('admin_userlist',['slug'=>'teachers']) }}"><i class="bi bi-list-ol"></i> Викладачі</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('admin_userlist',['slug'=>'students']) }}"><i class="bi bi-list-ol"></i> Студенти</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="{{ route('admin_loglist') }}"><i class="bi bi-list-ol"></i> Лог подій</a>

@@ -12,10 +12,21 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    function index()
+    function index($slug = 'teachers')
     {
         if (Auth::user()->isAdmin()) {
-            $users = User::orderBy('name')->get();
+            switch ($slug) {
+                case 'teachers':
+                    $users = User::teachers();
+                    break;
+                case 'students':
+                    $users = User::students();
+                    break;
+                default:
+                    $users = User::teachers();
+                    break;
+            }
+            $users = $users->orderBy('name')->get();
             return view('admin.users_list', ['users' => $users]);
         } else
             return view('auth.login');
@@ -57,5 +68,4 @@ class UserController extends Controller
             //'journals' => Auth::user()->userable->groups->first()->journals()->with('group')->get()->sortBy('group.title')
         ]);
     }
-
 }

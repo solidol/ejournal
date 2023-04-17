@@ -48,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/admin/users/login-as', [UserController::class, 'anotherLogin'])->name('admin_another_auth');
 
-        Route::get('/admin/users/list', [UserController::class, 'index'])->name('admin_userlist');
+        Route::get('/admin/users/list/{slug?}', [UserController::class, 'index'])->name('admin_userlist');
 
         Route::post('/admin/users/create', [UserController::class, 'WUStore'])->name('admin_create_user');
 

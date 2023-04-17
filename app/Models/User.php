@@ -80,4 +80,10 @@ class User extends Authenticatable
         else return false;
     }
 
+    public static function teachers(){
+        return User::where('userable_type','App\Models\Teacher');
+    }
+    public static function students(){
+        return User::where('userable_type','App\Models\Student');
+    }
 }
