@@ -58,6 +58,19 @@
                         <li>
                             <a class="dropdown-item" href="{{ route('show_profile') }}"><i class="bi bi-person-lines-fill"></i> Мій профіль</a>
                         </li>
+
+                        @if (Auth::user()->isTeacher())
+                        <li>
+                            <a class="dropdown-item" href="{{ route('my_timesheet_date') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="{{ route('message_index') }}"><i class="bi bi-envelope-paper"></i> Мої повідомлення</a>
+                        </li>
+                        @endif
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
     document.getElementById('logout-form').submit();">
@@ -68,15 +81,6 @@
                                 @csrf
                             </form>
                         </li>
-                        @if (Auth::user()->isTeacher())
-                        <li>
-                            <a class="dropdown-item" href="{{ route('my_timesheet_date') }}"><i class="bi bi-calendar3-week"></i> Мій табель</a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item" href="{{ route('message_index') }}"><i class="bi bi-envelope-paper"></i> Мої повідомлення</a>
-                        </li>
-                        @endif
                     </ul>
                 </li>
 
