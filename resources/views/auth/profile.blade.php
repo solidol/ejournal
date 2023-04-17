@@ -1,14 +1,13 @@
-@extends('layouts.app-nosidebar')
+@extends('layouts.app-simple')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card mt-1">
-                <div class="card-header text-white bg-dblue">Перегляд профілю</div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header  text-white bg-dark">Вхід у журнал</div>
 
                 <div class="card-body row">
-
                     <div class="col-4">
                         @if (Auth::user()->isTeacher())
                         <img class="w-100" src="{{asset('/storage/images/'.Auth::user()->userable->image)}}">
@@ -35,5 +34,4 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
