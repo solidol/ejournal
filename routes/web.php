@@ -80,7 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => 'teacher'], function () {
         // Пошук
 
-        Route::get('/students/search', [StudentController::class, 'find'])->name('find_student');
+        Route::match(array('GET','POST'),'/students/search', [StudentController::class, 'find'])->name('find_student');
 
         // Пари
 

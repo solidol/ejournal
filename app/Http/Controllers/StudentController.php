@@ -13,8 +13,10 @@ class StudentController extends Controller
         if ($res == null) {
             $students = array();
         } else {
-            $students = Student::where('FIO_stud', 'LIKE', '%' . $res . '%')->get();
+            $students = Student::where('FIO_stud', 'LIKE', "%{$res}%")->paginate(25);
+            $students->appends(array('fullname' => $request->fullname,));
         }
+        
         return view('teacher.students_list', ['students' => $students]);
     }
 }

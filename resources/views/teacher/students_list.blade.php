@@ -14,7 +14,7 @@
     Студенти
 </h1>
 
-<form method="get">
+<form method="post">
     @csrf
     <div class="mb-3">
         <label class="form-label">ПІБ студента або частина</label>
@@ -40,17 +40,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($students as $students)
+            @foreach($students as $student)
             <tr>
                 <td>
-                    {{$students->FIO_stud}}
+                    {{$student->FIO_stud}}
                 </td>
                 <td>
-                    {{$students->group->nomer_grup}}
+                    {{$student->group->nomer_grup}}
                 </td>
 
                 <td>
-                    <a class="btn btn-success pt-0 pb-0" href="{{route('get_journals',['group'=>$students->group->id])}}">
+                    <a class="btn btn-success pt-0 pb-0" href="{{route('get_journals',['group'=>$student->group->id])}}">
                         <i class="bi bi-pencil-square"></i> Журнали
                     </a>
 
@@ -75,7 +75,9 @@
             </tr>
         </tfoot>
     </table>
-
+    @if (!empty($students))
+    {!! $students->links() !!}
+    @endif
 </div>
 
 
