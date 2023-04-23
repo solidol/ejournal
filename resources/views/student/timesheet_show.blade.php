@@ -110,7 +110,7 @@
             }
         });
 
-/*
+
         $('#tbtable').DataTable({
             dom: 'Bfrtip',
             language: languageUk,
@@ -126,7 +126,7 @@
             "paging": false,
             "ordering": false,
 
-        });*/
+        });
     });
 </script>
 @stop
