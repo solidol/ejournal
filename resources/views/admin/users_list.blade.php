@@ -22,6 +22,9 @@
 <table id="journal_users" class="table table-stripped table-bordered">
     <thead>
         <tr>
+            <th style="width:15%;">
+                Фото
+            </th>
             <th>
                 Ім'я
             </th>
@@ -36,6 +39,11 @@
     <tbody>
         @foreach($users as $user)
         <tr>
+            <td>
+                @if ($user->isTeacher())
+                <img class="w-100" src="{{route('teacher.avatar.get',['id'=>$user->userable->id])}}">
+                @endif
+            </td>
             <td>
                 {{$user->userable->fullname}}
             </td>
