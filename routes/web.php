@@ -12,6 +12,7 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ControlController;
 use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
         return view('home');
     })->name('home');
 
+    Route::get('/files/teachers/{id}.jpg', [TeacherController::class, 'avatar'])->name('teacher.avatar.get');
 
     Route::post('/messages/send', [MessageController::class, 'send'])->name('message_send');
 

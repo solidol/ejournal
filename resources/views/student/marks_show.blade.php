@@ -27,7 +27,7 @@
 @else
 <div class="row m-3">
     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-12">
-        <img class="w-75" src="{{asset('/storage/images/'.$currentJournal->teacher->image)}}">
+        <img class="w-75" src="{{route('teacher.avatar.get',['id'=>$currentJournal->teacher->id])}}">
     </div>
     <div class="col-xl-10 col-lg-9 col-md-8 col-sm-6 col-xs-12">
         <h2>{{$currentJournal->subject->subject_name}}</h2>
