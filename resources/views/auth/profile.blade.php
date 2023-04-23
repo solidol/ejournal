@@ -10,7 +10,7 @@
                 <div class="card-body row">
                     <div class="col-4">
                         @if (Auth::user()->isTeacher())
-                        <img class="w-100" src="{{asset('/storage/images/'.Auth::user()->userable->image)}}">
+                        <img class="w-100" src="{{route('student_get_marks',['id'=>Auth::user()->userable->id])}}">
                         @endif
                     </div>
                     <div class="col-8">
