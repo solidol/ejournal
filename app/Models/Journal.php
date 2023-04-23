@@ -20,16 +20,20 @@ class Journal extends Model
     {
         return $this->hasMany(Lesson::class)->orderBy('data_');
     }
+    public function lessonsDate($from, $to)
+    {
+        return $this->hasMany(Lesson::class)->whereBetween('data_', [$from, $to])->orderBy('data_');
+    }
     public function group()
     {
-        return $this->belongsTo(Group::class,'group_id','kod_grup')->orderBy('nomer_grup');
+        return $this->belongsTo(Group::class, 'group_id', 'kod_grup')->orderBy('nomer_grup');
     }
     public function subject()
     {
-        return $this->belongsTo(Subject::class,'subject_id','kod_subj')->orderBy('subject_name');
+        return $this->belongsTo(Subject::class, 'subject_id', 'kod_subj')->orderBy('subject_name');
     }
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class,'teacher_id','kod_prep');
+        return $this->belongsTo(Teacher::class, 'teacher_id', 'kod_prep');
     }
 }

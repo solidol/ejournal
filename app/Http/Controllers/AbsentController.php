@@ -37,11 +37,14 @@ class AbsentController extends Controller
             $month = (new DateTime())->format('m');
         }
         $user = Auth::user();
+        $dateFrom = new DateTime($year . '-' . $month . '-01');
+        $dateTo = (new DateTime($year . '-' . $month . '-01'))->modify('first day of next month');
         $period = new DatePeriod(
-            new DateTime($year . '-' . $month . '-01'),
+            $dateFrom,
             new DateInterval('P1D'),
-            (new DateTime($year . '-' . $month . '-01'))->modify('first day of next month')
+            $dateTo
         );
+        //dd($period);
         $dates = array();
         foreach ($period as $dItem) {
 
@@ -60,6 +63,8 @@ class AbsentController extends Controller
                     'last_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('last month')->format('m'),
                     'next_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('next month')->format('m'),
                 ],
+                'dateFrom' => $dateFrom,
+                'dateTo' => $dateTo,
                 'arDates' => $dates,
                 'journals' => $journals
             ]

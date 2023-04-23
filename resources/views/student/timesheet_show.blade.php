@@ -57,7 +57,9 @@
         </thead>
         <tbody>
             @foreach($journals as $journal)
+            @if ($journal->lessonsDate($dateFrom->format('Y-m-d'),$dateTo->format('Y-m-d'))->count() > 0)
             <tr>
+
                 <td class="subj-name">
                     {{$journal->subject->subject_name}}
                 </td>
@@ -70,7 +72,7 @@
                 @foreach($arDates as $dItem)
                 <td class="hr-cnt {{($dItem['dw']=='6' || $dItem['dw']=='0')?'we-cols':''}}">
 
-                    @foreach($journal->lessons as $lesson)
+                    @foreach($journal->lessonsDate($dateFrom->format('Y-m-d'),$dateTo->format('Y-m-d'))->get() as $lesson)
                     @if ($lesson->data_ == $dItem['raw'])
                     <div class="bg-dark text-white">
                         @if ($lesson->absent($user->userable->id))
@@ -86,9 +88,10 @@
                 </td>
                 @endforeach
                 <td class="hr-cnt fw-bold">
-                    {{$cnt>0?$cnt:'-'}}
+                   {{$cnt>0?$cnt:'-'}}
                 </td>
             </tr>
+            @endif
             @endforeach
         </tbody>
 
@@ -107,7 +110,7 @@
             }
         });
 
-
+/*
         $('#tbtable').DataTable({
             dom: 'Bfrtip',
             language: languageUk,
@@ -123,7 +126,7 @@
             "paging": false,
             "ordering": false,
 
-        });
+        });*/
     });
 </script>
 @stop

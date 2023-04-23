@@ -27,7 +27,7 @@
 
         @include('menus.mainmenu')
 
-        <div class="container">
+        <div class="container-fluid">
             <main class="m-1 p-2 bg-white rounded-2">
                 @yield('content')
             </main>
