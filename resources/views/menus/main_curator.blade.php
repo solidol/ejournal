@@ -27,7 +27,29 @@
 -->
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-bounding-box"></i> {{ Auth::user()->userable->fullname }} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('show_profile') }}"><i class="bi bi-person-lines-fill"></i> Мій профіль</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+    document.getElementById('logout-form').submit();">
+                                <i class="bi bi-box-arrow-right"></i> Вихід
+                            </a>
 
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/teacher" class="btn btn-outline-success"><i class="bi bi-book"></i> Загальний журнал</a>
