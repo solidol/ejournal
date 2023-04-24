@@ -53,14 +53,14 @@
 
                 @if (Auth::user()->isCurator())
                 <li class="nav-item">
-                    <a class="nav-link" href="/curator" class="btn btn-outline-success"><i class="bi bi-book"></i> Журнали куратора</a>
+                    <a class="nav-link" href="/curator" class="btn btn-outline-success"><i class="bi bi-pencil-square"></i> Журнали куратора</a>
                 </li>
                 @endif
 
 
                 @if (Auth::user()->isAdmin())
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin" class="btn btn-outline-success"><i class="bi bi-book"></i> Адмінпанель</a>
+                    <a class="nav-link" href="/admin" class="btn btn-outline-success"><i class="bi bi-gear"></i> Адмінпанель</a>
                 </li>
                 @endif
             </ul>
