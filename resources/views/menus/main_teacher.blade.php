@@ -52,7 +52,9 @@
                 </li>
 
                 @if (Auth::user()->isCurator())
-                @include('menus.main_curator')
+                <li class="nav-item">
+                    <a class="nav-link" href="/curator" class="btn btn-outline-success"><i class="bi bi-book"></i> Журнали куратора</a>
+                </li>
                 @endif
 
 

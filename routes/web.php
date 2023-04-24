@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\MarkController;
@@ -65,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/student/journals', [JournalController::class, 'studentMarks'])->name('student_get_journals');
 
         Route::get('/student/absents/{year?}/{month?}', [AbsentController::class, 'studentTable'])->name('student_get_absents');
-        
+
         Route::get('/student/teachers', [GroupController::class, 'studentTeachers'])->name('student_get_teachers');
 
         Route::get('/student/absents/{year?}/{month?}', [AbsentController::class, 'studentTable'])->name('student_get_absents');
@@ -73,6 +74,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::group(['middleware' => 'curator'], function () {
+        Route::get('/teacher', function () {
+            Session::put('localrole', 'teacher');
+            return redirect()->route('home');
+        });
+
         Route::get('/curator/journals/{id}/show/marks', [JournalController::class, 'curatorMarks'])->name('curator_get_marks');
 
         Route::get('/curator/journals', [UserController::class, 'curatorGroups'])->name('curator_get_journals');
@@ -80,9 +86,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::group(['middleware' => 'teacher'], function () {
+        Route::get('/curator', function () {
+            Session::put('localrole', 'curator');
+            return redirect()->route('home');
+        });
+
         // Пошук
 
-        Route::match(array('GET','POST'),'/students/search', [StudentController::class, 'find'])->name('find_student');
+        Route::match(array('GET', 'POST'), '/students/search', [StudentController::class, 'find'])->name('find_student');
 
         // Пари
 
