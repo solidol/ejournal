@@ -30,6 +30,32 @@ class AbsentController extends Controller
         '12' => 'Грудень',
     ];
 
+    private static function getYear()
+    {
+        $date = new DateTime();
+        $m = $date->format('m');
+        switch ($m) {
+            case '01':
+            case '02':
+            case '03':
+            case '04':
+            case '05':
+            case '06':
+                return $date->format('Y') - 1;
+                break;
+            case '08':
+            case '09':
+            case '10':
+            case '11':
+            case '12':
+                return $date->format('Y');
+                break;
+            default:
+                return $date->format('Y');
+                break;
+        }
+    }
+
     function studentTable($year = false, $month = false)
     {
         if (!$year || !$month) {
@@ -66,7 +92,8 @@ class AbsentController extends Controller
                 'dateFrom' => $dateFrom,
                 'dateTo' => $dateTo,
                 'arDates' => $dates,
-                'journals' => $journals
+                'journals' => $journals,
+                'year' => AbsentController::getYear(),
             ]
         );
     }

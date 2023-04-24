@@ -9,17 +9,17 @@
     {{$data['title1']}}
 </h2>
 <nav class="nav">
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'08'])}}">Серпень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'09'])}}">Вересень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'10'])}}">Жовтень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'11'])}}">Листопад</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2022','month'=>'12'])}}">Грудень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'01'])}}">Січень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'02'])}}">Лютий</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'03'])}}">Березень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'04'])}}">Квітень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'05'])}}">Травень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>'2023','month'=>'06'])}}">Червень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>$year,'month'=>'08'])}}">Серпень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>$year,'month'=>'09'])}}">Вересень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>$year,'month'=>'10'])}}">Жовтень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>$year,'month'=>'11'])}}">Листопад</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>$year,'month'=>'12'])}}">Грудень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>$year+1,'month'=>'01'])}}">Січень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>$year+1,'month'=>'02'])}}">Лютий</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>$year+1,'month'=>'03'])}}">Березень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>$year+1,'month'=>'04'])}}">Квітень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>$year+1,'month'=>'05'])}}">Травень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('my_timesheet_date',['year'=>$year+1,'month'=>'06'])}}">Червень</a>
 
 </nav>
 <div class="form-check mb-3">
@@ -46,6 +46,7 @@
         </thead>
         <tbody>
             @foreach($journals as $journal)
+            @if ($journal->lessonsDate($dateFrom->format('Y-m-d'),$dateTo->format('Y-m-d'))->count() > 0)
             <tr>
                 <td class="subj-name">
                     {{$journal->group->nomer_grup}} {{$journal->subject->subject_name}}
@@ -63,6 +64,7 @@
                 </td>
                 @endforeach
             </tr>
+            @endif
             @endforeach
         </tbody>
         <tfoot>
