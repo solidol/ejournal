@@ -59,7 +59,9 @@
 
 
                 @if (Auth::user()->isAdmin())
-                @include('menus.main_admin')
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin" class="btn btn-outline-success"><i class="bi bi-book"></i> Адмінпанель</a>
+                </li>
                 @endif
             </ul>
         </div>

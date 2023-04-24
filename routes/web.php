@@ -47,6 +47,11 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'admin'], function () {
+        Route::get('/teacher', function () {
+            Session::put('localrole', 'teacher');
+            return redirect()->route('home');
+        });
+
         Route::get('/admin/users/login-as', [UserController::class, 'anotherLoginForm'])->name('admin_another_login');
 
         Route::post('/admin/users/login-as', [UserController::class, 'anotherLogin'])->name('admin_another_auth');
@@ -86,8 +91,17 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::group(['middleware' => 'teacher'], function () {
+        Route::get('/teacher', function () {
+            Session::put('localrole', 'teacher');
+            return redirect()->route('home');
+        });
         Route::get('/curator', function () {
             Session::put('localrole', 'curator');
+            return redirect()->route('home');
+        });
+
+        Route::get('/admin', function () {
+            Session::put('localrole', 'admin');
             return redirect()->route('home');
         });
 

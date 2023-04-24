@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -50,7 +50,7 @@ class UserController extends Controller
         if (Auth::user()->isAdmin() && $request->input('userid') > 0) {
             Log::loginAs($request->input('userid'));
             Auth::loginUsingId($request->input('userid'));
-
+            Session::put('localrole', null);
             return redirect()->route('get_journals');
         } else
             return view('auth.login');
