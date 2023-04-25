@@ -53,7 +53,7 @@
 
                 @if (Auth::user()->isCurator())
                 <li class="nav-item">
-                    <a class="nav-link" href="/curator" class="btn btn-outline-success"><i class="bi bi-pencil-square"></i> <span class="d-md-inline d-lg-none">Журнали куратора</span></a>
+                    <a class="nav-link" href="/curator" class="btn btn-outline-success"><i class="bi bi-pencil-square"></i> Журнали куратора</a>
                 </li>
                 @endif
 
