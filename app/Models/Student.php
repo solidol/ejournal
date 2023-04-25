@@ -26,7 +26,7 @@ class Student extends Model
     }
     public function user()
     {
-        return $this->morphOne(App\Models\User::class, 'userable');
+        return $this->morphOne(User::class, 'userable');
     }
     public function group()
     {
@@ -42,4 +42,5 @@ class Student extends Model
     {
         return $this->hasMany(Absent::class, 'kod_stud');
     }
+
 }

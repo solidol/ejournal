@@ -40,4 +40,15 @@ class Teacher extends Model
     {
         return $this->hasMany(Group::class, 'kod_prep');
     }
+    public function curLocalStudents()
+    {
+        return $this->hasManyThrough(
+            Student::class, 
+            Group::class,
+            'kod_prep', // Внешний ключ в таблице `groups` ...
+            'kod_grup', // Внешний ключ в таблице `students` ...
+            'kod_prep', // Локальный ключ в таблице `teachers` ...
+            'kod_grup' // Локальный ключ в таблице `groups` ...
+        );
+    }
 }

@@ -12,11 +12,15 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
 
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-book"></i> Моя група
+                        <i class="bi bi-people"></i> Моя група</a>
                     </a>
                     <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('corator_local_student_list') }}"><i class="bi bi-people"></i> Список студентів</a>
+                        </li>
                         <li>
                             <a class="dropdown-item" href="{{ route('curator_get_journals') }}"><i class="bi bi-person-lines-fill"></i> Оцінки у моїх групаї</a>
                         </li>

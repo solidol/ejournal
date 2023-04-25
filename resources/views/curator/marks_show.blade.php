@@ -27,10 +27,6 @@
 
 @stop
 
-@section('custom-menu')
-
-@stop
-
 @section('content')
 
 @if ($currentJournal)

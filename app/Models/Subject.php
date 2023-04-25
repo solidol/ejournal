@@ -10,10 +10,14 @@ class Subject extends Model
     use HasFactory;
     protected $table = 'subjects';
     protected $guarded = [];
+    protected $appends = ['title'];
     
     public $timestamps = false;
     protected $primaryKey = 'kod_subj';
 
+    public function getTitleAttribute(){
+        return $this->subject_name;
+    }
 
     public function lessons()
     {
