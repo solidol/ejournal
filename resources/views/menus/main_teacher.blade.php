@@ -13,7 +13,7 @@
                 <!-- Authentication Links -->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('get_journals') }}"><i class="bi bi-book"></i> <span class="d-md-inline d-lg-none">Мої журнали</span></a>
+                    <a class="nav-link" href="{{ route('get_journals') }}"><i class="bi bi-book"></i> <span>Журнали</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('find_student') }}"><i class="bi bi-search"></i> <span class="d-md-inline d-lg-none">Пошук студента</span></a>
@@ -60,7 +60,7 @@
 
                 @if (Auth::user()->isAdmin())
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin" class="btn btn-outline-success"><i class="bi bi-gear"></i> Адмінпанель</a>
+                    <a class="nav-link" href="/admin" class="btn btn-outline-success"><i class="bi bi-gear"></i></a>
                 </li>
                 @endif
             </ul>
