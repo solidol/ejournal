@@ -1,28 +1,26 @@
 @extends('layouts.app-nosidebar')
 
-@section('title', 'Мої пропуски')
-
-
+@section('title', 'Пропуски '.$student->fullname)
 
 
 @section('content')
-<h1>Мої пропуски</h1>
+<h1>Пропуски {{$student->fullname}}</h1>
 <h2>
     {{$data['title1']}}
 </h2>
 
 <nav class="nav">
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year,'month'=>'08'])}}">Серпень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year,'month'=>'09'])}}">Вересень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year,'month'=>'10'])}}">Жовтень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year,'month'=>'11'])}}">Листопад</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year,'month'=>'12'])}}">Грудень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'01'])}}">Січень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'02'])}}">Лютий</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'03'])}}">Березень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'04'])}}">Квітень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'05'])}}">Травень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'06'])}}">Червень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('curator_local_student_absents',['id'=>$student->id,'year'=>$year,'month'=>'08'])}}">Серпень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('curator_local_student_absents',['id'=>$student->id,'year'=>$year,'month'=>'09'])}}">Вересень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('curator_local_student_absents',['id'=>$student->id,'year'=>$year,'month'=>'10'])}}">Жовтень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('curator_local_student_absents',['id'=>$student->id,'year'=>$year,'month'=>'11'])}}">Листопад</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('curator_local_student_absents',['id'=>$student->id,'year'=>$year,'month'=>'12'])}}">Грудень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('curator_local_student_absents',['id'=>$student->id,'year'=>$year+1,'month'=>'01'])}}">Січень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('curator_local_student_absents',['id'=>$student->id,'year'=>$year+1,'month'=>'02'])}}">Лютий</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('curator_local_student_absents',['id'=>$student->id,'year'=>$year+1,'month'=>'03'])}}">Березень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('curator_local_student_absents',['id'=>$student->id,'year'=>$year+1,'month'=>'04'])}}">Квітень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('curator_local_student_absents',['id'=>$student->id,'year'=>$year+1,'month'=>'05'])}}">Травень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('curator_local_student_absents',['id'=>$student->id,'year'=>$year+1,'month'=>'06'])}}">Червень</a>
 
 </nav>
 
@@ -75,7 +73,7 @@
                     @foreach($journal->lessonsDate($dateFrom->format('Y-m-d'),$dateTo->format('Y-m-d'))->get() as $lesson)
                     @if ($lesson->data_ == $dItem['raw'])
                     <div class="bg-dark text-white">
-                        @if ($lesson->absent($user->userable->id))
+                        @if ($lesson->absent($student->id))
                         <?php $cnt++; ?>
                         НБ
                         @else

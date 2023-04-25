@@ -70,7 +70,7 @@ class AbsentController extends Controller
             new DateInterval('P1D'),
             $dateTo
         );
-        //dd($period);
+
         $dates = array();
         foreach ($period as $dItem) {
 

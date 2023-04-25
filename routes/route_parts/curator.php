@@ -23,7 +23,7 @@ Route::group(['middleware' => 'curator'], function () {
 
     Route::get('/curator/local/students/{id}/profile', [CuratorController::class, 'profile'])->name('corator_local_student_profile');
 
-    Route::get('/curator/local/students/{id}/absents', [CuratorController::class, 'absents'])->name('corator_local_student_absents');
+    Route::get('/curator/local/students/{id}/absents/{year?}/{month?}', [CuratorController::class, 'absents'])->name('curator_local_student_absents');
 
     Route::get('/curator/local/students/{id}/marks/{journal_id?}', [CuratorController::class, 'marks'])->name('corator_local_student_marks');
 });

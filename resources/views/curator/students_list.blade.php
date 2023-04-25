@@ -68,7 +68,7 @@
                     <a class="btn btn-outline-primary" href="{{route('corator_local_student_marks',['id'=>$student->id])}}"><i class="bi bi-5-square"></i></a>
                 </td>
                 <td>
-                    
+                    <a class="btn btn-outline-primary" href="{{route('curator_local_student_absents',['id'=>$student->id])}}"><i class="bi bi-person-slash"></i></a>
                 </td>
                 <td>
                     <a class="btn btn-outline-primary" href="{{route('corator_local_student_profile',['id'=>$student->id])}}"><i class="bi bi-person-lines-fill"></i></a>
