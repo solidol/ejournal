@@ -35,7 +35,7 @@
             @foreach($logs as $logItem)
             <tr>
                 <td>
-                    {{$logItem->created_at->format('d.m.Y h:i')}}
+                    {{$logItem->created_at->format('d.m.Y H:i')}}
                 </td>
                 <td>
                     {{$logItem->comment}}
