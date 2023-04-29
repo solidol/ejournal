@@ -10,7 +10,7 @@ class LogController extends Controller
     public function index()
     {
         return view('admin.events_list', [
-            'arEvents' => Log::orderByDesc('created_at')->paginate(20),
+            'arEvents' => Log::orderByDesc('created_at')->paginate(100),
         ]);
     }
 

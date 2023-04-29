@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-nosidebar')
 
 @section('title', 'Адмінпанель. Журнал подій')
 
@@ -36,7 +36,7 @@
                 {{$event->created_at}}
             </td>
             <td>
-                {{$event->user?$event->user->name:'Inactive'}}
+                {{$event->user?$event->userable->fullname:'Inactive'}}
             </td>
             <td>
                 {{$event->event}}
