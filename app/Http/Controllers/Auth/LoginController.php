@@ -43,13 +43,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->loginType = $this->checkLoginInput();
     }
-    public function redirectTo()
-    {
 
-        if (auth()->user()->id > 0) {
-            Log::login();
-        }
-    }
     public function login(Request $request)
     {
         
@@ -63,6 +57,7 @@ class LoginController extends Controller
             'password'           => $request->password
         ];
         if (Auth::attempt($credentials)) {
+            Log::login();
             return redirect()->intended($this->redirectTo);
         }
         return redirect()->back()
