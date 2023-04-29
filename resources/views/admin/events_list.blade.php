@@ -36,7 +36,7 @@
                 {{$event->created_at}}
             </td>
             <td>
-                {{$event->user?$event->userable->fullname:'Inactive'}}
+                {{$event->user?$event->user->userable->fullname:'Inactive'}}
             </td>
             <td>
                 {{$event->event}}
