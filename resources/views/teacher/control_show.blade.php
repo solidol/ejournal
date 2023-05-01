@@ -110,7 +110,7 @@
                             {{$student->FIO_stud}}
                         </td>
                         <td>
-                            {{$student->lastLogin()?$student->lastLogin()->created_at->format('d.m.Y H:m'):'-'}}
+                            {{$student->lastLogin()?$student->lastLogin()->created_at->format('d.m.Y H:m'):'Ніколи'}}
                         </td>
                         <td>
                             <p style="display:none">
