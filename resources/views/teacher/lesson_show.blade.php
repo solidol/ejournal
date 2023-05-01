@@ -109,7 +109,7 @@
                     <tr>
                         @foreach ($lesson->group->students as $student)
                         <td>
-                            {{$student->FIO_stud}}
+                            {{$student->fullname}}
                         </td>
                         <td>
                             <input type="text" class="inp-abs form form-control" name="abs[{{$student->id}}]" value="{{$lesson->absent($student->id)?'нб':''}}" placeholder="">
@@ -184,8 +184,6 @@
 
 
 @include('popups.edit-lesson')
-
-@include('popups.share-lesson')
 
 @include('popups.new-control')
 
