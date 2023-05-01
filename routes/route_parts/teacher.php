@@ -40,6 +40,8 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::get('/journals/show/{id}/marks', [JournalController::class, 'marks'])->name('get_marks');
 
+    Route::get('/journals/show/{journal_id}/control/{control_id}', [ControlController::class, 'show'])->name('show_control');
+
     Route::post('/journals/store', [JournalController::class, 'store'])->name('store_journal');
 
     Route::post('/lessons/store', [LessonController::class, 'store'])->name('store_lesson');

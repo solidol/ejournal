@@ -56,17 +56,17 @@ class User extends Authenticatable
     {
         return $this->hasRole('teacher');
     }
-    
+
     public function isCurator()
     {
         return $this->hasRole('curator');
     }
-    
+
     public function isDispatcher()
     {
         return $this->hasRole('dispatcher');
     }
-    
+
     public function isStudent()
     {
         return $this->hasRole('student');
@@ -80,10 +80,24 @@ class User extends Authenticatable
         else return false;
     }
 
-    public static function teachers(){
-        return User::where('userable_type','App\Models\Teacher');
+    public static function teachers()
+    {
+        return User::where('userable_type', 'App\Models\Teacher');
     }
-    public static function students(){
-        return User::where('userable_type','App\Models\Student');
+    public static function students()
+    {
+        return User::where('userable_type', 'App\Models\Student');
+    }
+    public function logins()
+    {
+        return $this->hasMany(Log::class);
+    }
+    public function lastLogin()
+    {
+        if ($this->logins) {
+            return $this->logins->last();
+        } else {
+            return false;
+        }
     }
 }

@@ -58,29 +58,49 @@ class ControlController extends Controller
             'vid_kontrol' => $control->title,
             'ocenka' => $maxval,
         ]);
+
+        Session::flash('message', 'Контроль ' . $control->title . ' успішно створено!');
+        return redirect()->route('show_control', ['journal_id' => $control->journal->id, 'control_id' => $control->id]);
         
-        Session::flash('message', 'Контроль '.$control->title.' успішно створено!');
-        return redirect()->route('get_marks', ['id' => $journal->id]);
+        //return redirect()->route('get_marks', ['id' => $journal->id]);
     }
 
-    
+
+    function show($journal_id, $control_id)
+    {
+        $control = Control::find($control_id);
+        if ($control != null && $control->journal_id == $journal_id) {
+
+            $journals = Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title');
+            return view('teacher.control_show', [
+                'lesson' => false,
+                'currentJournal' => $control->journal,
+                'journals' => $journals,
+                'currentControl' => $control
+            ]);
+        } else {
+            return view('noelement');
+        }
+    }
+
+
     function delete($id)
     {
         $control = Control::find($id);
-        Session::flash('message', 'Контроль '.$control->title.' успішно видалено!');
+        Session::flash('message', 'Контроль ' . $control->title . ' успішно видалено!');
         $journal_id = $control->journal_id;
         $control->marks()->delete();
         $control->marksHeader()->delete();
         $control->delete();
-        return redirect()->route('get_marks', ['id'=>$journal_id]);
+        return redirect()->route('get_marks', ['id' => $journal_id]);
     }
 
     function update(Request $request)
     {
-        if ($request->control_id<1) {
+        if ($request->control_id < 1) {
             Session::flash('error', 'Контроль не оновлено! Не вистачає даних!');
             return redirect()->route('get_journals');
-        } 
+        }
         $control = Control::find($request->control_id);
         $control->update([
             'title' => $request->title,
@@ -99,6 +119,7 @@ class ControlController extends Controller
             'type_kontrol' => $request->typecontrol,
             'ocenka' => $request->max_grade,
         ]);
-        return redirect()->route('get_marks', ['id'=>$control->journal_id]);
+        return redirect()->route('show_control', ['journal_id' => $control->journal->id, 'control_id' => $control->id]);
+        //return redirect()->route('get_marks', ['id' => $control->journal_id]);
     }
 }

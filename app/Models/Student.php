@@ -14,7 +14,7 @@ class Student extends Model
 
     public $timestamps = false;
     protected $primaryKey = 'kod_stud';
-    protected $appends = ['id','fullname'];
+    protected $appends = ['id', 'fullname'];
 
     public function getIdAttribute()
     {
@@ -42,5 +42,12 @@ class Student extends Model
     {
         return $this->hasMany(Absent::class, 'kod_stud');
     }
-
+    public function lastLogin()
+    {
+        if ($this->user && $this->user->logins) {
+            return $this->user->logins->last();
+        } else {
+            return false;
+        }
+    }
 }

@@ -49,163 +49,76 @@
 </ul>
 
 <ul class="nav nav-pills mb-3" role="tablist">
-    <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="tl-all" data-bs-toggle="tab" data-bs-target="#tab-all" type="button" role="tab" aria-controls="all" aria-selected="false">
-            Всі
-        </button>
+    <li class="nav-item">
+        <a class="nav-link" href="{{URL::route('get_marks',['id'=>$currentJournal->id])}}">
+            Всі разом
+        </a>
     </li>
-    <?php $i = 1; ?>
     @foreach ($currentJournal->controls as $control)
 
     <li class="nav-item" role="presentation">
-        <button class="nav-link " id="<?= 'tl-' . $i ?>" data-bs-toggle="tab" data-bs-target="#tab-{{$i}}" type="button" role="tab" aria-controls="{{$i}}" aria-selected="<?= ($i == 1) ? 'true' : 'false' ?>">
+        <a class="nav-link" href="{{URL::route('show_control',['journal_id'=>$currentJournal->id, 'control_id'=>$control->id])}}">
             {{$control->title}}
-        </button>
+        </a>
     </li>
-    <?php $i++; ?>
     @endforeach
 
 </ul>
 
 
-<div class="tab-content" id="myTabContent">
 
-    <div class="tab-pane fade show active" id="tab-all" role="tabpanel" aria-labelledby="tl-all">
-        <table id="table-all" class="table table-striped m-0">
-            <thead>
-                <tr>
-                    <th></th>
-                    <?php $i = 1; ?>
-                    @foreach($currentJournal->controls as $control)
-                    <th>
-                        <button type="button" class="btn btn-outline-success edit-control p-0 m-0" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['id'=>$control->id])}}"><i class="bi bi-pencil-square text-light"></i></button>
-                    </th>
-                    <?php $i++; ?>
-                    @endforeach
-                </tr>
-                <tr>
-                    <th class="th-naming">ПІБ</th>
-                    @foreach($currentJournal->controls as $control)
-                    <th class="rotate sum">
-                        <div>
-                            {{$control->title}}
-                        </div>
-
-                    </th>
-                    @endforeach
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($currentJournal->group->students as $student)
-                <tr>
-                    <td>
-                        {{$student->FIO_stud}}
-                    </td>
-                    @foreach($currentJournal->controls as $control)
-                    <td>
-                        {{$control->mark($student->id)->mark_str??'-'}}
-                    </td>
-                    @endforeach
-                </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>Середнє <!--| Успішність | Якість--></th>
-                    @foreach($currentJournal->controls as $control)
-                    <th>
-
-                    </th>
-                    @endforeach
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-
-    <?php
-    $i = 1;
-
-    ?>
-    @foreach ($currentJournal->controls as $control)
-
-    <div class="tab-pane fade " id="tab-{{$i}}" role="tabpanel" aria-labelledby="<?= 'tl-' . $i ?>">
-        <div class="row">
-            <div class="col-lg-8 col-md-12">
-                <h3>Дата контролю {{!is_null($control->date_)?$control->date_->format('d.m.Y'):''}} | {{$control->type_title}}</h3>
-
-                <form action="{{route('store_marks',['id'=>$control->id])}}" method="post">
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-success">Зберегти</button>
-                    </div>
-                    <textarea rows="1" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V"></textarea>
-
-                    @csrf
-                    <table class="table table-striped table-marks m-0">
-                        <thead>
-                            <tr>
-                                <th>ПІБ студента</th>
-                                <th class="sum">Оцінка</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $studentsCount = $currentJournal->group->students->count();
-                            $countYak = 0;
-                            $countUsp = 0;
-                            ?>
-
-                            @foreach($currentJournal->group->students as $student)
-                            <?php
-                            if (($control->mark($student->id)->ocenka ?? 0) >= (0.6 * $control->max_grade)) {
-                                $countUsp++;
-                            }
-                            if (($control->mark($student->id)->ocenka ?? 0) >= (0.75 * $control->max_grade)) {
-                                $countYak++;
-                            }
-                            ?>
-                            <tr>
-                                <td>
-                                    {{$student->FIO_stud}}
-                                </td>
-                                <td>
-                                    <p style="display:none">
-                                        {{$control->max_grade}}
-                                    </p>
-                                    <input type="text" class="form form-control m-0 p-1" name="marks[{{$student->id}}]" value="{{$control->mark($student->id)->mark_str??''}}" placeholder="Max = {{$control->max_grade}}">
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Успішність</th>
-                                <th>{{round(1000*$countUsp/$studentsCount)/10}} %</th>
-                            </tr>
-                            <tr>
-                                <th>Якість</th>
-                                <th>{{round(1000*$countYak/$studentsCount)/10}} %</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </form>
-            </div>
-
-            <div class="col-lg-4 col-md-12">
-                <div class="p-2 border border-2 border-primary rounded-2">
-                    <h3 class="text-danger">Редагування та видалення</h3>
-                    <div class="mb-3">
-                        <a href="{{URL::route('delete_control',['id'=>$control->id])}}" class="btn btn-danger m-2" data-confirm="Видалити увесь контроль {{$control->title}} разом з оцінками?">Видалити контроль</a>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['id'=>$control->id])}}" class="edit-control btn btn-warning m-2">Редагувати контроль</button>
-                    </div>
+<table id="table-all" class="table table-striped m-0">
+    <thead>
+        <tr>
+            <th></th>
+            <?php $i = 1; ?>
+            @foreach($currentJournal->controls as $control)
+            <th>
+                <button type="button" class="btn btn-outline-success edit-control p-0 m-0" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['id'=>$control->id])}}"><i class="bi bi-pencil-square text-light"></i></button>
+            </th>
+            <?php $i++; ?>
+            @endforeach
+        </tr>
+        <tr>
+            <th class="th-naming">ПІБ</th>
+            @foreach($currentJournal->controls as $control)
+            <th class="rotate sum">
+                <div>
+                    {{$control->title}}
                 </div>
-            </div>
-        </div>
-    </div>
-    <?php $i++; ?>
-    @endforeach
+
+            </th>
+            @endforeach
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($currentJournal->group->students as $student)
+        <tr>
+            <td>
+                {{$student->FIO_stud}}
+            </td>
+            @foreach($currentJournal->controls as $control)
+            <td>
+                {{$control->mark($student->id)->mark_str??'-'}}
+            </td>
+            @endforeach
+        </tr>
+        @endforeach
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Середнє <!--| Успішність | Якість--></th>
+            @foreach($currentJournal->controls as $control)
+            <th>
+
+            </th>
+            @endforeach
+        </tr>
+    </tfoot>
+</table>
 
 
-</div>
+
 
 
 @include('popups.edit-control')
@@ -250,43 +163,6 @@
                     $(this.footer()).html(sum > 0 ? Math.round(10 * sum / rowCount) / 10 : '');
                 });
             }
-        });
-
-
-
-        $('.table-marks').DataTable({
-            dom: 'Bfrtip',
-            language: languageUk,
-            buttons: [{
-                    extend: 'copy',
-                    className: 'btn btn-primary'
-                },
-                {
-                    extend: 'excel',
-                    className: 'btn btn-primary'
-                }
-            ],
-            "paging": false,
-            "ordering": false,
-        });
-
-        $(".m-inputs").on('paste', function() {
-            var element = this;
-            let arInps = $(this).parent().find("table input");
-            setTimeout(function() {
-                var text = $(element).val();
-                console.dir(text);
-                $(element).val("");
-                let adMarks = text.split("\n");
-                if (arInps.length == adMarks.length) {
-
-                    for (let i = 0; i <= adMarks.length - 1; i++) {
-                        arInps[i].value = adMarks[i];
-                    }
-                } else {
-                    alert('Кількість оцінок і рядків не співпадають');
-                }
-            }, 100);
         });
     });
 </script>
