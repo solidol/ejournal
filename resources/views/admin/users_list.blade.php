@@ -41,7 +41,7 @@
         <tr>
             <td>
                 @if ($user->isTeacher())
-                <img class="w-100" src="{{route('teacher.avatar.get',['id'=>$user->userable->id])}}">
+                <!--<img class="w-100" src="{{route('teacher.avatar.get',['id'=>$user->userable->id])}}">-->
                 @endif
             </td>
             <td>
