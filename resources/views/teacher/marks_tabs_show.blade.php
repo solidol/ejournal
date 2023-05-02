@@ -7,9 +7,15 @@
 
 <div class="baloon">
     <h1>Оцінки</h1>
-    <nav class="navbar navbar-light bg-light pt-1 pb-1">
+    <h2>
+        Контролі
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addControl">
+            Додати
+        </button>
+    </h2>
+    <nav class="navbar navbar-light bg-white pt-1 pb-1">
         <div class="d-block d-md-none">
-            <a class="navbar-brand" href="#">Контролі</a>
+            <a class="navbar-brand" href="#">Інші контролі</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#controlsNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -34,20 +40,26 @@
     </nav>
 
     <hr>
-    <div class="mb-3 mt-3">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addControl">
-            Додати контроль
-        </button>
-    </div>
-</div>
 
 
-<div class="baloon d-none d-md-block">
-    <h2 class="d-sm-none d-md-block">Оцінки з інших дисциплін</h2>
-    <nav class="nav flex-column d-none d-md-block">
-        @foreach($journals as $journal)
-        <a class="nav-link" href="{{URL::route('get_marks',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
-        @endforeach
+    <h2>Оцінки з інших дисциплін</h2>
+    <nav class="navbar navbar-light bg-white pt-1 pb-1">
+        <div class="d-block d-md-none">
+            <a class="navbar-brand" href="#">Інші журнали</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#journalsNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div id="journalsNavbar" class="collapse d-md-block">
+            <ul class="navbar-nav mr-auto mb-3">
+                @foreach($journals as $journal)
+                <li class="nav-item">
+                    <a class="nav-link {{($journal->id==$currentJournal->id)?'active':''}}" href="{{URL::route('get_marks',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
+                </li>
+                @endforeach
+            </ul>
+        </div>
     </nav>
 </div>
 @stop

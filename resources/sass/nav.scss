@@ -1,5 +1,9 @@
 /* navbar */
 
+.navbar-light .nav-link{
+    --bs-nav-link-color: $dark;
+}
+
 .navbar {
     padding: 0.2rem;
 }
@@ -12,7 +16,9 @@
     border-radius: 5px;
 }
 
-
+.navbar-light{
+    color: $dark;
+}
 
 .nav-item button.nav-link {
     margin: 5px;
@@ -36,7 +42,11 @@ a.nav-link{
     padding: 0.3rem;
 }
 
-a.active{
+.nav-item a.active{
     font-weight: 600;
-    border: 1px solid $dark;
+//    padding-left: 0.7rem;
+}
+
+.nav-item a.active::before{
+    content: "- ";
 }

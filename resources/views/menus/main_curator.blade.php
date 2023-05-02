@@ -22,7 +22,7 @@
                             <a class="dropdown-item" href="{{ route('corator_local_student_list') }}"><i class="bi bi-people"></i> Список студентів</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('curator_get_journals') }}"><i class="bi bi-person-lines-fill"></i> Оцінки у моїх групаї</a>
+                            <a class="dropdown-item" href="{{ route('curator_get_journals') }}"><i class="bi bi-person-lines-fill"></i> Оцінки студентів групи</a>
                         </li>
                         <!--
                         <li>
