@@ -30,3 +30,13 @@
     width: 100%;
     min-height: 450px;
 }
+
+a.nav-link{
+    display: block;
+    padding: 0.3rem;
+}
+
+a.active{
+    font-weight: 600;
+    border: 1px solid $dark;
+}
