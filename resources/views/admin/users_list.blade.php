@@ -45,7 +45,7 @@
                 @endif
             </td>
             <td>
-                {{$user->userable->fullname}}
+                {{$user->userable?$user->userable->fullname:'NA'}}
             </td>
             <td>{{$user->email}}</td>
             <td>
