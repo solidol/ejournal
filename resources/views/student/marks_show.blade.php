@@ -54,6 +54,7 @@
     </thead>
     <tbody>
         @foreach($currentJournal->controls as $control)
+        @if ($control->title)
         <tr>
             <td>
                 {{$control->date_??'2000-01-01'}}
@@ -68,6 +69,7 @@
                 <b class="mark-in-list">{{$control->mark(Auth::user()->userable_id)->mark_str??'-'}}</b><span>з {{$control->max_grade}}б.</span>
             </td>
         </tr>
+        @endif
         @endforeach
     </tbody>
 </table>
