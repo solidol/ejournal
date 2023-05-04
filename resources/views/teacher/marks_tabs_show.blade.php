@@ -29,13 +29,11 @@
                     </a>
                 </li>
                 @foreach ($currentJournal->controls as $control)
-                @if ($control->title)
                 <li class="nav-item">
                     <a class="nav-link" href="{{URL::route('show_control',['journal_id'=>$currentJournal->id, 'control_id'=>$control->id])}}">
                         {{$control->title}}
                     </a>
                 </li>
-                @endif
                 @endforeach
             </ul>
         </div>
