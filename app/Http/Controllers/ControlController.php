@@ -145,7 +145,7 @@ class ControlController extends Controller
 
 
 
-        $word = new \PhpOffice\PhpWord\TemplateProcessor('exam_report_1.docx');
+        $word = new PhpOffice\PhpWord\TemplateProcessor('exam_report_1.docx');
 
 
         $word->setValue('teacher', Auth::user()->userable->fullname);
