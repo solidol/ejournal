@@ -151,7 +151,7 @@
                 </tfoot>
             </table>
         </form>
-        @if ($currentControl->max_grade==100)
+        @if ($currentControl->max_grade==1000)
         <a href="{{URL::route('get_exam_report',['id'=>$currentControl->id])}}" class="btn btn-outline-success">Завантажити відомість</a>
         @endif
     </div>
