@@ -12,6 +12,11 @@
                         @if (Auth::user()->isTeacher())
                         <img class="w-100" src="{{route('teacher.avatar.get',['id'=>Auth::user()->userable->id])}}">
                         @endif
+                        <form action="/tokens/create" method="post">
+                            @csrf
+                            <input type="hidden" name="token_name" value="test">
+                            <button type="submit">create</button>
+                        </form>
                     </div>
                     <div class="col-8">
 

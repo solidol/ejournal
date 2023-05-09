@@ -69,6 +69,12 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::get('/ajax/controls/{id}/info', [ControlController::class, 'apiShow'])->name('get_info_control');
 
+
+
+    Route::get('/files/examrep/control:{id}', [ControlController::class, 'getExamReport'])->name('get_exam_report');
+
+
+
     //    Табель
 
     //Route::get('/my/timesheet', [TimesheetController::class, 'getTimesheet'])->name('my_timesheet');
@@ -95,7 +101,8 @@ Route::group(['middleware' => 'teacher'], function () {
 
     // Профіль
 
-
-
     Route::get('/users/messages', [MessageController::class, 'list'])->name('list_messages');
+
+
+
 });

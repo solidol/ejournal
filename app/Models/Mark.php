@@ -18,12 +18,92 @@ class Mark extends Model
     protected $guarded = [];
     protected $dates = ['data_'];
     public $timestamps = false;
-    protected $appends = ['id','type_control_title', 'mark_str', 'date_formatted'];
+    protected $appends = ['id', 'type_control_title', 'mark_str', 'date_formatted', 'mark_national', 'mark_ects'];
 
     public function getIdAttribute()
     {
         return $this->kod_ocenki;
     }
+
+    public function getMarkNationalAttribute()
+    {
+        if ($this->ocenka > 0) {
+            if ($this->ocenka >= 0 && $this->ocenka < 30) {
+                return 'Не задовільно';
+            }
+            if ($this->ocenka >= 30 && $this->ocenka < 60) {
+                return 'Не задовільно';
+            }
+            if ($this->ocenka >= 60 && $this->ocenka < 64) {
+                return 'Достатньо';
+            }
+            if ($this->ocenka >= 64 && $this->ocenka < 75) {
+                return 'Задовільно';
+            }
+            if ($this->ocenka >= 75 && $this->ocenka < 82) {
+                return 'Добре';
+            }
+            if ($this->ocenka >= 82 && $this->ocenka < 90) {
+                return 'Дуже добре';
+            }
+            if ($this->ocenka >= 90 && $this->ocenka <= 100) {
+                return 'Відмінно';
+            }
+        } else {
+            switch ($this->ocenka) {
+                case -1:
+                    return "Н/А";
+                    break;
+                case -2:
+                    return "Зар";
+                    break;
+                default:
+                    return '';
+                    break;
+            }
+        }
+    }
+
+
+    public function getMarkEctsAttribute()
+    {
+        if ($this->ocenka > 0) {
+            if ($this->ocenka >= 0 && $this->ocenka < 30) {
+                return 'F';
+            }
+            if ($this->ocenka >= 30 && $this->ocenka < 60) {
+                return 'FX';
+            }
+            if ($this->ocenka >= 60 && $this->ocenka < 64) {
+                return 'E';
+            }
+            if ($this->ocenka >= 64 && $this->ocenka < 75) {
+                return 'D';
+            }
+            if ($this->ocenka >= 75 && $this->ocenka < 82) {
+                return 'C';
+            }
+            if ($this->ocenka >= 82 && $this->ocenka < 90) {
+                return 'B';
+            }
+            if ($this->ocenka >= 90 && $this->ocenka <= 100) {
+                return 'A';
+            }
+        } else {
+            switch ($this->ocenka) {
+                case -1:
+                    return "Н/А";
+                    break;
+                case -2:
+                    return "Зар";
+                    break;
+                default:
+                    return '';
+                    break;
+            }
+        }
+    }
+
 
     public function getMarkStrAttribute()
     {
@@ -81,5 +161,4 @@ class Mark extends Model
     {
         return $this->data_->format('d.m.Y');
     }
-  
 }

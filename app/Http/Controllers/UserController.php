@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,5 +68,11 @@ class UserController extends Controller
             'groups' => $groups,
             //'journals' => Auth::user()->userable->groups->first()->journals()->with('group')->get()->sortBy('group.title')
         ]);
+    }
+
+    function createToken(Request $request)
+    {
+        $token = $request->user()->createToken($request->token_name);
+        return ['token' => $token->plainTextToken];
     }
 }

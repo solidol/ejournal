@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
 
     /**

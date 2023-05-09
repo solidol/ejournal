@@ -130,7 +130,7 @@
                         </td>
                         <td>
                             <p style="display:none">
-                                {{$control->max_grade}}
+                                {{$currentControl->max_grade}}
                             </p>
                             <input type="text" class="form form-control m-0 p-1" name="marks[{{$student->id}}]" value="{{$currentControl->mark($student->id)->mark_str??''}}" placeholder="Max = {{$currentControl->max_grade}}">
                         </td>
@@ -151,6 +151,9 @@
                 </tfoot>
             </table>
         </form>
+        @if ($currentControl->max_grade==100)
+        <a href="{{URL::route('get_exam_report',['id'=>$currentControl->id])}}" class="btn btn-outline-success">Завантажити відомість</a>
+        @endif
     </div>
 
     <div class="col-lg-4 col-md-12">
