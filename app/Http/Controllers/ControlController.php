@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Journal;
 use App\Models\Control;
 use Illuminate\Support\Facades\Auth;
-
-//use \PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\TemplateProcessor;
 use Session;
 
 class ControlController extends Controller
@@ -145,7 +144,7 @@ class ControlController extends Controller
 
 
 
-        $word = new PhpOffice\PhpWord\TemplateProcessor('exam_report_1.docx');
+        $word = new TemplateProcessor('exam_report_1.docx');
 
 
         $word->setValue('teacher', Auth::user()->userable->fullname);
