@@ -2,7 +2,6 @@
 
 @section('title', 'Оцінки '. $currentJournal->group->nomer_grup ." - " .$currentJournal->subject->subject_name)
 
-
 @section('sidebar')
 
 <div class="baloon">
