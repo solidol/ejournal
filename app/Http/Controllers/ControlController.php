@@ -163,7 +163,8 @@ class ControlController extends Controller
         $studentsCount = $control->journal->group->students->count();
         foreach ($control->journal->group->students as $student) {
             $mark = $control->mark($student->id)->mark_str ?? '';
-
+            $nat = 'НА';
+            $ects = 'НА';
             if ($mark < 0) {
                 $nat = 'НА';
                 $ects = 'НА';
