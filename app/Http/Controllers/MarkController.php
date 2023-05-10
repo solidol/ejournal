@@ -13,31 +13,7 @@ use Session;
 
 class MarkController extends Controller
 {
-    function index()
-    {
-        return view('marks', [
-            'oList' => Mark::tester()
-        ]);
-    }
 
-
-
-    function list($subj, $group)
-    {
-        $user = Auth::user();
-        $lesson = Lesson::getSubjectInfo($subj, $group);
-
-        if ($lesson == null)
-            return view('noelement');
-        return view('teacher.marks', [
-            'data' => [
-                'title1' => $lesson->group->nomer_grup . ' - ' . $lesson->subject->subject_name,
-            ],
-            'oList' => Mark::getOcTable($subj, $group),
-            'mList' => $user->getMySubjects(),
-            'lesson' => $lesson,
-        ]);
-    }
 
     function store($id, Request $request)
     {

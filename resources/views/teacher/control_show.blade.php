@@ -71,7 +71,7 @@
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('show_journal',['id'=>$currentJournal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
+    <a class="nav-link" href="{{URL::route('list_lessons',['id'=>$currentJournal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
 </li>
 @stop
 
@@ -80,9 +80,6 @@
 
 <h2>{{$currentJournal->group->nomer_grup}} - {{$currentJournal->subject->subject_name}}</h2>
 <p>Класний керівник - {{$currentJournal->group->curator->FIO_prep}}</p>
-
-
-
 
 
 <div class="row">
@@ -151,9 +148,6 @@
                 </tfoot>
             </table>
         </form>
-        @if ($currentControl->max_grade==100)
-        <a href="{{URL::route('get_exam_report',['id'=>$currentControl->id])}}" class="btn btn-outline-success">Завантажити відомість</a>
-        @endif
     </div>
 
     <div class="col-lg-4 col-md-12">

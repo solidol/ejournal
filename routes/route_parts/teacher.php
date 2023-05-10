@@ -38,6 +38,8 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::get('/journals/show/{id}', [JournalController::class, 'show'])->name('show_journal');
 
+    Route::get('/journals/show/{id}/lessons', [JournalController::class, 'lessons'])->name('list_lessons');
+
     Route::get('/journals/show/{id}/marks', [JournalController::class, 'marks'])->name('get_marks');
 
     Route::get('/journals/show/{journal_id}/control/{control_id}', [ControlController::class, 'show'])->name('show_control');
@@ -71,7 +73,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
 
 
-    Route::get('/files/examrep/control:{id}', [ControlController::class, 'getExamReport'])->name('get_exam_report');
+    Route::post('/files/examrep', [ControlController::class, 'getExamReport'])->name('get_exam_report');
 
 
 

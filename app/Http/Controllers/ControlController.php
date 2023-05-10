@@ -7,6 +7,7 @@ use App\Models\Journal;
 use App\Models\Control;
 use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpWord\TemplateProcessor;
+use Illuminate\Support\Facades\Storage;
 use Session;
 
 class ControlController extends Controller
@@ -138,13 +139,13 @@ class ControlController extends Controller
         //return redirect()->route('get_marks', ['id' => $control->journal_id]);
     }
 
-    function getExamReport($id)
+    function getExamReport(Request $request)
     {
-        $control = Control::find($id);
+        $control = Control::find($request->control_id);
 
 
 
-        $word = new TemplateProcessor('exam_report_1.docx');
+        $word = new TemplateProcessor(Storage::disk('public')->path('system/exam_report_1.docx'));
 
 
         $word->setValue('teacher', Auth::user()->userable->fullname);
@@ -239,10 +240,11 @@ class ControlController extends Controller
         $word->setValue('yak', $yak);
         $word->setValue('usp', $usp);
 
+        $filename = $control->journal->group->title . ' ' . $control->journal->subject->title . '.docx';
 
+        $word->saveAs(Storage::disk('public')->path('reports') . '/' . $filename);
 
-        $word->saveAs('MyWordFile.docx');
+        return Storage::disk('public')->download('reports/' . $filename);
 
-        return   response()->download('MyWordFile.docx', $control->journal->group->title . ' ' . $control->journal->subject->title . '.docx');
     }
 }

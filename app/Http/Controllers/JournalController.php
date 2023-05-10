@@ -65,6 +65,18 @@ class JournalController extends Controller
         if ($journal == null)
             return view('noelement');
         return view('teacher.journal_show', [
+            'lesson' => false,
+            'currentJournal' => $journal,
+            'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
+        ]);
+    }
+
+    function lessons($id)
+    {
+        $journal = Auth::user()->userable->journals->find($id);
+        if ($journal == null)
+            return view('noelement');
+        return view('teacher.lessons_list', [
             'currentJournal' => $journal,
             'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
         ]);
