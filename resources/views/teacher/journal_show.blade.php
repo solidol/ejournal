@@ -19,7 +19,7 @@
 
 @section('custom-menu')
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('list_lessons',['id'=>$journal->id])}}"><i class="bi bi-pencil-square"></i> Записані пари</a>
+    <a class="nav-link" href="{{URL::route('list_lessons',['id'=>$currentJournal->id])}}"><i class="bi bi-pencil-square"></i> Записані пари</a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="{{URL::route('get_marks',['id'=>$currentJournal->id])}}"><i class="bi bi-5-square"></i> Оцінки</a>
