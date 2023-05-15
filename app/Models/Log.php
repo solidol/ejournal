@@ -16,6 +16,19 @@ class Log extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public static function createJournal($id)
+    {
+        Log::create([
+            'user_id' => Auth::id(),
+            'event' => 'create journal',
+            'roles' => Auth::user()->roles,
+            'ip_addr' => \Request::ip(),
+            'comment' => "Користувач " . Auth::user()->userable->fullname . " створив журнал",
+        ]);
+    }
+
+
     public static function login()
     {
         Log::create([
