@@ -11,7 +11,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-
                         <label>Контроль</label>
                         <select id="control_id" name="control_id" class="form-select form-select-md">
                             <option value="-1" selected>Оберіть контроль</option>
@@ -19,8 +18,6 @@
                             <option value="{{$cItem->id}}">{{$cItem->date_?$cItem->date_->format('d.m.Y'):'Без дати'}} {{$cItem->title}}</option>
                             @endforeach
                         </select>
-
-
                     </div>
                 </div>
                 <div class="modal-footer">
