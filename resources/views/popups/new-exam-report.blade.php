@@ -16,7 +16,7 @@
                         <select id="control_id" name="control_id" class="form-select form-select-md">
                             <option value="-1" selected>Оберіть контроль</option>
                             @foreach ($currentJournal->controls as $cItem)
-                            <option value="{{$cItem->id}}">{{$cItem->date_->format('d.m.Y')}} {{$cItem->title}}</option>
+                            <option value="{{$cItem->id}}">{{$cItem->date_?$cItem->date_->format('d.m.Y'):'Без дати'}} {{$cItem->title}}</option>
                             @endforeach
                         </select>
 
