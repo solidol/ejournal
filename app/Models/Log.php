@@ -21,6 +21,8 @@ class Log extends Model
         Log::create([
             'user_id' => Auth::id(),
             'event' => 'login',
+            'roles' => Auth::user()->roles,
+            'ip_addr' => \Request::ip(),
             'comment' => "Авторизація у веб-інтерфейс.\n Користувач " . Auth::user()->userable->fullname . " IP:" . \Request::ip(),
         ]);
     }
@@ -30,6 +32,8 @@ class Log extends Model
         Log::create([
             'user_id' => Auth::id(),
             'event' => 'login',
+            'roles' => Auth::user()->roles,
+            'ip_addr' => \Request::ip(),
             'comment' => 'Адміністратор ' . Auth::user()->userable->fullname . ' авторизується як користувач ' . User::find($id)->userable->fullname . "\n IP:" . \Request::ip(),
         ]);
     }
@@ -39,6 +43,8 @@ class Log extends Model
         Log::create([
             'user_id' => Auth::id(),
             'event' => 'login',
+            'roles' => Auth::user()->roles,
+            'ip_addr' => \Request::ip(),
             'comment' => 'Адміністратор ' . Auth::user()->userable->fullname . ' авторизується як користувач ' . User::find($id)->userable->fullname,
         ]);
     }

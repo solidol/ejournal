@@ -22,7 +22,13 @@
                 User
             </th>
             <th>
+                Roles
+            </th>
+            <th>
                 Event
+            </th>
+            <th>
+                IP addr
             </th>
             <th>
                 Comment
@@ -39,7 +45,13 @@
                 {{$event->user?$event->user->userable->fullname:'Inactive'}}
             </td>
             <td>
+                {{$event->roles}}
+            </td>
+            <td>
                 {{$event->event}}
+            </td>
+            <td>
+                {{$event->ip_addr}}
             </td>
             <td>
                 {{$event->comment}}
