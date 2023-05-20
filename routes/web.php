@@ -9,6 +9,7 @@ use App\Http\Controllers\MessageController;
 
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MDBController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,7 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     // method db
 
     Route::get('/mdb/dir/', [MDBController::class, 'index'])->name('get_method_index');
-    
+
     Route::get('/mdb/download/', [MDBController::class, 'download'])->name('get_method_download');
 
 

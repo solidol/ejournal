@@ -11,7 +11,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ControlController;
 use App\Http\Controllers\TimesheetController;
-use App\Http\Controllers\MDBController;
+
 
 
 Route::group(['middleware' => 'teacher'], function () {
