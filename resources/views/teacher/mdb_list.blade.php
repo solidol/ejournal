@@ -17,8 +17,9 @@
     </ol>
 </nav>
 
-<div class="div-table">
-    <table class="table table-striped m-0">
+<div class="mb-3 mt-1 table-responsive">
+
+    <table class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th class="w-5"><a href="{{URL::route('get_method_index')}}?dir={{$retPath}}"><img src="/assets/img/arrow_180.png"></a></th>
