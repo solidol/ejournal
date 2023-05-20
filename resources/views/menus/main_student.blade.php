@@ -21,6 +21,9 @@
                     <a class="nav-link" href="{{ route('student_get_absents') }}"><i class="bi bi-person-slash"></i> Мої пропуски</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('get_method_index') }}"><i class="bi bi-database"></i> Методична база</a>
+                </li>
                 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

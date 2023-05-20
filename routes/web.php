@@ -45,6 +45,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/users/profile', [UserController::class, 'show'])->name('show_profile');
 
+
+    // method db
+
+    Route::get('/mdb/dir/', [MDBController::class, 'index'])->name('get_method_index');
+    
+    Route::get('/mdb/download/', [MDBController::class, 'download'])->name('get_method_download');
+
+
     Route::group(['middleware' => ['admin', 'student', 'teacher']], function () {
     });
 });
