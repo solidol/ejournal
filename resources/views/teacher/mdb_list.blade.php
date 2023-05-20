@@ -31,7 +31,7 @@
         <tbody>
             @foreach($dirs as $dItem)
             <tr>
-                <td><img src="/assets/img/folder.png" style="width:24px;"></td>
+                <td><img src="/assets/img/_folder.png" style="width:24px;"></td>
                 <td><a href="{{URL::route('get_method_index')}}?dir={{$dItem['path']}}" title="">{{$dItem['title']}}</a></td>
                 <td>[DIR]</td>
                 <td></td>
