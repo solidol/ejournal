@@ -25,7 +25,7 @@
 
 <div class="mb-3 mt-1 table-responsive">
 
-    <table class="table table-striped table-bordered m-0">
+    <table class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>

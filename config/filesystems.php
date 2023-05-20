@@ -44,6 +44,14 @@ return [
             'throw' => false,
         ],
 
+        'mdb' => [
+            'driver' => 'local',
+            'root' => env('METHOD_DB'),
+            'url' => env('APP_URL').'/mdb',
+            'visibility' => false,
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

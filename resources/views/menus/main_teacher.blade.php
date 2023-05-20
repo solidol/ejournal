@@ -18,6 +18,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('find_student') }}"><i class="bi bi-search"></i> <span class="d-md-inline d-lg-none">Пошук студента</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('get_method_index') }}"><i class="bi bi-database"></i> <span class="d-md-inline d-lg-none">Електронна база</span></a>
+                </li>
                 @yield('custom-menu')
 
                 <li class="nav-item dropdown">

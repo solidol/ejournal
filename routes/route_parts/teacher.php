@@ -11,6 +11,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ControlController;
 use App\Http\Controllers\TimesheetController;
+use App\Http\Controllers\MDBController;
 
 
 Route::group(['middleware' => 'teacher'], function () {
@@ -106,5 +107,8 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::get('/users/messages', [MessageController::class, 'list'])->name('list_messages');
 
 
+    // method db
 
+    Route::get('/mdb/dir/', [MDBController::class, 'index'])->name('get_method_index');
+    Route::get('/mdb/download/', [MDBController::class, 'download'])->name('get_method_download');
 });
