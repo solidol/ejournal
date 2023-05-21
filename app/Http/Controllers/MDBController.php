@@ -34,7 +34,7 @@ class MDBController extends Controller
         } else {
             $dir = '';
         }
-        $dir = str_replace(['..', $root], '', $dir);
+        $dir = str_replace(['/..', '../', $root], '', $dir);
 
         $breadcrumbs = [];
         $bc = explode('/', $dir);
@@ -110,7 +110,7 @@ class MDBController extends Controller
             'dirs' => $dirs,
             'dir' => $dir,
             'breadcrumbs' => $breadcrumbs,
-            'retPath' => str_replace('.', '', dirname($dir)),
+            'retPath' => str_replace('/.', '', dirname($dir)),
         ]);
     }
 
