@@ -13,7 +13,7 @@ class Teacher extends Model
     protected $guarded = [];
 
     public $timestamps = false;
-    protected $appends = ['id', 'fullname'];
+    protected $appends = ['id', 'fullname','shortname','shortname_rev'];
 
     public function getFullnameAttribute()
     {
@@ -22,6 +22,18 @@ class Teacher extends Model
     public function getIdAttribute()
     {
         return $this->kod_prep;
+    }
+    public function getShortnameAttribute()
+    {
+        $name = explode(' ',$this->FIO_prep);
+        $shortname = $name[0]." ".mb_substr($name[1], 0, 1).".".mb_substr($name[2], 0, 1).".";
+        return $shortname;
+    }
+    public function getShortnameRevAttribute()
+    {
+        $name = explode(' ',$this->FIO_prep);
+        $shortname = mb_substr($name[1], 0, 1).".".mb_substr($name[2], 0, 1).". ".$name[0];
+        return $shortname;
     }
     public function user()
     {

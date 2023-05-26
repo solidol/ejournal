@@ -64,39 +64,44 @@ class MDBController extends Controller
         $arFiles = [];
         foreach ($files as $fileName) {
             $pathInfo = pathinfo(Storage::disk('mdb')->path($fileName));
-            switch ($pathInfo['extension']) {
-                case 'rar':
-                case 'zip':
-                    $icon = '_zip.png';
-                    break;
-                case 'txt':
-                    $icon = '_txt.png';
-                    break;
-                case 'pdf':
-                    $icon = '_pdf.png';
-                    break;
-                case 'png':
-                case 'jpeg':
-                case 'jpg':
-                case 'gif':
-                    $icon = '_image.png';
-                    break;
-                case 'docx':
-                case 'doc':
-                    $icon = '_word.png';
-                    break;
-                case 'xlsx':
-                case 'xls':
-                    $icon = '_excel.png';
-                    break;
-                case 'pptx':
-                case 'ppt':
-                    $icon = '_powerpoint.png';
-                    break;
-                default:
-                    $icon = '_file.png';
-                    break;
+            if (isset($pathInfo['extension'])) {
+                switch ($pathInfo['extension']) {
+                    case 'rar':
+                    case 'zip':
+                        $icon = '_zip.png';
+                        break;
+                    case 'txt':
+                        $icon = '_txt.png';
+                        break;
+                    case 'pdf':
+                        $icon = '_pdf.png';
+                        break;
+                    case 'png':
+                    case 'jpeg':
+                    case 'jpg':
+                    case 'gif':
+                        $icon = '_image.png';
+                        break;
+                    case 'docx':
+                    case 'doc':
+                        $icon = '_word.png';
+                        break;
+                    case 'xlsx':
+                    case 'xls':
+                        $icon = '_excel.png';
+                        break;
+                    case 'pptx':
+                    case 'ppt':
+                        $icon = '_powerpoint.png';
+                        break;
+                    default:
+                        $icon = '_file.png';
+                        break;
+                }
+            } else {
+                $icon = '_file.png';
             }
+
             $arFiles[] = [
                 'fileName' => $pathInfo['basename'],
                 'fileSize' => MDBController::fileSizeHumanFriendly(Storage::disk('mdb')->size($fileName)),
