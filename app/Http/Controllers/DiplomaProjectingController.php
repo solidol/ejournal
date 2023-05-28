@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DiplomaProjecting;
 use App\Models\DiplomaProject;
-use App\Models\Student;
+use App\Models\Group;
 use App\Models\Teacher;
 
 class DiplomaProjectingController extends Controller
@@ -13,7 +13,13 @@ class DiplomaProjectingController extends Controller
     public function index()
     {
         $myProjectings =  DiplomaProjecting::all();
-        return view('dp_scribe.dp_list', ['dp' => $myProjectings]);
+        $groups = Group::all();
+        $teachers = Teacher::all();
+        return view('dpscriber.dp_list', [
+            'dp' => $myProjectings,
+            'groups' => $groups,
+            'teachers' => $teachers
+        ]);
     }
 
     public function show($id)
@@ -23,7 +29,7 @@ class DiplomaProjectingController extends Controller
         $projects = DiplomaProject::where('diploma_projecting_id', $currentProjecting->id)->get();
         //dd($projects);
         $teachers = Teacher::all();
-        return view('dp_scribe.dp_show', [
+        return view('dpscriber.dp_show', [
             'currentProjecting' => $currentProjecting,
             'students' => $students,
             'teachers' => $teachers,
@@ -39,6 +45,17 @@ class DiplomaProjectingController extends Controller
         $currentProjecting->com_number = $request->com_number;
         $currentProjecting->com_date = $request->com_date;
         $currentProjecting->save();
-        return redirect()->route('diploma_projectings_show',['id'=>$id]);
+        return redirect()->route('diploma_projectings_show', ['id' => $id]);
+    }
+
+    public function store(Request $request)
+    {
+        $dp = new DiplomaProjecting();
+        $dp->group_id = $request->group_id;
+        $dp->scriber_id = $request->scriber_id;
+        $dp->template = $request->template;
+        $dp->save();
+
+        return redirect()->route('diploma_projectings_show', ['id' => $dp->id]);
     }
 }

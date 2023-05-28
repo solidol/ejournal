@@ -72,6 +72,11 @@ class User extends Authenticatable
         return $this->hasRole('student');
     }
 
+    public function isDPScriber()
+    {
+        return $this->hasRole('dpscriber');
+    }
+
     public function hasRole($role = false)
     {
         if (!$role) return false;

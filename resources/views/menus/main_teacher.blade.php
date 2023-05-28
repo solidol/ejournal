@@ -19,8 +19,14 @@
                     <a class="nav-link" href="{{ route('find_student') }}"><i class="bi bi-search"></i> <span class="d-md-inline d-lg-none">Пошук студента</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('get_method_index') }}"><i class="bi bi-database"></i> <span class="d-md-inline d-lg-none">Електронна база</span></a>
+                    <a class="nav-link" href="{{ route('diploma_projectings_index') }}"><i class="bi bi-database"></i> <span class="d-md-inline d-lg-none">Електронна база</span></a>
                 </li>
+                @if (Auth::user()->isDPScriber())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('diploma_projectings_index') }}">ДП</a>
+                </li>
+                @endif
+
                 @yield('custom-menu')
 
                 <li class="nav-item dropdown">

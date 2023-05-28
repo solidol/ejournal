@@ -7,18 +7,22 @@ use App\Models\DiplomaProject;
 use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Control;
+
 use NCL\NCLNameCaseUa;
 
 class ReportController extends Controller
 {
-    public static function getShortName($name){
-        $name = explode(' ',trim($name," "));
-        $shortname = $name[0]." ".mb_substr($name[1], 0, 1).".".mb_substr($name[2], 0, 1).".";
+    public static function getShortName($name)
+    {
+        $name = explode(' ', trim($name, " "));
+        $shortname = $name[0] . " " . mb_substr($name[1], 0, 1) . "." . mb_substr($name[2], 0, 1) . ".";
         return $shortname;
     }
-    public static function getShortNameReverse($name){
-        $name = explode(' ',trim($name," "));
-        $shortname = mb_substr($name[1], 0, 1).".".mb_substr($name[2], 0, 1).". ".$name[0];
+    public static function getShortNameReverse($name)
+    {
+        $name = explode(' ', trim($name, " "));
+        $shortname = mb_substr($name[1], 0, 1) . "." . mb_substr($name[2], 0, 1) . ". " . $name[0];
         return $shortname;
     }
     function getProtoReport($id)
@@ -62,5 +66,114 @@ class ReportController extends Controller
         $word->saveAs(Storage::disk('public')->path('reports/diploma') . '/' . $filename);
 
         return Storage::disk('public')->download('reports/diploma/' . $filename);
+    }
+
+
+    function getExamReport(Request $request)
+    {
+        $control = Control::find($request->control_id);
+
+
+
+        $word = new TemplateProcessor(Storage::disk('public')->path('system/exam_report_1.docx'));
+
+
+        $word->setValue('teacher', Auth::user()->userable->fullname);
+        $word->setValue('group', $control->journal->group->title);
+        $word->setValue('subject', $control->journal->subject->title);
+        $word->setValue('day', $control->date_->format('d'));
+        $word->setValue('month', ControlController::$monthStrings[$control->date_->format('m')]);
+        $word->setValue('year', $control->date_->format('Y'));
+        $word->setValue('hours', $control->journal->lessons->sum('kol_chasov'));
+        $values = array();
+
+        $id = 1;
+        $cnt_a = $cnt_b = $cnt_c = $cnt_d = $cnt_e = $cnt_f = $cnt_fx = 0;
+        $countYak = 0;
+        $countUsp = 0;
+        $studentsCount = $control->journal->group->students->count();
+        foreach ($control->journal->group->students as $student) {
+            $mark = $control->mark($student->id)->mark_str ?? '';
+            $nat = 'НА';
+            $ects = 'НА';
+            if ($mark < 0) {
+                $nat = 'НА';
+                $ects = 'НА';
+                $cnt_f++;
+            }
+            if ($mark >= 0 && $mark < 30) {
+                $nat = 'Не задовільно';
+                $ects = 'F';
+                $cnt_f++;
+            }
+            if ($mark >= 30 && $mark < 60) {
+                $nat =  'Не задовільно';
+                $ects = 'FX';
+                $cnt_fx++;
+            }
+            if ($mark >= 60 && $mark < 64) {
+                $nat =  'Достатньо';
+                $ects = 'E';
+                $cnt_e++;
+                $countUsp++;
+            }
+            if ($mark >= 64 && $mark < 75) {
+                $nat =  'Задовільно';
+                $ects = 'D';
+                $cnt_d++;
+                $countUsp++;
+            }
+            if ($mark >= 75 && $mark < 82) {
+                $nat =  'Добре';
+                $ects = 'C';
+                $cnt_c++;
+                $countUsp++;
+                $countYak++;
+            }
+            if ($mark >= 82 && $mark < 90) {
+                $nat =  'Дуже добре';
+                $ects = 'B';
+                $cnt_b++;
+                $countUsp++;
+                $countYak++;
+            }
+            if ($mark >= 90 && $mark <= 100) {
+                $nat =  'Відмінно';
+                $ects = 'A';
+                $cnt_a++;
+                $countUsp++;
+                $countYak++;
+            }
+
+            $values[] = [
+                'id' => $id,
+                'fullname' => $student->fullname,
+                'nat' => $nat ?? '',
+                'hd' => $mark,
+                'ects' => $ects ?? '',
+            ];
+
+            $id++;
+        }
+        $usp = round(1000 * $countUsp / $studentsCount) / 10;
+        $yak = round(1000 * $countYak / $studentsCount) / 10;
+        $word->cloneRowAndSetValues('id', $values);
+
+
+        $word->setValue('cnt_a', $cnt_a);
+        $word->setValue('cnt_b', $cnt_b);
+        $word->setValue('cnt_c', $cnt_c);
+        $word->setValue('cnt_d', $cnt_d);
+        $word->setValue('cnt_e', $cnt_e);
+        $word->setValue('cnt_f', $cnt_f);
+        $word->setValue('cnt_fx', $cnt_fx);
+        $word->setValue('yak', $yak);
+        $word->setValue('usp', $usp);
+
+        $filename = $control->journal->group->title . ' ' . $control->journal->subject->title . '.docx';
+
+        $word->saveAs(Storage::disk('public')->path('reports') . '/' . $filename);
+
+        return Storage::disk('public')->download('reports/' . $filename);
     }
 }

@@ -13,8 +13,6 @@ use App\Http\Controllers\ControlController;
 use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\ReportController;
 
-use App\Http\Controllers\DiplomaProjectingController;
-use App\Http\Controllers\DiplomaProjectController;
 
 
 Route::group(['middleware' => 'teacher'], function () {
@@ -77,7 +75,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
 
 
-    Route::post('/files/examrep', [ControlController::class, 'getExamReport'])->name('get_exam_report');
+    Route::post('/files/examrep', [ReportController::class, 'getExamReport'])->name('get_exam_report');
 
 
 
@@ -109,20 +107,4 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::get('/users/messages', [MessageController::class, 'list'])->name('list_messages');
 
-    // Diploma
-
-    Route::get('/dp/projecting/index', [DiplomaProjectingController::class, 'index'])->name('diploma_projectings_index');
-
-    Route::get('/dp/projecting/{id}', [DiplomaProjectingController::class, 'show'])->name('diploma_projectings_show');
-
-    Route::post('/dp/projecting/{id}/update', [DiplomaProjectingController::class, 'update'])->name('diploma_projectings_update');
-
-    Route::post('/dp/projecting/project/store', [DiplomaProjectController::class, 'store'])->name('diploma_project_store');
-
-    Route::post('/dp/projecting/project/{id}/update', [DiplomaProjectController::class, 'update'])->name('diploma_project_update');
-
-    Route::get('/dp/projecting/project/{id}/delete', [DiplomaProjectController::class, 'delete'])->name('diploma_project_delete');
-
-    Route::get('/dp/projecting/project/{id}/prot', [ReportController::class, 'getProtoReport'])->name('diploma_project_prot');
-
-});
+  });

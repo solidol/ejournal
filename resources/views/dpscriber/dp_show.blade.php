@@ -57,7 +57,7 @@
             Дата комісії
         </div>
         <div class="col-4">
-            <input type="date" class="form-control" name="com_date" value="{{$currentProjecting->com_date->format('Y-m-d')}}">
+            <input type="date" class="form-control" name="com_date" value="{{$currentProjecting->com_date?$currentProjecting->com_date->format('Y-m-d'):''}}">
         </div>
     </div>
     <button type="submit" class="btn btn-success">Зберегти</button>
