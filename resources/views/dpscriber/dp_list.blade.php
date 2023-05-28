@@ -55,6 +55,8 @@
 </table>
 
 
+<h2>Додати нову</h2>
+
 <form action="{{URL::route('diploma_projectings_store')}}" method="post">
     @csrf
     <div class="row">
