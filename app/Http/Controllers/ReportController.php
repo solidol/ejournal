@@ -41,7 +41,7 @@ class ReportController extends Controller
         $word->setValue('reporting_date', $dp->reporting_date->format('d.m.Y'));
         $word->setValue('c_n', $dp->projecting->com_number);
         $word->setValue('c_d', $dp->projecting->com_date->format('d.m.Y'));
-        $word->setValue('student_fullname_1', $dp->student->fullname);
+        $word->setValue('student_fullname_1', $nc->q($dp->student->fullname, 1));
         $word->setValue('student_fullname_2', $nc->q($dp->student->fullname, 2));
         $word->setValue('student_shortname_1', $dp->student->shortname);
         $word->setValue('project_title', $dp->title);

@@ -61,7 +61,22 @@
             <input type="date" class="form-control" name="com_date" value="{{$currentProjecting->com_date?$currentProjecting->com_date->format('Y-m-d'):''}}">
         </div>
     </div>
-    <button type="submit" class="btn btn-success">Зберегти</button>
+    <div class="row mb-1">
+        <div class="col-2">
+            Секретар
+        </div>
+        <div class="col-4">
+            <select name="scriber_id" class="form-select form-select-md" required>
+                @foreach ($teachers as $tItem)
+                <option value="{{$tItem->id}}" {{$tItem->id==$currentProjecting->scriber_id?'selected':''}}>{{$tItem->fullname}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-6">
+            <button type="submit" class="btn btn-success">Зберегти</button>
+        </div>
+    </div>
+
 </form>
 <hr>
 <h2>Сформовані протоколи</h2>

@@ -43,6 +43,7 @@ class DiplomaProjectingController extends Controller
         $currentProjecting->chief = $request->chief;
         $currentProjecting->committee = $request->committee;
         $currentProjecting->com_number = $request->com_number;
+        $currentProjecting->scriber_id = $request->scriber_id;
         $currentProjecting->com_date = $request->com_date;
         $currentProjecting->save();
         return redirect()->route('diploma_projectings_show', ['id' => $id]);
