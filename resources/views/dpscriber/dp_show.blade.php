@@ -10,7 +10,8 @@
 @endsection
 
 @section('content')
-<h1>Захист проекту</h1>
+<h1>Захист групи {{$currentProjecting->group->title}}</h1>
+<h2>Дані про склад комісії</h2>
 <form action="{{URL::route('diploma_projectings_update',['id'=>$currentProjecting->id])}}" method="post">
     @csrf
     <div class="row mb-1">
@@ -21,7 +22,7 @@
             <p class="form-control m-0">{{$currentProjecting->group->title}}</p>
         </div>
         <div class="col-6">
-            
+
         </div>
     </div>
     <div class="row mb-1">
@@ -62,11 +63,19 @@
     </div>
     <button type="submit" class="btn btn-success">Зберегти</button>
 </form>
+<hr>
+<h2>Сформовані протоколи</h2>
 <table id="logtab" class="table table-stripped table-bordered m-0">
     <thead>
         <tr>
             <th>
+                Номер
+            </th>
+            <th>
                 Студент
+            </th>
+            <th>
+
             </th>
             <th>
                 Тема
@@ -78,9 +87,6 @@
                 Дата
             </th>
             <th>
-                День/номер
-            </th>
-            <th>
 
             </th>
         </tr>
@@ -89,7 +95,13 @@
         @foreach($projects as $item)
         <tr>
             <td>
+                {{$item->prot_number}}/{{$item->prot_subnumber}}
+            </td>
+            <td>
                 {{$item->student->fullname}}
+            </td>
+            <td>
+                <a href="{{URL::route('diploma_project_delete',['id'=>$item->id])}}" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
             </td>
             <td>
                 {{$item->title}}
@@ -98,20 +110,17 @@
                 {{$item->teacher->fullname}}
             </td>
             <td>
-                {{$item->reporting_date}}
+                {{$item->reporting_date->format('d.m.Y')}}
             </td>
             <td>
-                {{$item->prot_number}}/{{$item->prot_subnumber}}
-            </td>
-            <td>
-                <a href="{{URL::route('diploma_project_delete',['id'=>$item->id])}}" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
                 <a href="{{URL::route('diploma_project_prot',['id'=>$item->id])}}" class="btn btn-outline-danger">Протокол</a>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
-
+<hr>
+<h2>Додати протокол</h2>
 <form action="{{URL::route('diploma_project_store')}}" method="post">
     @csrf
     <input type="hidden" name="diploma_projecting_id" value="{{$currentProjecting->id}}">
