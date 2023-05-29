@@ -25,12 +25,14 @@ class ReportController extends Controller
         $shortname = mb_substr($name[1], 0, 1) . "." . mb_substr($name[2], 0, 1) . ". " . $name[0];
         return $shortname;
     }
+
+
+
+
     function getProtoReport($id)
     {
 
         $nc = new NCLNameCaseUa();
-
-
 
         $dp = DiplomaProject::find($id);
 

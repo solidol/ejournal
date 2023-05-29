@@ -1,11 +1,21 @@
-@extends('layouts.app-nosidebar')
+@extends('layouts.app')
 
 @section('title', 'Адмінпанель. Мої комісії ДП')
 
 
 @section('sidebar')
+
 <div class="baloon">
-    <h1>Захист проекту</h1>
+    <h2>Всі комісії</h2>
+
+    <ul>
+        @foreach($dp as $item)
+        <li>
+            <a href="{{URL::route('diploma_projectings_show',['id'=>$item->id])}}">{{$item->group->title}}</a>
+
+        </li>
+        @endforeach
+    </ul>
 </div>
 @endsection
 
@@ -82,13 +92,13 @@
     <thead>
         <tr>
             <th>
+                №
+            </th>
+            <th>
                 Номер
             </th>
             <th>
                 Студент
-            </th>
-            <th>
-
             </th>
             <th>
                 Тема
@@ -108,13 +118,13 @@
         @foreach($projects as $item)
         <tr>
             <td>
+                {{$item->variant}}
+            </td>
+            <td>
                 {{$item->prot_number}}/{{$item->prot_subnumber}}
             </td>
             <td>
                 {{$item->student->fullname}}
-            </td>
-            <td>
-                <a href="{{URL::route('diploma_project_delete',['id'=>$item->id])}}" class="btn btn-outline-danger"><i class="bi bi-trash"></i></a>
             </td>
             <td>
                 {{$item->title}}
@@ -126,7 +136,8 @@
                 {{$item->reporting_date->format('d.m.Y')}}
             </td>
             <td>
-                <a href="{{URL::route('diploma_project_prot',['id'=>$item->id])}}" class="btn btn-outline-danger">Протокол</a>
+                <a href="{{URL::route('diploma_project_show',['id'=>$item->id])}}" class="btn btn-outline-danger"><i class="bi bi-pencil-square"></i></a>
+
             </td>
         </tr>
         @endforeach
@@ -137,20 +148,10 @@
 <form action="{{URL::route('diploma_project_store')}}" method="post">
     @csrf
     <input type="hidden" name="diploma_projecting_id" value="{{$currentProjecting->id}}">
-    <div class="row">
-        <div class="col-3">
-            Студент
-        </div>
-        <div class="col-6">
-            Тема
-        </div>
-        <div class="col-3">
-            Керівник
-        </div>
 
-    </div>
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-3">
+            <label class="form-label">Студент</label>
             <select name="student_id" class="form-select form-select-md" required>
                 @foreach ($students as $sItem)
                 <option value="{{$sItem->id}}">{{$sItem->fullname}}</option>
@@ -158,9 +159,11 @@
             </select>
         </div>
         <div class="col-6">
+            <label class="form-label">Тема</label>
             <input type="text" class="form-control" id="title" name="title" required>
         </div>
         <div class="col-3">
+            <label class="form-label">Керівник</label>
             <select name="teacher_id" class="form-select form-select-md" required>
                 @foreach ($teachers as $tItem)
                 <option value="{{$tItem->id}}">{{$tItem->fullname}}</option>
@@ -168,35 +171,28 @@
             </select>
         </div>
     </div>
-    <div class="row">
 
-        <div class="col-3">
-            Дата
-        </div>
-        <div class="col-3">
-            День/номер
-        </div>
-        <div class="col-3">
-            Тип
-        </div>
-        <div class="col-3">
-            Додати
-        </div>
-    </div>
-    <div class="row">
+    <div class="row mt-3">
 
-        <div class="col-3">
+        <div class="col-2">
+            <label class="form-label">Дата</label>
             <input type="date" class="form-control" name="reporting_date" required>
         </div>
-        <div class="col-3">
+        <div class="col-2">
+            <label class="form-label">Варіант</label>
+            <input type="number" class="form-control" name="variant" required>
+        </div>
+        <div class="col-2">
+            <label class="form-label">День/номер</label>
             <div class="input-group">
-                <input type="text" class="form-control" name="prot_number">
+                <input type="number" class="form-control" name="prot_number">
                 <span class="input-group-text">/</span>
-                <input type="text" class="form-control" name="prot_subnumber">
+                <input type="number" class="form-control" name="prot_subnumber">
             </div>
         </div>
 
         <div class="col-3">
+            <label class="form-label">Тип</label>
             <select name="project_type" class="form-select form-select-md" required>
                 <option value="PROG" selected>Програма</option>
                 <option value="AIS">АІС</option>
@@ -205,6 +201,8 @@
             </select>
         </div>
 
+    </div>
+    <div class="row mt-3">
         <div class="col-3">
             <button type="submit" class="btn btn-success">Зберегти</button>
         </div>

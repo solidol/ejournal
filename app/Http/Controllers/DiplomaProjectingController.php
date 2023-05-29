@@ -26,10 +26,12 @@ class DiplomaProjectingController extends Controller
     {
         $currentProjecting = DiplomaProjecting::find($id);
         $students = $currentProjecting->group->students;
+        $myProjectings =  DiplomaProjecting::all();
         $projects = DiplomaProject::where('diploma_projecting_id', $currentProjecting->id)->get();
         //dd($projects);
         $teachers = Teacher::all();
         return view('dpscriber.dp_show', [
+            'dp' => $myProjectings,
             'currentProjecting' => $currentProjecting,
             'students' => $students,
             'teachers' => $teachers,

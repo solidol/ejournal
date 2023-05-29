@@ -27,6 +27,8 @@ Route::group(['middleware' => 'dpscriber'], function () {
 
   Route::get('/dp/projecting/project/{id}/delete', [DiplomaProjectController::class, 'delete'])->name('diploma_project_delete');
 
+  Route::get('/dp/projecting/project/{id}/show', [DiplomaProjectController::class, 'show'])->name('diploma_project_show');
+
   Route::get('/dp/projecting/project/{id}/prot', [ReportController::class, 'getProtoReport'])->name('diploma_project_prot');
 
 });
