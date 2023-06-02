@@ -53,6 +53,8 @@ class ReportController extends Controller
         $word->setValue('chief_full_1', str_replace(',', '', $dp->projecting->chief));
         $word->setValue('committee_0', $dp->projecting->committee);
 
+        $word->setValue('pages', 123);
+        $word->setValue('slides', 10);
 
         $chief = explode(',', $dp->projecting->chief);
         $committee = explode(',', $dp->projecting->committee);
@@ -62,6 +64,13 @@ class ReportController extends Controller
         $word->setValue('committee_2', ReportController::getShortNameReverse($committee[1]));
         $word->setValue('committee_3', ReportController::getShortNameReverse($committee[2]));
 
+        $questions = explode("\n",$dp->questions);
+
+        $word->setValue('qa_1', (isset($questions[0])?$questions[0]:'---'));
+        $word->setValue('qa_2', (isset($questions[1])?$questions[1]:'---'));
+        $word->setValue('qa_3', (isset($questions[2])?$questions[2]:'---'));
+        $word->setValue('qa_4', (isset($questions[3])?$questions[3]:'---'));
+        $word->setValue('qa_5', (isset($questions[4])?$questions[4]:'---'));
 
         $filename = "Протокол захисту " . $dp->projecting->group->title . " " . $dp->student->fullname . '.docx';
 
