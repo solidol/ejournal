@@ -53,8 +53,9 @@ class ReportController extends Controller
         $word->setValue('chief_full_1', str_replace(',', '', $dp->projecting->chief));
         $word->setValue('committee_0', $dp->projecting->committee);
 
-        $word->setValue('pages', 123);
-        $word->setValue('slides', 10);
+        $word->setValue('pages', $dp->pages);
+        $word->setValue('minutes', $dp->minutes);
+        $word->setValue('slides', $dp->slides);
 
         $chief = explode(',', $dp->projecting->chief);
         $committee = explode(',', $dp->projecting->committee);

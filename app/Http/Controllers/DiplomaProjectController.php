@@ -40,10 +40,13 @@ class DiplomaProjectController extends Controller
         $dp->prot_number = $request->prot_number;
         $dp->prot_subnumber = $request->prot_subnumber;
         $dp->project_type = $request->project_type;
+        $dp->pages = $request->pages;
+        $dp->slides = $request->slides;
+        $dp->minutes = $request->minutes;
         $dp->questions = $request->questions??'';
         $dp->save();
 
-        return redirect()->route('diploma_projectings_show', ['id' => $dp->diploma_projecting_id]);
+        return redirect()->route('diploma_project_show', ['id' => $dp->id]);
     }
 
 

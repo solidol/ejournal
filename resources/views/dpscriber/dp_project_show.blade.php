@@ -65,11 +65,23 @@
             </div>
         </div>
         <div class="col-4">
+        <div class="mb-3">
+                <label class="form-label">Сторінок</label>
+                <input type="number" class="form-control" name="pages" min="1" step="1" max="100" value="{{$currentProject->pages}}" required>
+            </div>
             <div class="mb-3">
-                <label class="form-label">Питання</label>
-                <textarea class="form-control" rows="10" name="questions">{{$currentProject->questions}}</textarea>
+                <label class="form-label">Слайдів</label>
+                <input type="number" class="form-control" name="slides" min="1" step="1" max="100" value="{{$currentProject->slides}}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Хв захисту</label>
+                <input type="number" class="form-control" name="minutes" min="1" step="1" max="100" value="{{$currentProject->minutes}}" required>
             </div>
         </div>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Питання</label>
+        <textarea class="form-control" rows="5" name="questions">{{$currentProject->questions}}</textarea>
     </div>
     <div class="row">
         <div class="col-4">
