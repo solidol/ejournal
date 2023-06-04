@@ -38,7 +38,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Варіант</label>
-                <input type="number" class="form-control" name="variant" min="1" step="1" max="100" value="{{$currentProject->variant}}" required>
+                <input type="number" class="form-control" name="variant" min="1" step="1" max="100" value="{{$currentProject->variant}}">
             </div>
             <div class="mb-3">
                 <label class="form-label">День/Номер</label>
@@ -48,11 +48,15 @@
                     <input type="number" class="form-control" name="prot_subnumber" value="{{$currentProject->prot_subnumber}}">
                 </div>
             </div>
+            <div class="mb-3">
+                <label class="form-label">Оцінка</label>
+                <input type="number" class="form-control text-danges" name="mark" min="1" step="1" max="100" value="{{$currentProject->mark}}">
+            </div>
         </div>
         <div class="col-4">
             <div class="mb-3">
                 <label for="datetime1" class="form-label">Дата захисту</label>
-                <input type="date" class="form-control" name="reporting_date" value="{{$currentProject->reporting_date->format('Y-m-d')}}" required>
+                <input type="date" class="form-control" name="reporting_date" value="{{$currentProject->reporting_date->format('Y-m-d')}}">
             </div>
 
             <div class="mb-3">
@@ -65,17 +69,17 @@
             </div>
         </div>
         <div class="col-4">
-        <div class="mb-3">
+            <div class="mb-3">
                 <label class="form-label">Сторінок</label>
-                <input type="number" class="form-control" name="pages" min="1" step="1" max="200" value="{{$currentProject->pages}}" required>
+                <input type="number" class="form-control" name="pages" min="1" step="1" max="200" value="{{$currentProject->pages}}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Слайдів</label>
-                <input type="number" class="form-control" name="slides" min="1" step="1" max="100" value="{{$currentProject->slides}}" required>
+                <input type="number" class="form-control" name="slides" min="1" step="1" max="100" value="{{$currentProject->slides}}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Хв захисту</label>
-                <input type="number" class="form-control" name="minutes" min="1" step="1" max="100" value="{{$currentProject->minutes}}" required>
+                <input type="number" class="form-control" name="minutes" min="1" step="1" max="100" value="{{$currentProject->minutes}}">
             </div>
         </div>
     </div>

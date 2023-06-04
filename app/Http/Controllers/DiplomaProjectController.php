@@ -40,6 +40,7 @@ class DiplomaProjectController extends Controller
         $dp->prot_number = $request->prot_number;
         $dp->prot_subnumber = $request->prot_subnumber;
         $dp->project_type = $request->project_type;
+        $dp->mark = $request->mark;
         $dp->pages = $request->pages;
         $dp->slides = $request->slides;
         $dp->minutes = $request->minutes;
