@@ -67,7 +67,7 @@
         <div class="col-4">
         <div class="mb-3">
                 <label class="form-label">Сторінок</label>
-                <input type="number" class="form-control" name="pages" min="1" step="1" max="100" value="{{$currentProject->pages}}" required>
+                <input type="number" class="form-control" name="pages" min="1" step="1" max="200" value="{{$currentProject->pages}}" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Слайдів</label>
