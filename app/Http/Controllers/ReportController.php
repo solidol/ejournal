@@ -13,6 +13,54 @@ use NCL\NCLNameCaseUa;
 
 class ReportController extends Controller
 {
+
+
+
+    public static function getWideMark($mark = 0)
+    {
+        $nat = 'НА';
+        $ects = 'НА';
+        if ($mark < 0) {
+            $nat = 'НА';
+            $ects = 'НА';
+        }
+        if ($mark >= 0 && $mark < 30) {
+            $nat = 'Не задовільно';
+            $ects = 'F';
+        }
+        if ($mark >= 30 && $mark < 60) {
+            $nat =  'Не задовільно';
+            $ects = 'FX';
+        }
+        if ($mark >= 60 && $mark < 64) {
+            $nat =  'Достатньо';
+            $ects = 'E';
+        }
+        if ($mark >= 64 && $mark < 75) {
+            $nat =  'Задовільно';
+            $ects = 'D';
+        }
+        if ($mark >= 75 && $mark < 82) {
+            $nat =  'Добре';
+            $ects = 'C';
+        }
+        if ($mark >= 82 && $mark < 90) {
+            $nat =  'Дуже добре';
+            $ects = 'B';
+        }
+        if ($mark >= 90 && $mark <= 100) {
+            $nat =  'Відмінно';
+            $ects = 'A';
+        }
+
+        $result = [
+            'national' => $nat ?? '',
+            'mark' => $mark,
+            'ects' => $ects ?? '',
+        ];
+        return $result;
+    }
+
     public static function getShortName($name)
     {
         $name = explode(' ', trim($name, " "));
@@ -57,6 +105,9 @@ class ReportController extends Controller
         $word->setValue('minutes', $dp->minutes);
         $word->setValue('slides', $dp->slides);
 
+        $word->setValue('mark_n', ReportController::getWideMark($dp->mark)['national']);
+        $word->setValue('mark_ects', ReportController::getWideMark($dp->mark)['ects']);
+
         $chief = explode(',', $dp->projecting->chief);
         $committee = explode(',', $dp->projecting->committee);
 
@@ -65,13 +116,13 @@ class ReportController extends Controller
         $word->setValue('committee_2', ReportController::getShortNameReverse($committee[1]));
         $word->setValue('committee_3', ReportController::getShortNameReverse($committee[2]));
 
-        $questions = explode("\n",$dp->questions);
+        $questions = explode("\n", $dp->questions);
 
-        $word->setValue('qa_1', (isset($questions[0])?'1. '.$questions[0]:''));
-        $word->setValue('qa_2', (isset($questions[1])?'2. '.$questions[1]:''));
-        $word->setValue('qa_3', (isset($questions[2])?'3. '.$questions[2]:''));
-        $word->setValue('qa_4', (isset($questions[3])?'4. '.$questions[3]:''));
-        $word->setValue('qa_5', (isset($questions[4])?'5. '.$questions[4]:''));
+        $word->setValue('qa_1', (isset($questions[0]) ? '1. ' . $questions[0] : ''));
+        $word->setValue('qa_2', (isset($questions[1]) ? '2. ' . $questions[1] : ''));
+        $word->setValue('qa_3', (isset($questions[2]) ? '3. ' . $questions[2] : ''));
+        $word->setValue('qa_4', (isset($questions[3]) ? '4. ' . $questions[3] : ''));
+        $word->setValue('qa_5', (isset($questions[4]) ? '5. ' . $questions[4] : ''));
 
         $filename = "Протокол захисту " . $dp->projecting->group->title . " " . $dp->student->fullname . '.docx';
 
