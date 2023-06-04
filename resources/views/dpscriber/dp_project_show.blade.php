@@ -22,6 +22,7 @@
 @section('content')
 <h1>Захист проекту <<{{$currentProject->title}}>></h1>
 
+<h2>{{$currentProject->student->fullname}}</h2>
 
 <h2>Дані до протоколу</h2>
 
