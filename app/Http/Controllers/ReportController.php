@@ -106,7 +106,7 @@ class ReportController extends Controller
         $word->setValue('slides', $dp->slides);
 
         $word->setValue('mark_n', ReportController::getWideMark($dp->mark)['national']);
-        $word->setValue('mark_ects', ReportController::getWideMark($dp->mark)['ects']);
+        $word->setValue('mark_ects', $dp->mark.' '.ReportController::getWideMark($dp->mark)['ects']);
 
         $chief = explode(',', $dp->projecting->chief);
         $committee = explode(',', $dp->projecting->committee);
