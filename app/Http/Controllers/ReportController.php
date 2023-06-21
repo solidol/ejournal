@@ -95,7 +95,8 @@ class ReportController extends Controller
         $word->setValue('student_fullname_2', $nc->q($dp->student->fullname, 2));
         $word->setValue('student_shortname_1', $dp->student->shortname);
         $word->setValue('project_title', $dp->title);
-        $word->setValue('teacher_fullname', $nc->q($dp->teacher->fullname, 1));
+        //$word->setValue('teacher_fullname', $nc->q($dp->teacher->fullname, 1));
+        $word->setValue('teacher_fullname', $dp->teacher->fullname);
         $word->setValue('scriber_shortname', $dp->projecting->scriber->shortname_rev);
 
         $word->setValue('chief_full_1', str_replace(',', '', $dp->projecting->chief));
