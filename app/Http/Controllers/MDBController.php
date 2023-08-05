@@ -58,6 +58,11 @@ class MDBController extends Controller
                 'title' => basename(str_replace($root, '', $dirItem)),
             ];
         }
+        $pattern = '/^\./';
+        $dirs = array_filter($dirs, function ($item) use ($pattern) {
+            return !preg_match($pattern, $item);
+        });
+
         $files = Storage::disk('mdb')->files($dir);
         asort($files);
 
