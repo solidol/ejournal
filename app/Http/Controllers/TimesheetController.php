@@ -47,6 +47,7 @@ class TimesheetController extends Controller
             case '04':
             case '05':
             case '06':
+            case '07':
                 return $date->format('Y') - 1;
                 break;
             case '08':
