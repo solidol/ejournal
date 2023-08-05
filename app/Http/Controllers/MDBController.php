@@ -51,17 +51,17 @@ class MDBController extends Controller
 
         $dirs = Storage::disk('mdb')->directories($dir);
         asort($dirs);
-
+        $pattern = '/^\./';
+        $dirs = array_filter($dirs, function ($item) use ($pattern) {
+            return !preg_match($pattern, $item);
+        });
         foreach ($dirs as &$dirItem) {
             $dirItem = [
                 'path' => str_replace($root, '', $dirItem),
                 'title' => basename(str_replace($root, '', $dirItem)),
             ];
         }
-        $pattern = '/^\./';
-        $dirs = array_filter($dirs, function ($item) use ($pattern) {
-            return !preg_match($pattern, $item);
-        });
+
 
         $files = Storage::disk('mdb')->files($dir);
         asort($files);
