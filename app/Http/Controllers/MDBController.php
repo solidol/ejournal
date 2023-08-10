@@ -50,6 +50,7 @@ class MDBController extends Controller
         }
 
         $dirs = Storage::disk('mdb')->directories($dir);
+        dd($dirs);
         asort($dirs);
         $pattern = '/^\./';
         $dirs = array_filter($dirs, function ($item) use ($pattern) {
