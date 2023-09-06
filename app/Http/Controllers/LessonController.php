@@ -93,13 +93,15 @@ class LessonController extends Controller
     public function update(Request $request, Lesson $lesson)
     {
         if ($lesson) {
+            $hr = abs(round(+$request->input('hours'), 0));
+            $np = abs(round(+$request->input('lessnom'), 0));
             $lesson->kod_grupi = $request->input('grcode') ?? $lesson->kod_grupi;
             $lesson->kod_prep = Auth::user()->userable_id;
             $lesson->kod_subj = $request->input('sbjcode') ?? $lesson->kod_subj;
-            $lesson->nom_pari = abs(round(+$request->input('lessnom'), 0)) ?? $lesson->nom_pari;
+            $lesson->nom_pari =  $np > 0 ? $np : $lesson->nom_pari;
             $lesson->tema = $request->input('thesis') ?? $lesson->tema;
             $lesson->zadanaie = $request->input('homework') ?? $lesson->zadanaie;
-            $lesson->kol_chasov = abs(round(+$request->input('hours'), 0)) ?? $lesson->kol_chasov;
+            $lesson->kol_chasov = $hr > 0 ? $hr : $lesson->kol_chasov;
             $lesson->data_ = $request->input('datetime') ?? $lesson->data_;
             $lesson->save();
         }
@@ -107,7 +109,7 @@ class LessonController extends Controller
             return response()->json(['status' => 'OK']);
         }
         Session::flash('message', 'Successfully updated post!');
-        return redirect()->route('show_lesson', ['id' => $request->get('lesscode')]);
+        return redirect()->route('lessons.show', ['lesson' => $lesson]);
     }
 
     public function destroy($id)
