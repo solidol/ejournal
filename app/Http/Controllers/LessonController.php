@@ -49,10 +49,8 @@ class LessonController extends Controller
         );
     }
 
-    public function edit($id)
+    public function edit(Lesson $lesson)
     {
-        $lesson = Lesson::findOrFail($id);
-
         if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
         return view(
@@ -64,7 +62,6 @@ class LessonController extends Controller
                     'subj' => $lesson->kod_subj,
                     'group' => $lesson->kod_groupi
                 ],
-                'storeRoute' => route('update_lesson', ['id' => $id]),
                 'lesson' => $lesson
             ]
         );
@@ -87,7 +84,7 @@ class LessonController extends Controller
             $lesson->save();
         }
         Session::flash('message', 'Пару збережено');
-        return redirect()->route('list_lessons', ['id' => $journal->id]);
+        return redirect()->route('lessons.index', ['id' => $journal->id]);
     }
 
     public function update(Request $request, Lesson $lesson)
@@ -119,12 +116,12 @@ class LessonController extends Controller
         $journal = $lesson->journal;
         $lesson->delete();
         if ($journal->lessons->count() > 0) {
-            return redirect()->route('get_journals', [
+            return redirect()->route('lessons.index', [
                 'id' => $journal->id
             ]);
         } else {
             $journal->delete();
-            return redirect()->route('get_journals');
+            return redirect()->route('journals.index');
         }
     }
 }

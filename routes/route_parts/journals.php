@@ -19,7 +19,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
     // Пари
 
-    Route::get('/journals/{group?}', [JournalController::class, 'index'])->name('journals.index');
+    Route::get('/journals/group/{group?}', [JournalController::class, 'index'])->name('journals.index');
 
     Route::get('/journals/{journal}', [JournalController::class, 'show'])->name('journals.show');
 
@@ -30,7 +30,7 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::post('/journals/store', [JournalController::class, 'store'])->name('journals.store');
 
 
-    Route::post('/journals/{journal}/lessons', [JournalController::class, 'update'])->name('journals.update');
+    Route::post('/journals/{journal}/update', [JournalController::class, 'update'])->name('journals.update');
 
 
 });
