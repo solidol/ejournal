@@ -92,7 +92,7 @@
 </div>
 
 
-@include('popups.show-lesson')
+
 
 <script type="module">
     $(document).ready(function() {
@@ -126,6 +126,6 @@
     });
 </script>
 
-
-@include('popups.new-lesson')
+@include('lessons.popups.show')
+@include('lessons.popups.create')
 @stop

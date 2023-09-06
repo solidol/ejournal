@@ -16,7 +16,7 @@ use DateTime;
 
 class JournalController extends Controller
 {
-    function list($group = false)
+    function index($group = false)
     {
         $user = Auth::user();
         $groups = DB::table('grups')->orderBy('nomer_grup')->get();
@@ -32,7 +32,7 @@ class JournalController extends Controller
             ->whereDate('datetime_start', '<', (new DateTime())->format('Y-m-d h:m:s'))
             ->get();
 
-        return view('teacher.journals_list', [
+        return view('journals.index', [
             'messages' => $messages,
             'data' => array('prep' => $user->userable_id),
             'journals' => $journals,
@@ -64,7 +64,7 @@ class JournalController extends Controller
         $journal = Auth::user()->userable->journals->find($id);
         if ($journal == null)
             return view('noelement');
-        return view('teacher.journal_show', [
+        return view('journals.show', [
             'lesson' => false,
             'currentJournal' => $journal,
             'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')

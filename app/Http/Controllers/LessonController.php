@@ -94,28 +94,24 @@ class LessonController extends Controller
         return redirect()->route('list_lessons', ['id' => $journal->id]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Lesson $lesson)
     {
-        if ($request->get('lesscode') > 0) {
-            $lesson = Lesson::findOrFail($request->get('lesscode'));
-            $lesson->kod_grupi = $request->input('grcode');
+        if ($lesson) {
+            $lesson->kod_grupi = $request->input('grcode')??$lesson->kod_grupi;
             $lesson->kod_prep = Auth::user()->userable_id;
-            $lesson->kod_subj = $request->input('sbjcode');
-            $lesson->nom_pari = abs(round(+$request->input('lessnom'), 0));
-            $lesson->tema = $request->input('thesis');
-            $lesson->zadanaie = $request->input('homework');
-            $lesson->kol_chasov = abs(round(+$request->input('hours'), 0));
-            $lesson->data_ = $request->input('datetime');
-
-            $subj = $lesson->kod_subj;
-            $group = $lesson->kod_grupi;
+            $lesson->kod_subj = $request->input('sbjcode')??$lesson->kod_subj;
+            $lesson->nom_pari = abs(round(+$request->input('lessnom'), 0))??$lesson->nom_pari;
+            $lesson->tema = $request->input('thesis')??$lesson->tema;
+            $lesson->zadanaie = $request->input('homework')??$lesson->zadanaie;
+            $lesson->kol_chasov = abs(round(+$request->input('hours'), 0))??$lesson->kol_chasov;
+            $lesson->data_ = $request->input('datetime')??$lesson->data_;
             $lesson->save();
         }
-        // redirect
-        // Session::flash('message', 'Successfully updated post!');
+        if (\request()->ajax()) {
+            return response()->json(['status' => 'OK']);
+        }
+        Session::flash('message', 'Successfully updated post!');
         return redirect()->route('show_lesson', ['id' => $request->get('lesscode')]);
-        //return redirect()->route('show_lesson', ['subj' => $subj, 'group' => $group]);
-        //  }*/
     }
 
     public function destroy($id)
@@ -133,6 +129,4 @@ class LessonController extends Controller
             return redirect()->route('get_journals');
         }
     }
-
- 
 }

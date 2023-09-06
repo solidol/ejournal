@@ -156,7 +156,7 @@
 
 
 
-@include('popups.new-control')
+
 
 <script type="module">
     $(document).ready(function() {
@@ -183,8 +183,8 @@
 </script>
 
 
-@include('lessons.popups.edit-lesson')
+@include('lessons.popups.edit')
 
-@include('controls.popups.new-control')
+@include('controls.popups.create')
 
 @stop

@@ -1,4 +1,4 @@
-<form action="{{URL::route('lessons.update',['id'=>$lesson->id])}}" method="post">
+<form action="{{URL::route('lessons.update',['lesson'=>$lesson])}}" method="post">
     @csrf
     <div class="modal fade" id="editLesson" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

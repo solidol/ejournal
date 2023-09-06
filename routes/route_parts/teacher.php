@@ -36,7 +36,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
     // Пари
 
-    Route::get('/journals/{group?}', [JournalController::class, 'list'])->name('get_journals');
+    Route::get('/journals/{group?}', [JournalController::class, 'index'])->name('get_journals');
 
     Route::get('/journals/{id}/show', [JournalController::class, 'show'])->name('show_journal');
 

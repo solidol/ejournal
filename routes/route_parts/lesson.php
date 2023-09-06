@@ -21,7 +21,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::get('/journals/{id}/lessons', [LessonController::class, 'index'])->name('lessons.index');
 
-    Route::post('/lessons/{id}/update', [LessonController::class, 'update'])->name('lessons.update');
+    Route::post('/lessons/{lesson}/update', [LessonController::class, 'update'])->name('lessons.update');
 
     Route::get('/lessons/{id}/show', [LessonController::class, 'show'])->name('show_lesson');
 

@@ -69,7 +69,7 @@
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('list_lessons',['id'=>$currentJournal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
+    <a class="nav-link" href="{{URL::route('lessons.index',['id'=>$currentJournal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
 </li>
 @stop
 
@@ -141,10 +141,6 @@
 
 
 
-@include('popups.edit-control')
-
-@include('popups.new-control')
-
 
 <script type="module">
     $(document).ready(function() {
@@ -186,6 +182,10 @@
         });
     });
 </script>
+
+@include('controls.popups.edit')
+
+@include('controls.popups.create')
 
 
 

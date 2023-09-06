@@ -19,7 +19,7 @@
 
 @section('custom-menu')
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('list_lessons',['id'=>$currentJournal->id])}}"><i class="bi bi-pencil-square"></i> Записані пари</a>
+    <a class="nav-link" href="{{URL::route('lessons.index',['id'=>$currentJournal->id])}}"><i class="bi bi-pencil-square"></i> Записані пари</a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="{{URL::route('get_marks',['id'=>$currentJournal->id])}}"><i class="bi bi-5-square"></i> Оцінки</a>
@@ -53,9 +53,9 @@
 <script type="module">
 
 </script>
-@include('popups.new-control')
+@include('controls.popups.create')
 
 @include('popups.new-exam-report')
 
-@include('popups.new-lesson')
+@include('lessons.popups.create')
 @stop
