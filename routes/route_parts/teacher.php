@@ -34,19 +34,6 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::match(array('GET', 'POST'), '/students/search', [StudentController::class, 'find'])->name('find_student');
 
-    // Пари
-
-    Route::get('/journals/{group?}', [JournalController::class, 'index'])->name('get_journals');
-
-    Route::get('/journals/{id}/show', [JournalController::class, 'show'])->name('show_journal');
-
-
-
-    Route::get('/journals/{id}/marks', [JournalController::class, 'marks'])->name('get_marks');
-
-    Route::get('/journals/show/{journal_id}/control/{control_id}', [ControlController::class, 'show'])->name('show_control');
-
-    Route::post('/journals/store', [JournalController::class, 'store'])->name('store_journal');
 
 
     // Оцінки

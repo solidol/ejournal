@@ -17,7 +17,7 @@
     <h2>Інші пари дисципліни</h2>
     <nav class="nav flex-column">
         @foreach($currentJournal->lessons as $lessonItem)
-        <a class="nav-link" href="{{route('show_lesson',['id'=>$lessonItem->kod_pari])}}">{{$lessonItem->data_->format('d.m')}} - {{$lessonItem->tema}}</a>
+        <a class="nav-link" href="{{URL::route('lessons.show',['lesson'=>$lessonItem])}}">{{$lessonItem->data_->format('d.m')}} - {{$lessonItem->tema}}</a>
         @endforeach
     </nav>
 </div>

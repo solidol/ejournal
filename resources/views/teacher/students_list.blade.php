@@ -50,7 +50,7 @@
                 </td>
 
                 <td>
-                    <a class="btn btn-success pt-0 pb-0" href="{{route('get_journals',['group'=>$student->group->id])}}">
+                    <a class="btn btn-success pt-0 pb-0" href="{{route('journals.index',['group'=>$student->group->id])}}">
                         <i class="bi bi-pencil-square"></i> Журнали
                     </a>
 

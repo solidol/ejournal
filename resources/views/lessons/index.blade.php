@@ -65,10 +65,10 @@
                 @endif
             </td>
             <td>
-                <a class="btn btn-success m-1" href="{{URL::route('show_lesson',['id'=>$lesson->id])}}">
+                <a class="btn btn-success m-1" href="{{URL::route('lessons.show',['lesson'=>$lesson])}}">
                     <i class="bi bi-pencil-square"></i>
                 </a>
-                <a class="btn btn-outline-danger show-lesson m-1" href="#" data-bs-toggle="modal" data-bs-target="#viewLesson" data-url="{{route('get_info_lesson',['id'=>$lesson->id])}}">
+                <a class="btn btn-outline-danger show-lesson m-1" href="#" data-bs-toggle="modal" data-bs-target="#viewLesson" data-url="{{URL::route('lessons.show',['lesson'=>$lesson])}}">
                     <i class="bi bi-exclamation-triangle"></i>
                 </a>
             </td>
@@ -96,6 +96,8 @@
 
 <script type="module">
     $(document).ready(function() {
+
+
         $('#tblessons').DataTable({
             dom: 'Bfrtip',
             language: languageUk,

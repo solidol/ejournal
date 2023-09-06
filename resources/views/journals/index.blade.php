@@ -63,7 +63,7 @@
                         <i class="bi bi-5-square"></i> Оцінки
                     </a>
 
-                    <a class="btn btn-success pt-0 pb-0" href="{{URL::route('show_journal',['id'=>$journal->id])}}">
+                    <a class="btn btn-success pt-0 pb-0" href="{{URL::route('journals.show',['journal'=>$journal])}}">
                         <i class="bi bi-book"></i> Журнал
                     </a>
                 </td>
@@ -90,6 +90,6 @@
 
 </div>
 
-@include('popups.new-journal')
+@include('journals.popups.create')
 
 @stop

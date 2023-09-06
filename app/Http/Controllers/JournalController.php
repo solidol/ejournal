@@ -59,11 +59,13 @@ class JournalController extends Controller
         ]);
     }
 
-    function show($id)
+    function show(Journal $journal)
     {
-        $journal = Auth::user()->userable->journals->find($id);
         if ($journal == null)
             return view('noelement');
+        if ($journal->teacher_id != Auth::user()->userable_id)
+            return view('noelement');
+
         return view('journals.show', [
             'lesson' => false,
             'currentJournal' => $journal,
@@ -133,7 +135,21 @@ class JournalController extends Controller
         $lesson->data_ = $request->datetime;
         $lesson->save();
 
-        Session::flash('message', 'Пару збережено');
-        return redirect()->route('get_journals', ['id' => $journal->id]);
+        Session::flash('message', 'Журнал створено, першу пару збережено');
+        return redirect()->route('lessons.index', ['id' => $journal->id]);
+    }
+
+    public function update(Request $request, Journal $journal)
+    {
+
+        $journal->group_id = $request->grcode ?? $journal->group_id;
+        $journal->subject_id = $request->sbjcode ?? $journal->subject_id;
+        $journal->teacher_id = Auth::user()->userable_id;
+        $journal->description = $request->description ?? $journal->description;
+        $journal->color = $request->color ?? $journal->color;
+        $journal->save();
+
+        Session::flash('message', 'Налаштування журналу збережено');
+        return redirect()->route('journals.show', ['journal' => $journal]);
     }
 }

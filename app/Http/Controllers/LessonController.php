@@ -31,15 +31,11 @@ class LessonController extends Controller
         ]);
     }
 
-    public function apiShow($id)
+    public function show(Lesson $lesson)
     {
-        $lesson = Lesson::findOrFail($id);
-        return response()->json($lesson);
-    }
-
-    public function show($id)
-    {
-        $lesson = Lesson::findOrFail($id);
+        if (\request()->ajax()) {
+            return response()->json($lesson);
+        }
         if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
         return view(
@@ -97,14 +93,14 @@ class LessonController extends Controller
     public function update(Request $request, Lesson $lesson)
     {
         if ($lesson) {
-            $lesson->kod_grupi = $request->input('grcode')??$lesson->kod_grupi;
+            $lesson->kod_grupi = $request->input('grcode') ?? $lesson->kod_grupi;
             $lesson->kod_prep = Auth::user()->userable_id;
-            $lesson->kod_subj = $request->input('sbjcode')??$lesson->kod_subj;
-            $lesson->nom_pari = abs(round(+$request->input('lessnom'), 0))??$lesson->nom_pari;
-            $lesson->tema = $request->input('thesis')??$lesson->tema;
-            $lesson->zadanaie = $request->input('homework')??$lesson->zadanaie;
-            $lesson->kol_chasov = abs(round(+$request->input('hours'), 0))??$lesson->kol_chasov;
-            $lesson->data_ = $request->input('datetime')??$lesson->data_;
+            $lesson->kod_subj = $request->input('sbjcode') ?? $lesson->kod_subj;
+            $lesson->nom_pari = abs(round(+$request->input('lessnom'), 0)) ?? $lesson->nom_pari;
+            $lesson->tema = $request->input('thesis') ?? $lesson->tema;
+            $lesson->zadanaie = $request->input('homework') ?? $lesson->zadanaie;
+            $lesson->kol_chasov = abs(round(+$request->input('hours'), 0)) ?? $lesson->kol_chasov;
+            $lesson->data_ = $request->input('datetime') ?? $lesson->data_;
             $lesson->save();
         }
         if (\request()->ajax()) {

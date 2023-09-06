@@ -21,6 +21,12 @@
 
 <script type="module">
     $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
+
         $('.show-lesson').click(function() {
             let url = $(this).data('url');
             console.log(url);

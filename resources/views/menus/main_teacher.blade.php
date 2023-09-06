@@ -13,7 +13,7 @@
                 <!-- Authentication Links -->
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('get_journals') }}"><i class="bi bi-book"></i> <span class="d-md-inline d-lg-none">Журнали</span></a>
+                    <a class="nav-link" href="{{ route('journals.index') }}"><i class="bi bi-book"></i> <span class="d-md-inline d-lg-none">Журнали</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('find_student') }}"><i class="bi bi-search"></i> <span class="d-md-inline d-lg-none">Пошук студента</span></a>

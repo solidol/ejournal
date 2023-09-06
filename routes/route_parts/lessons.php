@@ -23,7 +23,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::post('/lessons/{lesson}/update', [LessonController::class, 'update'])->name('lessons.update');
 
-    Route::get('/lessons/{id}/show', [LessonController::class, 'show'])->name('show_lesson');
+    Route::get('/lessons/{lesson}/show', [LessonController::class, 'show'])->name('lessons.show');
 
     Route::get('/lessons/{id}/edit', [LessonController::class, 'edit'])->name('edit_lesson');
 

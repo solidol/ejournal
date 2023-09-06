@@ -10,7 +10,7 @@
     <h2>Інші журнали</h2>
     <nav class="nav flex-column">
         @foreach($journals as $journal)
-        <a class="nav-link" href="{{URL::route('show_journal',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
+        <a class="nav-link" href="{{URL::route('journals.show',['journal'=>$journal])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
         @endforeach
     </nav>
 </div>
@@ -39,16 +39,29 @@
 </div>
 <div class="mb-3 mt-3">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addControl">
-    <i class="bi bi-5-square"></i> Додати контрль
+        <i class="bi bi-5-square"></i> Додати контрль
     </button>
 </div>
 <div class="mb-3 mt-3">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addExamReport">
-    <i class="bi bi-clipboard-plus"></i> Додати відомість
+        <i class="bi bi-clipboard-plus"></i> Додати відомість
     </button>
 </div>
 
+<h2>Налаштування</h2>
+<div class="p-2 border border-2 border-primary rounded-2">
+    <form action="{{URL::route('journals.update',['journal'=>$currentJournal])}}" method="post">
+        @csrf
+        <div class="mb-3">
+            <label>Колір в календарі</label>
+            <input type="color" class="form" name="color" value="{{$currentJournal->color}}">
 
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-success">Зберегти</button>
+        </div>
+    </form>
+</div>
 
 <script type="module">
 

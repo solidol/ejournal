@@ -67,7 +67,7 @@
                 @foreach($teacher->lessons as $lesson)
 
                 @if($lesson->data_==$dateItem && $lesson->nom_pari==$i)
-                <div id="lesson-{{$lesson->id}}" class="btn btn-primary draggable" draggable="true" data-url="{{URL::route('lessons.update',['lesson'=>$lesson])}}">
+                <div id="lesson-{{$lesson->id}}" class="btn draggable text-white" style="background-color: <?=$lesson->journal->color?>;" draggable="true" data-url="{{URL::route('lessons.update',['lesson'=>$lesson])}}">
                     {{$lesson->group->title}}
                 </div>
                 @endif

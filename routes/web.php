@@ -34,7 +34,9 @@ require_once __DIR__ . '/route_parts/curator.php';
 
 require_once __DIR__ . '/route_parts/teacher.php';
 
-require_once __DIR__ . '/route_parts/lesson.php';
+require_once __DIR__ . '/route_parts/lessons.php';
+
+require_once __DIR__ . '/route_parts/journals.php';
 
 require_once __DIR__ . '/route_parts/dpscriber.php';
 
