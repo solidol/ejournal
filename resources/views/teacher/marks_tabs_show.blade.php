@@ -30,7 +30,7 @@
                 </li>
                 @foreach ($currentJournal->controls as $control)
                 <li class="nav-item">
-                    <a class="nav-link" href="{{URL::route('show_control',['journal_id'=>$currentJournal->id, 'control_id'=>$control->id])}}">
+                    <a class="nav-link" href="{{URL::route('controls.show',['control'=>$control])}}">
                         {{$control->title}}
                     </a>
                 </li>
@@ -94,7 +94,7 @@
                 <?php $i = 1; ?>
                 @foreach($currentJournal->controls as $control)
                 <th>
-                    <button type="button" class="btn btn-outline-success edit-control p-0 m-0" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['id'=>$control->id])}}"><i class="bi bi-pencil-square text-light"></i></button>
+                    <button type="button" class="btn btn-outline-success edit-control p-0 m-0" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('controls.show',['control'=>$control])}}"><i class="bi bi-pencil-square text-light"></i></button>
                 </th>
                 <?php $i++; ?>
                 @endforeach

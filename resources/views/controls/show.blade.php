@@ -30,7 +30,7 @@
                 @foreach ($currentJournal->controls as $control)
                 @if ($control->title)
                 <li class="nav-item">
-                    <a class="nav-link {{($control->id==$currentControl->id)?'active':''}}" href="{{URL::route('show_control',['journal_id'=>$currentJournal->id, 'control_id'=>$control->id])}}">
+                    <a class="nav-link {{($control->id==$currentControl->id)?'active':''}}" href="{{URL::route('controls.show',['control'=>$control])}}">
                         {{$control->title}}
                     </a>
                 </li>
@@ -70,7 +70,7 @@
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('list_lessons',['id'=>$currentJournal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
+    <a class="nav-link" href="{{URL::route('lessons.index',['id'=>$currentJournal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
 </li>
 @stop
 
@@ -110,10 +110,10 @@
 
                     @foreach($currentJournal->group->students as $student)
                     <?php
-                    if (($control->mark($student->id)->ocenka ?? 0) >= (0.6 * $currentControl->max_grade)) {
+                    if (($currentControl->mark($student->id)->ocenka ?? 0) >= (0.6 * $currentControl->max_grade)) {
                         $countUsp++;
                     }
-                    if (($control->mark($student->id)->ocenka ?? 0) >= (0.75 * $currentControl->max_grade)) {
+                    if (($currentControl->mark($student->id)->ocenka ?? 0) >= (0.75 * $currentControl->max_grade)) {
                         $countYak++;
                     }
                     ?>
@@ -167,7 +167,7 @@
             <h3 class="text-danger">Редагування та видалення</h3>
             <div class="mb-3">
                 <a href="{{URL::route('delete_control',['id'=>$currentControl->id])}}" class="btn btn-danger m-2" data-confirm="Видалити увесь контроль {{$currentControl->title}} разом з оцінками?">Видалити контроль</a>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('get_info_control',['id'=>$currentControl->id])}}" class="edit-control btn btn-warning m-2">Редагувати контроль</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('controls.show',['control'=>$currentControl])}}" class="edit-control btn btn-warning m-2">Редагувати контроль</button>
             </div>
         </div>
     </div>
@@ -175,9 +175,9 @@
 
 
 
-@include('popups.edit-control')
+@include('controls.popups.edit')
 
-@include('popups.new-control')
+@include('controls.popups.create')
 
 
 <script type="module">

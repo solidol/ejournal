@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Journal;
 use App\Models\Control;
 use Illuminate\Support\Facades\Auth;
-
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class ControlController extends Controller
 {
@@ -25,12 +24,31 @@ class ControlController extends Controller
         '11' => 'листопада',
         '12' => 'грудня',
     ];
-    function apiShow($id)
+
+    function show(Control $control)
     {
-        $info = Control::find($id);
-        if (!$info->date_) $info->date_ = "2000-01-01";
-        return response()->json($info);
+        if (\request()->ajax()) {
+            if (!$control->date_) $control->date_ = "2000-01-01";
+            return response()->json($control);
+        }
+
+        if ($control->journal->teacher_id == Auth::user()->userable_id) 
+        {
+
+            $journals = Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title');
+            return view('controls.show', [
+                'lesson' => false,
+                'currentJournal' => $control->journal,
+                'journals' => $journals,
+                'currentControl' => $control
+            ]);
+        } else {
+            return view('noelement');
+        }
     }
+
+
+
 
     function store(Request $request)
     {
@@ -75,28 +93,11 @@ class ControlController extends Controller
         ]);
 
         Session::flash('message', 'Контроль ' . $control->title . ' успішно створено!');
-        return redirect()->route('show_control', ['journal_id' => $control->journal->id, 'control_id' => $control->id]);
-
-        //return redirect()->route('get_marks', ['id' => $journal->id]);
+        return redirect()->route('controls.show', ['control' => $control]);
     }
 
 
-    function show($journal_id, $control_id)
-    {
-        $control = Control::find($control_id);
-        if ($control != null && $control->journal_id == $journal_id) {
 
-            $journals = Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title');
-            return view('teacher.control_show', [
-                'lesson' => false,
-                'currentJournal' => $control->journal,
-                'journals' => $journals,
-                'currentControl' => $control
-            ]);
-        } else {
-            return view('noelement');
-        }
-    }
 
 
     function delete($id)
@@ -134,8 +135,7 @@ class ControlController extends Controller
             'type_kontrol' => $request->typecontrol,
             'ocenka' => $request->max_grade,
         ]);
-        return redirect()->route('show_control', ['journal_id' => $control->journal->id, 'control_id' => $control->id]);
-        //return redirect()->route('get_marks', ['id' => $control->journal_id]);
+        return redirect()->route('controls.show', ['control' => $control]);
     }
 
 

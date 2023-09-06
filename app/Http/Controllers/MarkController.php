@@ -55,6 +55,6 @@ class MarkController extends Controller
             }
         }
 
-        return redirect()->route('show_control', ['journal_id' => $control->journal->id, 'control_id' => $control->id]);
+        return redirect()->route('controls.show', ['control' => $control]);
     }
 }

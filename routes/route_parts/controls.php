@@ -17,20 +17,17 @@ use App\http\Controllers\CalendarController;
 
 Route::group(['middleware' => 'teacher'], function () {
 
-    // Пари
 
-    Route::get('/journals/{group?}', [JournalController::class, 'index'])->name('journals.index');
+    // Оцінки
 
-    Route::get('/journals/{journal}', [JournalController::class, 'show'])->name('journals.show');
+    Route::get('/controls/{control}', [ControlController::class, 'show'])->name('controls.show');
 
+    Route::post('/controls/{id}/marks/store', [MarkController::class, 'store'])->name('store_marks');
 
+    Route::post('/controls/store', [ControlController::class, 'store'])->name('store_control');
 
-    Route::get('/journals/{id}/marks', [JournalController::class, 'marks'])->name('get_marks');
+    Route::get('/controls/{id}/delete', [ControlController::class, 'delete'])->name('delete_control');
 
-    Route::post('/journals/store', [JournalController::class, 'store'])->name('journals.store');
+    Route::post('/controls/update', [ControlController::class, 'update'])->name('update_info_control');
 
-
-    Route::post('/journals/{journal}/lessons', [JournalController::class, 'update'])->name('journals.update');
-
-
-});
+  });

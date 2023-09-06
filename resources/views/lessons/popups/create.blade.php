@@ -1,5 +1,5 @@
 <!-- Modal -->
-<form action="{{URL::route('store_lesson')}}" method="post">
+<form action="{{URL::route('lessons.store')}}" method="post">
     @csrf
     <!-- {{ csrf_field() }} -->
     <div class="modal fade" id="addLesson" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

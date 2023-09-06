@@ -17,17 +17,16 @@ use App\http\Controllers\CalendarController;
 
 Route::group(['middleware' => 'teacher'], function () {
 
-    Route::post('/lessons/store', [LessonController::class, 'store'])->name('store_lesson');
+    Route::get('/lessons/{lesson}', [LessonController::class, 'show'])->name('lessons.show');
+
+    Route::post('/lessons/store', [LessonController::class, 'store'])->name('lessons.store');
 
     Route::get('/journals/{id}/lessons', [LessonController::class, 'index'])->name('lessons.index');
 
     Route::post('/lessons/{lesson}/update', [LessonController::class, 'update'])->name('lessons.update');
 
-    Route::get('/lessons/{lesson}/show', [LessonController::class, 'show'])->name('lessons.show');
+    Route::get('/lessons/{lesson}/edit', [LessonController::class, 'edit'])->name('lessons.edit');
 
-    Route::get('/lessons/{id}/edit', [LessonController::class, 'edit'])->name('edit_lesson');
+    Route::get('/lessons/{lesson}/delete', [LessonController::class, 'destroy'])->name('lessons.delete');
 
-    Route::get('/lessons/{id}/delete', [LessonController::class, 'destroy'])->name('delete_lesson');
-
-    Route::get('/ajax/lessons/lessons/{id}', [LessonController::class, 'apiShow'])->name('get_info_lesson');
 });

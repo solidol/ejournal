@@ -145,7 +145,7 @@
                         </button>
                     </div>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body"> <a class="btn btn-danger" href="{{URL::route('delete_lesson',['id'=>$lesson->id])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i> Видалити</a></div>
+                        <div class="accordion-body"> <a class="btn btn-danger" href="{{URL::route('lessons.delete',['lesson'=>$lesson])}}" data-confirm="Видалити?"><i class="bi bi-trash"></i> Видалити</a></div>
                     </div>
                 </div>
             </div>
