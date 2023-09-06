@@ -23,68 +23,72 @@
 
 </nav>
 
-<div class="div-table">
-    <table id="tbtable" class="table table-bordered">
-        <thead>
-            <tr>
-                <th>
-                    Дата
-                </th>
-                <th>
-                    1 пара
-                </th>
-                <th>
-                    2 пара
-                </th>
-                <th>
-                    3 пара
-                </th>
-                <th>
-                    4 пара
-                </th>
-                <th>
-                    5 пара
-                </th>
-                <th>
-                    6 пара
-                </th>
-                <th>
-                    7 пара
-                </th>
-                <th>
-                    8 пара
-                </th>
-            </tr>
-        </thead>
-        <tbody>
 
-            @foreach($arDates as $dateItem)
-            <tr>
-                <td>
-                    {{$dateItem->format('d.m.y')}}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                Дата
+            </th>
+            <th style="width:150px;">
+                1 пара
+            </th>
+            <th style="width:150px;">
+                2 пара
+            </th>
+            <th style="width:150px;">
+                3 пара
+            </th>
+            <th style="width:150px;">
+                4 пара
+            </th>
+            <th style="width:150px;">
+                5 пара
+            </th>
+            <th style="width:150px;">
+                6 пара
+            </th>
+            <th style="width:150px;">
+                7 пара
+            </th>
+            <th style="width:150px;">
+                8 пара
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach($arDates as $dateItem)
+        <tr>
+            <td>
+                {{$dateItem->format('d.m.y')}}
+            </td>
+            @for($i=1; $i < 9; $i++) <td data-date="{{$dateItem->format('Y-m-d')}}" data-nom-p="{{$i}}">
+                @foreach($teacher->lessons as $lesson)
+
+                @if($lesson->data_==$dateItem && $lesson->nom_pari==$i)
+                <div id="lesson-{{$lesson->id}}" class="btn btn-primary draggable" draggable="true" data-url="{{URL::route('lessons.update',['lesson'=>$lesson])}}">
+                    {{$lesson->group->title}}
+                </div>
+                @endif
+
+                @endforeach
                 </td>
-                @for($i=1; $i < 9; $i++) 
-                <td data-date="{{$dateItem->format('Y-m-d')}}" data-nom-p="{{$i}}">
-                    @foreach($teacher->lessons as $lesson)
+                @endfor
+        </tr>
+        @endforeach
+    </tbody>
 
-                    @if($lesson->data_==$dateItem && $lesson->nom_pari==$i)
-                    <div id="lesson-{{$lesson->id}}" class="btn btn-primary draggable" draggable="true">
-                        {{$lesson->group->title}}
-                    </div>
-                    @endif
+</table>
 
-                    @endforeach
-                    </td>
-                    @endfor
-            </tr>
-            @endforeach
-        </tbody>
-
-    </table>
-</div>
 
 <script type="module">
     $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
         $('.draggable').on("dragstart", function(event) {
             var dt = event.originalEvent.dataTransfer;
             dt.setData('Text', $(this).attr('id'));
@@ -93,9 +97,18 @@
             event.preventDefault();
             if (event.type === 'drop') {
                 var data = event.originalEvent.dataTransfer.getData('Text', $(this).attr('id'));
-                console.log(data);
-                //$('#' + data).detach();
                 $('#' + data).appendTo($(this));
+                $.ajax({
+                    url: $('#' + data).data('url'),
+                    type: 'post',
+                    data: {
+                        'lessnom': $(this).data('nom-p'),
+                        'datetime': $(this).data('date')
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
             };
         });
 
