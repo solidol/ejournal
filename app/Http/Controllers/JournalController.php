@@ -11,7 +11,7 @@ use App\Models\Lesson;
 use App\Models\Message;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Session;
+use Illuminate\Support\Facades\Session;
 use DateTime;
 
 class JournalController extends Controller
@@ -71,16 +71,7 @@ class JournalController extends Controller
         ]);
     }
 
-    function lessons($id)
-    {
-        $journal = Auth::user()->userable->journals->find($id);
-        if ($journal == null)
-            return view('noelement');
-        return view('teacher.lessons_list', [
-            'currentJournal' => $journal,
-            'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
-        ]);
-    }
+
     function marks($id)
     {
         $journal = Auth::user()->userable->journals->find($id);

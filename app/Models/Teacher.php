@@ -63,4 +63,16 @@ class Teacher extends Model
             'kod_grup' // Локальный ключ в таблице `groups` ...
         );
     }
+
+    public function lessons()
+    {
+        return $this->hasManyThrough(
+            Lesson::class, 
+            journal::class,
+            'teacher_id', // Внешний ключ в таблице `environments` ...
+            'journal_id', // Внешний ключ в таблице `deployments` ...
+            'id', // Локальный ключ в таблице `projects` ...
+            'id' // Локальный ключ в таблице `environments` ...
+        );
+    }
 }

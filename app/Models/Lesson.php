@@ -65,5 +65,8 @@ class Lesson extends Model
     }
 
 
-    
+    public static function getByDate($date, $pnom)
+    {
+        return Lesson::where('data_', $date)->where('nom_pari', $pnom)->get();
+    }
 }

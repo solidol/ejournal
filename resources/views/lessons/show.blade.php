@@ -31,7 +31,7 @@
     <a class="nav-link" href="{{URL::route('get_marks',['id'=>$currentJournal->id])}}"><i class="bi bi-5-square"></i> Оцінки</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('list_lessons',['id'=>$lesson->journal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
+    <a class="nav-link" href="{{URL::route('lessons.index',['id'=>$lesson->journal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
 </li>
 @stop
 
@@ -183,8 +183,8 @@
 </script>
 
 
-@include('popups.edit-lesson')
+@include('lessons.popups.edit-lesson')
 
-@include('popups.new-control')
+@include('controls.popups.new-control')
 
 @stop

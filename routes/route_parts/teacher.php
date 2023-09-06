@@ -12,7 +12,7 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ControlController;
 use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\ReportController;
-
+use App\http\Controllers\CalendarController;
 
 
 Route::group(['middleware' => 'teacher'], function () {
@@ -38,27 +38,15 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::get('/journals/{group?}', [JournalController::class, 'list'])->name('get_journals');
 
-    Route::get('/journals/show/{id}', [JournalController::class, 'show'])->name('show_journal');
+    Route::get('/journals/{id}/show', [JournalController::class, 'show'])->name('show_journal');
 
-    Route::get('/journals/show/{id}/lessons', [JournalController::class, 'lessons'])->name('list_lessons');
 
-    Route::get('/journals/show/{id}/marks', [JournalController::class, 'marks'])->name('get_marks');
+
+    Route::get('/journals/{id}/marks', [JournalController::class, 'marks'])->name('get_marks');
 
     Route::get('/journals/show/{journal_id}/control/{control_id}', [ControlController::class, 'show'])->name('show_control');
 
     Route::post('/journals/store', [JournalController::class, 'store'])->name('store_journal');
-
-    Route::post('/lessons/store', [LessonController::class, 'store'])->name('store_lesson');
-
-    Route::post('/lessons/update', [LessonController::class, 'update'])->name('update_lesson');
-
-    Route::get('/lessons/show/{id}', [LessonController::class, 'show'])->name('show_lesson');
-
-    Route::get('/lessons/edit/{id}', [LessonController::class, 'edit'])->name('edit_lesson');
-
-    Route::get('/lessons/delete/{id}', [LessonController::class, 'destroy'])->name('delete_lesson');
-
-    Route::get('/ajax/lessons/lessons/{id}', [LessonController::class, 'apiShow'])->name('get_info_lesson');
 
 
     // Оцінки
@@ -81,9 +69,8 @@ Route::group(['middleware' => 'teacher'], function () {
 
     //    Табель
 
-    //Route::get('/my/timesheet', [TimesheetController::class, 'getTimesheet'])->name('my_timesheet');
-
-    Route::get('/my/timesheet/{year?}/{month?}', [TimesheetController::class, 'getTimesheetDate'])->name('my_timesheet_date');
+    Route::get('/my/timesheet/{year?}/{month?}', [TimesheetController::class, 'show'])->name('my.timesheet');
+    Route::get('/my/calendar/{year?}/{month?}', [CalendarController::class, 'show'])->name('my.calendar');
 
     // Відсутні
 

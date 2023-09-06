@@ -18,7 +18,7 @@ use DateTime;
 use DatePeriod;
 use DateInterval;
 
-class TimesheetController extends Controller
+class CalendarController extends Controller
 {
 
     static $mothStrings = [
@@ -81,29 +81,23 @@ class TimesheetController extends Controller
         );
 
 
-        $dates = array();
-        foreach ($period as $dItem) {
 
-            $tmp['raw'] = $dItem;
-            $tmp['dw'] = $dItem->format('w');
-            $dates[] = $tmp;
-        }
 
-        $journals = $user->userable->journals;
+        $teacher = $user->userable;
         return view(
-            'timesheets.show',
+            'calendars.show',
             [
 
                 'data' => [
-                    'title1' => 'Табель за ' . TimesheetController::$mothStrings[$month] . ' ' . $year . 'p.',
+                    'title1' => 'Табель за ' . CalendarController::$mothStrings[$month] . ' ' . $year . 'p.',
                     'last_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('last month')->format('m'),
                     'next_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('next month')->format('m'),
                 ],
                 'dateFrom' => $dateFrom,
                 'dateTo' => $dateTo,
-                'arDates' => $dates,
-                'journals' => $journals,
-                'year' => TimesheetController::getYear(),
+                'arDates' => $period,
+                'teacher' => $teacher,
+                'year' => CalendarController::getYear(),
             ]
         );
     }

@@ -13,25 +13,19 @@ use App\Models\Student;
 use App\Models\Mark;
 use App\Models\Journal;
 use App\Models\Control;
-use Session;
+use Illuminate\Support\Facades\Session;
 use DateTime;
 use DatePeriod;
 use DateInterval;
 
 class LessonController extends Controller
 {
-
-    function list($id)
+    function index($id)
     {
-        $user = Auth::user();
         $journal = Auth::user()->userable->journals->find($id);
         if ($journal == null)
             return view('noelement');
-        return view('teacher.lessons', [
-            'data' => [
-                'title1' => $journal->group->nomer_grup . ' - ' . $journal->subject->subject_name,
-                'prep' => $user->userable_id,
-            ],
+        return view('lessons.index', [
             'currentJournal' => $journal,
             'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
         ]);
@@ -49,7 +43,7 @@ class LessonController extends Controller
         if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
         return view(
-            'teacher.lesson_show',
+            'lessons.show',
             [
                 'currentJournal' => $lesson->journal,
                 'arCtrls' =>  Control::where('date_', $lesson->data_)->get(),
@@ -66,7 +60,7 @@ class LessonController extends Controller
         if (Auth::user()->userable_id != $lesson->kod_prep)
             return view('noelement');
         return view(
-            'teacher.edit-lesson',
+            'lessons.edit',
             [
                 'data' => [
                     'title1' => 'Редагувати записану пару',
