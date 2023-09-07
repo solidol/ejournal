@@ -110,10 +110,10 @@
 
                     @foreach($currentJournal->group->students as $student)
                     <?php
-                    if (($currentControl->mark($student->id)->ocenka ?? 0) >= (0.6 * $currentControl->max_grade)) {
+                    if (($control->mark($student->id)->ocenka ?? 0) >= (0.6 * $currentControl->max_grade)) {
                         $countUsp++;
                     }
-                    if (($currentControl->mark($student->id)->ocenka ?? 0) >= (0.75 * $currentControl->max_grade)) {
+                    if (($control->mark($student->id)->ocenka ?? 0) >= (0.75 * $currentControl->max_grade)) {
                         $countYak++;
                     }
                     ?>
