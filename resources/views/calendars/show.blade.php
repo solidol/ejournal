@@ -24,7 +24,7 @@
 </nav>
 
 
-<table class="table table-bordered">
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>
@@ -60,10 +60,11 @@
 
         @foreach($arDates as $dateItem)
         <tr>
-            <td>
+            <td class="text-center">
                 {{$dateItem->format('d.m.y')}}
             </td>
-            @for($i=1; $i < 9; $i++) <td data-date="{{$dateItem->format('Y-m-d')}}" data-nom-p="{{$i}}">
+            @for($i=1; $i < 9; $i++) 
+            <td data-date="{{$dateItem->format('Y-m-d')}}" data-nom-p="{{$i}}"  class="text-center">
                 @foreach($teacher->lessons as $lesson)
 
                 @if($lesson->data_==$dateItem && $lesson->nom_pari==$i)
@@ -73,8 +74,8 @@
                 @endif
 
                 @endforeach
-                </td>
-                @endfor
+            </td>
+            @endfor
         </tr>
         @endforeach
     </tbody>

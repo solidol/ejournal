@@ -52,7 +52,7 @@ class UserController extends Controller
             Log::loginAs($request->input('userid'));
             Auth::loginUsingId($request->input('userid'));
             Session::put('localrole', null);
-            return redirect()->route('get_journals');
+            return redirect()->route('journals.index');
         } else
             return view('auth.login');
     }
