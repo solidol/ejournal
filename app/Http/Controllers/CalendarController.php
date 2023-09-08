@@ -98,7 +98,7 @@ class CalendarController extends Controller
                 'dateTo' => $dateTo,
                 'arDates' => $period,
                 'teacher' => $teacher,
-                'year' => CalendarController::getYear(),
+                'year' => static::getYear(),
             ]
         );
     }
