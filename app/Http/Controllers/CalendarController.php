@@ -13,6 +13,7 @@ use App\Models\Student;
 use App\Models\Mark;
 use App\Models\Journal;
 use App\Models\Control;
+
 use Session;
 use DateTime;
 use DatePeriod;
