@@ -12,7 +12,7 @@ use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ControlController;
 use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\ReportController;
-use App\http\Controllers\CalendarController;
+use App\Http\Controllers\CalendarController;
 
 
 Route::group(['middleware' => 'teacher'], function () {
