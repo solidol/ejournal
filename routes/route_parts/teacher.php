@@ -35,21 +35,6 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::match(array('GET', 'POST'), '/students/search', [StudentController::class, 'find'])->name('find_student');
 
 
-
-    // Оцінки
-
-    Route::post('/controls/{id}/marks/store', [MarkController::class, 'store'])->name('store_marks');
-
-    Route::post('/controls/store', [ControlController::class, 'store'])->name('store_control');
-
-    Route::get('/controls/delete/{id}', [ControlController::class, 'delete'])->name('delete_control');
-
-    Route::post('/controls/update', [ControlController::class, 'update'])->name('update_info_control');
-
-    Route::get('/ajax/controls/{id}/info', [ControlController::class, 'apiShow'])->name('get_info_control');
-
-
-
     Route::post('/files/examrep', [ReportController::class, 'getExamReport'])->name('get_exam_report');
 
 

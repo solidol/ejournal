@@ -14,10 +14,19 @@ use Session;
 class MarkController extends Controller
 {
 
-
-    function store($id, Request $request)
+    function index($id)
     {
-        $control = Control::find($id);
+        $journal = Auth::user()->userable->journals->find($id);
+        if ($journal == null)
+            return view('noelement');
+        return view('marks.index', [
+            'lesson' => false,
+            'currentJournal' => $journal,
+            'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
+        ]);
+    }
+    function store(Request $request, Control $control)
+    {
         foreach ($request->input('marks') as $key => $value) {
             switch ($value) {
                 case 'Н/А':
@@ -36,7 +45,7 @@ class MarkController extends Controller
                     break;
             }
 
-            $searchKeys['control_id'] = $id;
+            $searchKeys['control_id'] = $control->id;
             $searchKeys['kod_stud'] = $key;
 
             $updateKeys['ocenka'] = $value;

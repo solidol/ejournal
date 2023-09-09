@@ -23,7 +23,7 @@
         <div id="controlsNavbar" class="collapse d-md-block">
             <ul class="navbar-nav mr-auto mb-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{URL::route('get_marks',['id'=>$currentJournal->id])}}">
+                    <a class="nav-link" href="{{URL::route('marks.index',['id'=>$currentJournal->id])}}">
                         Всі разом
                     </a>
                 </li>
@@ -56,7 +56,7 @@
             <ul class="navbar-nav mr-auto mb-3">
                 @foreach($journals as $journal)
                 <li class="nav-item">
-                    <a class="nav-link {{($journal->id==$currentJournal->id)?'active':''}}" href="{{URL::route('get_marks',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
+                    <a class="nav-link {{($journal->id==$currentJournal->id)?'active':''}}" href="{{URL::route('marks.index',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
                 </li>
                 @endforeach
             </ul>
@@ -86,7 +86,7 @@
         <h3>{{$currentControl->title}}</h3>
         <p class="fs-4">Дата контролю {{!is_null($currentControl->date_)?$currentControl->date_->format('d.m.Y'):''}} | {{$currentControl->type_title}}</p>
 
-        <form action="{{route('store_marks',['id'=>$currentControl->id])}}" method="post">
+        <form action="{{route('marks.store',['control'=>$currentControl])}}" method="post">
             <div class="mb-3">
                 <button type="submit" class="btn btn-success">Зберегти</button>
             </div>
@@ -166,7 +166,7 @@
         <div class="p-2 border border-2 border-primary rounded-2 mb-2 mt-2">
             <h3 class="text-danger">Редагування та видалення</h3>
             <div class="mb-3">
-                <a href="{{URL::route('delete_control',['id'=>$currentControl->id])}}" class="btn btn-danger m-2" data-confirm="Видалити увесь контроль {{$currentControl->title}} разом з оцінками?">Видалити контроль</a>
+                <a href="{{URL::route('controls.delete',['control'=>$currentControl])}}" class="btn btn-danger m-2" data-confirm="Видалити увесь контроль {{$currentControl->title}} разом з оцінками?">Видалити контроль</a>
                 <button type="button" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('controls.show',['control'=>$currentControl])}}" class="edit-control btn btn-warning m-2">Редагувати контроль</button>
             </div>
         </div>

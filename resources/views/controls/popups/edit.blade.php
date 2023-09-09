@@ -1,5 +1,5 @@
 <!-- Modal -->
-<form action="{{URL::route('update_info_control')}}" method="post">
+<form action="{{URL::route('controls.update')}}" method="post">
     @csrf
     <!-- {{ csrf_field() }} -->
     <div class="modal fade" id="editControl" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

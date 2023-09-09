@@ -61,7 +61,7 @@
                     <a class="btn btn-success py-0" href="{{URL::route('lessons.index',['id'=>$journal->id])}}">
                         <i class="bi bi-pencil-square"></i> Пари
                     </a>
-                    <a class="btn btn-success py-0" href="{{URL::route('get_marks',['id'=>$journal->id])}}">
+                    <a class="btn btn-success py-0" href="{{URL::route('marks.index',['id'=>$journal->id])}}">
                         <i class="bi bi-5-square"></i> Оцінки
                     </a>
 

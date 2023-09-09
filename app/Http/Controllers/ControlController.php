@@ -54,7 +54,7 @@ class ControlController extends Controller
     {
         if ($request->journal_id < 1) {
             Session::flash('error', 'Контроль не створено! Не вистачає даних!');
-            return redirect()->route('get_journals');
+            return redirect()->route('journals.index');
         }
         $journal = Journal::find($request->journal_id);
         $maxval = $request->maxval;
@@ -73,7 +73,7 @@ class ControlController extends Controller
 
         if ($journal->controls()->where('title', $request->title)->get()->first()) {
             Session::flash('error', 'Контроль вже існує!');
-            return redirect()->route('get_marks', ['id' => $journal->id]);
+            return redirect()->route('marks.index', ['id' => $journal->id]);
         }
         $control = $journal->controls()->create([
             'date_' => $request->date_control,
@@ -100,22 +100,21 @@ class ControlController extends Controller
 
 
 
-    function delete($id)
+    function destroy(Control $control)
     {
-        $control = Control::find($id);
         Session::flash('message', 'Контроль ' . $control->title . ' успішно видалено!');
         $journal_id = $control->journal_id;
         $control->marks()->delete();
         $control->marksHeader()->delete();
         $control->delete();
-        return redirect()->route('get_marks', ['id' => $journal_id]);
+        return redirect()->route('marks.index', ['id' => $journal_id]);
     }
 
     function update(Request $request)
     {
         if ($request->control_id < 1) {
             Session::flash('error', 'Контроль не оновлено! Не вистачає даних!');
-            return redirect()->route('get_journals');
+            return redirect()->route('journals.index');
         }
         $control = Control::find($request->control_id);
         $control->update([

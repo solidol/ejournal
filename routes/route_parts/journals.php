@@ -27,7 +27,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
 
 
-    Route::get('/journals/{id}/marks', [JournalController::class, 'marks'])->name('get_marks');
+
 
     Route::post('/journals/store', [JournalController::class, 'store'])->name('journals.store');
 

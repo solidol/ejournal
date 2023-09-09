@@ -19,15 +19,16 @@ Route::group(['middleware' => 'teacher'], function () {
 
 
     // Оцінки
+    Route::get('/journals/{id}/marks', [MarkController::class, 'index'])->name('marks.index');
 
     Route::get('/controls/{control}', [ControlController::class, 'show'])->name('controls.show');
 
-    Route::post('/controls/{id}/marks/store', [MarkController::class, 'store'])->name('store_marks');
+    Route::post('/controls/{control}/marks/store', [MarkController::class, 'store'])->name('marks.store');
 
-    Route::post('/controls/store', [ControlController::class, 'store'])->name('store_control');
+    Route::post('/controls/store', [ControlController::class, 'store'])->name('controls.store');
 
-    Route::get('/controls/{id}/delete', [ControlController::class, 'delete'])->name('delete_control');
+    Route::get('/controls/{control}/delete', [ControlController::class, 'destroy'])->name('controls.delete');
 
-    Route::post('/controls/update', [ControlController::class, 'update'])->name('update_info_control');
+    Route::post('/controls/update', [ControlController::class, 'update'])->name('controls.update');
 
   });

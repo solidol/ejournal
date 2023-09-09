@@ -28,7 +28,7 @@
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{{URL::route('get_marks',['id'=>$currentJournal->id])}}"><i class="bi bi-5-square"></i> Оцінки</a>
+    <a class="nav-link" href="{{URL::route('marks.index',['id'=>$currentJournal->id])}}"><i class="bi bi-5-square"></i> Оцінки</a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="{{URL::route('lessons.index',['id'=>$lesson->journal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
@@ -72,7 +72,7 @@
                         {{$control->max_grade}}
                     </td>
                     <td>
-                        <a class="btn btn-success pt-0 pb-0" href="{{URL::route('get_marks',['id'=>$control->journal_id])}}">
+                        <a class="btn btn-success pt-0 pb-0" href="{{URL::route('marks.index',['id'=>$control->journal_id])}}">
                             <i class="bi bi-pencil-square"></i> Переглянути
                         </a>
                     </td>
