@@ -3,13 +3,6 @@
 @section('title', 'Адмінпанель. Журнал подій')
 
 
-@section('sidebar')
-<div class="baloon">
-    <h1>Адмінпанель</h1>
-    <h2>Журнал подій</h2>
-</div>
-@endsection
-
 @section('content')
 <h2>Журнал подій</h2>
 <table id="logtab" class="table table-stripped table-bordered m-0">
@@ -36,7 +29,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($arEvents as $event)
+        @foreach($events as $event)
         <tr>
             <td>
                 {{$event->created_at}}
@@ -61,7 +54,7 @@
     </tbody>
 </table>
 <div class="d-flex">
-    {!! $arEvents->links() !!}
+    {!! $events->links() !!}
 </div>
 <script type="module">
     $(document).ready(function() {
@@ -82,7 +75,5 @@
         });
     });
 </script>
-
-@include('popups.new-webuser')
 
 @endsection

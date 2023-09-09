@@ -28,6 +28,8 @@ Route::get('/', function () {
 
 require_once __DIR__ . '/route_parts/admin.php';
 
+require_once __DIR__ . '/route_parts/users.php';
+
 require_once __DIR__ . '/route_parts/student.php';
 
 require_once __DIR__ . '/route_parts/curator.php';

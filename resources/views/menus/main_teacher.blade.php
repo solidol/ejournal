@@ -16,7 +16,7 @@
                     <a class="nav-link" href="{{ route('journals.index') }}"><i class="bi bi-book"></i> <span class="d-md-inline d-lg-none">Журнали</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('find_student') }}"><i class="bi bi-search"></i> <span class="d-md-inline d-lg-none">Пошук студента</span></a>
+                    <a class="nav-link" href="{{ route('students.index') }}"><i class="bi bi-search"></i> <span class="d-md-inline d-lg-none">Пошук студента</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('mdb.index') }}"><i class="bi bi-database"></i> <span class="d-md-inline d-lg-none">Електронна база</span></a>

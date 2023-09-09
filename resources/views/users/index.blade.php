@@ -15,7 +15,7 @@
 @endif
 
 <h2>Користувачі журналу</h2>
-<form action="{{ route('admin_another_auth') }}" id="form-login" method="post">
+<form action="{{ route('users.loginas.post') }}" id="form-login" method="post">
     @csrf
     <input type="hidden" name="userid" id="login-userid" value="">
 </form>

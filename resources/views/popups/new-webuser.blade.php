@@ -1,12 +1,12 @@
 <!-- Modal -->
-<form action="{{URL::route('admin_create_user')}}" method="post">
+<form action="{{URL::route('users.store')}}" method="post">
     @csrf
     <!-- {{ csrf_field() }} -->
     <div class="modal fade" id="addWebuser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header text-white bg-dark">
-                    <h5 class="modal-title" id="exampleModalLabel">Записати пару</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Створити обліковий запис входу</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

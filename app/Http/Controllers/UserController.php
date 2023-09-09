@@ -28,7 +28,7 @@ class UserController extends Controller
                     break;
             }
             $users = $users->orderBy('name')->get();
-            return view('admin.users_list', ['users' => $users]);
+            return view('users.index', ['users' => $users]);
         } else
             return view('auth.login');
     }
@@ -45,7 +45,7 @@ class UserController extends Controller
         return view('auth.profile', ['user' => $user]);
     }
 
-    function anotherLogin(Request $request)
+    function loginAs(Request $request)
     {
 
         if (Auth::user()->isAdmin() && $request->input('userid') > 0) {

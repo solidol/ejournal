@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function find(Request $request)
+    public function index(Request $request)
     {
         $res = str_ireplace(['\'', '"', ',', '.', ':', '*', ';', '<', '>', '%', '\n'], '', $request->fullname);
         if ($res == null) {
@@ -17,6 +17,6 @@ class StudentController extends Controller
             $students->appends(array('fullname' => $request->fullname,));
         }
         
-        return view('teacher.students_list', ['students' => $students]);
+        return view('students.index', ['students' => $students]);
     }
 }

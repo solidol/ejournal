@@ -18,13 +18,13 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a class="dropdown-item" href="{{ route('admin_userlist',['slug'=>'teachers']) }}"><i class="bi bi-list-ol"></i> Викладачі</a>
+                            <a class="dropdown-item" href="{{ route('users.index',['slug'=>'teachers']) }}"><i class="bi bi-list-ol"></i> Викладачі</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('admin_userlist',['slug'=>'students']) }}"><i class="bi bi-list-ol"></i> Студенти</a>
+                            <a class="dropdown-item" href="{{ route('users.index',['slug'=>'students']) }}"><i class="bi bi-list-ol"></i> Студенти</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('admin_loglist') }}"><i class="bi bi-list-ol"></i> Лог подій</a>
+                            <a class="dropdown-item" href="{{ route('logs.index') }}"><i class="bi bi-list-ol"></i> Лог подій</a>
                         </li>
                     </ul>
                 </li>
