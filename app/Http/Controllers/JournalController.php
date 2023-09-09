@@ -74,6 +74,21 @@ class JournalController extends Controller
     }
 
 
+    function edit(Journal $journal)
+    {
+        if ($journal == null)
+            return view('noelement');
+        if ($journal->teacher_id != Auth::user()->userable_id)
+            return view('noelement');
+
+        return view('journals.edit', [
+            'lesson' => false,
+            'currentJournal' => $journal,
+            'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
+        ]);
+    }
+
+
     function marks($id)
     {
         $journal = Auth::user()->userable->journals->find($id);
@@ -150,6 +165,6 @@ class JournalController extends Controller
         $journal->save();
 
         Session::flash('message', 'Налаштування журналу збережено');
-        return redirect()->route('journals.show', ['journal' => $journal]);
+        return redirect()->route('journals.edit', ['journal' => $journal]);
     }
 }

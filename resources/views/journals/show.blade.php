@@ -10,7 +10,11 @@
     <h2>Інші журнали</h2>
     <nav class="nav flex-column">
         @foreach($journals as $journal)
-        <a class="nav-link" href="{{URL::route('journals.show',['journal'=>$journal])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
+        <a class="nav-link" href="{{URL::route('journals.show',['journal'=>$journal])}}">
+            <span style="color: <?= $journal->color ?? '#000' ?>;">
+                {{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}
+            </span>
+        </a>
         @endforeach
     </nav>
 </div>
@@ -50,17 +54,7 @@
 
 <h2>Налаштування</h2>
 <div class="p-2 border border-2 border-primary rounded-2">
-    <form action="{{URL::route('journals.update',['journal'=>$currentJournal])}}" method="post">
-        @csrf
-        <div class="mb-3">
-            <label>Колір в календарі</label>
-            <input type="color" class="form" name="color" value="{{$currentJournal->color}}">
-
-        </div>
-        <div class="mb-3">
-            <button type="submit" class="btn btn-success">Зберегти</button>
-        </div>
-    </form>
+    <a href="{{URL::route('journals.edit',['journal'=>$currentJournal])}}" class="btn btn-danger fs-3"><i class="bi bi-gear"></i> Налаштування</a>
 </div>
 
 <script type="module">

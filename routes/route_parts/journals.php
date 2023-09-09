@@ -23,6 +23,8 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::get('/journals/{journal}', [JournalController::class, 'show'])->name('journals.show');
 
+    Route::get('/journals/{journal}/edit}', [JournalController::class, 'edit'])->name('journals.edit');
+
 
 
     Route::get('/journals/{id}/marks', [JournalController::class, 'marks'])->name('get_marks');

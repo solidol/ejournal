@@ -45,25 +45,27 @@
         <tbody>
             @foreach($journals as $journal)
             <tr>
-                <td>
-                    {{$journal->group->nomer_grup}}
+                <td class="text-center">
+                    <div class="btn text-white py-0" style="background-color: <?= $journal->color ?? '#000' ?>;">
+                        {{$journal->group->nomer_grup}}
+                    </div>
                 </td>
                 <td>
                     {{$journal->subject->subject_name}}
                 </td>
                 <td>
-                    {{$journal->lessons->sum('kol_chasov')}} г.
+                    {{$journal->lessons->sum('kol_chasov')}} год.
                 </td>
                 <td>
 
-                    <a class="btn btn-success pt-0 pb-0" href="{{URL::route('lessons.index',['id'=>$journal->id])}}">
+                    <a class="btn btn-success py-0" href="{{URL::route('lessons.index',['id'=>$journal->id])}}">
                         <i class="bi bi-pencil-square"></i> Пари
                     </a>
-                    <a class="btn btn-success pt-0 pb-0" href="{{URL::route('get_marks',['id'=>$journal->id])}}">
+                    <a class="btn btn-success py-0" href="{{URL::route('get_marks',['id'=>$journal->id])}}">
                         <i class="bi bi-5-square"></i> Оцінки
                     </a>
 
-                    <a class="btn btn-success pt-0 pb-0" href="{{URL::route('journals.show',['journal'=>$journal])}}">
+                    <a class="btn btn-success py-0" href="{{URL::route('journals.show',['journal'=>$journal])}}">
                         <i class="bi bi-book"></i> Журнал
                     </a>
                 </td>
