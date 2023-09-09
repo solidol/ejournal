@@ -22,7 +22,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('get_method_index') }}"><i class="bi bi-database"></i> Методична база</a>
+                    <a class="nav-link" href="{{ route('mdb.index') }}"><i class="bi bi-database"></i> Методична база</a>
                 </li>
                 
                 <li class="nav-item dropdown">

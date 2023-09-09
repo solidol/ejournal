@@ -42,6 +42,8 @@ require_once __DIR__ . '/route_parts/controls.php';
 
 require_once __DIR__ . '/route_parts/dpscriber.php';
 
+require_once __DIR__ . '/route_parts/mdb.php';
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', function () {
@@ -53,14 +55,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/messages/send', [MessageController::class, 'send'])->name('message_send');
 
     Route::get('/users/profile', [UserController::class, 'show'])->name('show_profile');
-
-
-    // method db
-
-    Route::get('/mdb/dir/', [MDBController::class, 'index'])->name('get_method_index');
-
-    Route::get('/mdb/download/', [MDBController::class, 'download'])->name('get_method_download');
-
 
     Route::group(['middleware' => ['admin', 'student', 'teacher']], function () {
     });
