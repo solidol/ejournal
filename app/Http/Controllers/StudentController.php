@@ -11,7 +11,7 @@ class StudentController extends Controller
     function index()
     {
         if (\request()->ajax()) {
-            $students = Student::all();
+            $students = Student::orderBy('FIO_stud','asc');
             return  DataTables::of($students)
                 ->addIndexColumn()
                 ->addColumn('group', function ($student) {
