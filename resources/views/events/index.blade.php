@@ -5,7 +5,7 @@
 
 @section('content')
 <h2>Журнал подій</h2>
-<table id="logtab" class="table table-stripped table-bordered m-0">
+<table id="dttbl" class="mb-3 mt-1 table table-striped table-bordered">
     <thead>
         <tr>
             <th>
@@ -29,50 +29,48 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($events as $event)
-        <tr>
-            <td>
-                {{$event->created_at}}
-            </td>
-            <td>
-                {{$event->user?$event->user->userable->fullname:'Inactive'}}
-            </td>
-            <td>
-                {{$event->roles}}
-            </td>
-            <td>
-                {{$event->event}}
-            </td>
-            <td>
-                {{$event->ip_addr}}
-            </td>
-            <td>
-                {{$event->comment}}
-            </td>
-        </tr>
-        @endforeach
+
     </tbody>
 </table>
-<div class="d-flex">
-    {!! $events->links() !!}
-</div>
+
 <script type="module">
     $(document).ready(function() {
 
-        $('#logtab').DataTable({
-            dom: 'Bfrtip',
-            buttons: [{
-                    extend: 'copy',
-                    className: 'btn btn-success'
-                },
-                {
-                    extend: 'excel',
-                    className: 'btn btn-success'
-                }
-            ],
-            "paging": false,
-            "ordering": false
+        let dt = $('#dttbl').DataTable({
+            buttons: [],
+            lengthMenu: [100, 500],
+            language: languageUk,
+            ordering: true,
+            processing: true,
+            serverSide: true,
+            searchDelay: 750,
+            ajax: "{{ route('logs.index') }}",
+            columns: [{
+                data: 'dt',
+                name: 'dt'
+            },
+            {
+                data: 'user',
+                name: 'user'
+            },
+            {
+                data: 'roles',
+                name: 'roles'
+            },
+            {
+                data: 'event',
+                name: 'event'
+            },
+            {
+                data: 'ip_addr',
+                name: 'ip_addr'
+            },
+            {
+                data: 'comment',
+                name: 'comment'
+            }]
         });
+
     });
 </script>
 

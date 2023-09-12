@@ -32,7 +32,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
     // Пошук
 
-    Route::match(array('GET', 'POST'), '/students/search', [StudentController::class, 'index'])->name('students.index');
+    Route::match(array('GET', 'POST'), '/students', [StudentController::class, 'index'])->name('students.index');
 
 
     Route::post('/files/examrep', [ReportController::class, 'getExamReport'])->name('get_exam_report');

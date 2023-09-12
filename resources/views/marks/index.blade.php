@@ -87,7 +87,7 @@
     </li>
 </ul>
 <div class="div-table">
-    <table id="table-all" class="table table-striped m-0">
+    <table id="table-all" class="table table-striped">
         <thead>
             <tr>
                 <th></th>
