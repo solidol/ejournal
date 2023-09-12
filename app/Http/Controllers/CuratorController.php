@@ -7,7 +7,7 @@ use App\Models\Teacher;
 use App\Models\Student;
 use App\Models\Journal;
 use App\Models\Log;
-
+use App\Library\CalendarHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
@@ -16,20 +16,7 @@ use DateInterval;
 
 class CuratorController extends Controller
 {
-    static $mothStrings = [
-        '01' => 'Січень',
-        '02' => 'Лютий',
-        '03' => 'Березень',
-        '04' => 'Квітень',
-        '05' => 'Травень',
-        '06' => 'Червень',
-        '07' => 'Липень',
-        '08' => 'Серпень',
-        '09' => 'Вересень',
-        '10' => 'Жовтень',
-        '11' => 'Листопад',
-        '12' => 'Грудень',
-    ];
+
 
     private static function getYear()
     {
@@ -87,7 +74,7 @@ class CuratorController extends Controller
                 [
                     'student' => $student,
                     'data' => [
-                        'title1' => 'Пропуски за ' . CuratorController::$mothStrings[$month] . ' ' . $year . 'p.',
+                        'title1' => 'Пропуски за ' . CalendarHelper::$months[$month] . ' ' . $year . 'p.',
                         'last_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('last month')->format('m'),
                         'next_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('next month')->format('m'),
                     ],

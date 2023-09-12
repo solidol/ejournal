@@ -24,7 +24,7 @@
 </nav>
 
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>
@@ -59,7 +59,7 @@
     <tbody>
 
         @foreach($arDates as $dateItem)
-        <tr>
+        <tr  class="{{ in_array($dateItem->format('N'),[6,7])?'table-info':'' }}">
             <td class="text-center">
                 {{$dateItem->format('d.m.y')}}
             </td>

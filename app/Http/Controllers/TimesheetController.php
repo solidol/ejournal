@@ -6,13 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
-use App\Models\User;
-use App\Models\Subject;
-use App\Models\Absent;
-use App\Models\Student;
-use App\Models\Mark;
-use App\Models\Journal;
-use App\Models\Control;
+use App\Library\CalendarHelper;
 use Session;
 use DateTime;
 use DatePeriod;
@@ -20,21 +14,6 @@ use DateInterval;
 
 class TimesheetController extends Controller
 {
-
-    static $mothStrings = [
-        '01' => 'Січень',
-        '02' => 'Лютий',
-        '03' => 'Березень',
-        '04' => 'Квітень',
-        '05' => 'Травень',
-        '06' => 'Червень',
-        '07' => 'Липень',
-        '08' => 'Серпень',
-        '09' => 'Вересень',
-        '10' => 'Жовтень',
-        '11' => 'Листопад',
-        '12' => 'Грудень',
-    ];
 
     private static function getYear()
     {
@@ -95,7 +74,7 @@ class TimesheetController extends Controller
             [
 
                 'data' => [
-                    'title1' => 'Табель за ' . static::$mothStrings[$month] . ' ' . $year . 'p.',
+                    'title1' => 'Табель за ' . CalendarHelper::$months[$month] . ' ' . $year . 'p.',
                     'last_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('last month')->format('m'),
                     'next_mon' => (new DateTime($year . '-' . $month . '-01'))->modify('next month')->format('m'),
                 ],

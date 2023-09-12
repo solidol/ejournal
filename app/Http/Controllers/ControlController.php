@@ -47,9 +47,6 @@ class ControlController extends Controller
         }
     }
 
-
-
-
     function store(Request $request)
     {
         if ($request->journal_id < 1) {
@@ -95,10 +92,6 @@ class ControlController extends Controller
         Session::flash('message', 'Контроль ' . $control->title . ' успішно створено!');
         return redirect()->route('controls.show', ['control' => $control]);
     }
-
-
-
-
 
     function destroy(Control $control)
     {
