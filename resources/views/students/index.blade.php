@@ -37,7 +37,7 @@
             ordering: true,
             processing: true,
             serverSide: true,
-            searchDelay: 750,
+            searchDelay: 500,
             ajax: "{{ route('students.index') }}",
             columns: [{
                 data: 'FIO_stud',

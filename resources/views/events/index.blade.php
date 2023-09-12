@@ -43,7 +43,7 @@
             ordering: true,
             processing: true,
             serverSide: true,
-            searchDelay: 750,
+            searchDelay: 500,
             ajax: "{{ route('logs.index') }}",
             columns: [{
                 data: 'dt',
