@@ -37,10 +37,9 @@
 
 
 
-
+<h2>Колір в календарі</h2>
 <form action="{{URL::route('journals.update',['journal'=>$currentJournal])}}" method="post">
     @csrf
-    <h2>Колір в календарі</h2>
     <div class="mb-3">
         <input type="color" class="form" name="color" value="{{$currentJournal->color}}">
 
@@ -50,10 +49,19 @@
     </div>
 </form>
 
-
+@if ($currentJournal->children()->count()==0)
+<h2>Додати поділ</h2>
+<div class="mb-3 mt-3">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addChild">
+        <i class="bi bi-clipboard-plus"></i> Створити журнал
+    </button>
+</div>
+@endif
 <script type="module">
 
 </script>
+@include('journals.popups.create_child')
+
 @include('controls.popups.create')
 
 @include('popups.new-exam-report')

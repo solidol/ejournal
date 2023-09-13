@@ -36,4 +36,12 @@ class Journal extends Model
     {
         return $this->belongsTo(Teacher::class, 'teacher_id', 'kod_prep');
     }
+    public function children()
+    {
+        return $this->hasMany(Journal::class, 'parent_id', 'id');
+    }
+    public function parent()
+    {
+        return $this->belongsTo(Journal::class, 'parent_id', 'id');
+    }
 }

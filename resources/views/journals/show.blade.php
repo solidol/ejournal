@@ -52,6 +52,21 @@
     </button>
 </div>
 
+<h2>Пов'язані журнали</h2>
+@if ($currentJournal->children()->count()>0)
+<h3>Поділи</h3>
+<div class="mb-3 mt-3">
+    @foreach($currentJournal->children as $journal)
+    <div>{{$journal->group->title}} {{$journal->subject->title}} {{$journal->teacher->fullname}}</div>
+    @endforeach
+</div>
+@endif
+@if ($currentJournal->parent)
+<h3>Основний журнал</h3>
+<div class="mb-3 mt-3">
+    <div>{{$currentJournal->parent->group->title}} {{$currentJournal->parent->subject->title}} {{$currentJournal->parent->teacher->fullname}}</div>
+</div>
+@endif
 <h2>Налаштування</h2>
 <div class="p-2 border border-2 border-primary rounded-2">
     <a href="{{URL::route('journals.edit',['journal'=>$currentJournal])}}" class="btn btn-danger fs-3"><i class="bi bi-gear"></i> Налаштування</a>

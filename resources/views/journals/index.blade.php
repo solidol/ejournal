@@ -51,7 +51,10 @@
                     </div>
                 </td>
                 <td>
-                    {{$journal->subject->subject_name}}
+                    {{$journal->subject->subject_name}} 
+                    @if ($journal->parent)
+                    <i class="bi bi-vr fs-5"></i>
+                    @endif
                 </td>
                 <td>
                     {{$journal->lessons->sum('kol_chasov')}} год.

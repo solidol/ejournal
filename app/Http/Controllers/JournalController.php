@@ -83,6 +83,7 @@ class JournalController extends Controller
 
         return view('journals.edit', [
             'lesson' => false,
+            'teachers' => Teacher::all(),
             'currentJournal' => $journal,
             'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
         ]);
@@ -123,11 +124,24 @@ class JournalController extends Controller
     {
 
         $journal = new Journal();
-        $journal->group_id = $request->grcode;
-        $journal->subject_id = $request->sbjcode;
-        $journal->teacher_id = Auth::user()->userable_id;
-        $journal->description = $request->description;
-        $journal->save();
+
+        if ($request->parent_id) {
+            $oldJournal = Journal::find($request->parent_id);
+            $journal->group_id = $oldJournal->group_id;
+            $journal->subject_id = $oldJournal->subject_id;
+            $journal->teacher_id = $request->teacher_id;
+            $journal->parent_id = $request->parent_id ?? 0;
+            $journal->description = $request->description;
+            $journal->save();
+        } else {
+            $journal->group_id = $request->grcode;
+            $journal->subject_id = $request->sbjcode;
+            $journal->teacher_id = Auth::user()->userable_id;
+            $journal->parent_id = $request->parent_id ?? 0;
+            $journal->description = $request->description;
+            $journal->save();
+        }
+
         $lesson = new Lesson();
         $lesson->kod_grupi = $journal->group_id;
         $lesson->kod_prep = $journal->teacher_id;
@@ -141,7 +155,11 @@ class JournalController extends Controller
         $lesson->save();
 
         Session::flash('message', 'Журнал створено, першу пару збережено');
-        return redirect()->route('lessons.index', ['id' => $journal->id]);
+        if ($request->parent_id) {
+            return redirect()->route('journals.show', ['journal' => $oldJournal]);
+        } else {
+            return redirect()->route('lessons.index', ['id' => $journal->id]);
+        }
     }
 
     public function update(Request $request, Journal $journal)
