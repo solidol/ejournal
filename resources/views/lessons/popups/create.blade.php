@@ -74,10 +74,20 @@
                     <div class="mb-3">
                         <label for="zadanaie">Що задано</label>
                         <textarea class="form-control" placeholder="Leave a comment here" id="homework" name="homework"></textarea>
-                        <button id="addlect" type="button" class="btn btn-secondary">Конспект</button>
-                        <button id="addrep" type="button" class="btn btn-secondary">Звіт</button>
                     </div>
-
+                    <div class="mb-3">
+                        <label for="zadanaie">Що задано підказка</label>
+                        <button id="addlect" type="button" class="btn btn-secondary m-1">Конспект</button>
+                        <button id="addrep" type="button" class="btn btn-secondary m-1">Звіт</button>
+                    </div>
+                    @if ($currentJournal->children()->count()>0)
+                    <div class="mb-3 form-check">
+                        <input class="form-check-input" type="checkbox" value="true" id="flexCheckDefault" name="copy_to_div">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Скопіювати в поділ
+                        </label>
+                    </div>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">Зберегти</button>

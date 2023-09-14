@@ -82,6 +82,20 @@ class LessonController extends Controller
             $lesson->kol_chasov = $request->input('hours');
             $lesson->data_ = $request->input('datetime');
             $lesson->save();
+            if ($request->copy_to_div) {
+                $div = $journal->children()->first();
+                $dLesson = new Lesson();
+                $dLesson->kod_grupi = $div->group_id;
+                $dLesson->kod_prep = $div->teacher_id;
+                $dLesson->kod_subj = $div->subject_id;
+                $dLesson->journal_id = $div->id;
+                $dLesson->nom_pari = $request->input('lessnom');
+                $dLesson->tema = $request->input('thesis');
+                $dLesson->zadanaie = $request->input('homework');
+                $dLesson->kol_chasov = $request->input('hours');
+                $dLesson->data_ = $request->input('datetime');
+                $dLesson->save();
+            }
         }
         Session::flash('message', 'Пару збережено');
         return redirect()->route('lessons.index', ['id' => $journal->id]);
