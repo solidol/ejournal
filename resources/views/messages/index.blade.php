@@ -20,25 +20,16 @@
             <th>
                 Зміст
             </th>
-            <th>
-                Дія
-            </th>
         </tr>
     </thead>
     <tbody>
-        @foreach($arTexts as $text)
+        @foreach($messages as $mes)
         <tr>
             <td>
-                {{$text->user->userable->FIO_prep}}
+                {{$mes->from_id>0?$mes->user->userable->FIO_prep:'Адміністратор'}}
             </td>
             <td>
-                {!! nl2br($text->content) !!}
-            </td>
-
-            <td>
-                <a class="btn btn-danger" href="{{URL::route('messages.delete',['message'=>$text->id])}}">
-                    Видалити
-                </a>
+                {!! nl2br($mes->content) !!}
             </td>
         </tr>
         @endforeach
@@ -46,34 +37,7 @@
 
 </table>
 
-<h2>
-    Системні
-</h2>
-<table class="table table-striped table-bordered m-0">
-    <thead>
-        <tr>
-            <th>
-                Від
-            </th>
-            <th>
-                Зміст
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($arSystem as $text)
-        <tr>
-            <td>
-                {{$text->user->userable->FIO_prep}}
-            </td>
-            <td>
-                {!! nl2br($text->content) !!}
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
 
-</table>
 
 
 

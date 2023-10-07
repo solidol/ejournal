@@ -15,12 +15,10 @@ class MessageController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $messText = Message::where('to_id', $user->id)->where('message_type', 'text')->get();
-        $messSystem = Message::where('message_type', 'system')->where('to_id', $user->id)->orWhere('to_id', 0)->get();
-
+        $messages = Message::where('message_type', 'text')->where('to_id', $user->id)->orWhere('to_id', 0)->get();
+        
         return view('messages.index', [
-            'arTexts' => $messText,
-            'arSystem' => $messSystem,
+            'messages' => $messages,
             'arUsers' => User::all(),
         ]);
     }
