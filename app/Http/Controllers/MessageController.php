@@ -15,7 +15,9 @@ class MessageController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $messages = Message::where('message_type', 'text')->where('datetime_end', '<', date("Y-m-d H:i:s"))->where('to_id', $user->id)->orWhere('to_id', 0)->get();
+        $messages = Message::where('message_type', 'text')->
+        where('datetime_end', '<', date("Y-m-d H:i:s"))->
+        where('to_id', $user->id)->orWhere('to_id', 0)->orderByDesc('datetime_end')->get();
 
         return view('messages.index', [
             'messages' => $messages,
