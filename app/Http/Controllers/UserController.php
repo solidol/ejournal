@@ -39,7 +39,7 @@ class UserController extends Controller
                         return $user->userable->fullname;
                     })
                     ->addColumn('action', function ($user) {
-                        $actionBtn = '<button type="button" class="btn btn-success btn-login" data-uid="' . $user->id . '">Увійти</button>';
+                        $actionBtn = '<a href="' . route('users.loginas', ['user' => $user]) . '" class="btn btn-success btn-login" data-uid="' . $user->id . '">Увійти</a>';
                         return $actionBtn;
                     })
 
@@ -63,12 +63,12 @@ class UserController extends Controller
         return view('auth.profile', ['user' => $user]);
     }
 
-    function loginAs(Request $request)
+    function loginAs(User $user)
     {
 
-        if (Auth::user()->isAdmin() && $request->input('userid') > 0) {
-            Log::loginAs($request->input('userid'));
-            Auth::loginUsingId($request->input('userid'));
+        if (Auth::user()->isAdmin() ) {
+            Log::loginAs($user->id);
+            Auth::loginUsingId($user->id);
             Session::put('localrole', null);
             return redirect()->route('journals.index');
         } else

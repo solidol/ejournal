@@ -10,10 +10,7 @@
 @endif
 
 <h2>Користувачі журналу</h2>
-<form action="{{ route('users.loginas.post') }}" id="form-login" method="post">
-    @csrf
-    <input type="hidden" name="userid" id="login-userid" value="">
-</form>
+
 <table id="journal_users" class="table table-stripped table-bordered">
     <thead>
         <tr>
@@ -34,14 +31,9 @@
 </table>
 <script type="module">
     $(document).ready(function() {
-        $('.btn-login').click(function() {
-            $('#login-userid').val($(this).data('uid'));
-            $('#form-login').submit();
-        });
-
-        let dt = $('#journal_users').DataTable({
+        $('#journal_users').DataTable({
             buttons: [],
-            lengthMenu: [50, 100, 500],
+            lengthMenu: [100, 500],
             language: languageUk,
             ordering: false,
             processing: true,
