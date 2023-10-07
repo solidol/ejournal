@@ -18,7 +18,9 @@
                         <select id="user_id" name="user_id" class="form-select form-select-md" aria-label=".form-select-sm example" required placeholder="Оберіть групу">
                             <option selected></option>
                             @foreach ($arUsers as $user)
+                            @if ($user->userable)
                             <option value="{{$user->id}}">{{$user->userable->FIO_prep}}</option>
+                            @endif
                             @endforeach
                         </select>
                     </div>
