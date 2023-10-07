@@ -87,11 +87,15 @@ class User extends Authenticatable
 
     public static function teachers()
     {
-        return User::where('userable_type', 'App\Models\Teacher');
+        return User::with('userable')->
+        join('prepod', 'prepod.kod_prep', '=', 'users.userable_id')->
+        where('userable_type', 'App\Models\Teacher')->orderBy('prepod.FIO_prep', 'asc');
     }
     public static function students()
     {
-        return User::where('userable_type', 'App\Models\Student');
+        return User::with('userable')->
+        join('spisok_stud', 'spisok_stud.kod_stud', '=', 'users.userable_id')->
+        where('userable_type', 'App\Models\Student')->orderBy('spisok_stud.FIO_stud', 'asc');
     }
     public function logins()
     {

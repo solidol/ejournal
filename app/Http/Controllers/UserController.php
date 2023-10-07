@@ -10,25 +10,43 @@ use App\Models\Teacher;
 use App\Models\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\DataTables;
 
 class UserController extends Controller
 {
-    function index($slug = 'teachers')
+
+    public function index($slug = 'teachers')
     {
+
         if (Auth::user()->isAdmin()) {
-            switch ($slug) {
-                case 'teachers':
-                    $users = User::teachers();
-                    break;
-                case 'students':
-                    $users = User::students();
-                    break;
-                default:
-                    $users = User::teachers();
-                    break;
+
+
+            if (\request()->ajax()) {
+                switch ($slug) {
+                    case 'teachers':
+                        $users = User::teachers()->get();
+                        break;
+                    case 'students':
+                        $users = User::students()->get();
+                        break;
+                    default:
+                        $users = User::teachers()->get();
+                        break;
+                }
+                return  DataTables::of($users)
+                    ->addIndexColumn()
+                    ->addColumn('fullname', function ($user) {
+                        return $user->userable->fullname;
+                    })
+                    ->addColumn('action', function ($user) {
+                        $actionBtn = '<button type="button" class="btn btn-success btn-login" data-uid="' . $user->id . '">Увійти</button>';
+                        return $actionBtn;
+                    })
+
+                    ->rawColumns(['action'])
+                    ->make(true);
             }
-            $users = $users->orderBy('name')->get();
-            return view('users.index', ['users' => $users]);
+            return view('users.index', ['slug' => $slug]);
         } else
             return view('auth.login');
     }
