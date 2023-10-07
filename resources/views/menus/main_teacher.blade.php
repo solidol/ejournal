@@ -46,7 +46,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="{{ route('message_index') }}"><i class="bi bi-envelope-paper"></i> Мої повідомлення</a>
+                            <a class="dropdown-item" href="{{ route('messages.index') }}"><i class="bi bi-envelope-paper"></i> Мої повідомлення</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">

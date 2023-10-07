@@ -1,4 +1,4 @@
-<form action="{{URL::route('message_send')}}" method="post">
+<form action="{{URL::route('messages.store')}}" method="post">
     @csrf
     <div class="modal fade" id="shareLesson" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

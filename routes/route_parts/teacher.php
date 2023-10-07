@@ -51,19 +51,9 @@ Route::group(['middleware' => 'teacher'], function () {
 
     // Повідомлення
 
-    Route::get('/messages/index', [MessageController::class, 'list'])->name('message_index');
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
 
-    Route::post('/messages/send-system', [MessageController::class, 'sendSystem'])->name('message_send_system');
-
-    Route::post('/messages/share-lesson', [MessageController::class, 'shareLesson'])->name('message_share_lesson');
-
-    Route::get('/messages/lesson/accept/{messId}', [MessageController::class, 'acceptLesson'])->name('message_accept_lesson');
-
-    Route::get('/messages/delete/{messId}', [MessageController::class, 'deleteLesson'])->name('message_delete');
-
-
-    // Профіль
-
-    Route::get('/users/messages', [MessageController::class, 'list'])->name('list_messages');
-
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+    
+    Route::get('/messages/delete/{message}', [MessageController::class, 'destroy'])->name('messages.delete');
   });
