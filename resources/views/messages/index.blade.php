@@ -15,6 +15,9 @@
     <thead>
         <tr>
             <th>
+                Дата
+            </th>
+            <th>
                 Від
             </th>
             <th>
@@ -25,6 +28,9 @@
     <tbody>
         @foreach($messages as $mes)
         <tr>
+            <td>
+                {{$mes->datetime_start->format('d.m.Y H:i')}}
+            </td>
             <td>
                 {{$mes->from_id>0?$mes->user->userable->FIO_prep:'Адміністратор'}}
             </td>
