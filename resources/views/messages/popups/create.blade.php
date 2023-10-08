@@ -15,11 +15,11 @@
                     </div>
                     <div class="mb-3">
                         <label>Оберіть користувача</label>
-                        <select id="user_id" name="user_id" class="form-select form-select-md" aria-label=".form-select-sm example" required placeholder="Оберіть групу">
+                        <select id="user_id" name="to_id" class="form-select form-select-md" aria-label=".form-select-sm example" required placeholder="Оберіть групу">
                             <option selected></option>
-                            @foreach ($arUsers as $user)
+                            @foreach ($users as $user)
                             @if ($user->userable)
-                            <option value="{{$user->id}}">{{$user->userable->FIO_prep}}</option>
+                            <option value="{{$user->id}}">{{$user->userable->fullname}}</option>
                             @endif
                             @endforeach
                         </select>

@@ -15,20 +15,22 @@ class MessageController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $messages = Message::where('message_type', 'text')->
-        where('datetime_end', '>', date("Y-m-d H:i:s"))->
-        where('to_id', $user->id)->orWhere('to_id', 0)->orderByDesc('datetime_end')->get();
+        $messages = Message::where('to_id', $user->id)->orWhere('to_id', 0)->
+        where('message_type', 'text')->
+        where('datetime_end', '>=', date("Y-m-d H:i:s"))->
+        where('datetime_start', '<=', date("Y-m-d H:i:s"))->
+        orderByDesc('datetime_start')->get();
 
         return view('messages.index', [
             'messages' => $messages,
-            'arUsers' => User::all(),
+            'users' => User::teachers(),
         ]);
     }
 
     public function createAdmin()
     {
-        return view('admin.messages_create', [
-            'arUsers' => User::all(),
+        return view('messages.create_sys', [
+            'users' => User::teachers(),
         ]);
     }
 
@@ -36,20 +38,22 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         Message::create([
-            'from_id' => Auth::user()->id, //$request->from_id;
-            'to_id' => $request->user_id,
+            'from_id' => $request->from_id ?? Auth::id(), 
+            'to_id' => $request->to_id ?? Auth::id(),
             'message_type' => $request->message_type,
             'content' => $request->content,
             'created_at' => date("Y-m-d H:i:s"),
-            'datetime_start' => date("Y-m-d H:i:s"),
-            'datetime_end' => '2100-01-01',
+            'datetime_start' => $request->datetime_start ?? date("Y-m-d H:i:s"),
+            'datetime_end' => $request->datetime_end ?? '2100-01-01',
         ]);
         return redirect()->route('messages.index');
     }
 
     public function destroy(Message $message)
     {
-        $message->delete();
+        if ($message->from_id == Auth::id() or $message->to_id == Auth::id()) {
+            $message->delete();
+        }
         return redirect()->route('messages.index');
     }
 }

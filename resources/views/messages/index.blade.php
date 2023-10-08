@@ -23,6 +23,9 @@
             <th>
                 Зміст
             </th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +39,11 @@
             </td>
             <td>
                 {!! nl2br($mes->content) !!}
+            </td>
+            <td>
+                @if ($mes->from_id>0)
+                <a href="{{URL::route('messages.delete',['message'=>$mes])}}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                @endif
             </td>
         </tr>
         @endforeach

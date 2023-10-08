@@ -49,11 +49,4 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::post('/absents/lesson/{id}/store', [AbsentController::class, 'store'])->name('store_absents');
 
 
-    // Повідомлення
-
-    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
-
-    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
-    
-    Route::get('/messages/delete/{message}', [MessageController::class, 'destroy'])->name('messages.delete');
   });

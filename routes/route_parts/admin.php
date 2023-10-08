@@ -13,8 +13,7 @@ Route::group(['middleware' => 'admin'], function () {
 
         Route::get('/admin/events', [LogController::class, 'index'])->name('logs.index');
 
-        Route::get('/admin/message/create', [MessageController::class, 'createAdmin'])->name('admin_message_create');
-
+ 
         Route::post('/tokens/create', function (Request $request) {
             $token = $request->user()->createToken($request->token_name);
         

@@ -24,13 +24,13 @@ class UserController extends Controller
             if (\request()->ajax()) {
                 switch ($slug) {
                     case 'teachers':
-                        $users = User::teachers()->get();
+                        $users = User::teachers();
                         break;
                     case 'students':
-                        $users = User::students()->get();
+                        $users = User::students();
                         break;
                     default:
-                        $users = User::teachers()->get();
+                        $users = User::teachers();
                         break;
                 }
                 return  DataTables::of($users)

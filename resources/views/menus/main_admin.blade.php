@@ -31,7 +31,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/teacher" class="btn btn-outline-success"><i class="bi bi-book"></i> Загальний журнал</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('messages.create_sys')}}" class="btn btn-outline-success"><i class="bi bi-envelope"></i> Системне повідомлення</a>
+                </li>
             </ul>
         </div>
     </div>

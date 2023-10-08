@@ -89,13 +89,13 @@ class User extends Authenticatable
     {
         return User::with('userable')->
         join('prepod', 'prepod.kod_prep', '=', 'users.userable_id')->
-        where('userable_type', 'App\Models\Teacher')->orderBy('prepod.FIO_prep', 'asc');
+        where('userable_type', 'App\Models\Teacher')->orderBy('prepod.FIO_prep', 'asc')->get();
     }
     public static function students()
     {
         return User::with('userable')->
         join('spisok_stud', 'spisok_stud.kod_stud', '=', 'users.userable_id')->
-        where('userable_type', 'App\Models\Student')->orderBy('spisok_stud.FIO_stud', 'asc');
+        where('userable_type', 'App\Models\Student')->orderBy('spisok_stud.FIO_stud', 'asc')->get();
     }
     public function logins()
     {

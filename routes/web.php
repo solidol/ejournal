@@ -46,6 +46,8 @@ require_once __DIR__ . '/route_parts/dpscriber.php';
 
 require_once __DIR__ . '/route_parts/mdb.php';
 
+require_once __DIR__ . '/route_parts/messages.php';
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', function () {
