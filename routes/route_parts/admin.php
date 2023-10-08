@@ -11,9 +11,6 @@ Route::group(['middleware' => 'admin'], function () {
             return redirect()->route('home');
         });
 
-        Route::get('/admin/events', [LogController::class, 'index'])->name('logs.index');
-
- 
         Route::post('/tokens/create', function (Request $request) {
             $token = $request->user()->createToken($request->token_name);
         

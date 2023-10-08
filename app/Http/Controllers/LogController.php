@@ -26,11 +26,4 @@ class LogController extends Controller
         return view('events.index');
     }
 
-    /*
-    public function index()
-    {
-        return view('events.index', [
-            'events' => Log::orderByDesc('created_at')->paginate(200),
-        ]);
-    }*/
 }
