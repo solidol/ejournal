@@ -24,10 +24,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('mdb.index') }}"><i class="bi bi-database"></i> Методична база</a>
                 </li>
-
+<!--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('lessons.now') }}"><i class="bi bi-book"></i> Поточна пара</a>
                 </li>
+-->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-bounding-box"></i> {{ Auth::user()->userable->fullname }} <span class="caret"></span>
