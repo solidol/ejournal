@@ -30,9 +30,17 @@ class Lesson extends Model
     {
         return $this->hasMany(Absent::class, 'kod_lesson');
     }
+    public function presents()
+    {
+        return $this->hasMany(Present::class, 'lesson_id');
+    }
     public function absent($student_id)
     {
         return $this->absents->where('kod_stud', $student_id)->first() ?? false;
+    }
+    public function present($student_id)
+    {
+        return $this->presents->where('student_id', $student_id)->first() ?? false;
     }
     public function group()
     {

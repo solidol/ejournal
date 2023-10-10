@@ -103,6 +103,9 @@
                         <th>
                             Відсутній
                         </th>
+                        <th>
+                            Web-відмітка
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -113,6 +116,9 @@
                         </td>
                         <td>
                             <input type="text" class="inp-abs form form-control" name="abs[{{$student->id}}]" value="{{$lesson->absent($student->id)?'нб':''}}" placeholder="">
+                        </td>
+                        <td>
+                            {{$lesson->present($student->id)?'так':''}}
                         </td>
                     </tr>
                     @endforeach

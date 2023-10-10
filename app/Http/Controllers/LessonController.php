@@ -31,6 +31,44 @@ class LessonController extends Controller
         ]);
     }
 
+    function nowIndex()
+    {
+        if (Auth::user()->isStudent()) {
+            $student = Auth::user()->userable;
+            $lessons = Lesson::where('kod_grupi', $student->kod_grup)->where('created_at', '>=', now()->subMinutes(30))->
+                //where('created_at','>=',date("Y-m-d H:i:s"))->
+                get();
+            return view('student.lessons.current', ['lessons' => $lessons]);
+        } else {
+            return view('noelement');
+        }
+    }
+
+    function now()
+    {
+        if (Auth::user()->isStudent()) {
+            $student = Auth::user()->userable;
+            $lesson = Lesson::where('kod_grupi', $student->kod_grup)->where('created_at', '>=', now()->subMinutes(30))->first();
+            if ($lesson)
+            
+                return view('student.lessons.show', ['lesson' => $lesson]);
+            else
+                return view('noelement');
+        } else {
+            return view('noelement');
+        }
+    }
+
+    function nowShow(Lesson $lesson)
+    {
+        if (Auth::user()->isStudent()) {
+            $student = Auth::user()->userable;
+            return view('student.lessons.show', ['lesson' => $lesson]);
+        } else {
+            return view('noelement');
+        }
+    }
+
     public function show(Lesson $lesson)
     {
         if (\request()->ajax()) {

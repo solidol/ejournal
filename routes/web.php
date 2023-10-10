@@ -53,6 +53,8 @@ require_once __DIR__ . '/route_parts/messages.php';
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', function () {
+        //if (Auth::user()->isStudent())
+        //  return redirect()->route('lessons.now');
         return view('home');
     })->name('home');
 
