@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use App\Models\Present;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,6 @@ class PresentController extends Controller
                 'present' => 1
             ]
         );
-        return redirect()->route('lessons.now');
+        return redirect($request->getRequestUri());
     }
 }

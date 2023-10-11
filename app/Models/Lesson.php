@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,10 +14,11 @@ class Lesson extends Model
 {
     protected $table = 'lessons_';
     protected $dates = ['data_'];
-    protected $appends = ['id', 'date_formatted'];
+    protected $appends = ['id', 'date_formatted', 'student_url'];
     public $timestamps = false;
     protected $primaryKey = 'kod_pari';
     protected $guarded = [];
+
 
     public function getIdAttribute()
     {
@@ -25,6 +27,14 @@ class Lesson extends Model
     public function getDateFormattedAttribute()
     {
         return $this->data_->format('d.m.Y');
+    }
+    public function getStudentUrlAttribute()
+    {
+        return URL::temporarySignedRoute(
+            'lessons.now.show',
+            now()->addMinutes(30),
+            ['lesson' => $this]
+        );
     }
     public function absents()
     {

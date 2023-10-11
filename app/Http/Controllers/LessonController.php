@@ -50,7 +50,7 @@ class LessonController extends Controller
             $student = Auth::user()->userable;
             $lesson = Lesson::where('kod_grupi', $student->kod_grup)->where('created_at', '>=', now()->subMinutes(30))->first();
             if ($lesson)
-            
+
                 return view('student.lessons.show', ['lesson' => $lesson]);
             else
                 return view('noelement');
@@ -59,8 +59,11 @@ class LessonController extends Controller
         }
     }
 
-    function nowShow(Lesson $lesson)
+    function nowShow(Request $request, Lesson $lesson)
     {
+        if (!$request->hasValidSignature()) {
+            abort(401);
+        }
         if (Auth::user()->isStudent()) {
             $student = Auth::user()->userable;
             return view('student.lessons.show', ['lesson' => $lesson]);

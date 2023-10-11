@@ -85,7 +85,18 @@
         @endif
 
         <h3>Відсутні</h3>
-        <p>Будь-яка позначка або подвійний клік для відмітки. Обов'язково натисніть "Зберегти"</p>
+        <p>
+            Будь-яка позначка або подвійний клік для відмітки. Обов'язково натисніть "Зберегти"
+        </p>
+        <p>
+            Посилання для відмічання студентів:
+        </p>
+        <p>
+            <input type="text" id="studUrl" value="{{$lesson->student_url}}" readonly>
+            <button type="button" id="copyUrl" data-url="{{$lesson->student_url}}" class="btn btn-success">
+                <i class="bi bi-copy"></i> Натисніть для копіювання
+            </button>
+        </p>
         <form action="{{URL::route('store_absents',['id'=>$lesson->id])}}" method="post">
             @csrf
             <div class="mb-3">
@@ -166,6 +177,12 @@
 
 <script type="module">
     $(document).ready(function() {
+        $('#copyUrl').click(function() {
+            let copyText = document.querySelector("#studUrl");
+            copyText.focus();
+            copyText.select();
+            document.execCommand("copy");
+        });
         $('#freset').click(function() {
             $('#homework').val('');
             $('#thesis').val('');
