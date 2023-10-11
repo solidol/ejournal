@@ -116,6 +116,6 @@ class AbsentController extends Controller
                 Absent::insert($updateKeys);
             }
         }
-        return redirect()->route('show_lesson', ['id' => $lesson->id]);
+        return redirect()->route('lessons.show', ['lesson' => $lesson]);
     }
 }
