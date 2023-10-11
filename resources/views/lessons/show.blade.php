@@ -97,11 +97,14 @@
                 <i class="bi bi-copy"></i> Натисніть для копіювання
             </button>
         </p>
-        <form action="{{URL::route('store_absents',['id'=>$lesson->id])}}" method="post">
+        <form id="formabsents" action="{{URL::route('store_absents',['id'=>$lesson->id])}}" method="post">
             @csrf
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-success">
                     <i class="bi bi-clipboard-plus"></i> Зберегти
+                </button>
+                <button type="button" id="websync" class="btn btn-primary">
+                    Синхронізувати з web
                 </button>
             </div>
 
@@ -126,7 +129,7 @@
                             {{$student->fullname}}
                         </td>
                         <td>
-                            <input type="text" class="inp-abs form form-control" name="abs[{{$student->id}}]" value="{{$lesson->absent($student->id)?'нб':''}}" placeholder="">
+                            <input type="text" class="inp-abs form form-control" name="abs[{{$student->id}}]" value="{{$lesson->absent($student->id)?'нб':''}}" data-webabsent="{{$lesson->present($student->id)?'':'нб'}}" placeholder="">
                         </td>
                         <td>
                             {{$lesson->present($student->id)?'так':''}}
@@ -149,9 +152,6 @@
                 <a class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#editLesson"><i class="bi bi-pencil-square"></i> Редагувати</a>
             </div>
             <div class="mb-2 mt-2">
-                <!--
-                <a class="btn btn-success" disabled="disabled" href="#" data-bs-toggle="modal" data-bs-target="#shareLesson"><i class="bi bi-share-fill"></i> Поширити</a>
--->
             </div>
             <h3 class="text-danger">Видалення записаної пари</h3>
             <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -182,6 +182,12 @@
             copyText.focus();
             copyText.select();
             document.execCommand("copy");
+        });
+        $('#websync').click(function() {
+            $('.inp-abs').each(function(index, item) {
+                $(item).val($(item).data('webabsent'));
+            });
+            $('#formabsents').submit();
         });
         $('#freset').click(function() {
             $('#homework').val('');
