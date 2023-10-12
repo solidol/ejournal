@@ -139,7 +139,7 @@
                 </tbody>
             </table>
             <div class="mb-3 mt-3">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-success">
                     <i class="bi bi-clipboard-plus"></i> Зберегти
                 </button>
             </div>
