@@ -58,11 +58,9 @@ class LessonController extends Controller
         }
     }
 
-    function nowLinkAjax(Lesson $lesson)
+    function checkinLink(Lesson $lesson)
     {
-
         $response['url'] = $lesson->student_url;
-
         return response()->json($response);
     }
 
