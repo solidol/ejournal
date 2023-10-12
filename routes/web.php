@@ -28,6 +28,8 @@ Route::get('/', function () {
 
 require_once __DIR__ . '/route_parts/admin.php';
 
+require_once __DIR__ . '/route_parts/absents.php';
+
 require_once __DIR__ . '/route_parts/events.php';
 
 require_once __DIR__ . '/route_parts/users.php';
@@ -53,8 +55,6 @@ require_once __DIR__ . '/route_parts/messages.php';
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/home', function () {
-        //if (Auth::user()->isStudent())
-        //  return redirect()->route('lessons.now');
         return view('home');
     })->name('home');
 

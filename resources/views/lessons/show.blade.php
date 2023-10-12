@@ -97,14 +97,17 @@
                 <i class="bi bi-copy"></i> Натисніть для копіювання
             </button>
         </p>
-        <form id="formabsents" action="{{URL::route('store_absents',['id'=>$lesson->id])}}" method="post">
+        <form id="formabsents" action="{{URL::route('absents.store',['id'=>$lesson->id])}}" method="post">
             @csrf
-            <div class="mb-3">
+            <div class="my-3">
                 <button type="submit" class="btn btn-success">
                     <i class="bi bi-clipboard-plus"></i> Зберегти
                 </button>
-                <button type="button" id="websync" class="btn btn-primary">
+                <button type="button" class="websync btn btn-primary">
                     Синхронізувати з web
+                </button>
+                <button type="button" class="clear btn btn-danger">
+                    Очистити НБ
                 </button>
             </div>
 
@@ -138,9 +141,15 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="mb-3 mt-3">
+            <div class="my-3">
                 <button type="submit" class="btn btn-success">
                     <i class="bi bi-clipboard-plus"></i> Зберегти
+                </button>
+                <button type="button" class="websync btn btn-primary">
+                    Синхронізувати з web
+                </button>
+                <button type="button" class="clear btn btn-danger">
+                    Очистити НБ
                 </button>
             </div>
         </form>
@@ -183,11 +192,16 @@
             copyText.select();
             document.execCommand("copy");
         });
-        $('#websync').click(function() {
+        $('.websync').click(function() {
             $('.inp-abs').each(function(index, item) {
                 $(item).val($(item).data('webabsent'));
             });
-            //$('#formabsents').submit();
+            //if (confirm('Зберегти зміни одразу після синхронізації?'))
+            //    $('#formabsents').submit();
+        });
+        $('.clear').click(function() {
+            if (confirm('Точно очистити всі НБ?'))
+                $('.inp-abs').val('');
         });
         $('#freset').click(function() {
             $('#homework').val('');

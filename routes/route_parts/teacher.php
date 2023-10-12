@@ -44,9 +44,6 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::get('/my/timesheet/{year?}/{month?}', [TimesheetController::class, 'show'])->name('my.timesheet');
     Route::get('/my/calendar/{year?}/{month?}', [CalendarController::class, 'show'])->name('my.calendar');
 
-    // Відсутні
-
-    Route::post('/absents/lesson/{id}/store', [AbsentController::class, 'store'])->name('store_absents');
 
 
   });
