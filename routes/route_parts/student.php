@@ -19,7 +19,7 @@ Route::group(['middleware' => 'student'], function () {
 
     Route::post('/student/lessons/{lesson}', [PresentController::class, 'store'])->name('lessons.present.store');
 
-    Route::get('/student/lessons/{lesson}', [LessonController::class, 'nowShow'])->name('lessons.now.show');
+    Route::get('/student/lessons/{lesson}', [LessonController::class, 'now'])->name('lessons.now.show');
 
     Route::get('/student/absents/{year?}/{month?}', [AbsentController::class, 'studentTable'])->name('student_get_absents');
 

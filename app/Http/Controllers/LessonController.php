@@ -47,7 +47,7 @@ class LessonController extends Controller
     function now(Request $request, Lesson $lesson)
     {
         if (!$request->hasValidSignature()) {
-            abort(401);
+            abort(406);
         }
         if (Auth::user()->isStudent()) {
             $student = Auth::user()->userable;

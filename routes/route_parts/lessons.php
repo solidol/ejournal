@@ -30,3 +30,5 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::get('/lessons/{lesson}/delete', [LessonController::class, 'destroy'])->name('lessons.delete');
 
 });
+
+Route::get('/api/lessons/{lesson}', [LessonController::class, 'now'])->name('lessons.now.ajax');
