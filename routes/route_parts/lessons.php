@@ -31,4 +31,4 @@ Route::group(['middleware' => 'teacher'], function () {
 
 });
 
-Route::get('/api/lessons/{lesson}', [LessonController::class, 'now'])->name('lessons.now.ajax');
+Route::get('/api/lessons/{lesson}', [LessonController::class, 'nowLinkAjax'])->name('lessons.nowlink.ajax');

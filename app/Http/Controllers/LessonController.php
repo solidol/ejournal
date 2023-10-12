@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\Lesson;
 use App\Models\User;
 use App\Models\Subject;
@@ -55,6 +56,14 @@ class LessonController extends Controller
         } else {
             return view('noelement');
         }
+    }
+
+    function nowLinkAjax(Lesson $lesson)
+    {
+
+        $response['url'] = $lesson->student_url;
+
+        return response()->json($response);
     }
 
     public function show(Lesson $lesson)
