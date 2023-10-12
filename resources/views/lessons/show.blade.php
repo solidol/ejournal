@@ -187,7 +187,7 @@
             $('.inp-abs').each(function(index, item) {
                 $(item).val($(item).data('webabsent'));
             });
-            $('#formabsents').submit();
+            //$('#formabsents').submit();
         });
         $('#freset').click(function() {
             $('#homework').val('');
