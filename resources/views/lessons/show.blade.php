@@ -121,7 +121,12 @@
                             Відсутній
                         </th>
                         <th>
+                            <div>
                             Web-відмітка
+                            </div>
+                            <div>
+                                {{$lesson->presents->count()}}/{{$lesson->group->students->count()}}
+                            </div>
                         </th>
                     </tr>
                 </thead>
