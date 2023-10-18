@@ -59,23 +59,26 @@
     <tbody>
 
         @foreach($arDates as $dateItem)
-        <tr  class="{{ in_array($dateItem->format('N'),[6,7])?'table-info':'' }}">
+        <tr class="{{ in_array($dateItem->format('N'),[6,7])?'table-info':'' }}">
             <td class="text-center">
                 {{$dateItem->format('d.m.y')}}
             </td>
-            @for($i=1; $i < 9; $i++) 
-            <td data-date="{{$dateItem->format('Y-m-d')}}" data-nom-p="{{$i}}"  class="text-center">
+            @for($i=1; $i < 9; $i++) <td data-date="{{$dateItem->format('Y-m-d')}}" data-nom-p="{{$i}}" class="text-center">
                 @foreach($teacher->lessons as $lesson)
 
                 @if($lesson->data_==$dateItem && $lesson->nom_pari==$i)
-                <div id="lesson-{{$lesson->id}}" class="btn draggable text-white py-0" style="background-color: <?= $lesson->journal->color??'#000' ?>;" draggable="true" data-tooltip="{{$lesson->journal->subject->short_title}}. {{$lesson->tema}}" data-url="{{URL::route('lessons.update',['lesson'=>$lesson])}}">
+                <div id="lesson-{{$lesson->id}}" class="btn draggable text-white py-0" style="background-color: <?= $lesson->journal->color ?? '#000' ?>;" draggable="true" data-tooltip="{{$lesson->journal->subject->short_title}}. {{$lesson->tema}}" data-url="{{URL::route('lessons.update',['lesson'=>$lesson])}}">
                     {{$lesson->group->title}}
+                    {{$lesson->journal->subject->short_title}}
+                    @if ($lesson->journal->parent)
+                    <i class="bi bi-vr fs-5"></i>
+                    @endif
                 </div>
                 @endif
 
                 @endforeach
-            </td>
-            @endfor
+                </td>
+                @endfor
         </tr>
         @endforeach
     </tbody>
