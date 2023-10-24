@@ -16,6 +16,14 @@ class Journal extends Model
     {
         return $this->hasMany(Control::class)->orderBy('date_');
     }
+    public function practicies()
+    {
+        return $this->hasMany(Control::class)->orderBy('date_');
+    }
+    public function practices()
+    {
+        return $this->hasMany(Practice::class)->orderBy('date_');
+    }
     public function lessons()
     {
         return $this->hasMany(Lesson::class)->orderBy('data_');

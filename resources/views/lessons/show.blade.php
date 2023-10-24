@@ -11,6 +11,11 @@
             Додати контроль
         </button>
     </div>
+    <div class="mb-3 mt-3">
+        <button type="button" id="btnAddPractice" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addPractice">
+            Додати лабораторну
+        </button>
+    </div>
 </div>
 
 <div class="baloon d-none d-md-block">
@@ -28,7 +33,13 @@
     <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
 </li>
 <li class="nav-item">
+    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addPractice"><i class="bi bi-pencil-square"></i> Додати лабу</a>
+</li>
+<li class="nav-item">
     <a class="nav-link" href="{{URL::route('marks.index',['id'=>$currentJournal->id])}}"><i class="bi bi-5-square"></i> Оцінки</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{URL::route('practices.index',['id'=>$currentJournal->id])}}"><i class="bi bi-clipboard2-pulse"></i> лабораторні</a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="{{URL::route('lessons.index',['id'=>$lesson->journal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
@@ -234,5 +245,7 @@
 @include('lessons.popups.edit')
 
 @include('controls.popups.create')
+
+@include('practices.popups.create')
 
 @stop

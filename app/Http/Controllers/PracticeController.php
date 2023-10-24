@@ -6,48 +6,40 @@ use Illuminate\Http\Request;
 use App\Models\Journal;
 use App\Models\Control;
 use App\Models\Group;
+use App\Models\Practice;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use App\Library\CalendarHelper;
 
-class ControlController extends Controller
+class PracticeController extends Controller
 {
-
     function index($id)
     {
         $journal = Auth::user()->userable->journals->find($id);
         if ($journal == null)
             return view('noelement');
-        return view('controls.index', [
+        return view('practices.index', [
             'lesson' => false,
             'currentJournal' => $journal,
             'journals' => Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title')
         ]);
     }
 
-
-
-    function show(Control $control)
+    function show(Practice $practice)
     {
         if (\request()->ajax()) {
-            if (!$control->date_) $control->date_ = "2000-01-01";
-            return response()->json($control);
+            if (!$practice->date_) $practice->date_ = "2000-01-01";
+            return response()->json($practice);
         }
 
-        if ($control->journal->teacher_id == Auth::user()->userable_id) 
+        if ($practice->journal->teacher_id == Auth::user()->userable_id) 
         {
 
             $journals = Auth::user()->userable->journals()->with('group')->get()->sortBy('group.title');
-
-            switch ($control->max_grade){
-                case -2: $view = 'practices.show'; break;
-                default:  $view = 'controls.show';
-            }
-            return view($view, [
+            return view('practices.show', [
                 'lesson' => false,
-                'currentJournal' => $control->journal,
+                'currentJournal' => $practice->journal,
                 'journals' => $journals,
-                'currentControl' => $control
+                'currentControl' => $practice
             ]);
         } else {
             return view('noelement');
@@ -75,11 +67,11 @@ class ControlController extends Controller
         }
         if (!is_numeric($maxval)) $maxval = 0;
 
-        if ($journal->controls()->where('title', $request->title)->get()->first()) {
+        if ($journal->practices()->where('title', $request->title)->get()->first()) {
             Session::flash('error', 'Контроль вже існує!');
-            return redirect()->route('marks.index', ['id' => $journal->id]);
+            return redirect()->route('practices.index', ['id' => $journal->id]);
         }
-        $control = $journal->controls()->create([
+        $control = $journal->practices()->create([
             'date_' => $request->date_control,
             'title' => $request->title,
             'max_grade' => $maxval,
@@ -96,20 +88,21 @@ class ControlController extends Controller
             'type_kontrol' => $request->control_type,
             'ocenka' => $maxval,
             'journal_id' => $journal->id,
+            'lesson_id' => $request->lesson_id,
         ]);
 
         Session::flash('message', 'Контроль ' . $control->title . ' успішно створено!');
-        return redirect()->route('controls.show', ['control' => $control]);
+        return redirect()->route('practices.show', ['practice' => $control]);
     }
 
-    function destroy(Control $control)
+    function destroy(Practice $practice)
     {
-        Session::flash('message', 'Контроль ' . $control->title . ' успішно видалено!');
-        $journal_id = $control->journal_id;
-        $control->marks()->delete();
-        $control->marksHeader()->delete();
-        $control->delete();
-        return redirect()->route('marks.index', ['id' => $journal_id]);
+        Session::flash('message', 'Контроль ' . $practice->title . ' успішно видалено!');
+        $journal_id = $practice->journal_id;
+        $practice->marks()->delete();
+        $practice->marksHeader()->delete();
+        $practice->delete();
+        return redirect()->route('practices.index', ['id' => $journal_id]);
     }
 
     function update(Request $request)
@@ -118,26 +111,24 @@ class ControlController extends Controller
             Session::flash('error', 'Контроль не оновлено! Не вистачає даних!');
             return redirect()->route('journals.index');
         }
-        $control = Control::find($request->control_id);
-        $control->update([
+        $practice = Control::find($request->control_id);
+        $practice->update([
             'title' => $request->title,
             'date_' => $request->edited_date,
             'type_' => $request->typecontrol,
             'max_grade' => $request->max_grade,
         ]);
-        $control->marks()->update([
+        $practice->marks()->update([
             'vid_kontrol' => $request->title,
             'data_' => $request->edited_date,
             'type_kontrol' => $request->typecontrol
         ]);
-        $control->marksHeader()->update([
+        $practice->marksHeader()->update([
             'vid_kontrol' => $request->title,
             'data_' => $request->edited_date,
             'type_kontrol' => $request->typecontrol,
             'ocenka' => $request->max_grade,
         ]);
-        return redirect()->route('controls.show', ['control' => $control]);
+        return redirect()->route('practices.show', ['practice' => $practice]);
     }
-
-
 }

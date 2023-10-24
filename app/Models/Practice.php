@@ -7,22 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use stdClass;
 
-class Control extends Model
+class Practice extends Model
 {
     use HasFactory;
+    protected $table = 'controls';
     public $timestamps = false;
     protected $guarded = [];
     protected $appendds = ['type_title'];
     protected $dates = ['date_', 'date_formatted'];
-
     protected static function boot ()
     {
         parent::boot ();
         static::addGlobalScope('control', function (Builder $builder) {
-            $builder->where('type_', 0)->orWhere('type_', 1)->orWhere('type_', 2)->orWhere('type_', 13);
+            $builder->where('type_', 11)->orWhere('type_', 12)->orWhere('type_', 13);
         });
     }
-
     public function getTypeTitleAttribute()
     {
         switch ($this->type_) {

@@ -86,11 +86,11 @@
         <h3>{{$currentControl->title}}</h3>
         <p class="fs-4">Дата контролю {{!is_null($currentControl->date_)?$currentControl->date_->format('d.m.Y'):''}} | {{$currentControl->type_title}}</p>
 
-        <form action="{{route('marks.store',['control'=>$currentControl])}}" method="post">
+        <form action="{{route('practices.marks.store',['practice'=>$currentControl])}}" method="post">
             <div class="mb-3">
                 <button type="submit" class="btn btn-success">Зберегти</button>
             </div>
-            <textarea rows="1" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V"></textarea>
+            <!--<textarea rows="1" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V"></textarea>-->
 
             @csrf
             <table class="table table-striped table-marks m-0">
@@ -101,21 +101,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $studentsCount = $currentJournal->group->students->count();
-                    $countYak = 0;
-                    $countUsp = 0;
-                    ?>
-
                     @foreach($currentJournal->group->students as $student)
-                    <?php
-                    if (($control->mark($student->id)->ocenka ?? 0) >= (0.6 * $currentControl->max_grade)) {
-                        $countUsp++;
-                    }
-                    if (($control->mark($student->id)->ocenka ?? 0) >= (0.75 * $currentControl->max_grade)) {
-                        $countYak++;
-                    }
-                    ?>
                     <tr>
                         <td>
                             {{$student->FIO_stud}}
@@ -124,6 +110,12 @@
                             <p style="display:none">
                                 {{$currentControl->mark($student->id)->mark_str??'-'}}
                             </p>
+
+                            <!--
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" name="marks[{{$student->id}}]" {{isset($currentControl->mark($student->id)->mark_str)?'checked="checked"':''}}>
+                            </div>
+-->
                             <input type="text" class="form form-control m-0 p-1" name="marks[{{$student->id}}]" value="{{$currentControl->mark($student->id)->mark_str??''}}" placeholder="Max = {{$currentControl->max_grade}}">
                         </td>
                     </tr>
@@ -131,12 +123,8 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>Успішність</th>
-                        <th>{{round(1000*$countUsp/$studentsCount)/10}} %</th>
-                    </tr>
-                    <tr>
-                        <th>Якість</th>
-                        <th>{{round(1000*$countYak/$studentsCount)/10}} %</th>
+                        <th>ПІБ студента</th>
+                        <th class="sum">Оцінка</th>
                     </tr>
                 </tfoot>
             </table>
@@ -160,8 +148,8 @@
         <div class="p-2 border border-2 border-primary rounded-2 mb-2 mt-2">
             <h3 class="text-danger">Редагування та видалення</h3>
             <div class="mb-3">
-                <a href="{{URL::route('controls.delete',['control'=>$currentControl])}}" class="btn btn-danger m-2" data-confirm="Видалити увесь контроль {{$currentControl->title}} разом з оцінками?">Видалити контроль</a>
-                <button type="button" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('controls.show',['control'=>$currentControl])}}" class="edit-control btn btn-warning m-2">Редагувати контроль</button>
+                <a href="{{URL::route('practices.delete',['practice'=>$currentControl])}}" class="btn btn-danger m-2" data-confirm="Видалити увесь контроль {{$currentControl->title}} разом з оцінками?">Видалити контроль</a>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('practices.show',['practice'=>$currentControl])}}" class="edit-control btn btn-warning m-2">Редагувати контроль</button>
             </div>
         </div>
     </div>
@@ -169,9 +157,9 @@
 
 
 
-@include('controls.popups.edit')
+@include('practices.popups.edit')
 
-@include('controls.popups.create')
+@include('practices.popups.create')
 
 
 <script type="module">

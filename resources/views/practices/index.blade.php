@@ -8,8 +8,8 @@
 <div class="baloon">
     <h1>Оцінки</h1>
     <h2>
-        Контролі
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addControl">
+        Лабораторні (практичні) роботи
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPractice">
             Додати
         </button>
     </h2>
@@ -24,13 +24,13 @@
         <div id="controlsNavbar" class="collapse d-md-block">
             <ul class="navbar-nav mr-auto mb-3">
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{URL::route('marks.index',['id'=>$currentJournal->id])}}">
+                    <a class="nav-link active" href="{{URL::route('practices.index',['id'=>$currentJournal->id])}}">
                         Всі разом
                     </a>
                 </li>
-                @foreach ($currentJournal->controls as $control)
+                @foreach ($currentJournal->practices as $control)
                 <li class="nav-item">
-                    <a class="nav-link" href="{{URL::route('controls.show',['control'=>$control])}}">
+                    <a class="nav-link" href="{{URL::route('practices.show',['practice'=>$control])}}">
                         {{$control->title}}
                     </a>
                 </li>
@@ -66,7 +66,7 @@
 
 @section('custom-menu')
 <li class="nav-item">
-    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
+    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addPractice"><i class="bi bi-clipboard2-pulse"></i> Додати ЛР</a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="{{URL::route('lessons.index',['id'=>$currentJournal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
@@ -92,7 +92,7 @@
             <tr>
                 <th></th>
                 <?php $i = 1; ?>
-                @foreach($currentJournal->controls as $control)
+                @foreach($currentJournal->practices as $control)
                 <th>
                     <button type="button" class="btn btn-outline-success edit-control p-0 m-0" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('controls.show',['control'=>$control])}}"><i class="bi bi-pencil-square text-light"></i></button>
                 </th>
@@ -101,7 +101,7 @@
             </tr>
             <tr>
                 <th class="th-naming">ПІБ</th>
-                @foreach($currentJournal->controls as $control)
+                @foreach($currentJournal->practices as $control)
                 <th class="rotate sum">
                     <div>
                         {{$control->title}}
@@ -117,7 +117,7 @@
                 <td>
                     {{$student->FIO_stud}}
                 </td>
-                @foreach($currentJournal->controls as $control)
+                @foreach($currentJournal->practices as $control)
                 <td>
                     {{$control->mark($student->id)->mark_str??'-'}}
                 </td>
@@ -128,7 +128,7 @@
         <tfoot>
             <tr>
                 <th>Середнє <!--| Успішність | Якість--></th>
-                @foreach($currentJournal->controls as $control)
+                @foreach($currentJournal->practices as $control)
                 <th>
 
                 </th>
@@ -183,9 +183,9 @@
     });
 </script>
 
-@include('controls.popups.edit')
+@include('practices.popups.edit')
 
-@include('controls.popups.create')
+@include('practices.popups.create')
 
 
 

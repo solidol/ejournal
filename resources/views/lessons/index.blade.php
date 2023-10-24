@@ -31,6 +31,9 @@
 <li class="nav-item">
     <a class="nav-link" href="{{URL::route('marks.index',['id'=>$currentJournal->id])}}"><i class="bi bi-5-square"></i> Оцінки</a>
 </li>
+<li class="nav-item">
+    <a class="nav-link" href="{{URL::route('practices.index',['id'=>$currentJournal->id])}}"><i class="bi bi-clipboard2-pulse"></i> лабораторні</a>
+</li>
 @stop
 
 @section('content')

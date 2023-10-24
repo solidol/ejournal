@@ -152,6 +152,11 @@ class Mark extends Model
         return $this->belongsTo(Control::class, 'control_id');
     }
 
+    public function practice()
+    {
+        return $this->belongsTo(Practice::class, 'control_id');
+    }
+
     public function journal()
     {
         return $this->belongsTo(Journal::class, 'journal_id');
