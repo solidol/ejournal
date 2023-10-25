@@ -90,16 +90,6 @@
     <table id="table-all" class="table table-striped">
         <thead>
             <tr>
-                <th></th>
-                <?php $i = 1; ?>
-                @foreach($currentJournal->practices as $control)
-                <th>
-                    <button type="button" class="btn btn-outline-success edit-control p-0 m-0" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('controls.show',['control'=>$control])}}"><i class="bi bi-pencil-square text-light"></i></button>
-                </th>
-                <?php $i++; ?>
-                @endforeach
-            </tr>
-            <tr>
                 <th class="th-naming">ПІБ</th>
                 @foreach($currentJournal->practices as $control)
                 <th class="rotate sum">
@@ -183,7 +173,6 @@
     });
 </script>
 
-@include('practices.popups.edit')
 
 @include('practices.popups.create')
 
