@@ -117,6 +117,9 @@ class Mark extends Model
                 case -2:
                     return "Зар";
                     break;
+                case null:
+                    return null;
+                    break;
                 default:
                     return '';
                     break;

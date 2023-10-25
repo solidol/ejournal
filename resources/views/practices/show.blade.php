@@ -7,8 +7,8 @@
 <div class="baloon">
     <h1>Оцінки</h1>
     <h2>
-        Контролі
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addControl">
+        Лабораторні
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPractice">
             Додати
         </button>
     </h2>
@@ -23,15 +23,15 @@
         <div id="controlsNavbar" class="collapse d-md-block">
             <ul class="navbar-nav mr-auto mb-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{URL::route('marks.index',['id'=>$currentJournal->id])}}">
+                    <a class="nav-link" href="{{URL::route('practices.index',['id'=>$currentJournal->id])}}">
                         Всі разом
                     </a>
                 </li>
-                @foreach ($currentJournal->controls as $control)
-                @if ($control->title)
+                @foreach ($currentJournal->practices as $practice)
+                @if ($practice->title)
                 <li class="nav-item">
-                    <a class="nav-link {{($control->id==$currentControl->id)?'active':''}}" href="{{URL::route('controls.show',['control'=>$control])}}">
-                        {{$control->title}}
+                    <a class="nav-link {{($practice->id==$currentControl->id)?'active':''}}" href="{{URL::route('practices.show',['practice'=>$practice])}}">
+                        {{$practice->title}}
                     </a>
                 </li>
                 @endif
@@ -67,7 +67,7 @@
 
 @section('custom-menu')
 <li class="nav-item">
-    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addControl"><i class="bi bi-pencil-square"></i> Додати контроль</a>
+    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#addPractice"><i class="bi bi-clipboard2-pulse"></i> Додати ЛР</a>
 </li>
 <li class="nav-item">
     <a class="nav-link" href="{{URL::route('lessons.index',['id'=>$currentJournal->id])}}"><i class="bi bi-list-columns"></i> Пари дисципліни</a>
@@ -97,7 +97,7 @@
                 <thead>
                     <tr>
                         <th>ПІБ студента</th>
-                        <th class="sum">Оцінка</th>
+                        <th class="sum">Зараховано</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -111,12 +111,11 @@
                                 {{$currentControl->mark($student->id)->mark_str??'-'}}
                             </p>
 
-                            <!--
+
                             <div class="form-check form-switch">
+                                <input type='hidden' value="0" name='marks[{{$student->id}}]'>
                                 <input class="form-check-input" type="checkbox" role="switch" name="marks[{{$student->id}}]" {{isset($currentControl->mark($student->id)->mark_str)?'checked="checked"':''}}>
                             </div>
--->
-                            <input type="text" class="form form-control m-0 p-1" name="marks[{{$student->id}}]" value="{{$currentControl->mark($student->id)->mark_str??''}}" placeholder="Max = {{$currentControl->max_grade}}">
                         </td>
                     </tr>
                     @endforeach
@@ -132,18 +131,6 @@
     </div>
 
     <div class="col-lg-4 col-md-12">
-
-        <div class="p-2 border border-2 border-primary rounded-2 mb-2 mt-2">
-            <h3>Оцінювання</h3>
-            <ul>
-                <li>
-                    Н/А, н/а, НА, на - неатестований
-                </li>
-                <li>
-                    Зар, зар, З, з - зараховано
-                </li>
-            </ul>
-        </div>
 
         <div class="p-2 border border-2 border-primary rounded-2 mb-2 mt-2">
             <h3 class="text-danger">Редагування та видалення</h3>

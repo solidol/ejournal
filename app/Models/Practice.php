@@ -15,9 +15,9 @@ class Practice extends Model
     protected $guarded = [];
     protected $appendds = ['type_title'];
     protected $dates = ['date_', 'date_formatted'];
-    protected static function boot ()
+    protected static function boot()
     {
-        parent::boot ();
+        parent::boot();
         static::addGlobalScope('control', function (Builder $builder) {
             $builder->where('type_', 11)->orWhere('type_', 12)->orWhere('type_', 13);
         });
@@ -25,14 +25,17 @@ class Practice extends Model
     public function getTypeTitleAttribute()
     {
         switch ($this->type_) {
-            case 0:
-                return "Поточний";
+            case 11:
+                return "Лабораторна робота";
                 break;
-            case 1:
-                return "Модульний";
+            case 12:
+                return "Практична робота";
                 break;
-            case 2:
-                return "Підсумковий";
+            case 13:
+                return "Лабораторні підсумок";
+                break;
+            case 14:
+                return "Практичні підсумок";
                 break;
             default:
                 return "-";
@@ -41,7 +44,7 @@ class Practice extends Model
     }
     public function getDateFormattedAttribute()
     {
-        return $this->date_?$this->date_->format('d.m.Y'):'Відсутня дата';
+        return $this->date_ ? $this->date_->format('d.m.Y') : 'Відсутня дата';
     }
     public function marks()
     {

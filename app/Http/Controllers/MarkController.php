@@ -79,6 +79,9 @@ class MarkController extends Controller
                 case 'on':
                     $value = -2;
                     break;
+                case 0:
+                    $value = null;
+                    break;
                 default:
                     break;
             }

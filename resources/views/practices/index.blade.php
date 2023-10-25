@@ -8,7 +8,7 @@
 <div class="baloon">
     <h1>Оцінки</h1>
     <h2>
-        Лабораторні (практичні) роботи
+        Лабораторні
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPractice">
             Додати
         </button>

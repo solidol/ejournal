@@ -76,7 +76,8 @@ class PracticeController extends Controller
             'title' => $request->title,
             'max_grade' => $maxval,
             'type_' => $request->control_type,
-            'description' => $request->description
+            'description' => $request->description,
+            'lesson_id' => $request->lesson_id??0,
         ]);
         $control->marks()->create([
             'kod_prep' => $journal->teacher_id,
@@ -88,7 +89,6 @@ class PracticeController extends Controller
             'type_kontrol' => $request->control_type,
             'ocenka' => $maxval,
             'journal_id' => $journal->id,
-            'lesson_id' => $request->lesson_id,
         ]);
 
         Session::flash('message', 'Контроль ' . $control->title . ' успішно створено!');

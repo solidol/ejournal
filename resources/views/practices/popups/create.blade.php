@@ -22,10 +22,10 @@
                     </div>
                     <div class="mb-3">
                         <label>Додати лабораторну до заняття</label>
-                        <select id="lsLesson" class="form-select form-select-md" aria-label=".form-select-sm example">
+                        <select id="lsLesson" name="lesson_id" class="form-select form-select-md" aria-label=".form-select-sm example">
                             <option selected></option>
                             @foreach($currentJournal->lessons as $lesson)
-                            <option value="{{$lesson->data_}}">{{$lesson->tema}}</option>
+                            <option value="{{$lesson->id}}" data-date="{{$lesson->data_}}">{{$lesson->tema}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -68,7 +68,8 @@
         if ($('#dateAddControl').val() == "")
             $('#dateAddControl').val(new Date().toISOString().split('T')[0]);
         $('#lsLesson').change(function() {
-            $('#dateAddControl').val($(this).val().split(' ')[0]);
+            let datetime = $('#lsLesson  option:selected').data('date').split(' ')[0];
+            $('#dateAddControl').val(datetime);
         });
     });
 </script>
