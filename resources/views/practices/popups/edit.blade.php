@@ -22,8 +22,8 @@
                         <input type="date" class="form-control" id="datetime2" name="edited_date">
                     </div>
                     <div class="mb-3">
-                        <label for="maxval" class="form-label">Максимальна оцінка</label>
-                        <select name="maxval" class="form-select form-select-md">
+                        <label for="max_grade" class="form-label">Максимальна оцінка</label>
+                        <select name="max_grade" class="form-select form-select-md">
                             <option value="-2" selected>Зараховано</option>
                             <option value="1">1</option>
                             <option value="2">2</option>

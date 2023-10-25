@@ -111,22 +111,22 @@ class PracticeController extends Controller
             Session::flash('error', 'Контроль не оновлено! Не вистачає даних!');
             return redirect()->route('journals.index');
         }
-        $practice = Control::find($request->control_id);
+        $practice = Practice::find($request->control_id);
         $practice->update([
             'title' => $request->title,
             'date_' => $request->edited_date,
-            'type_' => $request->typecontrol,
+            'type_' => $request->control_type,
             'max_grade' => $request->max_grade,
         ]);
         $practice->marks()->update([
             'vid_kontrol' => $request->title,
             'data_' => $request->edited_date,
-            'type_kontrol' => $request->typecontrol
+            'type_kontrol' => $request->control_type
         ]);
         $practice->marksHeader()->update([
             'vid_kontrol' => $request->title,
             'data_' => $request->edited_date,
-            'type_kontrol' => $request->typecontrol,
+            'type_kontrol' => $request->control_type,
             'ocenka' => $request->max_grade,
         ]);
         return redirect()->route('practices.show', ['practice' => $practice]);
