@@ -43,7 +43,8 @@
     </div>
 </div>
 
-<table id="dtmarks" class="table table-striped table-bordered m-0">
+<h3>Контролі</h3>
+<table id="tdctrl" class="table table-striped table-bordered">
     <thead>
         <tr>
             <th>Дата</th>
@@ -74,7 +75,39 @@
     </tbody>
 </table>
 
-
+@if($currentJournal->hasPractices())
+<h3>Лабораторні</h3>
+<table id="tdpr" class="table table-striped table-bordered m-0">
+    <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Дата</th>
+            <th>Назва</th>
+            <th>Оцінка</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($currentJournal->practices as $control)
+        @if ($control->title)
+        <tr>
+            <td>
+                {{$control->date_??'2000-01-01'}}
+            </td>
+            <td>
+                {{$control->date_formatted}}
+            </td>
+            <td>
+                {{$control->title}}
+            </td>
+            <td>
+                <b class="mark-in-list">{{$control->mark(Auth::user()->userable_id)->mark_str??'-'}}</b><span>з {{$control->max_grade}}б.</span>
+            </td>
+        </tr>
+        @endif
+        @endforeach
+    </tbody>
+</table>
+@endif
 @endif
 
 
@@ -82,7 +115,7 @@
 <script type="module">
     $(document).ready(function() {
 
-        $('#dtmarks').DataTable({
+        $('#dtctrl,#dtpr').DataTable({
             dom: 'Bfrtip',
             language: languageUk,
             buttons: [{

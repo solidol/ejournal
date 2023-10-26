@@ -16,10 +16,6 @@ class Journal extends Model
     {
         return $this->hasMany(Control::class)->orderBy('date_');
     }
-    public function practicies()
-    {
-        return $this->hasMany(Control::class)->orderBy('date_');
-    }
     public function practices()
     {
         return $this->hasMany(Practice::class)->orderBy('date_');
@@ -51,5 +47,9 @@ class Journal extends Model
     public function parent()
     {
         return $this->belongsTo(Journal::class, 'parent_id', 'id');
+    }
+    public function hasPractices()
+    {
+        return $this->practices->count() > 0 ? true : false;
     }
 }
