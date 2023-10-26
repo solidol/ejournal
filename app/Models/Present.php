@@ -9,4 +9,5 @@ class Present extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
 }

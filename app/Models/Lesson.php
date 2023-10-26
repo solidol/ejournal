@@ -87,4 +87,9 @@ class Lesson extends Model
     {
         return Lesson::where('data_', $date)->where('nom_pari', $pnom)->get();
     }
+
+    public function isPresent(Student $student)
+    {
+        return Present::where('student_id', $student->id)->where('lesson_id', $this->id)->count() > 0 ? true : false;
+    }
 }
