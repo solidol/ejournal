@@ -44,7 +44,7 @@
             processing: true,
             serverSide: true,
             searchDelay: 500,
-            ajax: "{{ route('logs.index') }}",
+            ajax: "{{ route('events.index') }}",
             columns: [{
                 data: 'dt',
                 name: 'dt'
