@@ -62,4 +62,10 @@ class Practice extends Model
     {
         return $this->belongsTo(Journal::class);
     }
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class,'lesson_id','kod_pari');
+    }
+
+    
 }

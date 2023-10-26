@@ -15,7 +15,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::get('/practices/{practice}', [PracticeController::class, 'show'])->name('practices.show');
 
-    Route::post('/practices/{practice}/marks/store', [MarkController::class, 'storePractice'])->name('practices.marks.store');
+    //Route::post('/practices/{practice}/marks/store', [MarkController::class, 'storePractice'])->name('practices.marks.store');
 
     Route::post('/practices/store', [PracticeController::class, 'store'])->name('practices.store');
 

@@ -86,63 +86,52 @@
         Зар, зар, З, з - зараховано
     </li>
 </ul>
-<div class="div-table">
-    <table id="table-all" class="table table-striped">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <?php $i = 1; ?>
-                @foreach($currentJournal->controls as $control)
-                <th>
-                    <button type="button" class="btn btn-outline-success edit-control p-0 m-0" data-bs-toggle="modal" data-bs-target="#editControl" data-url="{{URL::route('controls.show',['control'=>$control])}}"><i class="bi bi-pencil-square text-light"></i></button>
-                </th>
-                <?php $i++; ?>
-                @endforeach
-            </tr>
-            <tr>
-                <th class="th-naming">ПІБ</th>
-                <th>Останній вхід</th>
-                @foreach($currentJournal->controls as $control)
-                <th class="rotate sum">
-                    <div>
-                        {{$control->title}}
-                    </div>
 
-                </th>
-                @endforeach
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($currentJournal->group->students as $student)
-            <tr>
-                <td>
-                    {{$student->FIO_stud}}
-                </td>
-                <td>
-                    {{$student->lastLogin()?$student->lastLogin()->created_at->format('d.m.Y H:m'):'Ніколи'}}
-                </td>
-                @foreach($currentJournal->controls as $control)
-                <td>
-                    {{$control->mark($student->id)->mark_str??'-'}}
-                </td>
-                @endforeach
-            </tr>
+<table id="table-all" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th class="th-naming">ПІБ</th>
+            <th>Останній вхід</th>
+            @foreach($currentJournal->controls as $control)
+            <th class="rotate sum">
+                <div>
+                    {{$control->title}}
+                </div>
+
+            </th>
             @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>Середнє <!--| Успішність | Якість--></th>
-                <th></th>
-                @foreach($currentJournal->controls as $control)
-                <th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($currentJournal->group->students as $student)
+        <tr>
+            <td>
+                {{$student->FIO_stud}}
+            </td>
+            <td>
+                {{$student->lastLogin()?$student->lastLogin()->created_at->format('d.m.Y H:m'):'Ніколи'}}
+            </td>
+            @foreach($currentJournal->controls as $control)
+            <td data-student="{{$student->id}}" data-control="{{$control->id}}" contenteditable="true">
+                {{$control->mark($student->id)->mark_str??''}}
+            </td>
+            @endforeach
+        </tr>
+        @endforeach
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Середнє <!--| Успішність | Якість--></th>
+            <th></th>
+            @foreach($currentJournal->controls as $control)
+            <th>
 
-                </th>
-                @endforeach
-            </tr>
-        </tfoot>
-    </table>
-</div>
+            </th>
+            @endforeach
+        </tr>
+    </tfoot>
+</table>
+
 
 
 
@@ -150,7 +139,48 @@
 
 <script type="module">
     $(document).ready(function() {
+        $('td[contenteditable="true"]').on('blur', function() {
+            let cell = $(this);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            let index = $(this).data('student');
+            let marks = {};
+            marks[index] = $(this).text();
+            $.ajax({
+                type: 'POST',
+                url: "{{route('marks.store')}}",
+                data: {
+                    marks: marks,
+                    control_id: $(this).data('control'),
+                },
+                success: function(msg) {
+                    if (msg) {
+                        //console.log(msg);
+                        if (msg.status == 'ok') {
+                            $(cell).text(msg.marks[0]);
+                            $(cell).css('background-color', 'green');
+                            $(cell).css('color', 'white');
+                            setTimeout(function() {
+                                $(cell).css('background-color', 'white');
+                                $(cell).css('color', 'black');
+                            }, 1000);
+                        } else {
+                            $(cell).css('background-color', 'red');
+                            $(cell).css('color', 'white');
+                            setTimeout(function() {
+                                $(cell).css('background-color', 'white');
+                                $(cell).css('color', 'black');
+                                $(cell).text('');
+                            }, 1000);
+                        }
+                    }
+                }
+            });
 
+        });
 
         $('#table-all').DataTable({
             dom: 'Bfrtip',

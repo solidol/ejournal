@@ -23,7 +23,7 @@ Route::group(['middleware' => 'teacher'], function () {
 
     Route::get('/controls/{control}', [ControlController::class, 'show'])->name('controls.show');
 
-    Route::post('/controls/{control}/marks/store', [MarkController::class, 'storeControl'])->name('marks.store');
+    //Route::post('/controls/{control}/marks/store', [MarkController::class, 'storeControl'])->name('controls.marks.store');
 
     Route::post('/controls/store', [ControlController::class, 'store'])->name('controls.store');
 

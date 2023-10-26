@@ -87,7 +87,7 @@
     </li>
 </ul>
 <div class="div-table">
-    <table id="table-all" class="table table-striped">
+    <table id="table-all" class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th class="th-naming">ПІБ</th>
@@ -108,8 +108,8 @@
                     {{$student->FIO_stud}}
                 </td>
                 @foreach($currentJournal->practices as $control)
-                <td>
-                    {{$control->mark($student->id)->mark_str??'-'}}
+                <td data-student="{{$student->id}}" data-control="{{$control->id}}" contenteditable="true">
+                    {{$control->mark($student->id)->mark_str??''}}
                 </td>
                 @endforeach
             </tr>
@@ -134,6 +134,50 @@
 
 <script type="module">
     $(document).ready(function() {
+        $('td[contenteditable="true"]').on('blur', function() {
+            let cell = $(this);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            let index = $(this).data('student');
+            let marks = {};
+            marks[index] = $(this).text();
+            $.ajax({
+                type: 'POST',
+                url: "{{route('marks.store')}}",
+                data: {
+                    marks: marks,
+                    control_id: $(this).data('control'),
+                },
+                success: function(msg) {
+                    if (msg) {
+                        //console.log(msg);
+                        if (msg.status == 'ok') {
+                            $(cell).text(msg.marks[0]);
+                            $(cell).css('background-color', 'green');
+                            $(cell).css('color', 'white');
+                            setTimeout(function() {
+                                $(cell).css('background-color', 'white');
+                                $(cell).css('color', 'black');
+                            }, 1000);
+                        } else {
+                            $(cell).css('background-color', 'red');
+                            $(cell).css('color', 'white');
+                            setTimeout(function() {
+                                $(cell).css('background-color', 'white');
+                                $(cell).css('color', 'black');
+                                $(cell).text('');
+                            }, 1000);
+                        }
+                    }
+                }
+            });
+
+        });
+
+
 
 
         $('#table-all').DataTable({

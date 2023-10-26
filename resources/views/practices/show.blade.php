@@ -83,10 +83,13 @@
 
 <div class="row">
     <div class="col-lg-8 col-md-12">
-        <h3>{{$currentControl->title}}</h3>
+        <h2>{{$currentControl->title}}</h2>
+        <p class="fs-4">Пов'язана пара: {{$currentControl->lesson->tema??''}}</p>
         <p class="fs-4">Дата контролю {{!is_null($currentControl->date_)?$currentControl->date_->format('d.m.Y'):''}} | {{$currentControl->type_title}}</p>
 
-        <form action="{{route('practices.marks.store',['practice'=>$currentControl])}}" method="post">
+        <form action="{{route('marks.store')}}" method="post">
+            <input type="hidden" name="control_id" value="{{$currentControl->id}}">
+            <input type="hidden" name="control_type" value="practice">
             <div class="mb-3">
                 <button type="submit" class="btn btn-success">Зберегти</button>
             </div>

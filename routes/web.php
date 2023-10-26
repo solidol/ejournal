@@ -48,6 +48,8 @@ require_once __DIR__ . '/route_parts/controls.php';
 
 require_once __DIR__ . '/route_parts/practices.php';
 
+require_once __DIR__ . '/route_parts/marks.php';
+
 require_once __DIR__ . '/route_parts/dpscriber.php';
 
 require_once __DIR__ . '/route_parts/mdb.php';
