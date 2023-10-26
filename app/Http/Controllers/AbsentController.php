@@ -81,7 +81,7 @@ class AbsentController extends Controller
 
         $journals = $user->userable->group->journals()->with('subject')->get()->sortBy('subject.subject_name');
         return view(
-            'student.timesheet_show',
+            'student.timesheets.index',
             [
                 'user' => $user,
                 'data' => [

@@ -13,7 +13,7 @@ class GroupController extends Controller
     {
 
         $teachers = Auth::user()->userable->group->teachers()->orderBy('FIO_prep')->get();
-        return view('student.teachers_list', [
+        return view('student.teachers.index', [
             'group' => Auth::user()->userable->group,
             'teachers' => $teachers
         ]);

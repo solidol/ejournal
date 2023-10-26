@@ -12,17 +12,17 @@
 </h2>
 
 <nav class="nav">
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year,'month'=>'08'])}}">Серпень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year,'month'=>'09'])}}">Вересень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year,'month'=>'10'])}}">Жовтень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year,'month'=>'11'])}}">Листопад</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year,'month'=>'12'])}}">Грудень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'01'])}}">Січень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'02'])}}">Лютий</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'03'])}}">Березень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'04'])}}">Квітень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'05'])}}">Травень</a>
-    <a class="btn btn-outline-primary m-1" href="{{URL::route('student_get_absents',['year'=>$year+1,'month'=>'06'])}}">Червень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student.absents.index',['year'=>$year,'month'=>'08'])}}">Серпень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student.absents.index',['year'=>$year,'month'=>'09'])}}">Вересень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student.absents.index',['year'=>$year,'month'=>'10'])}}">Жовтень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student.absents.index',['year'=>$year,'month'=>'11'])}}">Листопад</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student.absents.index',['year'=>$year,'month'=>'12'])}}">Грудень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student.absents.index',['year'=>$year+1,'month'=>'01'])}}">Січень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student.absents.index',['year'=>$year+1,'month'=>'02'])}}">Лютий</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student.absents.index',['year'=>$year+1,'month'=>'03'])}}">Березень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student.absents.index',['year'=>$year+1,'month'=>'04'])}}">Квітень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student.absents.index',['year'=>$year+1,'month'=>'05'])}}">Травень</a>
+    <a class="btn btn-outline-primary m-1" href="{{URL::route('student.absents.index',['year'=>$year+1,'month'=>'06'])}}">Червень</a>
 
 </nav>
 

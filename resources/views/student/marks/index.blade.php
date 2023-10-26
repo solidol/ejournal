@@ -48,7 +48,6 @@
     <thead>
         <tr>
             <th>Дата</th>
-            <th>Дата</th>
             <th>Контроль</th>
             <th>Оцінка</th>
         </tr>
@@ -58,16 +57,13 @@
         @if ($control->title)
         <tr>
             <td>
-                {{$control->date_??'2000-01-01'}}
-            </td>
-            <td>
-                {{$control->date_formatted}}
+                {{$control->date_->format('d.m.Y')??'Дата не вказана'}}
             </td>
             <td>
                 {{$control->title}}
             </td>
             <td>
-                <b class="mark-in-list">{{$control->mark(Auth::user()->userable_id)->mark_str??'-'}}</b><span>з {{$control->max_grade}}б.</span>
+                <b class="mark-in-list">{{$control->mark(Auth::user()->userable_id)->mark_str??'-'}}</b><span>з {{$control->max_grade}} б.</span>
             </td>
         </tr>
         @endif
@@ -81,9 +77,9 @@
     <thead>
         <tr>
             <th>Дата</th>
-            <th>Дата</th>
             <th>Назва</th>
             <th>Оцінка</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -91,16 +87,16 @@
         @if ($control->title)
         <tr>
             <td>
-                {{$control->date_??'2000-01-01'}}
-            </td>
-            <td>
-                {{$control->date_formatted}}
+                {{$control->date_->format('d.m.Y')??'Дата не вказана'}}
             </td>
             <td>
                 {{$control->title}}
             </td>
             <td>
-                <b class="mark-in-list">{{$control->mark(Auth::user()->userable_id)->mark_str??'-'}}</b><span>з {{$control->max_grade}}б.</span>
+                <b class="mark-in-list">{{$control->mark(Auth::user()->userable_id)->mark_str??'-'}}</b><span>з {{$control->max_grade_str}}.</span>
+            </td>
+            <td>
+                <a href="{{URL::route('student.practices.show',['practice'=>$control])}}" class="btn btn-success"><i class="bi bi-exclamation-triangle"></i></a>
             </td>
         </tr>
         @endif

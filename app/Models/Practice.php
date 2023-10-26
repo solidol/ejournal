@@ -14,13 +14,33 @@ class Practice extends Model
     public $timestamps = false;
     protected $guarded = [];
     protected $appendds = ['type_title'];
-    protected $dates = ['date_', 'date_formatted'];
+    protected $dates = ['date_', 'date_formatted', 'max_grade_str'];
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope('control', function (Builder $builder) {
+        static::addGlobalScope('practice', function (Builder $builder) {
             $builder->where('type_', 11)->orWhere('type_', 12)->orWhere('type_', 13);
         });
+    }
+    public function getMaxGradeStrAttribute(){
+        if ($this->max_grade > 0) {    
+            return (string) $this->max_grade;
+        } else {
+            switch ($this->max_grade) {
+                case -1:
+                    return "Н/А";
+                    break;
+                case -2:
+                    return "Зар";
+                    break;
+                case null:
+                    return null;
+                    break;
+                default:
+                    return '';
+                    break;
+            }
+        }
     }
     public function getTypeTitleAttribute()
     {

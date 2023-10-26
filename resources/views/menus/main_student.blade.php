@@ -12,13 +12,13 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('student_get_journals') }}"><i class="bi bi-book"></i> Мої журнали</a>
+                    <a class="nav-link" href="{{ route('student.journals.index') }}"><i class="bi bi-book"></i> Мої журнали</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('student_get_teachers') }}"><i class="bi bi-people"></i> Мої викладачі</a>
+                    <a class="nav-link" href="{{ route('student.teachers.index') }}"><i class="bi bi-people"></i> Мої викладачі</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('student_get_absents') }}"><i class="bi bi-person-slash"></i> Мої пропуски</a>
+                    <a class="nav-link" href="{{ route('student.absents.index') }}"><i class="bi bi-person-slash"></i> Мої пропуски</a>
                 </li>
 
                 <li class="nav-item">

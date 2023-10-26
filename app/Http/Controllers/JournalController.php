@@ -52,7 +52,7 @@ class JournalController extends Controller
             $journal = false;
         }
         $journals = Auth::user()->userable->group->journals()->with('subject')->get()->sortBy('subject.subject_name');
-        return view('student.marks_show', [
+        return view('student.marks.index', [
             'lesson' => false,
             'currentJournal' => $journal,
             'journals' => $journals

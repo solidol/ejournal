@@ -22,7 +22,7 @@
                             </p>
                             @endif
                             @if (Auth::user()->isStudent())
-                            <p>Перейдіть до ваших журналів в головному меню - <a class="btn btn-outline-primary" href="{{ route('student_get_journals') }}"><i class="bi bi-book"></i></a>
+                            <p>Перейдіть до ваших журналів в головному меню - <a class="btn btn-outline-primary" href="{{ route('student.journals.index') }}"><i class="bi bi-book"></i></a>
                             </p>
                             @endif
                         </div>
