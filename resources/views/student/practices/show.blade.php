@@ -23,7 +23,7 @@
 <h3>
     Прикриплені матеріали
 </h3>
-<table class="table table-striped">
+<table class="table table-striped" width="100%">
     <thead>
         <tr>
             <th>Назва</th>
