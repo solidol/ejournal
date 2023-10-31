@@ -36,8 +36,8 @@
             <td>
                 {{$additional->title}}
             </td>
-            <td style="max-width: 50%; overflow: hidden; text-overflow: ellipsis;">
-                <a href="{{$additional->link}}" target="_blank">{{$additional->link}}</a>
+            <td style="max-width: 50%; white-space: nowrap; overflow-x: hidden; text-overflow: ellipsis;">
+                        <a href="{{$additional->link}}" target="_blank">{{$additional->link}}</a>
             </td>
        </tr>
         @endforeach
