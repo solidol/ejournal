@@ -107,7 +107,7 @@
                     <td>
                         {{$additional->title}}
                     </td>
-                    <td style="text-overflow:hidden;">
+                    <td style="overflow: hidden; text-overflow: ellipsis;">
                         <a href="{{$additional->link}}" target="_blank">{{$additional->link}}</a>
                     </td>
                     <td>
