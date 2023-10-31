@@ -86,6 +86,9 @@ class Practice extends Model
     {
         return $this->belongsTo(Lesson::class,'lesson_id','kod_pari');
     }
-
+    public function additionals()
+    {
+        return $this->morphMany(Additional::class, 'additionable');
+    }
     
 }

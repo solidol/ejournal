@@ -87,6 +87,36 @@
         <p class="fs-4">Пов'язана пара: {{$currentControl->lesson->tema??''}}</p>
         <p class="fs-4">Дата контролю {{!is_null($currentControl->date_)?$currentControl->date_->format('d.m.Y'):''}} | {{$currentControl->type_title}}</p>
 
+        <h3>
+            Прикриплені матеріали
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAdditional">
+                Додати
+            </button>
+        </h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Назва</th>
+                    <th>Посилання</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($currentControl->additionals as $additional)
+                <tr>
+                    <td>
+                        {{$additional->title}}
+                    </td>
+                    <td>
+                        <a href="{{$additional->link}}" target="_blank">{{$additional->link}}</a>
+                    </td>
+                    <td>
+                        <a href={{URL::route('additionals.delete',['additional'=>$additional])}} class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
         <form action="{{route('marks.store')}}" method="post">
             <input type="hidden" name="control_id" value="{{$currentControl->id}}">
             <input type="hidden" name="control_type" value="practice">
@@ -96,7 +126,7 @@
             <!--<textarea rows="1" class="m-inputs form-control" placeholder="Вставте оцінки сюди CTRL+V"></textarea>-->
 
             @csrf
-            <table class="table table-striped table-marks m-0">
+            <table class="table table-striped table-marks">
                 <thead>
                     <tr>
                         <th>ПІБ студента</th>
@@ -150,6 +180,8 @@
 @include('practices.popups.edit')
 
 @include('practices.popups.create')
+
+@include('practices.popups.create_additional')
 
 
 <script type="module">
