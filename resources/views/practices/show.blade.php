@@ -107,7 +107,7 @@
                     <td>
                         {{$additional->title}}
                     </td>
-                    <td>
+                    <td style="overflow:hidden;">
                         <a href="{{$additional->link}}" target="_blank">{{$additional->link}}</a>
                     </td>
                     <td>
