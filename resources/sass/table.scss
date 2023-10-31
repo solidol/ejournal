@@ -86,3 +86,11 @@ th.rotate>div {
     transform-origin: center left;
     white-space: nowrap;
 }
+
+td a.link-150px {
+    display: block;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}

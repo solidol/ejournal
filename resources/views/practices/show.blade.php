@@ -93,7 +93,7 @@
                 Додати
             </button>
         </h3>
-        <table class="table table-striped" width="100%">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Назва</th>
@@ -107,8 +107,8 @@
                     <td>
                         {{$additional->title}}
                     </td>
-                    <td style="max-width: 50%; white-space: nowrap; overflow-x: hidden; text-overflow: ellipsis;">
-                        <a href="{{$additional->link}}" target="_blank">{{$additional->link}}</a>
+                    <td>
+                        <a href="{{$additional->link}}" class="link-150px" target="_blank">{{$additional->link}}</a>
                     </td>
                     <td>
                         <a href={{URL::route('additionals.delete',['additional'=>$additional])}} class="btn btn-danger"><i class="bi bi-trash"></i></a>

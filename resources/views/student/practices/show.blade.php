@@ -23,7 +23,7 @@
 <h3>
     Прикриплені матеріали
 </h3>
-<table class="table table-striped" width="100%">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Назва</th>
@@ -36,10 +36,10 @@
             <td>
                 {{$additional->title}}
             </td>
-            <td style="max-width: 50%; white-space: nowrap; overflow-x: hidden; text-overflow: ellipsis;">
-                        <a href="{{$additional->link}}" target="_blank">{{$additional->link}}</a>
+            <td>
+                <a href="{{$additional->link}}" target="_blank" class="link-15px">{{$additional->link}}</a>
             </td>
-       </tr>
+        </tr>
         @endforeach
     </tbody>
 </table>
