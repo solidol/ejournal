@@ -86,47 +86,47 @@
         Зар, зар, З, з - зараховано
     </li>
 </ul>
+<div class="div-table">
+    <table id="table-all" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th class="th-naming">ПІБ</th>
+                @foreach($currentJournal->practices as $control)
+                <th class="rotate sum">
+                    <div>
+                        {{$control->title}}
+                    </div>
 
-<table id="table-all" class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th class="th-naming">ПІБ</th>
-            @foreach($currentJournal->practices as $control)
-            <th class="rotate sum">
-                <div>
-                    {{$control->title}}
-                </div>
-
-            </th>
+                </th>
+                @endforeach
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($currentJournal->group->students as $student)
+            <tr>
+                <td>
+                    {{$student->FIO_stud}}
+                </td>
+                @foreach($currentJournal->practices as $control)
+                <td data-student="{{$student->id}}" data-control="{{$control->id}}" contenteditable="true">
+                    {{$control->mark($student->id)->mark_str??''}}
+                </td>
+                @endforeach
+            </tr>
             @endforeach
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($currentJournal->group->students as $student)
-        <tr>
-            <td>
-                {{$student->FIO_stud}}
-            </td>
-            @foreach($currentJournal->practices as $control)
-            <td data-student="{{$student->id}}" data-control="{{$control->id}}" contenteditable="true">
-                {{$control->mark($student->id)->mark_str??''}}
-            </td>
-            @endforeach
-        </tr>
-        @endforeach
-    </tbody>
-    <tfoot>
-        <tr>
-            <th>Середнє <!--| Успішність | Якість--></th>
-            @foreach($currentJournal->practices as $control)
-            <th>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Середнє <!--| Успішність | Якість--></th>
+                @foreach($currentJournal->practices as $control)
+                <th>
 
-            </th>
-            @endforeach
-        </tr>
-    </tfoot>
-</table>
-
+                </th>
+                @endforeach
+            </tr>
+        </tfoot>
+    </table>
+</div>
 
 
 
