@@ -42,7 +42,7 @@
     <hr>
 
 
-    <h2>Оцінки з інших дисциплін</h2>
+    <h2>Відмітки інших дисциплін</h2>
     <nav class="navbar navbar-light bg-white pt-1 pb-1">
         <div class="d-block d-md-none">
             <a class="navbar-brand" href="#">Інші журнали</a>
@@ -55,7 +55,7 @@
             <ul class="navbar-nav mr-auto mb-3">
                 @foreach($journals as $journal)
                 <li class="nav-item">
-                    <a class="nav-link {{($journal->id==$currentJournal->id)?'active':''}}" href="{{URL::route('marks.index',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
+                    <a class="nav-link {{($journal->id==$currentJournal->id)?'active':''}}" href="{{URL::route('practices.index',['id'=>$journal->id])}}">{{$journal->group->nomer_grup}} - {{$journal->subject->subject_name}}</a>
                 </li>
                 @endforeach
             </ul>
