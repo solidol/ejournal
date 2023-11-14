@@ -48,9 +48,20 @@ class StudentController extends Controller
     public function rnd()
     {
         $faker = Faker\Factory::create();
-        $text = $faker->text(5000);
-        $word = $faker->word();
-        $sentence = $faker->sentence();
-        return view('student.fakers.show', ['text' => $text, 'word' => $word, 'sentence' => $sentence]);
+        $ints = array();
+        $floats = array();
+        for ($i =0; $i<100; $i++){
+            $ints[$i] = $faker->numberBetween(-100,100);
+            $floats[$i] = $faker->randomFloat(2,-100,100);
+        }
+        $fk = [
+            'paragraph' =>$faker->text(5000),
+            'word'=>$faker->word(),
+            'sentence'=>$faker->sentence(),
+            'ints'=>$ints,
+            'floats'=>$floats,
+        ];
+        $fk = (object) $fk;
+        return view('student.fakers.show', ['fk' => $fk]);
     }
 }
