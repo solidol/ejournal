@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Yajra\DataTables\DataTables;
+use Faker;
 
 class StudentController extends Controller
 {
@@ -11,8 +12,8 @@ class StudentController extends Controller
     function index()
     {
         if (\request()->ajax()) {
-            $students = Student::orderBy('FIO_stud','asc');
-            return  DataTables::of($students)
+            $students = Student::orderBy('FIO_stud', 'asc');
+            return DataTables::of($students)
                 ->addIndexColumn()
                 ->addColumn('group', function ($student) {
                     return $student->group->title;
@@ -43,4 +44,13 @@ class StudentController extends Controller
         return view('students.index', ['students' => $students]);
     }
     */
+
+    public function rnd()
+    {
+        $faker = Faker\Factory::create();
+        $text = $faker->text(5000);
+        $word = $faker->word();
+        $sentence = $faker->sentence();
+        return view('student.fakers.show', ['text' => $text, 'word' => $word, 'sentence' => $sentence]);
+    }
 }

@@ -26,6 +26,8 @@ Route::get('/', function () {
     else return view('welc');
 });
 
+require_once __DIR__ . '/route_parts/stud_helpers.php';
+
 require_once __DIR__ . '/route_parts/admin.php';
 
 require_once __DIR__ . '/route_parts/absents.php';
