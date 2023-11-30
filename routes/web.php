@@ -9,7 +9,7 @@ use App\Http\Controllers\MessageController;
 
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\MDBController;
+use App\Http\Controllers\LessonSheduleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,6 +66,14 @@ Route::group(['middleware' => 'auth'], function () {
         return view('home');
     })->name('home');
 
+    Route::get('/tokens/create', function () {
+        $token = Auth::user()->createToken('access-token')->plainTextToken;
+
+        return response()->json(['access_token' => $token]);
+    });
+
+
+
     Route::get('/files/teachers/{id}.jpg', [TeacherController::class, 'avatar'])->name('teacher.avatar.get');
 
     Route::post('/messages/send', [MessageController::class, 'send'])->name('message_send');
@@ -75,6 +83,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['middleware' => ['admin', 'student', 'teacher']], function () {
     });
 });
+
+Route::get('/lessons/shedule/replacements:{count?}',[LessonSheduleController::class, 'replacements'])->name('lessons.shedule.replacements');
 
 Auth::routes([
     'register' => false, // Registration Routes...

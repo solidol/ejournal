@@ -19,7 +19,7 @@ class LogController extends Controller
                     return $event->created_at->format('Y-m-d h:i:s');
                 })
                 ->addColumn('user', function ($event) {
-                    return $event->user ? $event->user->userable->fullname : 'Inactive';
+                    return $event->user->userable ? $event->user->userable->fullname : 'Inactive';
                 })
                 ->make(true);
         }
