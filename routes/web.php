@@ -10,6 +10,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LessonSheduleController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,8 +23,10 @@ use App\Http\Controllers\LessonSheduleController;
 */
 
 Route::get('/', function () {
-    if (Auth::user()) return redirect()->route('home');
-    else return view('welc');
+    if (Auth::user())
+        return redirect()->route('home');
+    else
+        return view('welc');
 });
 
 require_once __DIR__ . '/route_parts/stud_helpers.php';
@@ -84,10 +87,17 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
-Route::get('/lessons/shedule/replacements:{count?}',[LessonSheduleController::class, 'replacements'])->name('lessons.shedule.replacements');
+Route::get('/lessons/shedule/replacements:{count?}', [LessonSheduleController::class, 'replacements'])->name('lessons.shedule.replacements');
+Route::get('/lessons/shedule/replacements/checkrep', [LessonSheduleController::class, 'checkrep'])->name('lessons.shedule.checkrep');
+
+//Route::get('/lessons/shedule/group:{group}', [LessonSheduleController::class, 'group'])->name('lessons.shedule.group');
+
 
 Auth::routes([
-    'register' => false, // Registration Routes...
-    'reset' => false, // Password Reset Routes...
-    'verify' => false, // Email Verification Routes...
+    'register' => false,
+    // Registration Routes...
+    'reset' => false,
+    // Password Reset Routes...
+    'verify' => false,
+    // Email Verification Routes...
 ]);
