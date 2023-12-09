@@ -81,7 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/messages/send', [MessageController::class, 'send'])->name('message_send');
 
-    Route::get('/users/profile', [UserController::class, 'show'])->name('show_profile');
+    Route::get('/users/profile/my', [UserController::class, 'myShow'])->name('my.profile');
 
     Route::group(['middleware' => ['admin', 'student', 'teacher']], function () {
     });

@@ -33,7 +33,7 @@ class UserController extends Controller
                         $users = User::teachers();
                         break;
                 }
-                return  DataTables::of($users)
+                return DataTables::of($users)
                     ->addIndexColumn()
                     ->addColumn('fullname', function ($user) {
                         return $user->userable->fullname;
@@ -57,7 +57,15 @@ class UserController extends Controller
         return response()->json($info);
     }
 
-    function show()
+    function show(User $user)
+    {
+        if (Auth::user()->isAdmin()) {
+            return view('auth.profile', ['user' => $user]);
+        } else
+            return view('auth.login');
+    }
+
+    function myShow()
     {
         $user = Auth::user();
         return view('auth.profile', ['user' => $user]);
@@ -66,7 +74,7 @@ class UserController extends Controller
     function loginAs(User $user)
     {
 
-        if (Auth::user()->isAdmin() ) {
+        if (Auth::user()->isAdmin()) {
             Log::loginAs($user->id);
             Auth::loginUsingId($user->id);
             Session::put('localrole', null);

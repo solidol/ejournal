@@ -9,8 +9,8 @@
 
                 <div class="card-body row">
                     <div class="col-4">
-                        @if (Auth::user()->isTeacher())
-                        <img class="w-100" src="{{route('teacher.avatar.get',['id'=>Auth::user()->userable->id])}}">
+                        @if ($user->isTeacher())
+                        <img class="w-100" src="{{route('teacher.avatar.get',['id'=>$user->userable->id])}}">
                         @endif
 
                     </div>
@@ -30,6 +30,7 @@
                                 {{ $user->name }}
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

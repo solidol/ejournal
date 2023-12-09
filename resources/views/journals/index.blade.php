@@ -47,7 +47,7 @@
             <tr>
                 <td class="text-center">
                     <div class="btn text-white py-0" style="background-color: <?= $journal->color ?? '#000' ?>;">
-                        {{$journal->group->nomer_grup}}
+                        {{$journal->group?$journal->group->nomer_grup:''}}
                     </div>
                 </td>
                 <td>

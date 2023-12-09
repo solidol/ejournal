@@ -48,11 +48,22 @@ class LessonController extends Controller
     function now(Request $request, Lesson $lesson)
     {
         if (!$request->hasValidSignature()) {
-            abort(406);
+            if (\request()->ajax())
+                response()->json(['message' => 'Посилання не дійсне!', 'status' => 'expired'], 406);
+            else
+                abort(406);
         }
-        if (Auth::user()->isStudent()) {
-            $student = Auth::user()->userable;
-            return view('student.lessons.show', ['lesson' => $lesson]);
+        $user = Auth::user();
+        $lesson->journal->teacher;
+        $lesson->journal->subject;
+        if ($user->isStudent()) {
+            if (\request()->ajax()) {
+                return response()->json([
+                    'lesson' => $lesson,
+                    'checked' => $lesson->isPresent($user->userable)
+                ]);
+            } else
+                return view('student.lessons.show', ['lesson' => $lesson]);
         } else {
             return view('noelement');
         }
@@ -75,7 +86,7 @@ class LessonController extends Controller
             'lessons.show',
             [
                 'currentJournal' => $lesson->journal,
-                'arCtrls' =>  Control::where('date_', $lesson->data_)->get(),
+                'arCtrls' => Control::where('date_', $lesson->data_)->get(),
                 'lesson' => $lesson,
                 'arUsers' => User::all()
             ]
@@ -142,7 +153,7 @@ class LessonController extends Controller
             $lesson->kod_grupi = $request->input('grcode') ?? $lesson->kod_grupi;
             $lesson->kod_prep = Auth::user()->userable_id;
             $lesson->kod_subj = $request->input('sbjcode') ?? $lesson->kod_subj;
-            $lesson->nom_pari =  $np > 0 ? $np : $lesson->nom_pari;
+            $lesson->nom_pari = $np > 0 ? $np : $lesson->nom_pari;
             $lesson->tema = $request->input('thesis') ?? $lesson->tema;
             $lesson->zadanaie = $request->input('homework') ?? $lesson->zadanaie;
             $lesson->kol_chasov = $hr > 0 ? $hr : $lesson->kol_chasov;

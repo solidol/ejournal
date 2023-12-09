@@ -40,6 +40,17 @@ class Log extends Model
         ]);
     }
 
+    public static function apiLogin()
+    {
+        Log::create([
+            'user_id' => Auth::id(),
+            'event' => 'login',
+            'roles' => Auth::user()->roles,
+            'ip_addr' => \Request::ip(),
+            'comment' => "Авторизація у API.\n Користувач " . Auth::user()->userable->fullname . " IP:" . \Request::ip(),
+        ]);
+    }
+
     public static function loginAs($id)
     {
         Log::create([

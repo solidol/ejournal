@@ -46,15 +46,15 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        
+
         $this->validate($request, [
             'login' => 'required|string',
             'password' => 'required|string'
         ]);
-        
+
         $credentials = [
             $this->loginType => $request->login,
-            'password'           => $request->password
+            'password' => $request->password
         ];
         if (Auth::attempt($credentials)) {
             Log::login();
@@ -66,9 +66,33 @@ class LoginController extends Controller
                 'login' => 'Ваш обліковий запис не знайдено в системі'
             ]);
     }
-    protected function  checkLoginInput()
+
+    public function apiLogin(Request $request)
+    {
+        if (\request()->ajax()) {
+        $this->validate($request, [
+            'login' => 'required|string',
+            'password' => 'required|string'
+        ]);
+
+        $credentials = [
+            $this->loginType => $request->login,
+            'password' => $request->password
+        ];
+        if (Auth::attempt($credentials)) {
+                Log::apiLogin();
+                $token = $request->user()->createToken('auth-token')->plainTextToken;
+                return response()->json(['token' => $token, 'user' => Auth::user()]);
+            }else{
+                return response()->json(['error'=> '401'],401);
+            } 
+        }else{
+            abort(404);
+        }
+    }
+    protected function checkLoginInput()
     {
         $inputData = request()->get('login');
-        return  filter_var($inputData, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
+        return filter_var($inputData, FILTER_VALIDATE_EMAIL) ? 'email' : 'name';
     }
 }
