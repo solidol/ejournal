@@ -18,7 +18,7 @@ Route::group(['middleware' => 'student'], function () {
 
     Route::get('/student/journals', [JournalController::class, 'studentMarks'])->name('student.journals.index');
 
-    Route::post('/student/lessons/{lesson}', [PresentController::class, 'store'])->name('lessons.present.store');
+    Route::post('/student/lessons/{lesson?}', [PresentController::class, 'store'])->name('lessons.present.store');
 
     Route::get('/student/lessons/{lesson}', [LessonController::class, 'now'])->name('lessons.now.show');
 
