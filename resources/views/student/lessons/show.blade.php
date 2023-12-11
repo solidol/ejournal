@@ -25,7 +25,7 @@
     </p>
 </div>
 @else
-<form method="post" action="{{URL::route('lessons.present.store')}}" method="post">
+<form method="post" method="post">
     @csrf
     <div class="fs-3 my-2 p-2 border border-2 border-danger rounded-2">
         <p class="my-2">
