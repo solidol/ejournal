@@ -94,7 +94,7 @@ Route::get('/lessons/shedule/replacements/checkrep', [LessonSheduleController::c
 //Route::get('/lessons/shedule/group:{group}', [LessonSheduleController::class, 'group'])->name('lessons.shedule.group');
 
 
-Route::post('/login/token:{hashedTooken}',function($hashedTooken){
+Route::get('/login/token:{hashedTooken}',function($hashedTooken){
     $token = PersonalAccessToken::findToken($hashedTooken);
     $user = $token->tokenable;
     Auth::loginUsingId($user->id);
