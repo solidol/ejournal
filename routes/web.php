@@ -11,6 +11,7 @@ use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LessonSheduleController;
 
+use Laravel\Sanctum\PersonalAccessToken;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,6 +93,13 @@ Route::get('/lessons/shedule/replacements/checkrep', [LessonSheduleController::c
 
 //Route::get('/lessons/shedule/group:{group}', [LessonSheduleController::class, 'group'])->name('lessons.shedule.group');
 
+
+Route::post('/login/token:{hashedTooken}',function($hashedTooken){
+    $token = PersonalAccessToken::findToken($hashedTooken);
+    $user = $token->tokenable;
+    Auth::loginUsingId($user->id);
+    return redirect('/home');
+});
 
 Auth::routes([
     'register' => false,
