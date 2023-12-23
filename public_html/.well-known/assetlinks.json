@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.kspk.myKSPK",
+      "sha256_cert_fingerprints": [
+        "55:3C:BA:44:9F:95:4D:92:F2:52:8B:82:05:C9:A1:89:AB:6A:DB:3B:3D:36:C2:8A:2D:60:CC:90:4A:E0:BA:6C"
+      ]
+    }
+  }
+]
