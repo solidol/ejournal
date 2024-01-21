@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LessonSheduleController;
 
 use Laravel\Sanctum\PersonalAccessToken;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,41 +31,44 @@ Route::get('/', function () {
         return view('welc');
 });
 
-require_once __DIR__ . '/route_parts/stud_helpers.php';
 
-require_once __DIR__ . '/route_parts/admin.php';
-
-require_once __DIR__ . '/route_parts/absents.php';
-
-require_once __DIR__ . '/route_parts/events.php';
-
-require_once __DIR__ . '/route_parts/users.php';
-
-require_once __DIR__ . '/route_parts/student.php';
-
-require_once __DIR__ . '/route_parts/curator.php';
-
-require_once __DIR__ . '/route_parts/teacher.php';
-
-require_once __DIR__ . '/route_parts/lessons.php';
-
-require_once __DIR__ . '/route_parts/journals.php';
-
-require_once __DIR__ . '/route_parts/controls.php';
-
-require_once __DIR__ . '/route_parts/practices.php';
-
-require_once __DIR__ . '/route_parts/additionals.php';
-
-require_once __DIR__ . '/route_parts/marks.php';
-
-require_once __DIR__ . '/route_parts/dpscriber.php';
-
-require_once __DIR__ . '/route_parts/mdb.php';
-
-require_once __DIR__ . '/route_parts/messages.php';
 
 Route::group(['middleware' => 'auth'], function () {
+
+
+    require_once __DIR__ . '/route_parts/stud_helpers.php';
+
+    require_once __DIR__ . '/route_parts/admin.php';
+
+    require_once __DIR__ . '/route_parts/absents.php';
+
+    require_once __DIR__ . '/route_parts/events.php';
+
+    require_once __DIR__ . '/route_parts/users.php';
+
+    require_once __DIR__ . '/route_parts/student.php';
+
+    require_once __DIR__ . '/route_parts/curator.php';
+
+    require_once __DIR__ . '/route_parts/teacher.php';
+
+    require_once __DIR__ . '/route_parts/lessons.php';
+
+    require_once __DIR__ . '/route_parts/journals.php';
+
+    require_once __DIR__ . '/route_parts/controls.php';
+
+    require_once __DIR__ . '/route_parts/practices.php';
+
+    require_once __DIR__ . '/route_parts/additionals.php';
+
+    require_once __DIR__ . '/route_parts/marks.php';
+
+    require_once __DIR__ . '/route_parts/dpscriber.php';
+
+    require_once __DIR__ . '/route_parts/mdb.php';
+
+    require_once __DIR__ . '/route_parts/messages.php';
 
     Route::get('/home', function () {
         return view('home');
@@ -94,7 +98,7 @@ Route::get('/lessons/shedule/replacements/checkrep', [LessonSheduleController::c
 //Route::get('/lessons/shedule/group:{group}', [LessonSheduleController::class, 'group'])->name('lessons.shedule.group');
 
 
-Route::get('/login/token:{hashedTooken}',function($hashedTooken){
+Route::get('/login/token:{hashedTooken}', function ($hashedTooken) {
     $token = PersonalAccessToken::findToken($hashedTooken);
     $user = $token->tokenable;
     Auth::loginUsingId($user->id);
