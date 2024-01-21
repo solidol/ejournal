@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/student/lessons/{lesson}', [LessonContr
 Route::middleware('auth:sanctum')->post('/student/lessons/presents/store', [PresentController::class, 'store'])->name('api.lessons.present.store');
 
 
-Route::get('/api/lessons/{lesson}/ckeckin-link', [LessonController::class, 'checkinLink'])->name('lessons.nowlink.ajax');
+Route::get('/lessons/{lesson}/ckeckin-link', [LessonController::class, 'checkinLink'])->name('lessons.nowlink.ajax');
 
 
 
