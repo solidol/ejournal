@@ -25,4 +25,4 @@ Route::group(['middleware' => 'teacher'], function () {
 
 });
 
-Route::get('/api/lessons/{lesson}/ckeckin-link', [LessonController::class, 'checkinLink'])->name('lessons.nowlink.ajax');
+
