@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Control;
+use App\Library\CalendarHelper;
 
 use NCL\NCLNameCaseUa;
 
@@ -146,7 +147,7 @@ class ReportController extends Controller
         $word->setValue('group', $control->journal->group->title);
         $word->setValue('subject', $control->journal->subject->title);
         $word->setValue('day', $control->date_->format('d'));
-        $word->setValue('month', ControlController::$monthStrings[$control->date_->format('m')]);
+        $word->setValue('month', CalendarHelper::$months[$control->date_->format('m')]);
         $word->setValue('year', $control->date_->format('Y'));
         $word->setValue('hours', $control->journal->lessons->sum('kol_chasov'));
         $values = array();
